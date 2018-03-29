@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="downloadpackage.task" Condition=" '$(downloadpackagetask_Imported)' == '' " />
+  </ImportGroup>
+
+  <!-- 
+       Download Target.
+       Name must be unique. 
+       By design, targets are executed only once per project.
+       
+       Usage:
+       
+       package: URI
+
+       expectfileordirectory: Skips the download and extraction if exists
+
+       outputfolder: Folder to store a downloaded file. 
+                     By default "$(BaseDir)libs", if empty
+
+       outputfilename: If not empty, overrides filename from URI.
+                       .exe files don't get extracted
+
+       extractto: Folder to extract an archive to
+   -->
+
+  <Target Name="zlibBinariesDownloadTarget" BeforeTargets="libpqDownloadTarget" DependsOnTargets="7za">  
+      <DownloadPackageTask 
+           package="http://files.freeswitch.org/windows/packages/zlib/$(zlibVersion)/zlib-$(zlibVersion)-binaries-$(Platform.ToLower())-$(Configuration.ToLower()).zip"
+           expectfileordirectory="$(BaseDir)zlib-$(zlibVersion)\binaries\$(Platform.ToLower())\$(Configuration.ToLower())\zlib.lib" 
+           outputfolder=""
+           outputfilename="" 
+           extractto="$(BaseDir)"
+      />
+  </Target> 
+
+  <Target Name="zlibHeadersDownloadTarget" BeforeTargets="libpqDownloadTarget" DependsOnTargets="zlibBinariesDownloadTarget">  
+      <DownloadPackageTask 
+           package="http://files.freeswitch.org/windows/packages/zlib/$(zlibVersion)/zlib-$(zlibVersion)-headers.zip"
+           expectfileordirectory="$(BaseDir)zlib-$(zlibVersion)\include" 
+           outputfolder=""
+           outputfilename="" 
+           extractto="$(BaseDir)"
+      />
+  </Target> 
+
+  <PropertyGroup>
+    <zlibDownloadTarget_Imported>true</zlibDownloadTarget_Imported>
+  </PropertyGroup>
+
+</Project>
