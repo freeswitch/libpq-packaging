@@ -1,3 +1,9 @@
+postgresql-9.6 (9.6.7-0+fs9u1) stretch; urgency=medium
+
+  * FreeSWITCH rebuild with libssl-1.0.
+
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Fri, 29 Jun 2018 12:50:37 +0200
+
 postgresql-9.6 (9.6.7-0+deb9u1) stretch; urgency=medium
 
   * New upstream version.
