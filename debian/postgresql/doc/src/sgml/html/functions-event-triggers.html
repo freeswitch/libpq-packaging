@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.10 Documentation"
+TITLE="PostgreSQL 9.6.11 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2018-08-06T20:25:02"></HEAD
+CONTENT="2018-11-05T22:00:30"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.10 Documentation</A
+>PostgreSQL 9.6.11 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -145,7 +145,7 @@ CLASS="INFORMALTABLE"
 ><P
 ></P
 ><A
-NAME="AEN25022"
+NAME="AEN25027"
 ></A
 ><TABLE
 BORDER="1"
@@ -170,7 +170,7 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="TYPE"
->Oid</TT
+>oid</TT
 ></TD
 ><TD
 >OID of catalog the object belongs in</TD
@@ -184,10 +184,10 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="TYPE"
->Oid</TT
+>oid</TT
 ></TD
 ><TD
->OID of the object in the catalog</TD
+>OID of the object itself</TD
 ></TR
 ><TR
 ><TD
@@ -201,7 +201,7 @@ CLASS="TYPE"
 >integer</TT
 ></TD
 ><TD
->Object sub-id (e.g. attribute number for columns)</TD
+>Sub-object ID (e.g. attribute number for a column)</TD
 ></TR
 ><TR
 ><TD
@@ -215,7 +215,7 @@ CLASS="TYPE"
 >text</TT
 ></TD
 ><TD
->command tag</TD
+>Command tag</TD
 ></TR
 ><TR
 ><TD
@@ -262,8 +262,8 @@ CLASS="TYPE"
 >text</TT
 ></TD
 ><TD
->         Text rendering of the object identity, schema-qualified. Each and every
-         identifier present in the identity is quoted if necessary.
+>         Text rendering of the object identity, schema-qualified. Each
+         identifier included in the identity is quoted if necessary.
         </TD
 ></TR
 ><TR
@@ -278,7 +278,7 @@ CLASS="TYPE"
 >bool</TT
 ></TD
 ><TD
->whether the command is part of an extension script</TD
+>True if the command is part of an extension script</TD
 ></TR
 ><TR
 ><TD
@@ -338,7 +338,7 @@ CLASS="INFORMALTABLE"
 ><P
 ></P
 ><A
-NAME="AEN25094"
+NAME="AEN25099"
 ></A
 ><TABLE
 BORDER="1"
@@ -363,7 +363,7 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="TYPE"
->Oid</TT
+>oid</TT
 ></TD
 ><TD
 >OID of catalog the object belonged in</TD
@@ -377,10 +377,10 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="TYPE"
->Oid</TT
+>oid</TT
 ></TD
 ><TD
->OID the object had within the catalog</TD
+>OID of the object itself</TD
 ></TR
 ><TR
 ><TD
@@ -391,10 +391,10 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="TYPE"
->int32</TT
+>integer</TT
 ></TD
 ><TD
->Object sub-id (e.g. attribute number for columns)</TD
+>Sub-object ID (e.g. attribute number for a column)</TD
 ></TR
 ><TR
 ><TD
@@ -408,7 +408,7 @@ CLASS="TYPE"
 >bool</TT
 ></TD
 ><TD
->Flag used to identify the root object(s) of the deletion</TD
+>True if this was one of the root object(s) of the deletion</TD
 ></TR
 ><TR
 ><TD
@@ -422,7 +422,7 @@ CLASS="TYPE"
 >bool</TT
 ></TD
 ><TD
->         Flag indicating that there's a normal dependency relationship
+>         True if there was a normal dependency relationship
          in the dependency graph leading to this object
         </TD
 ></TR
@@ -438,7 +438,7 @@ CLASS="TYPE"
 >bool</TT
 ></TD
 ><TD
->         Flag indicating that the object was a temporary object.
+>         True if this was a temporary object
         </TD
 ></TR
 ><TR
@@ -506,8 +506,8 @@ CLASS="TYPE"
 >text</TT
 ></TD
 ><TD
->         Text rendering of the object identity, schema-qualified. Each and every
-         identifier present in the identity is quoted if necessary.
+>         Text rendering of the object identity, schema-qualified. Each
+         identifier included in the identity is quoted if necessary.
         </TD
 ></TR
 ><TR
@@ -529,13 +529,13 @@ CLASS="LITERAL"
          <TT
 CLASS="LITERAL"
 >address_args</TT
->,
-         can be used by the <CODE
+>, can be used by
+         the <CODE
 CLASS="FUNCTION"
 >pg_get_object_address()</CODE
-> to
+> function to
          recreate the object address in a remote server containing an
-         identically named object of the same kind.
+         identically named object of the same kind
         </TD
 ></TR
 ><TR
@@ -553,7 +553,7 @@ CLASS="TYPE"
 >         Complement for <TT
 CLASS="LITERAL"
 >address_names</TT
-> above.
+>
         </TD
 ></TR
 ></TBODY

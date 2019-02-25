@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.10 Documentation"
+TITLE="PostgreSQL 9.6.11 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Additional Supplied Modules"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2018-08-06T20:25:02"></HEAD
+CONTENT="2018-11-05T22:00:30"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.10 Documentation</A
+>PostgreSQL 9.6.11 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -134,7 +134,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN182262"
+NAME="AEN183164"
 >F.4.1. Parameters</A
 ></H2
 ><P
@@ -159,11 +159,15 @@ CLASS="LITERAL"
 ></DT
 ><DD
 ><P
->      Length of each signature (index entry) in bits. The default
-      is <TT
+>      Length of each signature (index entry) in bits. It is rounded up to the
+      nearest multiple of <TT
+CLASS="LITERAL"
+>16</TT
+>. The default is <TT
 CLASS="LITERAL"
 >80</TT
-> bits and maximum is <TT
+> bits
+      and the maximum is <TT
 CLASS="LITERAL"
 >4096</TT
 >.
@@ -203,7 +207,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN182283"
+NAME="AEN183186"
 >F.4.2. Examples</A
 ></H2
 ><P
@@ -350,7 +354,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN182302"
+NAME="AEN183205"
 >F.4.3. Operator Class Interface</A
 ></H2
 ><P
@@ -373,7 +377,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN182307"
+NAME="AEN183210"
 >F.4.4. Limitations</A
 ></H2
 ><P
@@ -402,6 +406,30 @@ CLASS="LITERAL"
       operations in the future.
      </P
 ></LI
+><LI
+><P
+>       <TT
+CLASS="LITERAL"
+>bloom</TT
+> access method doesn't support
+       <TT
+CLASS="LITERAL"
+>UNIQUE</TT
+> indexes.
+     </P
+></LI
+><LI
+><P
+>       <TT
+CLASS="LITERAL"
+>bloom</TT
+> access method doesn't support searching for
+       <TT
+CLASS="LITERAL"
+>NULL</TT
+> values.
+     </P
+></LI
 ></UL
 ><P>
   </P
@@ -411,7 +439,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN182318"
+NAME="AEN183229"
 >F.4.5. Authors</A
 ></H2
 ><P
