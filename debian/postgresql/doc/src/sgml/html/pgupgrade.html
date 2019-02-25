@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.10 Documentation"
+TITLE="PostgreSQL 9.6.11 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Server Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2018-08-06T20:25:02"></HEAD
+CONTENT="2018-11-05T22:00:30"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.10 Documentation</A
+>PostgreSQL 9.6.11 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN103287"
+NAME="AEN103331"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN103291"
+NAME="AEN103335"
 ></A
 ><H2
 >Synopsis</H2
@@ -159,7 +159,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103312"
+NAME="AEN103356"
 ></A
 ><H2
 >Description</H2
@@ -228,7 +228,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103328"
+NAME="AEN103372"
 ></A
 ><H2
 >Options</H2
@@ -574,7 +574,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103472"
+NAME="AEN103516"
 ></A
 ><H2
 >Usage</H2
@@ -799,7 +799,8 @@ CLASS="QUOTE"
 >"Latest checkpoint location"</SPAN
 > values match in all clusters.
      (There will be a mismatch if old standby servers were shut down
-     before the old primary.)  Also, change <TT
+     before the old primary or if the old standby servers are still running.)
+     Also, change <TT
 CLASS="VARNAME"
 >wal_level</TT
 > to
@@ -1446,7 +1447,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103675"
+NAME="AEN103719"
 ></A
 ><H2
 >Notes</H2
@@ -1564,7 +1565,7 @@ HREF="continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103703"
+NAME="AEN103747"
 ></A
 ><H2
 >See Also</H2
