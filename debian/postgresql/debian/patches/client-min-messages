@@ -1,0 +1,221 @@
+From 7b08b4a8adbbc5a5b022e9dd6e658d03ceb31afd Mon Sep 17 00:00:00 2001
+From: Tom Lane <tgl@sss.pgh.pa.us>
+Date: Thu, 8 Nov 2018 17:33:25 -0500
+Subject: [PATCH] Disallow setting client_min_messages higher than ERROR.
+
+Previously it was possible to set client_min_messages to FATAL or PANIC,
+which had the effect of suppressing transmission of regular ERROR messages
+to the client.  Perhaps that seemed like a useful option in the past, but
+the trouble with it is that it breaks guarantees that are explicitly made
+in our FE/BE protocol spec about how a query cycle can end.  While libpq
+and psql manage to cope with the omission, that's mostly because they
+are not very bright; client libraries that have more semantic knowledge
+are likely to get confused.  Notably, pgODBC doesn't behave very sanely.
+Let's fix this by getting rid of the ability to set client_min_messages
+above ERROR.
+
+In HEAD, just remove the FATAL and PANIC options from the set of allowed
+enum values for client_min_messages.  (This change also affects
+trace_recovery_messages, but that's OK since these aren't useful values
+for that variable either.)
+
+In the back branches, there was concern that rejecting these values might
+break applications that are explicitly setting things that way.  I'm
+pretty skeptical of that argument, but accommodate it by accepting these
+values and then internally setting the variable to ERROR anyway.
+
+In all branches, this allows a couple of tiny simplifications in the
+logic in elog.c, so do that.
+
+Also respond to the point that was made that client_min_messages has
+exactly nothing to do with the server's logging behavior, and therefore
+does not belong in the "When To Log" subsection of the documentation.
+The "Statement Behavior" subsection is a better match, so move it there.
+
+Jonah Harris and Tom Lane
+
+Discussion: https://postgr.es/m/7809.1541521180@sss.pgh.pa.us
+Discussion: https://postgr.es/m/15479-ef0f4cc2fd995ca2@postgresql.org
+---
+ doc/src/sgml/config.sgml                      | 45 +++++++++++++--------------
+ src/backend/utils/error/elog.c                | 11 ++-----
+ src/backend/utils/misc/guc.c                  | 19 +++++++++--
+ src/backend/utils/misc/postgresql.conf.sample | 21 ++++++-------
+ 4 files changed, 51 insertions(+), 45 deletions(-)
+
+--- a/doc/src/sgml/config.sgml
++++ b/doc/src/sgml/config.sgml
+@@ -4571,6 +4571,28 @@ local0.*    /var/log/postgresql
+ 
+      <variablelist>
+ 
++     <varlistentry id="guc-client-min-messages" xreflabel="client_min_messages">
++      <term><varname>client_min_messages</varname> (<type>enum</type>)
++      <indexterm>
++       <primary><varname>client_min_messages</varname> configuration parameter</primary>
++      </indexterm>
++      </term>
++      <listitem>
++       <para>
++        Controls which message levels are sent to the client.
++        Valid values are <literal>DEBUG5</literal>,
++        <literal>DEBUG4</literal>, <literal>DEBUG3</literal>, <literal>DEBUG2</literal>,
++        <literal>DEBUG1</literal>, <literal>LOG</literal>, <literal>NOTICE</literal>,
++        <literal>WARNING</literal>, <literal>ERROR</literal>, <literal>FATAL</literal>,
++        and <literal>PANIC</literal>.  Each level
++        includes all the levels that follow it.  The later the level,
++        the fewer messages are sent.  The default is
++        <literal>NOTICE</literal>.  Note that <literal>LOG</literal> has a different
++        rank here than in <varname>log_min_messages</varname>.
++       </para>
++      </listitem>
++     </varlistentry>
++
+      <varlistentry id="guc-log-min-messages" xreflabel="log_min_messages">
+       <term><varname>log_min_messages</varname> (<type>enum</type>)
+       <indexterm>
+@@ -5900,32 +5922,6 @@ COPY postgres_log FROM '/full/path/to/lo
+      <title>Statement Behavior</title>
+      <variablelist>
+ 
+-     <varlistentry id="guc-client-min-messages" xreflabel="client_min_messages">
+-      <term><varname>client_min_messages</varname> (<type>enum</type>)
+-      <indexterm>
+-       <primary><varname>client_min_messages</> configuration parameter</primary>
+-      </indexterm>
+-      </term>
+-      <listitem>
+-       <para>
+-        Controls which
+-        <link linkend="runtime-config-severity-levels">message levels</link>
+-        are sent to the client.
+-        Valid values are <literal>DEBUG5</literal>,
+-        <literal>DEBUG4</literal>, <literal>DEBUG3</literal>, <literal>DEBUG2</literal>,
+-        <literal>DEBUG1</literal>, <literal>LOG</literal>, <literal>NOTICE</literal>,
+-        <literal>WARNING</literal>, and <literal>ERROR</literal>.
+-        Each level includes all the levels that follow it.  The later the level,
+-        the fewer messages are sent.  The default is
+-        <literal>NOTICE</>.  Note that <literal>LOG</> has a different
+-        rank here than in <xref linkend="guc-log-min-messages">.
+-       </para>
+-       <para>
+-        <literal>INFO</literal> level messages are always sent to the client.
+-       </para>
+-      </listitem>
+-     </varlistentry>
+-
+      <varlistentry id="guc-search-path" xreflabel="search_path">
+       <term><varname>search_path</varname> (<type>string</type>)
+       <indexterm>
+--- a/src/backend/utils/error/elog.c
++++ b/src/backend/utils/error/elog.c
+@@ -472,7 +472,9 @@ errfinish(int dummy,...)
+ 	 * progress, so that we can report the message before dying.  (Without
+ 	 * this, pq_putmessage will refuse to send the message at all, which is
+ 	 * what we want for NOTICE messages, but not for fatal exits.) This hack
+-	 * is necessary because of poor design of old-style copy protocol.
++	 * is necessary because of poor design of old-style copy protocol.  Note
++	 * we must do this even if client is fool enough to have set
++	 * client_min_messages above FATAL, so don't look at output_to_client.
+ 	 */
+ 	if (elevel >= FATAL && whereToSendOutput == DestRemote)
+ 		pq_endcopyout(true);
+@@ -1756,7 +1758,12 @@ pg_re_throw(void)
+ 		else
+ 			edata->output_to_server = (FATAL >= log_min_messages);
+ 		if (whereToSendOutput == DestRemote)
+-			edata->output_to_client = true;
++		{
++			if (ClientAuthInProgress)
++				edata->output_to_client = true;
++			else
++				edata->output_to_client = (FATAL >= client_min_messages);
++		}
+ 
+ 		/*
+ 		 * We can use errfinish() for the rest, but we don't want it to call
+--- a/src/backend/utils/misc/guc.c
++++ b/src/backend/utils/misc/guc.c
+@@ -153,7 +153,6 @@ static int	syslog_facility = 0;
+ static void assign_syslog_facility(int newval, void *extra);
+ static void assign_syslog_ident(const char *newval, void *extra);
+ static void assign_session_replication_role(int newval, void *extra);
+-static bool check_client_min_messages(int *newval, void **extra, GucSource source);
+ static bool check_temp_buffers(int *newval, void **extra, GucSource source);
+ static bool check_bonjour(bool *newval, void **extra, GucSource source);
+ static bool check_ssl(bool *newval, void **extra, GucSource source);
+@@ -3591,14 +3590,14 @@ static struct config_enum ConfigureNames
+ 	},
+ 
+ 	{
+-		{"client_min_messages", PGC_USERSET, CLIENT_CONN_STATEMENT,
++		{"client_min_messages", PGC_USERSET, LOGGING_WHEN,
+ 			gettext_noop("Sets the message levels that are sent to the client."),
+ 			gettext_noop("Each level includes all the levels that follow it. The later"
+ 						 " the level, the fewer messages are sent.")
+ 		},
+ 		&client_min_messages,
+ 		NOTICE, client_message_level_options,
+-		check_client_min_messages, NULL, NULL
++		NULL, NULL, NULL
+ 	},
+ 
+ 	{
+@@ -9979,20 +9978,6 @@ assign_session_replication_role(int newv
+ }
+ 
+ static bool
+-check_client_min_messages(int *newval, void **extra, GucSource source)
+-{
+-	/*
+-	 * We disallow setting client_min_messages above ERROR, because not
+-	 * sending an ErrorResponse message for an error breaks the FE/BE
+-	 * protocol.  However, for backwards compatibility, we still accept FATAL
+-	 * or PANIC as input values, and then adjust here.
+-	 */
+-	if (*newval > ERROR)
+-		*newval = ERROR;
+-	return true;
+-}
+-
+-static bool
+ check_temp_buffers(int *newval, void **extra, GucSource source)
+ {
+ 	/*
+--- a/src/backend/utils/misc/postgresql.conf.sample
++++ b/src/backend/utils/misc/postgresql.conf.sample
+@@ -373,6 +373,17 @@
+ 
+ # - When to Log -
+ 
++#client_min_messages = notice		# values in order of decreasing detail:
++					#   debug5
++					#   debug4
++					#   debug3
++					#   debug2
++					#   debug1
++					#   log
++					#   notice
++					#   warning
++					#   error
++
+ #log_min_messages = warning		# values in order of decreasing detail:
+ 					#   debug5
+ 					#   debug4
+@@ -516,16 +527,6 @@
+ 
+ # - Statement Behavior -
+ 
+-#client_min_messages = notice		# values in order of decreasing detail:
+-					#   debug5
+-					#   debug4
+-					#   debug3
+-					#   debug2
+-					#   debug1
+-					#   log
+-					#   notice
+-					#   warning
+-					#   error
+ #search_path = '"$user", public'	# schema names
+ #default_tablespace = ''		# a tablespace name, '' uses the default
+ #temp_tablespaces = ''			# a list of tablespace names, '' uses
