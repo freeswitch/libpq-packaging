@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.11 Documentation"
+TITLE="PostgreSQL 9.6.12 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Types"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2018-11-05T22:00:30"></HEAD
+CONTENT="2019-02-11T21:31:11"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.11 Documentation</A
+>PostgreSQL 9.6.12 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -216,7 +216,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN5793"
+NAME="AEN5791"
 >8.4.1. <TT
 CLASS="TYPE"
 >bytea</TT
@@ -233,9 +233,12 @@ CLASS="LITERAL"
 >\x</TT
 > (to distinguish it
     from the escape format).  In some contexts, the initial backslash may
-    need to be escaped by doubling it, in the same cases in which backslashes
-    have to be doubled in escape format; details appear below.
-    The hexadecimal digits can
+    need to be escaped by doubling it
+    (see <A
+HREF="sql-syntax-lexical.html#SQL-SYNTAX-STRINGS"
+>Section 4.1.2.1</A
+>).
+    For input, the hexadecimal digits can
     be either upper or lower case, and whitespace is permitted between
     digit pairs (but not within a digit pair nor in the starting
     <TT
@@ -259,7 +262,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN5802"
+NAME="AEN5801"
 >8.4.2. <TT
 CLASS="TYPE"
 >bytea</TT
@@ -310,9 +313,7 @@ CLASS="EMPHASIS"
 ></SPAN
 > be escaped.  In
     general, to escape an octet, convert it into its three-digit
-    octal value and precede it
-    by a backslash (or two backslashes, if writing the value as a
-    literal using escape string syntax).
+    octal value and precede it by a backslash.
     Backslash itself (octet decimal value 92) can alternatively be represented by
     double backslashes.
     <A
@@ -348,7 +349,7 @@ CLASS="CALSTABLE"
 ><TH
 >Example</TH
 ><TH
->Output Representation</TH
+>Hex Representation</TH
 ></TR
 ></THEAD
 ><TBODY
@@ -405,10 +406,10 @@ CLASS="LITERAL"
 ><TD
 ><TT
 CLASS="LITERAL"
->'\'</TT
+>'\\'</TT
 > or <TT
 CLASS="LITERAL"
->'\\134'</TT
+>'\134'</TT
 ></TD
 ><TD
 ><TT
@@ -462,61 +463,41 @@ CLASS="EMPHASIS"
 ></SPAN
 > octets
     varies depending on locale settings. In some instances you can get away
-    with leaving them unescaped. Note that the result in each of the examples
-    in <A
-HREF="datatype-binary.html#DATATYPE-BINARY-SQLESC"
->Table 8-7</A
-> was exactly one octet in
-    length, even though the output representation is sometimes
-    more than one character.
+    with leaving them unescaped.
    </P
 ><P
->    The reason multiple backslashes are required, as shown
+>    The reason that single quotes must be doubled, as shown
     in <A
 HREF="datatype-binary.html#DATATYPE-BINARY-SQLESC"
 >Table 8-7</A
->, is that an input
-    string written as a string literal must pass through two parse
-    phases in the <SPAN
-CLASS="PRODUCTNAME"
->PostgreSQL</SPAN
-> server.
-    The first backslash of each pair is interpreted as an escape
-    character by the string-literal parser (assuming escape string
-    syntax is used) and is therefore consumed, leaving the second backslash of the
-    pair.  (Dollar-quoted strings can be used to avoid this level
-    of escaping.)  The remaining backslash is then recognized by the
-    <TT
+>, is that this
+    is true for any string literal in a SQL command.  The generic
+    string-literal parser consumes the outermost single quotes
+    and reduces any pair of single quotes to one data character.
+    What the <TT
 CLASS="TYPE"
 >bytea</TT
-> input function as starting either a three
-    digit octal value or escaping another backslash.  For example,
-    a string literal passed to the server as <TT
-CLASS="LITERAL"
->'\001'</TT
->
-    becomes <TT
-CLASS="LITERAL"
->\001</TT
-> after passing through the
-    escape string parser. The <TT
-CLASS="LITERAL"
->\001</TT
-> is then sent
-    to the <TT
+> input function sees is just one
+    single quote, which it treats as a plain data character.
+    However, the <TT
 CLASS="TYPE"
 >bytea</TT
-> input function, where it is converted
-    to a single octet with a decimal value of 1.  Note that the
-    single-quote character is not treated specially by <TT
-CLASS="TYPE"
->bytea</TT
->,
-    so it follows the normal rules for string literals.  (See also
+> input function treats
+    backslashes as special, and the other behaviors shown in
     <A
+HREF="datatype-binary.html#DATATYPE-BINARY-SQLESC"
+>Table 8-7</A
+> are implemented by
+    that function.
+   </P
+><P
+>    In some contexts, backslashes must be doubled compared to what is
+    shown above, because the generic string-literal parser will also
+    reduce pairs of backslashes to one data character;
+    see <A
 HREF="sql-syntax-lexical.html#SQL-SYNTAX-STRINGS"
 >Section 4.1.2.1</A
->.)
+>.
    </P
 ><P
 >    <TT
@@ -537,7 +518,7 @@ CLASS="LITERAL"
     <SPAN
 CLASS="QUOTE"
 >"non-printable"</SPAN
-> octet are converted to
+> octets are converted to their
     equivalent three-digit octal value and preceded by one backslash.
     Most <SPAN
 CLASS="QUOTE"

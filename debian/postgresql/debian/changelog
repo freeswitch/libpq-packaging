@@ -1,8 +1,16 @@
-postgresql-9.6 (9.6.11-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.12-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Mon, 25 Feb 2018 12:50:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Fri, 03 May 2019 21:10:37 +0200
+
+postgresql-9.6 (9.6.12-0+deb9u1) stretch; urgency=medium
+
+  * New upstream version.
+  * Revert upstream patch "Disallow setting client_min_messages higher than
+    ERROR", it causes to much disruption to existing (test) scripts.
+
+ -- Christoph Berg <christoph.berg@credativ.de>  Fri, 15 Feb 2019 15:26:24 +0100
 
 postgresql-9.6 (9.6.11-0+deb9u1) stretch; urgency=medium
 

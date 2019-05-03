@@ -993,9 +993,9 @@ psql testdb
 
    If you have installation problems on a platform that is known to be
    supported according to recent build farm results, please report it to
-   <pgsql-bugs@postgresql.org>. If you are interested in porting
-   PostgreSQL to a new platform, <pgsql-hackers@postgresql.org> is the
-   appropriate place to discuss that.
+   <pgsql-bugs@lists.postgresql.org>. If you are interested in porting
+   PostgreSQL to a new platform, <pgsql-hackers@lists.postgresql.org> is
+   the appropriate place to discuss that.
      __________________________________________________________________
 
                            Platform-specific Notes

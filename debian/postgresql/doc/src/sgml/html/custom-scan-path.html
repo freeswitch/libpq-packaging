@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.11 Documentation"
+TITLE="PostgreSQL 9.6.12 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Writing A Custom Scan Provider"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2018-11-05T22:00:30"></HEAD
+CONTENT="2019-02-11T21:31:11"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.11 Documentation</A
+>PostgreSQL 9.6.12 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,8 +98,9 @@ NAME="CUSTOM-SCAN-PATH"
 ><P
 >    A custom scan provider will typically add paths for a base relation by
     setting the following hook, which is called after the core code has
-    generated what it believes to be the complete and correct set of access
-    paths for the relation.
+    generated all the access paths it can for the relation (except for
+    Gather paths, which are made after this call so that they can use
+    partial paths added by the hook):
 </P><PRE
 CLASS="PROGRAMLISTING"
 >typedef void (*set_rel_pathlist_hook_type) (PlannerInfo *root,

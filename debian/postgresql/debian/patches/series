@@ -7,3 +7,4 @@
 70-history
 hurd-sem_init
 filter-debug-prefix-map
+client-min-messages
