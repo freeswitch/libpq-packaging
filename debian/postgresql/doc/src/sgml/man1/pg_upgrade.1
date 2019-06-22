@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.12 Documentation
-.\"    Source: PostgreSQL 9.6.12
+.\"    Manual: PostgreSQL 9.6.13 Documentation
+.\"    Source: PostgreSQL 9.6.13
 .\"  Language: English
 .\"
-.TH "PG_UPGRADE" "1" "2019" "PostgreSQL 9.6.12" "PostgreSQL 9.6.12 Documentation"
+.TH "PG_UPGRADE" "1" "2019" "PostgreSQL 9.6.13" "PostgreSQL 9.6.13 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -679,10 +679,9 @@ Reverting to old cluster: If, after running
 .sp -1
 .IP \(bu 2.3
 .\}
-If you ran
-\fBpg_upgrade\fR
-with
-\fB\-\-check\fR, no modifications were made to the old cluster and you can re\-use it anytime\&.
+If the
+\fB\-\-check\fR
+option was used, the old cluster was unmodified; it can be restarted\&.
 .RE
 .sp
 .RS 4
@@ -693,31 +692,68 @@ with
 .sp -1
 .IP \(bu 2.3
 .\}
-If you ran
-\fBpg_upgrade\fR
-with
-\fB\-\-link\fR, the data files are shared between the old and new cluster\&. If you started the new cluster, the new server has written to those shared files and it is unsafe to use the old cluster\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-If you ran
-\fBpg_upgrade\fR
-\fIwithout\fR
+If the
 \fB\-\-link\fR
-or did not start the new server, the old cluster was not modified except that, if linking started, a
+option was
+\fInot\fR
+used, the old cluster was unmodified; it can be restarted\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+If the
+\fB\-\-link\fR
+option was used, the data files might be shared between the old and new cluster:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+If
+\fBpg_upgrade\fR
+aborted before linking started, the old cluster was unmodified; it can be restarted\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+If you did
+\fInot\fR
+start the new cluster, the old cluster was unmodified except that, when linking started, a
 \&.old
 suffix was appended to
-$PGDATA/global/pg_control\&. To reuse the old cluster, possibly remove the
+$PGDATA/global/pg_control\&. To reuse the old cluster, remove the
 \&.old
 suffix from
 $PGDATA/global/pg_control; you can then restart the old cluster\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+If you did start the new cluster, it has written to shared files and it is unsafe to use the old cluster\&. The old cluster will need to be restored from backup in this case\&.
+.RE
+.sp
 .RE
 .sp
 .RE

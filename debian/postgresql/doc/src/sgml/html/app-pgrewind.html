@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.12 Documentation"
+TITLE="PostgreSQL 9.6.13 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Server Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-02-11T21:31:11"></HEAD
+CONTENT="2019-05-06T21:02:15"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.12 Documentation</A
+>PostgreSQL 9.6.13 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -505,10 +505,27 @@ NAME="AEN103197"
 ></A
 ><H2
 >Notes</H2
+><P
+>   When executing <SPAN
+CLASS="APPLICATION"
+>pg_rewind</SPAN
+> using an online
+   cluster as source which has been recently promoted, it is necessary
+   to execute a <TT
+CLASS="COMMAND"
+>CHECKPOINT</TT
+> after promotion so as its
+   control file reflects up-to-date timeline information, which is used by
+   <SPAN
+CLASS="APPLICATION"
+>pg_rewind</SPAN
+> to check if the target cluster
+   can be rewound using the designated source cluster.
+  </P
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN103199"
+NAME="AEN103203"
 ></A
 ><H3
 >How it works</H3

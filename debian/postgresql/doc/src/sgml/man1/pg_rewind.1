@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.12 Documentation
-.\"    Source: PostgreSQL 9.6.12
+.\"    Manual: PostgreSQL 9.6.13 Documentation
+.\"    Source: PostgreSQL 9.6.13
 .\"  Language: English
 .\"
-.TH "PG_REWIND" "1" "2019" "PostgreSQL 9.6.12" "PostgreSQL 9.6.12 Documentation"
+.TH "PG_REWIND" "1" "2019" "PostgreSQL 9.6.13" "PostgreSQL 9.6.13 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -165,6 +165,14 @@ libpq
 (see
 Section 32.14, \(lqEnvironment Variables\(rq, in the documentation)\&.
 .SH "NOTES"
+.PP
+When executing
+pg_rewind
+using an online cluster as source which has been recently promoted, it is necessary to execute a
+\fBCHECKPOINT\fR
+after promotion so as its control file reflects up\-to\-date timeline information, which is used by
+pg_rewind
+to check if the target cluster can be rewound using the designated source cluster\&.
 .SS "How it works"
 .PP
 The basic idea is to copy all file system\-level changes from the source cluster to the target cluster:

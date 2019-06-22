@@ -1417,6 +1417,7 @@ generic_set:
 					n->name = $1;
 					$$ = n;
 				}
+		;
 
 set_rest_more:	/* Generic SET syntaxes: */
 			generic_set 						{$$ = $1;}
@@ -5681,6 +5682,7 @@ attrs:		'.' attr_name
 type_name_list:
 			Typename								{ $$ = list_make1(list_make1($1)); }
 			| type_name_list ',' Typename			{ $$ = lappend($1, list_make1($3)); }
+		;
 
 /*****************************************************************************
  *
@@ -9583,9 +9585,27 @@ ExecuteStmt: EXECUTE name execute_param_clause
 					ctas->into = $4;
 					ctas->relkind = OBJECT_TABLE;
 					ctas->is_select_into = false;
+					ctas->if_not_exists = false;
 					/* cram additional flags into the IntoClause */
 					$4->rel->relpersistence = $2;
 					$4->skipData = !($9);
+					$$ = (Node *) ctas;
+				}
+			| CREATE OptTemp TABLE IF_P NOT EXISTS create_as_target AS
+				EXECUTE name execute_param_clause opt_with_data
+				{
+					CreateTableAsStmt *ctas = makeNode(CreateTableAsStmt);
+					ExecuteStmt *n = makeNode(ExecuteStmt);
+					n->name = $10;
+					n->params = $11;
+					ctas->query = (Node *) n;
+					ctas->into = $7;
+					ctas->relkind = OBJECT_TABLE;
+					ctas->is_select_into = false;
+					ctas->if_not_exists = true;
+					/* cram additional flags into the IntoClause */
+					$7->rel->relpersistence = $2;
+					$7->skipData = !($12);
 					$$ = (Node *) ctas;
 				}
 		;

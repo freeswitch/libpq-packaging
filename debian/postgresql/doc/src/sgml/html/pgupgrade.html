@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.12 Documentation"
+TITLE="PostgreSQL 9.6.13 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Server Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-02-11T21:31:11"></HEAD
+CONTENT="2019-05-06T21:02:15"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.12 Documentation</A
+>PostgreSQL 9.6.13 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN103386"
+NAME="AEN103390"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN103390"
+NAME="AEN103394"
 ></A
 ><H2
 >Synopsis</H2
@@ -159,7 +159,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103411"
+NAME="AEN103415"
 ></A
 ><H2
 >Description</H2
@@ -228,7 +228,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103427"
+NAME="AEN103431"
 ></A
 ><H2
 >Options</H2
@@ -574,7 +574,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103571"
+NAME="AEN103575"
 ></A
 ><H2
 >Usage</H2
@@ -1375,66 +1375,86 @@ CLASS="COMMAND"
 ></P><UL
 ><LI
 ><P
->        If you ran <TT
-CLASS="COMMAND"
->pg_upgrade</TT
->
-        with <TT
+>        If the <TT
 CLASS="OPTION"
 >--check</TT
->, no modifications were made to the old
-        cluster and you can re-use it anytime.
+> option was used, the old cluster
+        was unmodified;  it can be restarted.
        </P
 ></LI
 ><LI
 ><P
->        If you ran <TT
-CLASS="COMMAND"
->pg_upgrade</TT
->
-        with <TT
+>        If the <TT
 CLASS="OPTION"
 >--link</TT
->, the data files are shared between the
-        old and new cluster. If you started the new cluster, the new
-        server has written to those shared files and it is unsafe to
-        use the old cluster.
-       </P
-></LI
-><LI
-><P
->        If you ran <TT
-CLASS="COMMAND"
->pg_upgrade</TT
-> <SPAN
+> option was <SPAN
 CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
->without</I
+>not</I
 ></SPAN
 >
-        <TT
+        used, the old cluster was unmodified;  it can be restarted.
+       </P
+></LI
+><LI
+><P
+>        If the <TT
 CLASS="OPTION"
 >--link</TT
-> or did not start the new server, the
-        old cluster was not modified except that, if linking
-        started, a <TT
+> option was used, the data
+        files might be shared between the old and new cluster:
+
+        <P
+></P
+></P><UL
+><LI
+><P
+>           If <TT
+CLASS="COMMAND"
+>pg_upgrade</TT
+> aborted before linking started,
+           the old cluster was unmodified;  it can be restarted.
+          </P
+></LI
+><LI
+><P
+>           If you did <SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>not</I
+></SPAN
+> start the new cluster, the old
+           cluster was unmodified except that, when linking started, a
+           <TT
 CLASS="LITERAL"
 >.old</TT
 > suffix was appended to
-        <TT
+           <TT
 CLASS="FILENAME"
 >$PGDATA/global/pg_control</TT
 >.  To reuse the old
-        cluster, possibly remove the <TT
+           cluster, remove the <TT
 CLASS="FILENAME"
 >.old</TT
 > suffix from
-        <TT
+           <TT
 CLASS="FILENAME"
 >$PGDATA/global/pg_control</TT
->; you can then restart the
-        old cluster.
+>; you can then restart
+           the old cluster.
+          </P
+></LI
+><LI
+><P
+>           If you did start the new cluster, it has written to shared files
+           and it is unsafe to use the old cluster.  The old cluster will
+           need to be restored from backup in this case.
+          </P
+></LI
+></UL
+><P>
        </P
 ></LI
 ></UL
@@ -1447,7 +1467,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103774"
+NAME="AEN103784"
 ></A
 ><H2
 >Notes</H2
@@ -1565,7 +1585,7 @@ HREF="continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103802"
+NAME="AEN103812"
 ></A
 ><H2
 >See Also</H2

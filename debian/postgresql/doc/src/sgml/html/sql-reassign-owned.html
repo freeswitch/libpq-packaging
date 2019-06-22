@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.12 Documentation"
+TITLE="PostgreSQL 9.6.13 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-02-11T21:31:11"></HEAD
+CONTENT="2019-05-06T21:02:15"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.12 Documentation</A
+>PostgreSQL 9.6.13 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-REASSIGN-OWNED"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN89770"
+NAME="AEN89769"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN89770"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN89773"
+NAME="AEN89772"
 ></A
 ><H2
 >Synopsis</H2
@@ -125,7 +125,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN89777"
+NAME="AEN89776"
 ></A
 ><H2
 >Description</H2
@@ -152,7 +152,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN89783"
+NAME="AEN89782"
 ></A
 ><H2
 >Parameters</H2
@@ -200,7 +200,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN89797"
+NAME="AEN89796"
 ></A
 ><H2
 >Notes</H2
@@ -236,17 +236,22 @@ HREF="sql-drop-owned.html"
 CLASS="COMMAND"
 >REASSIGN OWNED</TT
 > command does not affect any
-   privileges granted to the <TT
+   privileges granted to
+   the <TT
 CLASS="REPLACEABLE"
 ><I
 >old_roles</I
 ></TT
-> for
-   objects that are not owned by them.  Use <TT
+> on objects
+   that are not owned by them.  Likewise, it does not affect default
+   privileges created with <TT
+CLASS="COMMAND"
+>ALTER DEFAULT PRIVILEGES</TT
+>.
+   Use <TT
 CLASS="COMMAND"
 >DROP OWNED</TT
-> to
-   revoke such privileges.
+> to revoke such privileges.
   </P
 ><P
 >   See <A
