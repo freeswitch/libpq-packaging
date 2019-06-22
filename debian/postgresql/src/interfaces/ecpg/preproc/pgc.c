@@ -5189,7 +5189,7 @@ parse_include(void)
 		base_yyin = fopen(inc_file, "r");
 		if (!base_yyin)
 		{
-			if (strcmp(inc_file + strlen(inc_file) - 2, ".h") != 0)
+			if (strlen(inc_file) <= 2 || strcmp(inc_file + strlen(inc_file) - 2, ".h") != 0)
 			{
 				strcat(inc_file, ".h");
 				base_yyin = fopen(inc_file, "r");
@@ -5207,7 +5207,7 @@ parse_include(void)
 
 		for (ip = include_paths; base_yyin == NULL && ip != NULL; ip = ip->next)
 		{
-			if (strlen(ip->path) + strlen(base_yytext) + 3 > MAXPGPATH)
+			if (strlen(ip->path) + strlen(base_yytext) + 4 > MAXPGPATH)
 			{
 				fprintf(stderr, _("Error: include path \"%s/%s\" is too long on line %d, skipping\n"), ip->path, base_yytext, base_yylineno);
 				continue;

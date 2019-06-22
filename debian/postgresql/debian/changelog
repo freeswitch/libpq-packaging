@@ -1,8 +1,30 @@
-postgresql-9.6 (9.6.12-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.13-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Fri, 03 May 2019 21:10:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Sat, 22 Jun 2019 14:10:37 +0200
+
+postgresql-9.6 (9.6.13-0+deb9u1) stretch-security; urgency=medium
+
+  * New upstream version.
+    + Prevent row-level security policies from being bypassed via selectivity
+      estimators (Dean Rasheed)
+
+      Some of the planner's selectivity estimators apply user-defined
+      operators to values found in pg_statistic (e.g., most-common values).
+      A leaky operator therefore can disclose some of the entries in a data
+      column, even if the calling user lacks permission to read that column.
+      In CVE-2017-7484 we added restrictions to forestall that, but we failed
+      to consider the effects of row-level security.  A user who has SQL
+      permission to read a column, but who is forbidden to see certain rows
+      due to RLS policy, might still learn something about those rows'
+      contents via a leaky operator.  This patch further tightens the rules,
+      allowing leaky operators to be applied to statistics data only when
+      there is no relevant RLS policy.  (CVE-2019-10130)
+
+  * Move maintainer address to tracker.
+
+ -- Christoph Berg <myon@debian.org>  Tue, 07 May 2019 12:51:42 +0200
 
 postgresql-9.6 (9.6.12-0+deb9u1) stretch; urgency=medium
 

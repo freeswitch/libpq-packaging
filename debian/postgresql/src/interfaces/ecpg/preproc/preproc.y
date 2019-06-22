@@ -2336,7 +2336,14 @@ mmerror(PARSE_ERROR, ET_WARNING, "unsupported feature will be passed to server")
  { 
  $$ = cat_str(2,$1,mm_strdup("to default"));
 }
-|  var_name '=' DEFAULT set_rest_more:
+|  var_name '=' DEFAULT
+ { 
+ $$ = cat_str(2,$1,mm_strdup("= default"));
+}
+;
+
+
+ set_rest_more:
  generic_set
  { 
  $$ = $1;
@@ -5710,7 +5717,14 @@ mmerror(PARSE_ERROR, ET_WARNING, "unsupported feature will be passed to server")
  { 
  $$ = $1;
 }
-|  type_name_list ',' Typename TruncateStmt:
+|  type_name_list ',' Typename
+ { 
+ $$ = cat_str(3,$1,mm_strdup(","),$3);
+}
+;
+
+
+ TruncateStmt:
  TRUNCATE opt_table relation_expr_list opt_restart_seqs opt_drop_behavior
  { 
  $$ = cat_str(5,mm_strdup("truncate"),$2,$3,$4,$5);
@@ -8744,6 +8758,10 @@ EXECUTE prepared_name execute_param_clause execute_rest
 |  CREATE OptTemp TABLE create_as_target AS EXECUTE name execute_param_clause opt_with_data
  { 
  $$ = cat_str(8,mm_strdup("create"),$2,mm_strdup("table"),$4,mm_strdup("as execute"),$7,$8,$9);
+}
+|  CREATE OptTemp TABLE IF_P NOT EXISTS create_as_target AS EXECUTE name execute_param_clause opt_with_data
+ { 
+ $$ = cat_str(8,mm_strdup("create"),$2,mm_strdup("table if not exists"),$7,mm_strdup("as execute"),$10,$11,$12);
 }
 ;
 
@@ -13962,7 +13980,14 @@ CreateAsStmt: CREATE OptTemp TABLE create_as_target AS {FoundInto = 0;} SelectSt
 			if (FoundInto == 1)
 				mmerror(PARSE_ERROR, ET_ERROR, "CREATE TABLE AS cannot specify INTO");
 
-			$$ = cat_str(6, mm_strdup("create"), $2, mm_strdup("table"), $4, mm_strdup("as"), $7);
+			$$ = cat_str(7, mm_strdup("create"), $2, mm_strdup("table"), $4, mm_strdup("as"), $7, $8);
+		}
+                |  CREATE OptTemp TABLE IF_P NOT EXISTS create_as_target AS {FoundInto = 0;} SelectStmt opt_with_data
+		{
+			if (FoundInto == 1)
+				mmerror(PARSE_ERROR, ET_ERROR, "CREATE TABLE AS cannot specify INTO");
+
+			$$ = cat_str(7, mm_strdup("create"), $2, mm_strdup("table if not exists"), $7, mm_strdup("as"), $10, $11);
 		}
 		;
 
