@@ -385,6 +385,9 @@ static void ATPrepAlterColumnType(List **wqueue,
 static bool ATColumnChangeRequiresRewrite(Node *expr, AttrNumber varattno);
 static ObjectAddress ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
 					  AlterTableCmd *cmd, LOCKMODE lockmode);
+static void RememberConstraintForRebuilding(Oid conoid, AlteredTableInfo *tab,
+											DependencyType deptype);
+static void RememberIndexForRebuilding(Oid indoid, AlteredTableInfo *tab);
 static ObjectAddress ATExecAlterColumnGenericOptions(Relation rel, const char *colName,
 								List *options, LOCKMODE lockmode);
 static void ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab,
@@ -6597,7 +6600,6 @@ ATAddForeignKeyConstraint(AlteredTableInfo *tab, Relation rel,
 							new_castfunc == old_castfunc &&
 							(!IsPolymorphicType(pfeqop_right) ||
 							 new_fktype == old_fktype));
-
 		}
 
 		pfeqoperators[i] = pfeqop;
@@ -8275,11 +8277,6 @@ ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
 	 * performed all the individual ALTER TYPE operations.  We have to save
 	 * the info before executing ALTER TYPE, though, else the deparser will
 	 * get confused.
-	 *
-	 * There could be multiple entries for the same object, so we must check
-	 * to ensure we process each one only once.  Note: we assume that an index
-	 * that implements a constraint will not show a direct dependency on the
-	 * column.
 	 */
 	depRel = heap_open(DependRelationId, RowExclusiveLock);
 
@@ -8321,13 +8318,7 @@ ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
 					if (relKind == RELKIND_INDEX)
 					{
 						Assert(foundObject.objectSubId == 0);
-						if (!list_member_oid(tab->changedIndexOids, foundObject.objectId))
-						{
-							tab->changedIndexOids = lappend_oid(tab->changedIndexOids,
-													   foundObject.objectId);
-							tab->changedIndexDefs = lappend(tab->changedIndexDefs,
-							   pg_get_indexdef_string(foundObject.objectId));
-						}
+						RememberIndexForRebuilding(foundObject.objectId, tab);
 					}
 					else if (relKind == RELKIND_SEQUENCE)
 					{
@@ -8348,39 +8339,8 @@ ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
 
 			case OCLASS_CONSTRAINT:
 				Assert(foundObject.objectSubId == 0);
-				if (!list_member_oid(tab->changedConstraintOids,
-									 foundObject.objectId))
-				{
-					char	   *defstring = pg_get_constraintdef_command(foundObject.objectId);
-
-					/*
-					 * Put NORMAL dependencies at the front of the list and
-					 * AUTO dependencies at the back.  This makes sure that
-					 * foreign-key constraints depending on this column will
-					 * be dropped before unique or primary-key constraints of
-					 * the column; which we must have because the FK
-					 * constraints depend on the indexes belonging to the
-					 * unique constraints.
-					 */
-					if (foundDep->deptype == DEPENDENCY_NORMAL)
-					{
-						tab->changedConstraintOids =
-							lcons_oid(foundObject.objectId,
-									  tab->changedConstraintOids);
-						tab->changedConstraintDefs =
-							lcons(defstring,
-								  tab->changedConstraintDefs);
-					}
-					else
-					{
-						tab->changedConstraintOids =
-							lappend_oid(tab->changedConstraintOids,
-										foundObject.objectId);
-						tab->changedConstraintDefs =
-							lappend(tab->changedConstraintDefs,
-									defstring);
-					}
-				}
+				RememberConstraintForRebuilding(foundObject.objectId, tab,
+												foundDep->deptype);
 				break;
 
 			case OCLASS_REWRITE:
@@ -8585,6 +8545,95 @@ ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
 	heap_freetuple(heapTup);
 
 	return address;
+}
+
+/*
+ * Subroutine for ATExecAlterColumnType: remember that a constraint needs
+ * to be rebuilt (which we might already know).
+ */
+static void
+RememberConstraintForRebuilding(Oid conoid, AlteredTableInfo *tab,
+								DependencyType deptype)
+{
+	/*
+	 * This de-duplication check is critical for two independent reasons: we
+	 * mustn't try to recreate the same constraint twice, and if a constraint
+	 * depends on more than one column whose type is to be altered, we must
+	 * capture its definition string before applying any of the column type
+	 * changes.  ruleutils.c will get confused if we ask again later.
+	 */
+	if (!list_member_oid(tab->changedConstraintOids, conoid))
+	{
+		/* OK, capture the constraint's existing definition string */
+		char	   *defstring = pg_get_constraintdef_command(conoid);
+
+		/*
+		 * Put NORMAL dependencies at the front of the list and AUTO
+		 * dependencies at the back.  This makes sure that foreign-key
+		 * constraints depending on this column will be dropped before unique
+		 * or primary-key constraints of the column; which we must have
+		 * because the FK constraints depend on the indexes belonging to the
+		 * unique constraints.
+		 */
+		if (deptype == DEPENDENCY_NORMAL)
+		{
+			tab->changedConstraintOids = lcons_oid(conoid,
+												   tab->changedConstraintOids);
+			tab->changedConstraintDefs = lcons(defstring,
+											   tab->changedConstraintDefs);
+		}
+		else
+		{
+			tab->changedConstraintOids = lappend_oid(tab->changedConstraintOids,
+													 conoid);
+			tab->changedConstraintDefs = lappend(tab->changedConstraintDefs,
+												 defstring);
+		}
+	}
+}
+
+/*
+ * Subroutine for ATExecAlterColumnType: remember that an index needs
+ * to be rebuilt (which we might already know).
+ */
+static void
+RememberIndexForRebuilding(Oid indoid, AlteredTableInfo *tab)
+{
+	/*
+	 * This de-duplication check is critical for two independent reasons: we
+	 * mustn't try to recreate the same index twice, and if an index depends
+	 * on more than one column whose type is to be altered, we must capture
+	 * its definition string before applying any of the column type changes.
+	 * ruleutils.c will get confused if we ask again later.
+	 */
+	if (!list_member_oid(tab->changedIndexOids, indoid))
+	{
+		/*
+		 * Before adding it as an index-to-rebuild, we'd better see if it
+		 * belongs to a constraint, and if so rebuild the constraint instead.
+		 * Typically this check fails, because constraint indexes normally
+		 * have only dependencies on their constraint.  But it's possible for
+		 * such an index to also have direct dependencies on table columns,
+		 * for example with a partial exclusion constraint.
+		 */
+		Oid			conoid = get_index_constraint(indoid);
+
+		if (OidIsValid(conoid))
+		{
+			/* index dependencies on columns should generally be AUTO */
+			RememberConstraintForRebuilding(conoid, tab, DEPENDENCY_AUTO);
+		}
+		else
+		{
+			/* OK, capture the index's existing definition string */
+			char	   *defstring = pg_get_indexdef_string(indoid);
+
+			tab->changedIndexOids = lappend_oid(tab->changedIndexOids,
+												indoid);
+			tab->changedIndexDefs = lappend(tab->changedIndexDefs,
+											defstring);
+		}
+	}
 }
 
 /*
@@ -9038,7 +9087,7 @@ TryReuseForeignKey(Oid oldId, Constraint *con)
 
 	/* stash a List of the operator Oids in our Constraint node */
 	for (i = 0; i < numkeys; i++)
-		con->old_conpfeqop = lcons_oid(rawarr[i], con->old_conpfeqop);
+		con->old_conpfeqop = lappend_oid(con->old_conpfeqop, rawarr[i]);
 
 	ReleaseSysCache(tup);
 }

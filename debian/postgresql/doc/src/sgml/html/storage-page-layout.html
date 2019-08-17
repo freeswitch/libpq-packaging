@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.13 Documentation"
+TITLE="PostgreSQL 9.6.15 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Database Physical Storage"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-05-06T21:02:15"></HEAD
+CONTENT="2019-08-05T21:31:39"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.13 Documentation</A
+>PostgreSQL 9.6.15 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -101,8 +101,8 @@ NAME="STORAGE-PAGE-LAYOUT"
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
 > tables and indexes.<A
-NAME="AEN120051"
-HREF="#FTN.AEN120051"
+NAME="AEN120169"
+HREF="#FTN.AEN120169"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -177,15 +177,15 @@ free space pointers.</TD
 ><TD
 >ItemIdData</TD
 ><TD
->Array of (offset,length) pairs pointing to the actual items.
-4 bytes per item.</TD
+>Array of item identifiers pointing to the actual items. Each
+entry is an (offset,length) pair. 4 bytes per item.</TD
 ></TR
 ><TR
 ><TD
 >Free space</TD
 ><TD
->The unallocated space. New item pointers are allocated from the start
-of this area, new items from the end.</TD
+>The unallocated space. New item identifiers are allocated from
+the start of this area, new items from the end.</TD
 ></TR
 ><TR
 ><TD
@@ -670,8 +670,8 @@ ALIGN="LEFT"
 VALIGN="TOP"
 WIDTH="5%"
 ><A
-NAME="FTN.AEN120051"
-HREF="storage-page-layout.html#AEN120051"
+NAME="FTN.AEN120169"
+HREF="storage-page-layout.html#AEN120169"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN

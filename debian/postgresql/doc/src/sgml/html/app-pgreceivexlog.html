@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.13 Documentation"
+TITLE="PostgreSQL 9.6.15 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-05-06T21:02:15"></HEAD
+CONTENT="2019-08-05T21:31:39"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.13 Documentation</A
+>PostgreSQL 9.6.15 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="APP-PGRECEIVEXLOG"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN97783"
+NAME="AEN97893"
 ></A
 ><H2
 >Name</H2
@@ -106,7 +106,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN97787"
+NAME="AEN97897"
 ></A
 ><H2
 >Synopsis</H2
@@ -124,7 +124,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97792"
+NAME="AEN97902"
 ></A
 ><H2
 >   Description
@@ -176,7 +176,41 @@ CLASS="APPLICATION"
 CLASS="OPTION"
 >--synchronous</TT
 > must be specified to flush WAL data
-   in real time.
+   in real time. Since <SPAN
+CLASS="APPLICATION"
+>pg_receivexlog</SPAN
+> does not
+   apply WAL, you should not allow it to become a synchronous standby when
+   <A
+HREF="runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT"
+>synchronous_commit</A
+> equals
+   <TT
+CLASS="LITERAL"
+>remote_apply</TT
+>. If it does, it will appear to be a
+   standby that never catches up, and will cause transaction commits to
+   block. To avoid this, you should either configure an appropriate value
+   for <A
+HREF="runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES"
+>synchronous_standby_names</A
+>, or specify
+   <TT
+CLASS="VARNAME"
+>application_name</TT
+> for
+   <SPAN
+CLASS="APPLICATION"
+>pg_receivexlog</SPAN
+> that does not match it, or
+   change the value of <TT
+CLASS="VARNAME"
+>synchronous_commit</TT
+> to
+   something other than <TT
+CLASS="LITERAL"
+>remote_apply</TT
+>.
   </P
 ><P
 >   The transaction log is streamed over a regular
@@ -220,7 +254,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97815"
+NAME="AEN97933"
 ></A
 ><H2
 >Options</H2
@@ -684,7 +718,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97977"
+NAME="AEN98095"
 ></A
 ><H2
 >Environment</H2
@@ -706,7 +740,7 @@ HREF="libpq-envars.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97983"
+NAME="AEN98101"
 ></A
 ><H2
 >Notes</H2
@@ -734,7 +768,7 @@ HREF="runtime-config-wal.html#GUC-ARCHIVE-COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97989"
+NAME="AEN98107"
 ></A
 ><H2
 >Examples</H2
@@ -762,7 +796,7 @@ CLASS="USERINPUT"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97997"
+NAME="AEN98115"
 ></A
 ><H2
 >See Also</H2

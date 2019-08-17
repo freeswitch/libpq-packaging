@@ -102,8 +102,7 @@ our @EXPORT = qw(
 our ($use_tcp, $test_localhost, $test_pghost, $last_host_assigned,
 	$last_port_assigned, @all_nodes);
 
-# Windows path to virtual file system root
-
+# For backward compatibility only.
 our $vfs_path = '';
 if ($Config{osname} eq 'msys')
 {
@@ -419,7 +418,17 @@ sub init
 	print $conf "restart_after_crash = off\n";
 	print $conf "log_statement = all\n";
 	print $conf "wal_retrieve_retry_interval = '500ms'\n";
-	print $conf "port = $port\n";
+
+	# If a setting tends to affect whether tests pass or fail, print it after
+	# TEMP_CONFIG.  Otherwise, print it before TEMP_CONFIG, thereby permitting
+	# overrides.  Settings that merely improve performance or ease debugging
+	# belong before TEMP_CONFIG.
+	print $conf TestLib::slurp_file($ENV{TEMP_CONFIG})
+	  if defined $ENV{TEMP_CONFIG};
+
+	# XXX Neutralize any stats_temp_directory in TEMP_CONFIG.  Nodes running
+	# concurrently must not share a stats_temp_directory.
+	print $conf "stats_temp_directory = 'pg_stat_tmp'\n";
 
 	if ($params{allows_streaming})
 	{
@@ -433,6 +442,7 @@ sub init
 		print $conf "max_connections = 10\n";
 	}
 
+	print $conf "port = $port\n";
 	if ($use_tcp)
 	{
 		print $conf "unix_socket_directories = ''\n";
@@ -833,7 +843,7 @@ standby_mode=on
 sub enable_restoring
 {
 	my ($self, $root_node) = @_;
-	my $path = $vfs_path . $root_node->archive_dir;
+	my $path = TestLib::perl2host($root_node->archive_dir);
 	my $name = $self->name;
 
 	print "### Enabling WAL restore for node \"$name\"\n";
@@ -861,7 +871,7 @@ standby_mode = on
 sub enable_archiving
 {
 	my ($self) = @_;
-	my $path   = $vfs_path. $self->archive_dir;
+	my $path   = TestLib::perl2host($self->archive_dir);
 	my $name   = $self->name;
 
 	print "### Enabling WAL archiving for node \"$name\"\n";
@@ -980,14 +990,15 @@ sub get_new_node
 		# This seems like a good idea on Unixen as well, even though we don't
 		# ask the postmaster to open a TCP port on Unix.  On Non-Linux,
 		# non-Windows kernels, binding to 127.0.0.1/24 addresses other than
-		# 127.0.0.1 fails with EADDRNOTAVAIL.
+		# 127.0.0.1 might fail with EADDRNOTAVAIL.  Binding to 0.0.0.0 is
+		# unnecessary on non-Windows systems.
 		#
 		# XXX A port available now may become unavailable by the time we start
 		# the postmaster.
 		if ($found == 1)
 		{
-			foreach my $addr (qw(127.0.0.1 0.0.0.0),
-				$use_tcp ? qw(127.0.0.2 127.0.0.3) : ())
+			foreach my $addr (qw(127.0.0.1),
+				$use_tcp ? qw(127.0.0.2 127.0.0.3 0.0.0.0) : ())
 			{
 				can_bind($addr, $port) or $found = 0;
 			}
