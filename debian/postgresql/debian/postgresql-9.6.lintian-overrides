@@ -1,0 +1,2 @@
+# We use debconf in postrm only
+no-debconf-config

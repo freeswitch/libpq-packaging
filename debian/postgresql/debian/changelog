@@ -1,8 +1,28 @@
-postgresql-9.6 (9.6.13-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.15-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Sat, 22 Jun 2019 14:10:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Sat, 17 Aug 2019 14:10:37 +0200
+
+postgresql-9.6 (9.6.15-0+deb9u1) stretch-security; urgency=medium
+
+  * New upstream security release.
+    + Fixes regression in ALTER TABLE on multiple columns. (Closes: #932247)
+
+    + Require schema qualification to cast to a temporary type when using
+      functional cast syntax (Noah Misch)
+
+      We have long required invocations of temporary functions to explicitly
+      specify the temporary schema, that is pg_temp.func_name(args). Require
+      this as well for casting to temporary types using functional notation,
+      for example pg_temp.type_name(arg). Otherwise it's possible to capture a
+      function call using a temporary object, allowing privilege escalation in
+      much the same ways that we blocked in CVE-2007-2138. (CVE-2019-10208)
+
+  * On purge, ask the user if they want to remove clusters.
+    (Closes: #911940, #933368)
+
+ -- Christoph Berg <myon@debian.org>  Thu, 08 Aug 2019 15:55:21 +0200
 
 postgresql-9.6 (9.6.13-0+deb9u1) stretch-security; urgency=medium
 

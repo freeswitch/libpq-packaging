@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.13 Documentation
-.\"    Source: PostgreSQL 9.6.13
+.\"    Manual: PostgreSQL 9.6.15 Documentation
+.\"    Source: PostgreSQL 9.6.15
 .\"  Language: English
 .\"
-.TH "PG_RECEIVEXLOG" "1" "2019" "PostgreSQL 9.6.13" "PostgreSQL 9.6.13 Documentation"
+.TH "PG_RECEIVEXLOG" "1" "2019" "PostgreSQL 9.6.15" "PostgreSQL 9.6.15 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -52,7 +52,20 @@ Unlike the WAL receiver of a PostgreSQL standby server,
 pg_receivexlog
 by default flushes WAL data only when a WAL file is closed\&. The option
 \fB\-\-synchronous\fR
-must be specified to flush WAL data in real time\&.
+must be specified to flush WAL data in real time\&. Since
+pg_receivexlog
+does not apply WAL, you should not allow it to become a synchronous standby when
+synchronous_commit
+equals
+remote_apply\&. If it does, it will appear to be a standby that never catches up, and will cause transaction commits to block\&. To avoid this, you should either configure an appropriate value for
+synchronous_standby_names, or specify
+\fIapplication_name\fR
+for
+pg_receivexlog
+that does not match it, or change the value of
+\fIsynchronous_commit\fR
+to something other than
+remote_apply\&.
 .PP
 The transaction log is streamed over a regular
 PostgreSQL

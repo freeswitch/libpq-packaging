@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.13 Documentation
-.\"    Source: PostgreSQL 9.6.13
+.\"    Manual: PostgreSQL 9.6.15 Documentation
+.\"    Source: PostgreSQL 9.6.15
 .\"  Language: English
 .\"
-.TH "PGBENCH" "1" "2019" "PostgreSQL 9.6.13" "PostgreSQL 9.6.13 Documentation"
+.TH "PGBENCH" "1" "2019" "PostgreSQL 9.6.15" "PostgreSQL 9.6.15 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -315,7 +315,7 @@ Write the time taken by each transaction to a log file\&. See below for details\
 .br
 \fB\-\-latency\-limit=\fR\fIlimit\fR
 .RS 4
-Transaction which last more than
+Transactions that last more than
 \fIlimit\fR
 milliseconds are counted and reported separately, as
 late\&.
@@ -563,7 +563,7 @@ aid,
 tid,
 bid
 and
-balance\&. The scenario is inspired by the TPC\-B benchmark, but is not actually TPC\-B, hence the name\&.
+delta\&. The scenario is inspired by the TPC\-B benchmark, but is not actually TPC\-B, hence the name\&.
 .sp
 .RS 4
 .ie n \{\
