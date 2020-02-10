@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Server Configuration"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -324,6 +324,8 @@ CLASS="LITERAL"
      identifiers or numbers must be single-quoted.  To embed a single
      quote in a parameter value, write either two quotes (preferred)
      or backslash-quote.
+     If the file contains multiple entries for the same parameter,
+     all but the last one are ignored.
     </P
 ><P
 >     Parameters set in this way provide default values for the cluster.
@@ -375,24 +377,43 @@ CLASS="FILENAME"
      which has the same format as <TT
 CLASS="FILENAME"
 >postgresql.conf</TT
-> but should
-     never be edited manually.  This file holds settings provided through
-     the <A
+> but
+     is intended to be edited automatically not manually.  This file holds
+     settings provided through the <A
 HREF="sql-altersystem.html"
 >ALTER SYSTEM</A
-> command.  This file is automatically
-     read whenever <TT
+> command.
+     This file is read whenever <TT
 CLASS="FILENAME"
 >postgresql.conf</TT
-> is, and its settings take
-     effect in the same way.  Settings in <TT
+> is,
+     and its settings take effect in the same way.  Settings
+     in <TT
 CLASS="FILENAME"
 >postgresql.auto.conf</TT
->
-     override those in <TT
+> override those
+     in <TT
 CLASS="FILENAME"
 >postgresql.conf</TT
 >.
+    </P
+><P
+>     External tools may also
+     modify <TT
+CLASS="FILENAME"
+>postgresql.auto.conf</TT
+>.  It is not
+     recommended to do this while the server is running, since a
+     concurrent <TT
+CLASS="COMMAND"
+>ALTER SYSTEM</TT
+> command could overwrite
+     such changes.  Such tools might simply append new settings to the end,
+     or they might choose to remove duplicate settings and/or comments
+     (as <TT
+CLASS="COMMAND"
+>ALTER SYSTEM</TT
+> will).
     </P
 ><P
 >     The system view
@@ -403,7 +424,7 @@ CLASS="STRUCTNAME"
 >pg_file_settings</TT
 ></A
 >
-     can be helpful for pre-testing changes to the configuration file, or for
+     can be helpful for pre-testing changes to the configuration files, or for
      diagnosing problems if a <SPAN
 CLASS="SYSTEMITEM"
 >SIGHUP</SPAN
@@ -568,7 +589,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN32706"
+NAME="AEN32717"
 >19.1.4. Parameter Interaction via the Shell</A
 ></H2
 ><P

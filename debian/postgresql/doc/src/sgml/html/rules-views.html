@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="The Rule System"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -206,19 +206,6 @@ CLASS="COMMAND"
     example that covers all the points discussed step by step rather
     than having many different ones that might mix up in mind.</P
 ><P
->For the example, we need a little <TT
-CLASS="LITERAL"
->min</TT
-> function that
-returns the lower of 2 integer values. We create that as:
-
-</P><PRE
-CLASS="PROGRAMLISTING"
->CREATE FUNCTION min(integer, integer) RETURNS integer AS $$
-    SELECT CASE WHEN $1 &lt; $2 THEN $1 ELSE $2 END
-$$ LANGUAGE SQL STRICT;</PRE
-><P></P
-><P
 >    The real tables we need in the first two rule system descriptions
     are these:
 
@@ -280,7 +267,7 @@ CREATE VIEW shoe_ready AS
            rsh.sh_avail,
            rsl.sl_name,
            rsl.sl_avail,
-           min(rsh.sh_avail, rsl.sl_avail) AS total_avail
+           least(rsh.sh_avail, rsl.sl_avail) AS total_avail
       FROM shoe rsh, shoelace rsl
      WHERE rsl.sl_color = rsh.slcolor
        AND rsl.sl_len_cm &gt;= rsh.slminlen_cm
@@ -541,7 +528,7 @@ CLASS="PROGRAMLISTING"
                rsh.sh_avail,
                rsl.sl_name,
                rsl.sl_avail,
-               min(rsh.sh_avail, rsl.sl_avail) AS total_avail
+               least(rsh.sh_avail, rsl.sl_avail) AS total_avail
           FROM shoe rsh, shoelace rsl
          WHERE rsl.sl_color = rsh.slcolor
            AND rsl.sl_len_cm &gt;= rsh.slminlen_cm
@@ -568,7 +555,7 @@ CLASS="PROGRAMLISTING"
                rsh.sh_avail,
                rsl.sl_name,
                rsl.sl_avail,
-               min(rsh.sh_avail, rsl.sl_avail) AS total_avail
+               least(rsh.sh_avail, rsl.sl_avail) AS total_avail
           FROM (SELECT sh.shoename,
                        sh.sh_avail,
                        sh.slcolor,
@@ -594,31 +581,14 @@ CLASS="PROGRAMLISTING"
 ><P>
    </P
 ><P
->    It turns out that the planner will collapse this tree into a
-    two-level query tree: the bottommost <TT
-CLASS="COMMAND"
->SELECT</TT
->
-    commands will be <SPAN
+>    This might look inefficient, but the planner will collapse this into a
+    single-level query tree by <SPAN
 CLASS="QUOTE"
->"pulled up"</SPAN
-> into the middle
-    <TT
-CLASS="COMMAND"
->SELECT</TT
-> since there's no need to process them
-    separately.  But the middle <TT
-CLASS="COMMAND"
->SELECT</TT
-> will remain
-    separate from the top, because it contains aggregate functions.
-    If we pulled those up it would change the behavior of the topmost
-    <TT
-CLASS="COMMAND"
->SELECT</TT
->, which we don't want.  However,
-    collapsing the query tree is an optimization that the rewrite
-    system doesn't have to concern itself with.
+>"pulling up"</SPAN
+> the subqueries,
+    and then it will plan the joins just as if we'd written them out
+    manually.  So collapsing the query tree is an optimization that the
+    rewrite system doesn't have to concern itself with.
    </P
 ></DIV
 ><DIV
@@ -626,7 +596,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN64750"
+NAME="AEN64774"
 >39.2.2. View Rules in Non-<TT
 CLASS="COMMAND"
 >SELECT</TT
@@ -848,7 +818,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN64806"
+NAME="AEN64830"
 >39.2.3. The Power of Views in <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN

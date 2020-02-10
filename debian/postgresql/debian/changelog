@@ -1,8 +1,14 @@
-postgresql-9.6 (9.6.15-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.16-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Sat, 17 Aug 2019 14:10:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Mon, 10 Feb 2020 12:10:37 +0200
+
+postgresql-9.6 (9.6.16-0+deb9u1) stretch; urgency=medium
+
+  * New upstream version.
+
+ -- Christoph Berg <myon@debian.org>  Mon, 18 Nov 2019 11:25:55 +0100
 
 postgresql-9.6 (9.6.15-0+deb9u1) stretch-security; urgency=medium
 

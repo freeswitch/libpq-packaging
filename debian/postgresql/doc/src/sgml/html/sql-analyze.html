@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-ANALYZE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN77213"
+NAME="AEN77237"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN77213"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN77216"
+NAME="AEN77240"
 ></A
 ><H2
 >Synopsis</H2
@@ -124,7 +124,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77220"
+NAME="AEN77244"
 ></A
 ><H2
 >Description</H2
@@ -160,7 +160,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77229"
+NAME="AEN77253"
 ></A
 ><H2
 >Parameters</H2
@@ -211,7 +211,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77247"
+NAME="AEN77271"
 ></A
 ><H2
 >Outputs</H2
@@ -230,10 +230,25 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77252"
+NAME="AEN77276"
 ></A
 ><H2
 >Notes</H2
+><P
+>   To analyze a table, one must ordinarily be the table's owner or a
+   superuser.  However, database owners are allowed to
+   analyze all tables in their databases, except shared catalogs.
+   (The restriction for shared catalogs means that a true database-wide
+   <TT
+CLASS="COMMAND"
+>ANALYZE</TT
+> can only be performed by a superuser.)
+   <TT
+CLASS="COMMAND"
+>ANALYZE</TT
+> will skip over any tables that the calling user
+   does not have permission to analyze.
+  </P
 ><P
 >   Foreign tables are analyzed only when explicitly selected.  Not all
    foreign data wrappers support <TT
@@ -440,7 +455,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77297"
+NAME="AEN77324"
 ></A
 ><H2
 >Compatibility</H2
@@ -454,7 +469,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN77301"
+NAME="AEN77328"
 ></A
 ><H2
 >See Also</H2

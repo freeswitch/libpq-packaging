@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -209,7 +209,7 @@ CLASS="REPLACEABLE"
 ><TD
 >input arrays concatenated into array of one higher dimension
        (inputs must all have same dimensionality,
-        and cannot be empty or NULL)</TD
+        and cannot be empty or null)</TD
 ></TR
 ><TR
 ><TD
@@ -265,7 +265,7 @@ CLASS="TYPE"
 ><TD
 >Yes</TD
 ><TD
->the average (arithmetic mean) of all input values</TD
+>the average (arithmetic mean) of all non-null input values</TD
 ></TR
 ><TR
 ><TD
@@ -511,7 +511,7 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->aggregates values as a JSON array</TD
+>aggregates values, including nulls, as a JSON array</TD
 ></TR
 ><TR
 ><TD
@@ -541,7 +541,7 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->aggregates values as a JSON array</TD
+>aggregates values, including nulls, as a JSON array</TD
 ></TR
 ><TR
 ><TD
@@ -576,7 +576,8 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->aggregates name/value pairs as a JSON object</TD
+>aggregates name/value pairs as a JSON object; values can be
+       null, but not names</TD
 ></TR
 ><TR
 ><TD
@@ -611,7 +612,8 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->aggregates name/value pairs as a JSON object</TD
+>aggregates name/value pairs as a JSON object; values can be
+       null, but not names</TD
 ></TR
 ><TR
 ><TD
@@ -639,7 +641,7 @@ CLASS="REPLACEABLE"
 ><I
 >expression</I
 ></TT
-> across all input
+> across all non-null input
        values
       </TD
 ></TR
@@ -669,7 +671,7 @@ CLASS="REPLACEABLE"
 ><I
 >expression</I
 ></TT
-> across all input
+> across all non-null input
        values
       </TD
 ></TR
@@ -714,7 +716,7 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->input values concatenated into a string, separated by delimiter</TD
+>non-null input values concatenated into a string, separated by delimiter</TD
 ></TR
 ><TR
 ><TD
@@ -788,7 +790,8 @@ CLASS="REPLACEABLE"
 ><I
 >expression</I
 ></TT
-> across all input values</TD
+>
+       across all non-null input values</TD
 ></TR
 ><TR
 ><TD
@@ -818,7 +821,8 @@ CLASS="TYPE"
 ><TD
 >No</TD
 ><TD
->concatenation of XML values (see also <A
+>concatenation of non-null XML values
+       (see also <A
 HREF="functions-xml.html#FUNCTIONS-XML-XMLAGG"
 >Section 9.14.1.7</A
 >)</TD

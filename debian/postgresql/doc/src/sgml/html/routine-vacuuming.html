@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Routine Database Maintenance Tasks"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1532,6 +1532,59 @@ CLASS="LITERAL"
 > storage parameters have been set
     are not considered in the balancing algorithm.
    </P
+><P
+>    Autovacuum workers generally don't block other commands.  If a process
+    attempts to acquire a lock that conflicts with the
+    <TT
+CLASS="LITERAL"
+>SHARE UPDATE EXCLUSIVE</TT
+> lock held by autovacuum, lock
+    acquisition will interrupt the autovacuum.  For conflicting lock modes,
+    see <A
+HREF="explicit-locking.html#TABLE-LOCK-COMPATIBILITY"
+>Table 13-2</A
+>.  However, if the autovacuum
+    is running to prevent transaction ID wraparound (i.e., the autovacuum query
+    name in the <TT
+CLASS="STRUCTNAME"
+>pg_stat_activity</TT
+> view ends with
+    <TT
+CLASS="LITERAL"
+>(to prevent wraparound)</TT
+>), the autovacuum is not
+    automatically interrupted.
+   </P
+><DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Warning</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+><P
+>     Regularly running commands that acquire locks conflicting with a
+     <TT
+CLASS="LITERAL"
+>SHARE UPDATE EXCLUSIVE</TT
+> lock (e.g., ANALYZE) can
+     effectively prevent autovacuums from ever completing.
+    </P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ></DIV
 ><DIV
