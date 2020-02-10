@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PL/pgSQL - SQL Procedural Language"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -141,7 +141,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66151"
+NAME="AEN66175"
 >41.6.1.1. <TT
 CLASS="COMMAND"
 >RETURN</TT
@@ -241,7 +241,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66173"
+NAME="AEN66197"
 >41.6.1.2. <TT
 CLASS="COMMAND"
 >RETURN NEXT</TT
@@ -600,7 +600,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66258"
+NAME="AEN66282"
 >41.6.2.1. <TT
 CLASS="LITERAL"
 >IF-THEN</TT
@@ -655,7 +655,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66271"
+NAME="AEN66295"
 >41.6.2.2. <TT
 CLASS="LITERAL"
 >IF-THEN-ELSE</TT
@@ -724,7 +724,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66284"
+NAME="AEN66308"
 >41.6.2.3. <TT
 CLASS="LITERAL"
 >IF-THEN-ELSIF</TT
@@ -888,7 +888,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66318"
+NAME="AEN66342"
 >41.6.2.4. Simple <TT
 CLASS="LITERAL"
 >CASE</TT
@@ -1036,7 +1036,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66350"
+NAME="AEN66374"
 >41.6.2.5. Searched <TT
 CLASS="LITERAL"
 >CASE</TT
@@ -1206,7 +1206,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66392"
+NAME="AEN66416"
 >41.6.3.1. <TT
 CLASS="LITERAL"
 >LOOP</TT
@@ -1273,7 +1273,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66408"
+NAME="AEN66432"
 >41.6.3.2. <TT
 CLASS="LITERAL"
 >EXIT</TT
@@ -1410,7 +1410,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66440"
+NAME="AEN66464"
 >41.6.3.3. <TT
 CLASS="LITERAL"
 >CONTINUE</TT
@@ -1497,7 +1497,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN66462"
+NAME="AEN66486"
 >41.6.3.4. <TT
 CLASS="LITERAL"
 >WHILE</TT
@@ -1786,19 +1786,29 @@ CLASS="REPLACEABLE"
      executed for each row. Here is an example:
 </P><PRE
 CLASS="PROGRAMLISTING"
->CREATE FUNCTION cs_refresh_mviews() RETURNS integer AS $$
+>CREATE FUNCTION refresh_mviews() RETURNS integer AS $$
 DECLARE
     mviews RECORD;
 BEGIN
-    RAISE NOTICE 'Refreshing materialized views...';
+    RAISE NOTICE 'Refreshing all materialized views...';
 
-    FOR mviews IN SELECT * FROM cs_materialized_views ORDER BY sort_key LOOP
+    FOR mviews IN
+       SELECT n.nspname AS mv_schema,
+              c.relname AS mv_name,
+              pg_catalog.pg_get_userbyid(c.relowner) AS owner
+         FROM pg_catalog.pg_class c
+    LEFT JOIN pg_catalog.pg_namespace n ON (n.oid = c.relnamespace)
+        WHERE c.relkind = 'm'
+     ORDER BY 1
+    LOOP
 
-        -- Now "mviews" has one record from cs_materialized_views
+        -- Now "mviews" has one record with information about the materialized view
 
-        RAISE NOTICE 'Refreshing materialized view %s ...', quote_ident(mviews.mv_name);
-        EXECUTE format('TRUNCATE TABLE %I', mviews.mv_name);
-        EXECUTE format('INSERT INTO %I %s', mviews.mv_name, mviews.mv_query);
+        RAISE NOTICE 'Refreshing materialized view %.% (owner: %)...',
+                     quote_ident(mviews.mv_schema),
+                     quote_ident(mviews.mv_name),
+                     quote_ident(mviews.owner);
+        EXECUTE format('REFRESH MATERIALIZED VIEW %I.%I', mviews.mv_schema, mviews.mv_name);
     END LOOP;
 
     RAISE NOTICE 'Done refreshing materialized views.';

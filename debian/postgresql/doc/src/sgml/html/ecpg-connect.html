@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="ECPG - Embedded SQL in C"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -379,6 +379,63 @@ CLASS="REPLACEABLE"
    SQL string literal, or a reference to a character variable.
   </P
 ><P
+>   If the connection target includes any <TT
+CLASS="REPLACEABLE"
+><I
+>options</I
+></TT
+>,
+   those consist of
+   <TT
+CLASS="LITERAL"
+><TT
+CLASS="REPLACEABLE"
+><I
+>keyword</I
+></TT
+>=<TT
+CLASS="REPLACEABLE"
+><I
+>value</I
+></TT
+></TT
+>
+   specifications separated by ampersands (<TT
+CLASS="LITERAL"
+>&amp;</TT
+>).
+   The allowed key words are the same ones recognized
+   by <SPAN
+CLASS="APPLICATION"
+>libpq</SPAN
+> (see
+   <A
+HREF="libpq-connect.html#LIBPQ-PARAMKEYWORDS"
+>Section 32.1.2</A
+>).  Spaces are ignored before
+   any <TT
+CLASS="REPLACEABLE"
+><I
+>keyword</I
+></TT
+> or <TT
+CLASS="REPLACEABLE"
+><I
+>value</I
+></TT
+>,
+   though not within or after one.  Note that there is no way to
+   write <TT
+CLASS="LITERAL"
+>&amp;</TT
+> within a <TT
+CLASS="REPLACEABLE"
+><I
+>value</I
+></TT
+>.
+  </P
+><P
 >   The <TT
 CLASS="REPLACEABLE"
 ><I
@@ -404,7 +461,7 @@ CLASS="VARNAME"
 >.  For example,
    add <TT
 CLASS="LITERAL"
->options=-csearch_path=</TT
+>options=-c search_path=</TT
 >
    to <TT
 CLASS="LITERAL"

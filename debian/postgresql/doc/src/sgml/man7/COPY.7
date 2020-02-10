@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.15 Documentation
-.\"    Source: PostgreSQL 9.6.15
+.\"    Manual: PostgreSQL 9.6.16 Documentation
+.\"    Source: PostgreSQL 9.6.16
 .\"  Language: English
 .\"
-.TH "COPY" "7" "2019" "PostgreSQL 9.6.15" "PostgreSQL 9.6.15 Documentation"
+.TH "COPY" "7" "2019" "PostgreSQL 9.6.16" "PostgreSQL 9.6.16 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -899,11 +899,11 @@ COPY \fItable_name\fR [ ( \fIcolumn_name\fR [, \&.\&.\&.] ) ]
     [ [ WITH ]
           [ BINARY ]
           [ OIDS ]
-          [ DELIMITER [ AS ] \*(Aq\fIdelimiter\fR\*(Aq ]
+          [ DELIMITER [ AS ] \*(Aq\fIdelimiter_character\fR\*(Aq ]
           [ NULL [ AS ] \*(Aq\fInull string\fR\*(Aq ]
           [ CSV [ HEADER ]
-                [ QUOTE [ AS ] \*(Aq\fIquote\fR\*(Aq ]
-                [ ESCAPE [ AS ] \*(Aq\fIescape\fR\*(Aq ]
+                [ QUOTE [ AS ] \*(Aq\fIquote_character\fR\*(Aq ]
+                [ ESCAPE [ AS ] \*(Aq\fIescape_character\fR\*(Aq ]
                 [ FORCE NOT NULL \fIcolumn_name\fR [, \&.\&.\&.] ] ] ]
 
 COPY { \fItable_name\fR [ ( \fIcolumn_name\fR [, \&.\&.\&.] ) ] | ( \fIquery\fR ) }
@@ -911,11 +911,11 @@ COPY { \fItable_name\fR [ ( \fIcolumn_name\fR [, \&.\&.\&.] ) ] | ( \fIquery\fR 
     [ [ WITH ]
           [ BINARY ]
           [ OIDS ]
-          [ DELIMITER [ AS ] \*(Aq\fIdelimiter\fR\*(Aq ]
+          [ DELIMITER [ AS ] \*(Aq\fIdelimiter_character\fR\*(Aq ]
           [ NULL [ AS ] \*(Aq\fInull string\fR\*(Aq ]
           [ CSV [ HEADER ]
-                [ QUOTE [ AS ] \*(Aq\fIquote\fR\*(Aq ]
-                [ ESCAPE [ AS ] \*(Aq\fIescape\fR\*(Aq ]
+                [ QUOTE [ AS ] \*(Aq\fIquote_character\fR\*(Aq ]
+                [ ESCAPE [ AS ] \*(Aq\fIescape_character\fR\*(Aq ]
                 [ FORCE QUOTE { \fIcolumn_name\fR [, \&.\&.\&.] | * } ] ] ]
 .fi
 .if n \{\
@@ -940,13 +940,13 @@ version 7\&.3 and is still supported:
 .nf
 COPY [ BINARY ] \fItable_name\fR [ WITH OIDS ]
     FROM { \*(Aq\fIfilename\fR\*(Aq | STDIN }
-    [ [USING] DELIMITERS \*(Aq\fIdelimiter\fR\*(Aq ]
-    [ WITH NULL AS \*(Aq\fInull string\fR\*(Aq ]
+    [ [USING] DELIMITERS \*(Aq\fIdelimiter_character\fR\*(Aq ]
+    [ WITH NULL AS \*(Aq\fInull_string\fR\*(Aq ]
 
 COPY [ BINARY ] \fItable_name\fR [ WITH OIDS ]
     TO { \*(Aq\fIfilename\fR\*(Aq | STDOUT }
-    [ [USING] DELIMITERS \*(Aq\fIdelimiter\fR\*(Aq ]
-    [ WITH NULL AS \*(Aq\fInull string\fR\*(Aq ]
+    [ [USING] DELIMITERS \*(Aq\fIdelimiter_character\fR\*(Aq ]
+    [ WITH NULL AS \*(Aq\fInull_string\fR\*(Aq ]
 .fi
 .if n \{\
 .RE

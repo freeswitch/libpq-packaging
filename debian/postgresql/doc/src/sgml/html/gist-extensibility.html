@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.15 Documentation"
+TITLE="PostgreSQL 9.6.16 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="GiST Indexes"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-08-05T21:31:39"></HEAD
+CONTENT="2019-11-11T22:22:08"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.15 Documentation</A
+>PostgreSQL 9.6.16 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -807,8 +807,8 @@ my_picksplit(PG_FUNCTION_ARGS)
 
         /*
          * Choose where to put the index entries and update unionL and unionR
-         * accordingly. Append the entries to either v_spl_left or
-         * v_spl_right, and care about the counters.
+         * accordingly. Append the entries to either v-&gt;spl_left or
+         * v-&gt;spl_right, and care about the counters.
          */
 
         if (my_choice_is_left(unionL, curl, unionR, curr))
@@ -1110,7 +1110,7 @@ Datum
 my_fetch(PG_FUNCTION_ARGS)
 {
     GISTENTRY  *entry = (GISTENTRY *) PG_GETARG_POINTER(0);
-    input_data_type *in = DatumGetP(entry-&#62;key);
+    input_data_type *in = DatumGetPointer(entry-&#62;key);
     fetched_data_type *fetched_data;
     GISTENTRY  *retval;
 
@@ -1121,7 +1121,7 @@ my_fetch(PG_FUNCTION_ARGS)
      * Convert 'fetched_data' into the a Datum of the original datatype.
      */
 
-    /* fill *retval from fetch_data. */
+    /* fill *retval from fetched_data. */
     gistentryinit(*retval, PointerGetDatum(converted_datum),
                   entry-&#62;rel, entry-&#62;page, entry-&#62;offset, FALSE);
 

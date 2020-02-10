@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.15 Documentation
-.\"    Source: PostgreSQL 9.6.15
+.\"    Manual: PostgreSQL 9.6.16 Documentation
+.\"    Source: PostgreSQL 9.6.16
 .\"  Language: English
 .\"
-.TH "ANALYZE" "7" "2019" "PostgreSQL 9.6.15" "PostgreSQL 9.6.15 Documentation"
+.TH "ANALYZE" "7" "2019" "PostgreSQL 9.6.16" "PostgreSQL 9.6.16 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -70,6 +70,12 @@ is specified,
 \fBANALYZE\fR
 emits progress messages to indicate which table is currently being processed\&. Various statistics about the tables are printed as well\&.
 .SH "NOTES"
+.PP
+To analyze a table, one must ordinarily be the table\*(Aqs owner or a superuser\&. However, database owners are allowed to analyze all tables in their databases, except shared catalogs\&. (The restriction for shared catalogs means that a true database\-wide
+\fBANALYZE\fR
+can only be performed by a superuser\&.)
+\fBANALYZE\fR
+will skip over any tables that the calling user does not have permission to analyze\&.
 .PP
 Foreign tables are analyzed only when explicitly selected\&. Not all foreign data wrappers support
 \fBANALYZE\fR\&. If the table\*(Aqs wrapper does not support
