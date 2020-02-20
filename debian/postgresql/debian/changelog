@@ -1,8 +1,21 @@
-postgresql-9.6 (9.6.16-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.17-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Mon, 10 Feb 2020 12:10:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Thu, 20 Feb 2020 12:10:37 +0200
+
+postgresql-9.6 (9.6.17-0+deb9u1) stretch-security; urgency=medium
+
+  * New upstream version.
+    + Add missing permissions checks for ALTER ... DEPENDS ON EXTENSION.
+
+      Marking an object as dependent on an extension did not have any
+      privilege check whatsoever.  This oversight allowed any user to mark
+      routines, triggers, materialized views, or indexes as droppable by
+      anyone able to drop an extension.  Require that the calling user own the
+      specified object (and hence have privilege to drop it). (CVE-2020-1720)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 11 Feb 2020 14:31:19 +0100
 
 postgresql-9.6 (9.6.16-0+deb9u1) stretch; urgency=medium
 

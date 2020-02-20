@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Indexes"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -354,6 +354,22 @@ CREATE UNIQUE INDEX tests_success_constraint ON tests (subject, target)
 ><P>
     This is a particularly efficient approach when there are few
     successful tests and many unsuccessful ones.
+   </P
+><P
+>    This index allows only one null in the indexed column by using a
+    partial index clause to process only null column values, and using
+    an expression index clause to index <TT
+CLASS="LITERAL"
+>true</TT
+> instead
+    of <TT
+CLASS="LITERAL"
+>null</TT
+>:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>CREATE UNIQUE INDEX tests_target_one_null ON tests ((target IS NULL)) WHERE target IS NULL;</PRE
+><P>
    </P
 ></DIV
 ><P

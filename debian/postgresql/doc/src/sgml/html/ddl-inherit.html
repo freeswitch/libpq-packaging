@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Definition"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -520,7 +520,20 @@ CLASS="STRUCTNAME"
 CLASS="STRUCTNAME"
 >capitals</TT
 > table could not be updated directly
-   without an additional grant.  In a similar way, the parent table's row
+   without an additional grant.  Two exceptions to this rule are
+   <TT
+CLASS="COMMAND"
+>TRUNCATE</TT
+> and <TT
+CLASS="COMMAND"
+>LOCK TABLE</TT
+>,
+   where permissions on the child tables are always checked,
+   whether they are processed directly or recursively via those commands
+   performed on the parent table.
+  </P
+><P
+>   In a similar way, the parent table's row
    security policies (see <A
 HREF="ddl-rowsecurity.html"
 >Section 5.7</A

@@ -2,12 +2,12 @@
 .\"     Title: SELECT
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.16 Documentation
-.\"    Source: PostgreSQL 9.6.16
+.\"      Date: 2020
+.\"    Manual: PostgreSQL 9.6.17 Documentation
+.\"    Source: PostgreSQL 9.6.17
 .\"  Language: English
 .\"
-.TH "SELECT" "7" "2019" "PostgreSQL 9.6.16" "PostgreSQL 9.6.16 Documentation"
+.TH "SELECT" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -366,6 +366,15 @@ list\&.
 A key property of
 WITH
 queries is that they are evaluated only once per execution of the primary query, even if the primary query refers to them more than once\&. In particular, data\-modifying statements are guaranteed to be executed once and only once, regardless of whether the primary query reads all or any of their output\&.
+.PP
+When there are multiple queries in the
+WITH
+clause,
+RECURSIVE
+should be written only once, immediately after
+WITH\&. It applies to all queries in the
+WITH
+clause, though it has no effect on queries that do not use recursion or forward references\&.
 .PP
 The primary query and the
 WITH

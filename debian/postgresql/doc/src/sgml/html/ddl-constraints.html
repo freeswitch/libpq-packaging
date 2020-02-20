@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Definition"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -262,13 +262,119 @@ CLASS="EMPHASIS"
     ensure that a column does not contain null values, the not-null
     constraint described in the next section can be used.
    </P
+><DIV
+CLASS="NOTE"
+><BLOCKQUOTE
+CLASS="NOTE"
+><P
+><B
+>Note: </B
+>     <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> does not support
+     <TT
+CLASS="LITERAL"
+>CHECK</TT
+> constraints that reference table data other than
+     the new or updated row being checked.  While a <TT
+CLASS="LITERAL"
+>CHECK</TT
+>
+     constraint that violates this rule may appear to work in simple
+     tests, it cannot guarantee that the database will not reach a state
+     in which the constraint condition is false (due to subsequent changes
+     of the other row(s) involved).  This would cause a database dump and
+     reload to fail.  The reload could fail even when the complete
+     database state is consistent with the constraint, due to rows not
+     being loaded in an order that will satisfy the constraint.  If
+     possible, use <TT
+CLASS="LITERAL"
+>UNIQUE</TT
+>, <TT
+CLASS="LITERAL"
+>EXCLUDE</TT
+>,
+     or <TT
+CLASS="LITERAL"
+>FOREIGN KEY</TT
+> constraints to express
+     cross-row and cross-table restrictions.
+    </P
+><P
+>     If what you desire is a one-time check against other rows at row
+     insertion, rather than a continuously-maintained consistency
+     guarantee, a custom <A
+HREF="triggers.html"
+>trigger</A
+> can be used
+     to implement that.  (This approach avoids the dump/reload problem because
+     <SPAN
+CLASS="APPLICATION"
+>pg_dump</SPAN
+> does not reinstall triggers until after
+     reloading data, so that the check will not be enforced during a
+     dump/reload.)
+    </P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="NOTE"
+><BLOCKQUOTE
+CLASS="NOTE"
+><P
+><B
+>Note: </B
+>     <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> assumes that
+     <TT
+CLASS="LITERAL"
+>CHECK</TT
+> constraints' conditions are immutable, that
+     is, they will always give the same result for the same input row.
+     This assumption is what justifies examining <TT
+CLASS="LITERAL"
+>CHECK</TT
+>
+     constraints only when rows are inserted or updated, and not at other
+     times.  (The warning above about not referencing other table data is
+     really a special case of this restriction.)
+    </P
+><P
+>     An example of a common way to break this assumption is to reference a
+     user-defined function in a <TT
+CLASS="LITERAL"
+>CHECK</TT
+> expression, and
+     then change the behavior of that
+     function.  <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> does not disallow
+     that, but it will not notice if there are rows in the table that now
+     violate the <TT
+CLASS="LITERAL"
+>CHECK</TT
+> constraint. That would cause a
+     subsequent database dump and reload to fail.
+     The recommended way to handle such a change is to drop the constraint
+     (using <TT
+CLASS="COMMAND"
+>ALTER TABLE</TT
+>), adjust the function definition,
+     and re-add the constraint, thereby rechecking it against all table rows.
+    </P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN2537"
+NAME="AEN2558"
 >5.3.2. Not-Null Constraints</A
 ></H2
 ><P

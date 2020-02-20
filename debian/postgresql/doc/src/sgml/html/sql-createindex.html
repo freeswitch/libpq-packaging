@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-CREATEINDEX"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN80458"
+NAME="AEN80520"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN80458"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN80461"
+NAME="AEN80523"
 ></A
 ><H2
 >Synopsis</H2
@@ -173,7 +173,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80474"
+NAME="AEN80536"
 ></A
 ><H2
 >Description</H2
@@ -274,7 +274,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80496"
+NAME="AEN80558"
 ></A
 ><H2
 >Parameters</H2
@@ -318,6 +318,14 @@ HREF="sql-createindex.html#SQL-CREATEINDEX-CONCURRENTLY"
 >Building Indexes Concurrently</I
 ></A
 >.
+       </P
+><P
+>        For temporary tables, <TT
+CLASS="COMMAND"
+>CREATE INDEX</TT
+> is always
+        non-concurrent, as no other session can access them, and
+        non-concurrent index creation is cheaper.
        </P
 ></DD
 ><DT
@@ -932,7 +940,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80693"
+NAME="AEN80757"
 ></A
 ><H2
 >Notes</H2
@@ -1098,7 +1106,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80726"
+NAME="AEN80790"
 ></A
 ><H2
 >Examples</H2
@@ -1203,7 +1211,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80754"
+NAME="AEN80818"
 ></A
 ><H2
 >Compatibility</H2
@@ -1222,7 +1230,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80759"
+NAME="AEN80823"
 ></A
 ><H2
 >See Also</H2
