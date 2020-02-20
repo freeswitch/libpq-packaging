@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="libpq - C Library"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1462,7 +1462,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45838"
+NAME="AEN45865"
 >32.1.1.1. Keyword/Value Connection Strings</A
 ></H3
 ><P
@@ -1505,7 +1505,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45849"
+NAME="AEN45876"
 >32.1.1.2. Connection URIs</A
 ></H3
 ><P
@@ -2502,11 +2502,13 @@ CLASS="LITERAL"
 ></DT
 ><DD
 ><P
->        GSS library to use for GSSAPI authentication. Only used on Windows.
-        Set to <TT
+>        GSS library to use for GSSAPI authentication.
+        Currently this is disregarded except on Windows builds that include
+        both GSSAPI and SSPI support.  In that case, set
+        this to <TT
 CLASS="LITERAL"
 >gssapi</TT
-> to force libpq to use the GSSAPI
+> to cause libpq to use the GSSAPI
         library for authentication instead of the default SSPI.
        </P
 ></DD

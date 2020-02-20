@@ -46,9 +46,231 @@
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 6
-#define YY_FLEX_SUBMINOR_VERSION 1
+#define YY_FLEX_SUBMINOR_VERSION 4
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
+#endif
+
+#ifdef yy_create_buffer
+#define psql_yy_create_buffer_ALREADY_DEFINED
+#else
+#define yy_create_buffer psql_yy_create_buffer
+#endif
+
+#ifdef yy_delete_buffer
+#define psql_yy_delete_buffer_ALREADY_DEFINED
+#else
+#define yy_delete_buffer psql_yy_delete_buffer
+#endif
+
+#ifdef yy_scan_buffer
+#define psql_yy_scan_buffer_ALREADY_DEFINED
+#else
+#define yy_scan_buffer psql_yy_scan_buffer
+#endif
+
+#ifdef yy_scan_string
+#define psql_yy_scan_string_ALREADY_DEFINED
+#else
+#define yy_scan_string psql_yy_scan_string
+#endif
+
+#ifdef yy_scan_bytes
+#define psql_yy_scan_bytes_ALREADY_DEFINED
+#else
+#define yy_scan_bytes psql_yy_scan_bytes
+#endif
+
+#ifdef yy_init_buffer
+#define psql_yy_init_buffer_ALREADY_DEFINED
+#else
+#define yy_init_buffer psql_yy_init_buffer
+#endif
+
+#ifdef yy_flush_buffer
+#define psql_yy_flush_buffer_ALREADY_DEFINED
+#else
+#define yy_flush_buffer psql_yy_flush_buffer
+#endif
+
+#ifdef yy_load_buffer_state
+#define psql_yy_load_buffer_state_ALREADY_DEFINED
+#else
+#define yy_load_buffer_state psql_yy_load_buffer_state
+#endif
+
+#ifdef yy_switch_to_buffer
+#define psql_yy_switch_to_buffer_ALREADY_DEFINED
+#else
+#define yy_switch_to_buffer psql_yy_switch_to_buffer
+#endif
+
+#ifdef yypush_buffer_state
+#define psql_yypush_buffer_state_ALREADY_DEFINED
+#else
+#define yypush_buffer_state psql_yypush_buffer_state
+#endif
+
+#ifdef yypop_buffer_state
+#define psql_yypop_buffer_state_ALREADY_DEFINED
+#else
+#define yypop_buffer_state psql_yypop_buffer_state
+#endif
+
+#ifdef yyensure_buffer_stack
+#define psql_yyensure_buffer_stack_ALREADY_DEFINED
+#else
+#define yyensure_buffer_stack psql_yyensure_buffer_stack
+#endif
+
+#ifdef yylex
+#define psql_yylex_ALREADY_DEFINED
+#else
+#define yylex psql_yylex
+#endif
+
+#ifdef yyrestart
+#define psql_yyrestart_ALREADY_DEFINED
+#else
+#define yyrestart psql_yyrestart
+#endif
+
+#ifdef yylex_init
+#define psql_yylex_init_ALREADY_DEFINED
+#else
+#define yylex_init psql_yylex_init
+#endif
+
+#ifdef yylex_init_extra
+#define psql_yylex_init_extra_ALREADY_DEFINED
+#else
+#define yylex_init_extra psql_yylex_init_extra
+#endif
+
+#ifdef yylex_destroy
+#define psql_yylex_destroy_ALREADY_DEFINED
+#else
+#define yylex_destroy psql_yylex_destroy
+#endif
+
+#ifdef yyget_debug
+#define psql_yyget_debug_ALREADY_DEFINED
+#else
+#define yyget_debug psql_yyget_debug
+#endif
+
+#ifdef yyset_debug
+#define psql_yyset_debug_ALREADY_DEFINED
+#else
+#define yyset_debug psql_yyset_debug
+#endif
+
+#ifdef yyget_extra
+#define psql_yyget_extra_ALREADY_DEFINED
+#else
+#define yyget_extra psql_yyget_extra
+#endif
+
+#ifdef yyset_extra
+#define psql_yyset_extra_ALREADY_DEFINED
+#else
+#define yyset_extra psql_yyset_extra
+#endif
+
+#ifdef yyget_in
+#define psql_yyget_in_ALREADY_DEFINED
+#else
+#define yyget_in psql_yyget_in
+#endif
+
+#ifdef yyset_in
+#define psql_yyset_in_ALREADY_DEFINED
+#else
+#define yyset_in psql_yyset_in
+#endif
+
+#ifdef yyget_out
+#define psql_yyget_out_ALREADY_DEFINED
+#else
+#define yyget_out psql_yyget_out
+#endif
+
+#ifdef yyset_out
+#define psql_yyset_out_ALREADY_DEFINED
+#else
+#define yyset_out psql_yyset_out
+#endif
+
+#ifdef yyget_leng
+#define psql_yyget_leng_ALREADY_DEFINED
+#else
+#define yyget_leng psql_yyget_leng
+#endif
+
+#ifdef yyget_text
+#define psql_yyget_text_ALREADY_DEFINED
+#else
+#define yyget_text psql_yyget_text
+#endif
+
+#ifdef yyget_lineno
+#define psql_yyget_lineno_ALREADY_DEFINED
+#else
+#define yyget_lineno psql_yyget_lineno
+#endif
+
+#ifdef yyset_lineno
+#define psql_yyset_lineno_ALREADY_DEFINED
+#else
+#define yyset_lineno psql_yyset_lineno
+#endif
+
+#ifdef yyget_column
+#define psql_yyget_column_ALREADY_DEFINED
+#else
+#define yyget_column psql_yyget_column
+#endif
+
+#ifdef yyset_column
+#define psql_yyset_column_ALREADY_DEFINED
+#else
+#define yyset_column psql_yyset_column
+#endif
+
+#ifdef yywrap
+#define psql_yywrap_ALREADY_DEFINED
+#else
+#define yywrap psql_yywrap
+#endif
+
+#ifdef yyget_lval
+#define psql_yyget_lval_ALREADY_DEFINED
+#else
+#define yyget_lval psql_yyget_lval
+#endif
+
+#ifdef yyset_lval
+#define psql_yyset_lval_ALREADY_DEFINED
+#else
+#define yyset_lval psql_yyset_lval
+#endif
+
+#ifdef yyalloc
+#define psql_yyalloc_ALREADY_DEFINED
+#else
+#define yyalloc psql_yyalloc
+#endif
+
+#ifdef yyrealloc
+#define psql_yyrealloc_ALREADY_DEFINED
+#else
+#define yyrealloc psql_yyrealloc
+#endif
+
+#ifdef yyfree
+#define psql_yyfree_ALREADY_DEFINED
+#else
+#define yyfree psql_yyfree
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -121,9 +343,15 @@ typedef unsigned int flex_uint32_t;
 #define UINT32_MAX             (4294967295U)
 #endif
 
+#ifndef SIZE_MAX
+#define SIZE_MAX               (~(size_t)0)
+#endif
+
 #endif /* ! C99 */
 
 #endif /* ! FLEXINT_H */
+
+/* begin standard C++ headers. */
 
 /* TODO: this is always defined, so inline it */
 #define yyconst const
@@ -137,12 +365,10 @@ typedef unsigned int flex_uint32_t;
 /* Returned upon end-of-file. */
 #define YY_NULL 0
 
-/* Promotes a possibly negative, possibly signed char to an unsigned
- * integer for use as an array index.  If the signed char is negative,
- * we want to instead treat it as an 8-bit unsigned char, hence the
- * double cast.
+/* Promotes a possibly negative, possibly signed char to an
+ *   integer in range [0..255] for use as an array index.
  */
-#define YY_SC_TO_UI(c) ((unsigned int) (unsigned char) c)
+#define YY_SC_TO_UI(c) ((YY_CHAR) (c))
 
 /* An opaque pointer. */
 #ifndef YY_TYPEDEF_YY_SCANNER_T
@@ -166,20 +392,16 @@ typedef void* yyscan_t;
  * definition of BEGIN.
  */
 #define BEGIN yyg->yy_start = 1 + 2 *
-
 /* Translate the current start state into a value that can be later handed
  * to BEGIN to return to the state.  The YYSTATE alias is for lex
  * compatibility.
  */
 #define YY_START ((yyg->yy_start - 1) / 2)
 #define YYSTATE YY_START
-
 /* Action number for EOF rule of a given start state. */
 #define YY_STATE_EOF(state) (YY_END_OF_BUFFER + state + 1)
-
 /* Special action meaning "start processing a new file". */
-#define YY_NEW_FILE psql_yyrestart(yyin ,yyscanner )
-
+#define YY_NEW_FILE yyrestart( yyin , yyscanner )
 #define YY_END_OF_BUFFER_CHAR 0
 
 /* Size of default input buffer. */
@@ -212,7 +434,7 @@ typedef size_t yy_size_t;
 #define EOB_ACT_CONTINUE_SCAN 0
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
-
+    
     #define YY_LESS_LINENO(n)
     #define YY_LINENO_REWIND_TO(ptr)
     
@@ -229,7 +451,6 @@ typedef size_t yy_size_t;
 		YY_DO_BEFORE_ACTION; /* set up yytext again */ \
 		} \
 	while ( 0 )
-
 #define unput(c) yyunput( c, yyg->yytext_ptr , yyscanner )
 
 #ifndef YY_STRUCT_YY_BUFFER_STATE
@@ -289,7 +510,7 @@ struct yy_buffer_state
 	 * possible backing-up.
 	 *
 	 * When we actually see the EOF, we change the status to "new"
-	 * (via psql_yyrestart()), so that the user can continue scanning by
+	 * (via yyrestart()), so that the user can continue scanning by
 	 * just pointing yyin at a new input file.
 	 */
 #define YY_BUFFER_EOF_PENDING 2
@@ -306,70 +527,64 @@ struct yy_buffer_state
 #define YY_CURRENT_BUFFER ( yyg->yy_buffer_stack \
                           ? yyg->yy_buffer_stack[yyg->yy_buffer_stack_top] \
                           : NULL)
-
 /* Same as previous macro, but useful when we know that the buffer stack is not
  * NULL or when we need an lvalue. For internal use only.
  */
 #define YY_CURRENT_BUFFER_LVALUE yyg->yy_buffer_stack[yyg->yy_buffer_stack_top]
 
-void psql_yyrestart (FILE *input_file ,yyscan_t yyscanner );
-void psql_yy_switch_to_buffer (YY_BUFFER_STATE new_buffer ,yyscan_t yyscanner );
-YY_BUFFER_STATE psql_yy_create_buffer (FILE *file,int size ,yyscan_t yyscanner );
-void psql_yy_delete_buffer (YY_BUFFER_STATE b ,yyscan_t yyscanner );
-void psql_yy_flush_buffer (YY_BUFFER_STATE b ,yyscan_t yyscanner );
-void psql_yypush_buffer_state (YY_BUFFER_STATE new_buffer ,yyscan_t yyscanner );
-void psql_yypop_buffer_state (yyscan_t yyscanner );
+void yyrestart ( FILE *input_file , yyscan_t yyscanner );
+void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size , yyscan_t yyscanner );
+void yy_delete_buffer ( YY_BUFFER_STATE b , yyscan_t yyscanner );
+void yy_flush_buffer ( YY_BUFFER_STATE b , yyscan_t yyscanner );
+void yypush_buffer_state ( YY_BUFFER_STATE new_buffer , yyscan_t yyscanner );
+void yypop_buffer_state ( yyscan_t yyscanner );
 
-static void psql_yyensure_buffer_stack (yyscan_t yyscanner );
-static void psql_yy_load_buffer_state (yyscan_t yyscanner );
-static void psql_yy_init_buffer (YY_BUFFER_STATE b,FILE *file ,yyscan_t yyscanner );
+static void yyensure_buffer_stack ( yyscan_t yyscanner );
+static void yy_load_buffer_state ( yyscan_t yyscanner );
+static void yy_init_buffer ( YY_BUFFER_STATE b, FILE *file , yyscan_t yyscanner );
+#define YY_FLUSH_BUFFER yy_flush_buffer( YY_CURRENT_BUFFER , yyscanner)
 
-#define YY_FLUSH_BUFFER psql_yy_flush_buffer(YY_CURRENT_BUFFER ,yyscanner)
+YY_BUFFER_STATE yy_scan_buffer ( char *base, yy_size_t size , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_scan_string ( const char *yy_str , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len , yyscan_t yyscanner );
 
-YY_BUFFER_STATE psql_yy_scan_buffer (char *base,yy_size_t size ,yyscan_t yyscanner );
-YY_BUFFER_STATE psql_yy_scan_string (yyconst char *yy_str ,yyscan_t yyscanner );
-YY_BUFFER_STATE psql_yy_scan_bytes (yyconst char *bytes,int len ,yyscan_t yyscanner );
+void *yyalloc ( yy_size_t , yyscan_t yyscanner );
+void *yyrealloc ( void *, yy_size_t , yyscan_t yyscanner );
+void yyfree ( void * , yyscan_t yyscanner );
 
-void *psql_yyalloc (yy_size_t ,yyscan_t yyscanner );
-void *psql_yyrealloc (void *,yy_size_t ,yyscan_t yyscanner );
-void psql_yyfree (void * ,yyscan_t yyscanner );
-
-#define yy_new_buffer psql_yy_create_buffer
-
+#define yy_new_buffer yy_create_buffer
 #define yy_set_interactive(is_interactive) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){ \
-        psql_yyensure_buffer_stack (yyscanner); \
+        yyensure_buffer_stack (yyscanner); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            psql_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner); \
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_is_interactive = is_interactive; \
 	}
-
 #define yy_set_bol(at_bol) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){\
-        psql_yyensure_buffer_stack (yyscanner); \
+        yyensure_buffer_stack (yyscanner); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            psql_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner); \
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_at_bol = at_bol; \
 	}
-
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
 
 #define psql_yywrap(yyscanner) (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
-
-typedef unsigned char YY_CHAR;
+typedef flex_uint8_t YY_CHAR;
 
 typedef int yy_state_type;
 
 #define yytext_ptr yytext_r
 
-static yyconst flex_int16_t yy_nxt[][41] =
+static const flex_int16_t yy_nxt[][41] =
     {
     {
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -2778,10 +2993,10 @@ static yyconst flex_int16_t yy_nxt[][41] =
 
     } ;
 
-static yy_state_type yy_get_previous_state (yyscan_t yyscanner );
-static yy_state_type yy_try_NUL_trans (yy_state_type current_state  ,yyscan_t yyscanner);
-static int yy_get_next_buffer (yyscan_t yyscanner );
-static void yynoreturn yy_fatal_error (yyconst char* msg ,yyscan_t yyscanner );
+static yy_state_type yy_get_previous_state ( yyscan_t yyscanner );
+static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  , yyscan_t yyscanner);
+static int yy_get_next_buffer ( yyscan_t yyscanner );
+static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 
 /* Done after the current pattern has been matched and before the
  * corresponding action - sets up yytext.
@@ -2792,7 +3007,6 @@ static void yynoreturn yy_fatal_error (yyconst char* msg ,yyscan_t yyscanner );
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-
 #define YY_NUM_RULES 86
 #define YY_END_OF_BUFFER 87
 /* This struct is not used in this scanner,
@@ -2802,7 +3016,7 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[283] =
+static const flex_int16_t yy_accept[283] =
     {   0,
         0,    0,   12,   12,    0,    0,    0,    0,   11,   11,
         0,    0,    0,    0,    0,    0,    0,    0,   52,   52,
@@ -2837,7 +3051,7 @@ static yyconst flex_int16_t yy_accept[283] =
        28,   28
     } ;
 
-static yyconst YY_CHAR yy_ec[256] =
+static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    2,    4,    1,    1,    1,    1,    1,    1,    1,
@@ -2882,7 +3096,7 @@ static yyconst YY_CHAR yy_ec[256] =
 #include "fe_utils/psqlscan_int.h"
 
 /*
- * We must have a typedef YYSTYPE for psql_yylex's first argument, but this lexer
+ * We must have a typedef YYSTYPE for yylex's first argument, but this lexer
  * doesn't presently make use of that argument, so just declare it as int.
  */
 typedef int YYSTYPE;
@@ -2894,7 +3108,7 @@ typedef int YYSTYPE;
 #define YY_EXTRA_TYPE PsqlScanState
 
 
-/* Return values from psql_yylex() */
+/* Return values from yylex() */
 #define LEXRES_EOL			0	/* end of input */
 #define LEXRES_SEMI			1	/* command-terminating semicolon found */
 #define LEXRES_BACKSLASH	2	/* backslash command start */
@@ -2911,6 +3125,7 @@ typedef int YYSTYPE;
 extern int	psql_yyget_column(yyscan_t yyscanner);
 extern void psql_yyset_column(int column_no, yyscan_t yyscanner);
 
+#line 3129 "psqlscan.c"
 #define YY_NO_INPUT 1
 /*
  * All of the following definitions and rules should exactly match
@@ -2948,16 +3163,6 @@ extern void psql_yyset_column(int column_no, yyscan_t yyscanner);
  * of it in error cases.  The backend just throws yyerror() in those
  * cases, but that's not an option here.
  */
-
-
-
-
-
-
-
-
-
-
 
 /*
  * In order to make the world safe for Windows and Mac clients as well as
@@ -3083,7 +3288,7 @@ extern void psql_yyset_column(int column_no, yyscan_t yyscanner);
  * Note that xcstart must appear before operator, as explained above!
  *  Also whitespace (comment) must appear before operator.
  */
-#line 3087 "psqlscan.c"
+#line 3292 "psqlscan.c"
 
 #define INITIAL 0
 #define xb 1
@@ -3146,52 +3351,52 @@ struct yyguts_t
 
     }; /* end struct yyguts_t */
 
-static int yy_init_globals (yyscan_t yyscanner );
+static int yy_init_globals ( yyscan_t yyscanner );
 
     /* This must go here because YYSTYPE and YYLTYPE are included
      * from bison output in section 1.*/
     #    define yylval yyg->yylval_r
     
-int psql_yylex_init (yyscan_t* scanner);
+int yylex_init (yyscan_t* scanner);
 
-int psql_yylex_init_extra (YY_EXTRA_TYPE user_defined,yyscan_t* scanner);
+int yylex_init_extra ( YY_EXTRA_TYPE user_defined, yyscan_t* scanner);
 
 /* Accessor methods to globals.
    These are made visible to non-reentrant scanners for convenience. */
 
-int psql_yylex_destroy (yyscan_t yyscanner );
+int yylex_destroy ( yyscan_t yyscanner );
 
-int psql_yyget_debug (yyscan_t yyscanner );
+int yyget_debug ( yyscan_t yyscanner );
 
-void psql_yyset_debug (int debug_flag ,yyscan_t yyscanner );
+void yyset_debug ( int debug_flag , yyscan_t yyscanner );
 
-YY_EXTRA_TYPE psql_yyget_extra (yyscan_t yyscanner );
+YY_EXTRA_TYPE yyget_extra ( yyscan_t yyscanner );
 
-void psql_yyset_extra (YY_EXTRA_TYPE user_defined ,yyscan_t yyscanner );
+void yyset_extra ( YY_EXTRA_TYPE user_defined , yyscan_t yyscanner );
 
-FILE *psql_yyget_in (yyscan_t yyscanner );
+FILE *yyget_in ( yyscan_t yyscanner );
 
-void psql_yyset_in  (FILE * _in_str ,yyscan_t yyscanner );
+void yyset_in  ( FILE * _in_str , yyscan_t yyscanner );
 
-FILE *psql_yyget_out (yyscan_t yyscanner );
+FILE *yyget_out ( yyscan_t yyscanner );
 
-void psql_yyset_out  (FILE * _out_str ,yyscan_t yyscanner );
+void yyset_out  ( FILE * _out_str , yyscan_t yyscanner );
 
-			int psql_yyget_leng (yyscan_t yyscanner );
+			int yyget_leng ( yyscan_t yyscanner );
 
-char *psql_yyget_text (yyscan_t yyscanner );
+char *yyget_text ( yyscan_t yyscanner );
 
-int psql_yyget_lineno (yyscan_t yyscanner );
+int yyget_lineno ( yyscan_t yyscanner );
 
-void psql_yyset_lineno (int _line_number ,yyscan_t yyscanner );
+void yyset_lineno ( int _line_number , yyscan_t yyscanner );
 
-int psql_yyget_column  (yyscan_t yyscanner );
+int yyget_column  ( yyscan_t yyscanner );
 
-void psql_yyset_column (int _column_no ,yyscan_t yyscanner );
+void yyset_column ( int _column_no , yyscan_t yyscanner );
 
-YYSTYPE * psql_yyget_lval (yyscan_t yyscanner );
+YYSTYPE * yyget_lval ( yyscan_t yyscanner );
 
-void psql_yyset_lval (YYSTYPE * yylval_param ,yyscan_t yyscanner );
+void yyset_lval ( YYSTYPE * yylval_param , yyscan_t yyscanner );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -3199,9 +3404,9 @@ void psql_yyset_lval (YYSTYPE * yylval_param ,yyscan_t yyscanner );
 
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
-extern "C" int psql_yywrap (yyscan_t yyscanner );
+extern "C" int yywrap ( yyscan_t yyscanner );
 #else
-extern int psql_yywrap (yyscan_t yyscanner );
+extern int yywrap ( yyscan_t yyscanner );
 #endif
 #endif
 
@@ -3210,19 +3415,18 @@ extern int psql_yywrap (yyscan_t yyscanner );
 #endif
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char *,yyconst char *,int ,yyscan_t yyscanner);
+static void yy_flex_strncpy ( char *, const char *, int , yyscan_t yyscanner);
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (yyconst char * ,yyscan_t yyscanner);
+static int yy_flex_strlen ( const char * , yyscan_t yyscanner);
 #endif
 
 #ifndef YY_NO_INPUT
-
 #ifdef __cplusplus
-static int yyinput (yyscan_t yyscanner );
+static int yyinput ( yyscan_t yyscanner );
 #else
-static int input (yyscan_t yyscanner );
+static int input ( yyscan_t yyscanner );
 #endif
 
 #endif
@@ -3253,7 +3457,7 @@ static int input (yyscan_t yyscanner );
 	if ( YY_CURRENT_BUFFER_LVALUE->yy_is_interactive ) \
 		{ \
 		int c = '*'; \
-		size_t n; \
+		int n; \
 		for ( n = 0; n < max_size && \
 			     (c = getc( yyin )) != EOF && c != '\n'; ++n ) \
 			buf[n] = (char) c; \
@@ -3266,7 +3470,7 @@ static int input (yyscan_t yyscanner );
 	else \
 		{ \
 		errno=0; \
-		while ( (result = (int) fread(buf, 1, max_size, yyin))==0 && ferror(yyin)) \
+		while ( (result = (int) fread(buf, 1, (yy_size_t) max_size, yyin)) == 0 && ferror(yyin)) \
 			{ \
 			if( errno != EINTR) \
 				{ \
@@ -3307,10 +3511,10 @@ static int input (yyscan_t yyscanner );
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
 
-extern int psql_yylex \
-               (YYSTYPE * yylval_param ,yyscan_t yyscanner);
+extern int yylex \
+               (YYSTYPE * yylval_param , yyscan_t yyscanner);
 
-#define YY_DECL int psql_yylex \
+#define YY_DECL int yylex \
                (YYSTYPE * yylval_param , yyscan_t yyscanner)
 #endif /* !YY_DECL */
 
@@ -3358,12 +3562,12 @@ YY_DECL
 			yyout = stdout;
 
 		if ( ! YY_CURRENT_BUFFER ) {
-			psql_yyensure_buffer_stack (yyscanner);
+			yyensure_buffer_stack (yyscanner);
 			YY_CURRENT_BUFFER_LVALUE =
-				psql_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner);
+				yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner);
 		}
 
-		psql_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 		}
 
 	{
@@ -3371,7 +3575,8 @@ YY_DECL
 
 
 
-		/* Declare some local variables inside psql_yylex(), for convenience */
+#line 369 "psqlscan.l"
+		/* Declare some local variables inside yylex(), for convenience */
 		PsqlScanState cur_state = yyextra;
 		PQExpBuffer output_buf = cur_state->output_buf;
 
@@ -3385,7 +3590,7 @@ YY_DECL
 		BEGIN(cur_state->start_state);
 
 
-#line 3389 "psqlscan.c"
+#line 3594 "psqlscan.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -3418,7 +3623,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 382 "psqlscan.l"
+#line 383 "psqlscan.l"
 {
 					/*
 					 * Note that the whitespace rule includes both true
@@ -3434,7 +3639,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 395 "psqlscan.l"
+#line 396 "psqlscan.l"
 {
 					cur_state->xcdepth = 0;
 					BEGIN(xc);
@@ -3445,7 +3650,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 403 "psqlscan.l"
+#line 404 "psqlscan.l"
 {
 					cur_state->xcdepth++;
 					/* Put back any characters past slash-star; see above */
@@ -3455,7 +3660,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 410 "psqlscan.l"
+#line 411 "psqlscan.l"
 {
 					if (cur_state->xcdepth <= 0)
 						BEGIN(INITIAL);
@@ -3467,28 +3672,28 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 418 "psqlscan.l"
+#line 419 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 422 "psqlscan.l"
+#line 423 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 426 "psqlscan.l"
+#line 427 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 430 "psqlscan.l"
+#line 431 "psqlscan.l"
 {
 					BEGIN(xb);
 					ECHO;
@@ -3496,11 +3701,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
-#line 435 "psqlscan.l"
+#line 436 "psqlscan.l"
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 435 "psqlscan.l"
+#line 436 "psqlscan.l"
 {
 					yyless(1);
 					BEGIN(INITIAL);
@@ -3509,29 +3714,29 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
-#line 441 "psqlscan.l"
+#line 442 "psqlscan.l"
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 441 "psqlscan.l"
+#line 442 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
-#line 445 "psqlscan.l"
+#line 446 "psqlscan.l"
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 445 "psqlscan.l"
+#line 446 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 449 "psqlscan.l"
+#line 450 "psqlscan.l"
 {
 					/* Hexadecimal bit type.
 					 * At some point we should simply pass the string
@@ -3545,11 +3750,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 /* rule 16 can match eol */
-#line 460 "psqlscan.l"
+#line 461 "psqlscan.l"
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 460 "psqlscan.l"
+#line 461 "psqlscan.l"
 {
 					yyless(1);
 					BEGIN(INITIAL);
@@ -3558,7 +3763,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 466 "psqlscan.l"
+#line 467 "psqlscan.l"
 {
 					yyless(1);	/* eat only 'n' this time */
 					ECHO;
@@ -3566,7 +3771,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 471 "psqlscan.l"
+#line 472 "psqlscan.l"
 {
 					if (cur_state->std_strings)
 						BEGIN(xq);
@@ -3577,7 +3782,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 478 "psqlscan.l"
+#line 479 "psqlscan.l"
 {
 					BEGIN(xe);
 					ECHO;
@@ -3585,7 +3790,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 482 "psqlscan.l"
+#line 483 "psqlscan.l"
 {
 					BEGIN(xus);
 					ECHO;
@@ -3593,11 +3798,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 /* rule 22 can match eol */
-#line 487 "psqlscan.l"
+#line 488 "psqlscan.l"
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 487 "psqlscan.l"
+#line 488 "psqlscan.l"
 {
 					yyless(1);
 					BEGIN(INITIAL);
@@ -3606,11 +3811,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 /* rule 24 can match eol */
-#line 493 "psqlscan.l"
+#line 494 "psqlscan.l"
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 493 "psqlscan.l"
+#line 494 "psqlscan.l"
 {
 					/* throw back all but the quote */
 					yyless(1);
@@ -3621,17 +3826,17 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 499 "psqlscan.l"
+#line 500 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 27:
-#line 503 "psqlscan.l"
+#line 504 "psqlscan.l"
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 503 "psqlscan.l"
+#line 504 "psqlscan.l"
 {
 					yyless(0);
 					BEGIN(INITIAL);
@@ -3641,7 +3846,7 @@ YY_RULE_SETUP
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 508 "psqlscan.l"
+#line 509 "psqlscan.l"
 {
 					BEGIN(INITIAL);
 					ECHO;
@@ -3649,7 +3854,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 512 "psqlscan.l"
+#line 513 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3657,7 +3862,7 @@ YY_RULE_SETUP
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 515 "psqlscan.l"
+#line 516 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3665,21 +3870,21 @@ YY_RULE_SETUP
 case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
-#line 518 "psqlscan.l"
+#line 519 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 521 "psqlscan.l"
+#line 522 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 524 "psqlscan.l"
+#line 525 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3687,21 +3892,21 @@ YY_RULE_SETUP
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 527 "psqlscan.l"
+#line 528 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 530 "psqlscan.l"
+#line 531 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 533 "psqlscan.l"
+#line 534 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3709,14 +3914,14 @@ YY_RULE_SETUP
 case 38:
 /* rule 38 can match eol */
 YY_RULE_SETUP
-#line 536 "psqlscan.l"
+#line 537 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 539 "psqlscan.l"
+#line 540 "psqlscan.l"
 {
 					/* This is only needed for \ just before EOF */
 					ECHO;
@@ -3724,7 +3929,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 544 "psqlscan.l"
+#line 545 "psqlscan.l"
 {
 					cur_state->dolqstart = pg_strdup(yytext);
 					BEGIN(xdolq);
@@ -3733,7 +3938,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 549 "psqlscan.l"
+#line 550 "psqlscan.l"
 {
 					/* throw back all but the initial "$" */
 					yyless(1);
@@ -3742,7 +3947,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 554 "psqlscan.l"
+#line 555 "psqlscan.l"
 {
 					if (strcmp(yytext, cur_state->dolqstart) == 0)
 					{
@@ -3765,21 +3970,21 @@ YY_RULE_SETUP
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 572 "psqlscan.l"
+#line 573 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 575 "psqlscan.l"
+#line 576 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 578 "psqlscan.l"
+#line 579 "psqlscan.l"
 {
 					/* This is only needed for $ inside the quoted text */
 					ECHO;
@@ -3787,7 +3992,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 583 "psqlscan.l"
+#line 584 "psqlscan.l"
 {
 					BEGIN(xd);
 					ECHO;
@@ -3795,7 +4000,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 587 "psqlscan.l"
+#line 588 "psqlscan.l"
 {
 					BEGIN(xui);
 					ECHO;
@@ -3803,7 +4008,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 591 "psqlscan.l"
+#line 592 "psqlscan.l"
 {
 					BEGIN(INITIAL);
 					ECHO;
@@ -3811,7 +4016,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 595 "psqlscan.l"
+#line 596 "psqlscan.l"
 {
 					yyless(1);
 					BEGIN(xuiend);
@@ -3821,17 +4026,17 @@ YY_RULE_SETUP
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 600 "psqlscan.l"
+#line 601 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 51:
-#line 604 "psqlscan.l"
+#line 605 "psqlscan.l"
 case 52:
 /* rule 52 can match eol */
 YY_RULE_SETUP
-#line 604 "psqlscan.l"
+#line 605 "psqlscan.l"
 {
 					yyless(0);
 					BEGIN(INITIAL);
@@ -3841,7 +4046,7 @@ YY_RULE_SETUP
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 609 "psqlscan.l"
+#line 610 "psqlscan.l"
 {
 					BEGIN(INITIAL);
 					ECHO;
@@ -3849,7 +4054,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 613 "psqlscan.l"
+#line 614 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3857,14 +4062,14 @@ YY_RULE_SETUP
 case 55:
 /* rule 55 can match eol */
 YY_RULE_SETUP
-#line 616 "psqlscan.l"
+#line 617 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 620 "psqlscan.l"
+#line 621 "psqlscan.l"
 {
 					/* throw back all but the initial u/U */
 					yyless(1);
@@ -3873,56 +4078,56 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 626 "psqlscan.l"
+#line 627 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 630 "psqlscan.l"
+#line 631 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 634 "psqlscan.l"
+#line 635 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 638 "psqlscan.l"
+#line 639 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 642 "psqlscan.l"
+#line 643 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 646 "psqlscan.l"
+#line 647 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 650 "psqlscan.l"
+#line 651 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 654 "psqlscan.l"
+#line 655 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -3934,7 +4139,7 @@ YY_RULE_SETUP
 	 */
 case 65:
 YY_RULE_SETUP
-#line 664 "psqlscan.l"
+#line 665 "psqlscan.l"
 {
 					cur_state->paren_depth++;
 					ECHO;
@@ -3942,7 +4147,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 669 "psqlscan.l"
+#line 670 "psqlscan.l"
 {
 					if (cur_state->paren_depth > 0)
 						cur_state->paren_depth--;
@@ -3951,7 +4156,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 675 "psqlscan.l"
+#line 676 "psqlscan.l"
 {
 					ECHO;
 					if (cur_state->paren_depth == 0)
@@ -3968,7 +4173,7 @@ YY_RULE_SETUP
 	 */
 case 68:
 YY_RULE_SETUP
-#line 690 "psqlscan.l"
+#line 691 "psqlscan.l"
 {
 					/* Force a semicolon or colon into the query buffer */
 					psqlscan_emit(cur_state, yytext + 1, 1);
@@ -3976,7 +4181,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 695 "psqlscan.l"
+#line 696 "psqlscan.l"
 {
 					/* Terminate lexing temporarily */
 					cur_state->start_state = YY_START;
@@ -3985,7 +4190,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 701 "psqlscan.l"
+#line 702 "psqlscan.l"
 {
 					/* Possible psql variable substitution */
 					char	   *varname;
@@ -4016,7 +4221,7 @@ YY_RULE_SETUP
 						{
 							/* OK, perform substitution */
 							psqlscan_push_new_buffer(cur_state, value, varname);
-							/* psql_yy_scan_string already made buffer active */
+							/* yy_scan_string already made buffer active */
 						}
 						free(value);
 					}
@@ -4034,14 +4239,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 747 "psqlscan.l"
+#line 748 "psqlscan.l"
 {
 					psqlscan_escape_variable(cur_state, yytext, yyleng, false);
 				}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 751 "psqlscan.l"
+#line 752 "psqlscan.l"
 {
 					psqlscan_escape_variable(cur_state, yytext, yyleng, true);
 				}
@@ -4052,7 +4257,7 @@ YY_RULE_SETUP
 	 */
 case 73:
 YY_RULE_SETUP
-#line 760 "psqlscan.l"
+#line 761 "psqlscan.l"
 {
 					/* Throw back everything but the colon */
 					yyless(1);
@@ -4061,7 +4266,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 766 "psqlscan.l"
+#line 767 "psqlscan.l"
 {
 					/* Throw back everything but the colon */
 					yyless(1);
@@ -4073,14 +4278,14 @@ YY_RULE_SETUP
 	 */
 case 75:
 YY_RULE_SETUP
-#line 776 "psqlscan.l"
+#line 777 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 780 "psqlscan.l"
+#line 781 "psqlscan.l"
 {
 					/*
 					 * Check for embedded slash-star or dash-dash; those
@@ -4150,28 +4355,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 847 "psqlscan.l"
+#line 848 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 851 "psqlscan.l"
+#line 852 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 854 "psqlscan.l"
+#line 855 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 857 "psqlscan.l"
+#line 858 "psqlscan.l"
 {
 					/* throw back the .., and treat as integer */
 					yyless(yyleng - 2);
@@ -4180,14 +4385,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 862 "psqlscan.l"
+#line 863 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 865 "psqlscan.l"
+#line 866 "psqlscan.l"
 {
 					/*
 					 * throw back the [Ee], and treat as {decimal}.  Note
@@ -4201,7 +4406,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 875 "psqlscan.l"
+#line 876 "psqlscan.l"
 {
 					/* throw back the [Ee][+-], and proceed as above */
 					yyless(yyleng - 2);
@@ -4210,14 +4415,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 882 "psqlscan.l"
+#line 883 "psqlscan.l"
 {
 					ECHO;
 				}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 886 "psqlscan.l"
+#line 887 "psqlscan.l"
 {
 					ECHO;
 				}
@@ -4234,7 +4439,7 @@ case YY_STATE_EOF(xui):
 case YY_STATE_EOF(xuiend):
 case YY_STATE_EOF(xus):
 case YY_STATE_EOF(xusend):
-#line 890 "psqlscan.l"
+#line 891 "psqlscan.l"
 {
 					if (cur_state->buffer_stack == NULL)
 					{
@@ -4252,10 +4457,10 @@ case YY_STATE_EOF(xusend):
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 905 "psqlscan.l"
+#line 906 "psqlscan.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 4259 "psqlscan.c"
+#line 4464 "psqlscan.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -4271,7 +4476,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 			/* We're scanning a new file or input source.  It's
 			 * possible that this happened because the user
 			 * just pointed yyin at a new source and called
-			 * psql_yylex().  If so, then we have to assure
+			 * yylex().  If so, then we have to assure
 			 * consistency between YY_CURRENT_BUFFER and our
 			 * globals.  Here is the right place to do so, because
 			 * this is the first action (other than possibly a
@@ -4331,7 +4536,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 				{
 				yyg->yy_did_buffer_switch_on_eof = 0;
 
-				if ( psql_yywrap(yyscanner ) )
+				if ( yywrap( yyscanner ) )
 					{
 					/* Note: because we've taken care in
 					 * yy_get_next_buffer() to have set up
@@ -4385,7 +4590,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 	} /* end of action switch */
 		} /* end of scanning one token */
 	} /* end of user's declarations */
-} /* end of psql_yylex */
+} /* end of yylex */
 
 /* yy_get_next_buffer - try to read in a new buffer
  *
@@ -4464,7 +4669,8 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					psql_yyrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2 ,yyscanner );
+					yyrealloc( (void *) b->yy_ch_buf,
+							 (yy_size_t) (b->yy_buf_size + 2) , yyscanner );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -4496,7 +4702,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		if ( number_to_move == YY_MORE_ADJ )
 			{
 			ret_val = EOB_ACT_END_OF_FILE;
-			psql_yyrestart(yyin  ,yyscanner);
+			yyrestart( yyin  , yyscanner);
 			}
 
 		else
@@ -4513,9 +4719,12 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	if ((yyg->yy_n_chars + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		int new_size = yyg->yy_n_chars + number_to_move + (yyg->yy_n_chars >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) psql_yyrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size ,yyscanner );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) yyrealloc(
+			(void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf, (yy_size_t) new_size , yyscanner );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
+		/* "- 2" to take care of EOB's */
+		YY_CURRENT_BUFFER_LVALUE->yy_buf_size = (int) (new_size - 2);
 	}
 
 	yyg->yy_n_chars += number_to_move;
@@ -4591,7 +4800,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 		else
 			{ /* need more input */
-			int offset = yyg->yy_c_buf_p - yyg->yytext_ptr;
+			int offset = (int) (yyg->yy_c_buf_p - yyg->yytext_ptr);
 			++yyg->yy_c_buf_p;
 
 			switch ( yy_get_next_buffer( yyscanner ) )
@@ -4608,13 +4817,13 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 					 */
 
 					/* Reset buffer status. */
-					psql_yyrestart(yyin ,yyscanner);
+					yyrestart( yyin , yyscanner);
 
 					/*FALLTHROUGH*/
 
 				case EOB_ACT_END_OF_FILE:
 					{
-					if ( psql_yywrap(yyscanner ) )
+					if ( yywrap( yyscanner ) )
 						return 0;
 
 					if ( ! yyg->yy_did_buffer_switch_on_eof )
@@ -4646,34 +4855,34 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @note This function does not reset the start condition to @c INITIAL .
  */
-    void psql_yyrestart  (FILE * input_file , yyscan_t yyscanner)
+    void yyrestart  (FILE * input_file , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	if ( ! YY_CURRENT_BUFFER ){
-        psql_yyensure_buffer_stack (yyscanner);
+        yyensure_buffer_stack (yyscanner);
 		YY_CURRENT_BUFFER_LVALUE =
-            psql_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner);
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner);
 	}
 
-	psql_yy_init_buffer(YY_CURRENT_BUFFER,input_file ,yyscanner);
-	psql_yy_load_buffer_state(yyscanner );
+	yy_init_buffer( YY_CURRENT_BUFFER, input_file , yyscanner);
+	yy_load_buffer_state( yyscanner );
 }
 
 /** Switch to a different input buffer.
  * @param new_buffer The new input buffer.
  * @param yyscanner The scanner object.
  */
-    void psql_yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer , yyscan_t yyscanner)
+    void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	/* TODO. We should be able to replace this entire function body
 	 * with
-	 *		psql_yypop_buffer_state();
-	 *		psql_yypush_buffer_state(new_buffer);
+	 *		yypop_buffer_state();
+	 *		yypush_buffer_state(new_buffer);
      */
-	psql_yyensure_buffer_stack (yyscanner);
+	yyensure_buffer_stack (yyscanner);
 	if ( YY_CURRENT_BUFFER == new_buffer )
 		return;
 
@@ -4686,17 +4895,17 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		}
 
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
-	psql_yy_load_buffer_state(yyscanner );
+	yy_load_buffer_state( yyscanner );
 
 	/* We don't actually know whether we did this switch during
-	 * EOF (psql_yywrap()) processing, but the only time this flag
-	 * is looked at is after psql_yywrap() is called, so it's safe
+	 * EOF (yywrap()) processing, but the only time this flag
+	 * is looked at is after yywrap() is called, so it's safe
 	 * to go ahead and always set it.
 	 */
 	yyg->yy_did_buffer_switch_on_eof = 1;
 }
 
-static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
+static void yy_load_buffer_state  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	yyg->yy_n_chars = YY_CURRENT_BUFFER_LVALUE->yy_n_chars;
@@ -4711,35 +4920,35 @@ static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @return the allocated buffer state.
  */
-    YY_BUFFER_STATE psql_yy_create_buffer  (FILE * file, int  size , yyscan_t yyscanner)
+    YY_BUFFER_STATE yy_create_buffer  (FILE * file, int  size , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) psql_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state ) , yyscanner );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in psql_yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
-	b->yy_buf_size = (yy_size_t)size;
+	b->yy_buf_size = size;
 
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) psql_yyalloc(b->yy_buf_size + 2 ,yyscanner );
+	b->yy_ch_buf = (char *) yyalloc( (yy_size_t) (b->yy_buf_size + 2) , yyscanner );
 	if ( ! b->yy_ch_buf )
-		YY_FATAL_ERROR( "out of dynamic memory in psql_yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
 	b->yy_is_our_buffer = 1;
 
-	psql_yy_init_buffer(b,file ,yyscanner);
+	yy_init_buffer( b, file , yyscanner);
 
 	return b;
 }
 
 /** Destroy the buffer.
- * @param b a buffer created with psql_yy_create_buffer()
+ * @param b a buffer created with yy_create_buffer()
  * @param yyscanner The scanner object.
  */
-    void psql_yy_delete_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
+    void yy_delete_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -4750,28 +4959,28 @@ static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		psql_yyfree((void *) b->yy_ch_buf ,yyscanner );
+		yyfree( (void *) b->yy_ch_buf , yyscanner );
 
-	psql_yyfree((void *) b ,yyscanner );
+	yyfree( (void *) b , yyscanner );
 }
 
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
- * such as during a psql_yyrestart() or at EOF.
+ * such as during a yyrestart() or at EOF.
  */
-    static void psql_yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file , yyscan_t yyscanner)
+    static void yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file , yyscan_t yyscanner)
 
 {
 	int oerrno = errno;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
-	psql_yy_flush_buffer(b ,yyscanner);
+	yy_flush_buffer( b , yyscanner);
 
 	b->yy_input_file = file;
 	b->yy_fill_buffer = 1;
 
-    /* If b is the current buffer, then psql_yy_init_buffer was _probably_
-     * called from psql_yyrestart() or through yy_get_next_buffer.
+    /* If b is the current buffer, then yy_init_buffer was _probably_
+     * called from yyrestart() or through yy_get_next_buffer.
      * In that case, we don't want to reset the lineno or column.
      */
     if (b != YY_CURRENT_BUFFER){
@@ -4788,7 +4997,7 @@ static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
  * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
  * @param yyscanner The scanner object.
  */
-    void psql_yy_flush_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
+    void yy_flush_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if ( ! b )
@@ -4809,7 +5018,7 @@ static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
 	if ( b == YY_CURRENT_BUFFER )
-		psql_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 }
 
 /** Pushes the new state onto the stack. The new state becomes
@@ -4818,15 +5027,15 @@ static void psql_yy_load_buffer_state  (yyscan_t yyscanner)
  *  @param new_buffer The new state.
  *  @param yyscanner The scanner object.
  */
-void psql_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
+void yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if (new_buffer == NULL)
 		return;
 
-	psql_yyensure_buffer_stack(yyscanner);
+	yyensure_buffer_stack(yyscanner);
 
-	/* This block is copied from psql_yy_switch_to_buffer. */
+	/* This block is copied from yy_switch_to_buffer. */
 	if ( YY_CURRENT_BUFFER )
 		{
 		/* Flush out information for old buffer. */
@@ -4840,8 +5049,8 @@ void psql_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
 		yyg->yy_buffer_stack_top++;
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
 
-	/* copied from psql_yy_switch_to_buffer. */
-	psql_yy_load_buffer_state(yyscanner );
+	/* copied from yy_switch_to_buffer. */
+	yy_load_buffer_state( yyscanner );
 	yyg->yy_did_buffer_switch_on_eof = 1;
 }
 
@@ -4849,19 +5058,19 @@ void psql_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
  *  The next element becomes the new top.
  *  @param yyscanner The scanner object.
  */
-void psql_yypop_buffer_state (yyscan_t yyscanner)
+void yypop_buffer_state (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if (!YY_CURRENT_BUFFER)
 		return;
 
-	psql_yy_delete_buffer(YY_CURRENT_BUFFER ,yyscanner);
+	yy_delete_buffer(YY_CURRENT_BUFFER , yyscanner);
 	YY_CURRENT_BUFFER_LVALUE = NULL;
 	if (yyg->yy_buffer_stack_top > 0)
 		--yyg->yy_buffer_stack_top;
 
 	if (YY_CURRENT_BUFFER) {
-		psql_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 		yyg->yy_did_buffer_switch_on_eof = 1;
 	}
 }
@@ -4869,9 +5078,9 @@ void psql_yypop_buffer_state (yyscan_t yyscanner)
 /* Allocates the stack if it does not exist.
  *  Guarantees space for at least one push.
  */
-static void psql_yyensure_buffer_stack (yyscan_t yyscanner)
+static void yyensure_buffer_stack (yyscan_t yyscanner)
 {
-	int num_to_alloc;
+	yy_size_t num_to_alloc;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	if (!yyg->yy_buffer_stack) {
@@ -4881,11 +5090,11 @@ static void psql_yyensure_buffer_stack (yyscan_t yyscanner)
 		 * immediate realloc on the next call.
          */
       num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
-		yyg->yy_buffer_stack = (struct yy_buffer_state**)psql_yyalloc
+		yyg->yy_buffer_stack = (struct yy_buffer_state**)yyalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								, yyscanner);
 		if ( ! yyg->yy_buffer_stack )
-			YY_FATAL_ERROR( "out of dynamic memory in psql_yyensure_buffer_stack()" );
+			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
 
 		memset(yyg->yy_buffer_stack, 0, num_to_alloc * sizeof(struct yy_buffer_state*));
 
@@ -4900,12 +5109,12 @@ static void psql_yyensure_buffer_stack (yyscan_t yyscanner)
 		yy_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = yyg->yy_buffer_stack_max + grow_size;
-		yyg->yy_buffer_stack = (struct yy_buffer_state**)psql_yyrealloc
+		yyg->yy_buffer_stack = (struct yy_buffer_state**)yyrealloc
 								(yyg->yy_buffer_stack,
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								, yyscanner);
 		if ( ! yyg->yy_buffer_stack )
-			YY_FATAL_ERROR( "out of dynamic memory in psql_yyensure_buffer_stack()" );
+			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
 
 		/* zero only the new slots.*/
 		memset(yyg->yy_buffer_stack + yyg->yy_buffer_stack_max, 0, grow_size * sizeof(struct yy_buffer_state*));
@@ -4919,7 +5128,7 @@ static void psql_yyensure_buffer_stack (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE psql_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
     
@@ -4929,11 +5138,11 @@ YY_BUFFER_STATE psql_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yy
 		/* They forgot to leave room for the EOB's. */
 		return NULL;
 
-	b = (YY_BUFFER_STATE) psql_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state ) , yyscanner );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in psql_yy_scan_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_buffer()" );
 
-	b->yy_buf_size = size - 2;	/* "- 2" to take care of EOB's */
+	b->yy_buf_size = (int) (size - 2);	/* "- 2" to take care of EOB's */
 	b->yy_buf_pos = b->yy_ch_buf = base;
 	b->yy_is_our_buffer = 0;
 	b->yy_input_file = NULL;
@@ -4943,33 +5152,33 @@ YY_BUFFER_STATE psql_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yy
 	b->yy_fill_buffer = 0;
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
-	psql_yy_switch_to_buffer(b ,yyscanner );
+	yy_switch_to_buffer( b , yyscanner );
 
 	return b;
 }
 
-/** Setup the input buffer state to scan a string. The next call to psql_yylex() will
+/** Setup the input buffer state to scan a string. The next call to yylex() will
  * scan from a @e copy of @a str.
  * @param yystr a NUL-terminated string to scan
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  * @note If you want to scan bytes that may contain NUL values, then use
- *       psql_yy_scan_bytes() instead.
+ *       yy_scan_bytes() instead.
  */
-YY_BUFFER_STATE psql_yy_scan_string (yyconst char * yystr , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_string (const char * yystr , yyscan_t yyscanner)
 {
     
-	return psql_yy_scan_bytes(yystr,(int) strlen(yystr) ,yyscanner);
+	return yy_scan_bytes( yystr, (int) strlen(yystr) , yyscanner);
 }
 
-/** Setup the input buffer state to scan the given bytes. The next call to psql_yylex() will
+/** Setup the input buffer state to scan the given bytes. The next call to yylex() will
  * scan from a @e copy of @a bytes.
  * @param yybytes the byte buffer to scan
  * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE psql_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
 	char *buf;
@@ -4978,18 +5187,18 @@ YY_BUFFER_STATE psql_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len ,
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = (yy_size_t) (_yybytes_len + 2);
-	buf = (char *) psql_yyalloc(n ,yyscanner );
+	buf = (char *) yyalloc( n , yyscanner );
 	if ( ! buf )
-		YY_FATAL_ERROR( "out of dynamic memory in psql_yy_scan_bytes()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_bytes()" );
 
 	for ( i = 0; i < _yybytes_len; ++i )
 		buf[i] = yybytes[i];
 
 	buf[_yybytes_len] = buf[_yybytes_len+1] = YY_END_OF_BUFFER_CHAR;
 
-	b = psql_yy_scan_buffer(buf,n ,yyscanner);
+	b = yy_scan_buffer( buf, n , yyscanner);
 	if ( ! b )
-		YY_FATAL_ERROR( "bad buffer in psql_yy_scan_bytes()" );
+		YY_FATAL_ERROR( "bad buffer in yy_scan_bytes()" );
 
 	/* It's okay to grow etc. this buffer, and we should throw it
 	 * away when we're done.
@@ -5003,11 +5212,11 @@ YY_BUFFER_STATE psql_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len ,
 #define YY_EXIT_FAILURE 2
 #endif
 
-static void yynoreturn yy_fatal_error (yyconst char* msg , yyscan_t yyscanner)
+static void yynoreturn yy_fatal_error (const char* msg , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
-	(void) fprintf( stderr, "%s\n", msg );
+	fprintf( stderr, "%s\n", msg );
 	exit( YY_EXIT_FAILURE );
 }
 
@@ -5033,7 +5242,7 @@ static void yynoreturn yy_fatal_error (yyconst char* msg , yyscan_t yyscanner)
 /** Get the user-defined data for this scanner.
  * @param yyscanner The scanner object.
  */
-YY_EXTRA_TYPE psql_yyget_extra  (yyscan_t yyscanner)
+YY_EXTRA_TYPE yyget_extra  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyextra;
@@ -5042,7 +5251,7 @@ YY_EXTRA_TYPE psql_yyget_extra  (yyscan_t yyscanner)
 /** Get the current line number.
  * @param yyscanner The scanner object.
  */
-int psql_yyget_lineno  (yyscan_t yyscanner)
+int yyget_lineno  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -5055,7 +5264,7 @@ int psql_yyget_lineno  (yyscan_t yyscanner)
 /** Get the current column number.
  * @param yyscanner The scanner object.
  */
-int psql_yyget_column  (yyscan_t yyscanner)
+int yyget_column  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -5068,7 +5277,7 @@ int psql_yyget_column  (yyscan_t yyscanner)
 /** Get the input stream.
  * @param yyscanner The scanner object.
  */
-FILE *psql_yyget_in  (yyscan_t yyscanner)
+FILE *yyget_in  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyin;
@@ -5077,7 +5286,7 @@ FILE *psql_yyget_in  (yyscan_t yyscanner)
 /** Get the output stream.
  * @param yyscanner The scanner object.
  */
-FILE *psql_yyget_out  (yyscan_t yyscanner)
+FILE *yyget_out  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyout;
@@ -5086,7 +5295,7 @@ FILE *psql_yyget_out  (yyscan_t yyscanner)
 /** Get the length of the current token.
  * @param yyscanner The scanner object.
  */
-int psql_yyget_leng  (yyscan_t yyscanner)
+int yyget_leng  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyleng;
@@ -5096,7 +5305,7 @@ int psql_yyget_leng  (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  */
 
-char *psql_yyget_text  (yyscan_t yyscanner)
+char *yyget_text  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yytext;
@@ -5106,7 +5315,7 @@ char *psql_yyget_text  (yyscan_t yyscanner)
  * @param user_defined The data to be associated with this scanner.
  * @param yyscanner The scanner object.
  */
-void psql_yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
+void yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyextra = user_defined ;
@@ -5116,13 +5325,13 @@ void psql_yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
  * @param _line_number line number
  * @param yyscanner The scanner object.
  */
-void psql_yyset_lineno (int  _line_number , yyscan_t yyscanner)
+void yyset_lineno (int  _line_number , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
         /* lineno is only valid if an input buffer exists. */
         if (! YY_CURRENT_BUFFER )
-           YY_FATAL_ERROR( "psql_yyset_lineno called with no buffer" );
+           YY_FATAL_ERROR( "yyset_lineno called with no buffer" );
     
     yylineno = _line_number;
 }
@@ -5131,13 +5340,13 @@ void psql_yyset_lineno (int  _line_number , yyscan_t yyscanner)
  * @param _column_no column number
  * @param yyscanner The scanner object.
  */
-void psql_yyset_column (int  _column_no , yyscan_t yyscanner)
+void yyset_column (int  _column_no , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
         /* column is only valid if an input buffer exists. */
         if (! YY_CURRENT_BUFFER )
-           YY_FATAL_ERROR( "psql_yyset_column called with no buffer" );
+           YY_FATAL_ERROR( "yyset_column called with no buffer" );
     
     yycolumn = _column_no;
 }
@@ -5146,27 +5355,27 @@ void psql_yyset_column (int  _column_no , yyscan_t yyscanner)
  * input buffer.
  * @param _in_str A readable stream.
  * @param yyscanner The scanner object.
- * @see psql_yy_switch_to_buffer
+ * @see yy_switch_to_buffer
  */
-void psql_yyset_in (FILE *  _in_str , yyscan_t yyscanner)
+void yyset_in (FILE *  _in_str , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyin = _in_str ;
 }
 
-void psql_yyset_out (FILE *  _out_str , yyscan_t yyscanner)
+void yyset_out (FILE *  _out_str , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyout = _out_str ;
 }
 
-int psql_yyget_debug  (yyscan_t yyscanner)
+int yyget_debug  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yy_flex_debug;
 }
 
-void psql_yyset_debug (int  _bdebug , yyscan_t yyscanner)
+void yyset_debug (int  _bdebug , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yy_flex_debug = _bdebug ;
@@ -5174,13 +5383,13 @@ void psql_yyset_debug (int  _bdebug , yyscan_t yyscanner)
 
 /* Accessor methods for yylval and yylloc */
 
-YYSTYPE * psql_yyget_lval  (yyscan_t yyscanner)
+YYSTYPE * yyget_lval  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yylval;
 }
 
-void psql_yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
+void yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yylval = yylval_param;
@@ -5188,20 +5397,18 @@ void psql_yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
 
 /* User-visible API */
 
-/* psql_yylex_init is special because it creates the scanner itself, so it is
+/* yylex_init is special because it creates the scanner itself, so it is
  * the ONLY reentrant function that doesn't take the scanner as the last argument.
  * That's why we explicitly handle the declaration, instead of using our macros.
  */
-
-int psql_yylex_init(yyscan_t* ptr_yy_globals)
-
+int yylex_init(yyscan_t* ptr_yy_globals)
 {
     if (ptr_yy_globals == NULL){
         errno = EINVAL;
         return 1;
     }
 
-    *ptr_yy_globals = (yyscan_t) psql_yyalloc ( sizeof( struct yyguts_t ), NULL );
+    *ptr_yy_globals = (yyscan_t) yyalloc ( sizeof( struct yyguts_t ), NULL );
 
     if (*ptr_yy_globals == NULL){
         errno = ENOMEM;
@@ -5214,27 +5421,25 @@ int psql_yylex_init(yyscan_t* ptr_yy_globals)
     return yy_init_globals ( *ptr_yy_globals );
 }
 
-/* psql_yylex_init_extra has the same functionality as psql_yylex_init, but follows the
+/* yylex_init_extra has the same functionality as yylex_init, but follows the
  * convention of taking the scanner as the last argument. Note however, that
  * this is a *pointer* to a scanner, as it will be allocated by this call (and
  * is the reason, too, why this function also must handle its own declaration).
- * The user defined value in the first argument will be available to psql_yyalloc in
+ * The user defined value in the first argument will be available to yyalloc in
  * the yyextra field.
  */
-
-int psql_yylex_init_extra(YY_EXTRA_TYPE yy_user_defined,yyscan_t* ptr_yy_globals )
-
+int yylex_init_extra( YY_EXTRA_TYPE yy_user_defined, yyscan_t* ptr_yy_globals )
 {
     struct yyguts_t dummy_yyguts;
 
-    psql_yyset_extra (yy_user_defined, &dummy_yyguts);
+    yyset_extra (yy_user_defined, &dummy_yyguts);
 
     if (ptr_yy_globals == NULL){
         errno = EINVAL;
         return 1;
     }
 
-    *ptr_yy_globals = (yyscan_t) psql_yyalloc ( sizeof( struct yyguts_t ), &dummy_yyguts );
+    *ptr_yy_globals = (yyscan_t) yyalloc ( sizeof( struct yyguts_t ), &dummy_yyguts );
 
     if (*ptr_yy_globals == NULL){
         errno = ENOMEM;
@@ -5245,7 +5450,7 @@ int psql_yylex_init_extra(YY_EXTRA_TYPE yy_user_defined,yyscan_t* ptr_yy_globals
     yy_init_globals. Leave at 0x00 for releases. */
     memset(*ptr_yy_globals,0x00,sizeof(struct yyguts_t));
 
-    psql_yyset_extra (yy_user_defined, *ptr_yy_globals);
+    yyset_extra (yy_user_defined, *ptr_yy_globals);
 
     return yy_init_globals ( *ptr_yy_globals );
 }
@@ -5254,7 +5459,7 @@ static int yy_init_globals (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     /* Initialization is the same as for the non-reentrant scanner.
-     * This function is called from psql_yylex_destroy(), so don't allocate here.
+     * This function is called from yylex_destroy(), so don't allocate here.
      */
 
     yyg->yy_buffer_stack = NULL;
@@ -5278,37 +5483,37 @@ static int yy_init_globals (yyscan_t yyscanner)
 #endif
 
     /* For future reference: Set errno on error, since we are called by
-     * psql_yylex_init()
+     * yylex_init()
      */
     return 0;
 }
 
-/* psql_yylex_destroy is for both reentrant and non-reentrant scanners. */
-int psql_yylex_destroy  (yyscan_t yyscanner)
+/* yylex_destroy is for both reentrant and non-reentrant scanners. */
+int yylex_destroy  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
     /* Pop the buffer stack, destroying each element. */
 	while(YY_CURRENT_BUFFER){
-		psql_yy_delete_buffer(YY_CURRENT_BUFFER ,yyscanner );
+		yy_delete_buffer( YY_CURRENT_BUFFER , yyscanner );
 		YY_CURRENT_BUFFER_LVALUE = NULL;
-		psql_yypop_buffer_state(yyscanner);
+		yypop_buffer_state(yyscanner);
 	}
 
 	/* Destroy the stack itself. */
-	psql_yyfree(yyg->yy_buffer_stack ,yyscanner);
+	yyfree(yyg->yy_buffer_stack , yyscanner);
 	yyg->yy_buffer_stack = NULL;
 
     /* Destroy the start condition stack. */
-        psql_yyfree(yyg->yy_start_stack ,yyscanner );
+        yyfree( yyg->yy_start_stack , yyscanner );
         yyg->yy_start_stack = NULL;
 
     /* Reset the globals. This is important in a non-reentrant scanner so the next time
-     * psql_yylex() is called, initialization will occur. */
+     * yylex() is called, initialization will occur. */
     yy_init_globals( yyscanner);
 
     /* Destroy the main struct (reentrant only). */
-    psql_yyfree ( yyscanner , yyscanner );
+    yyfree ( yyscanner , yyscanner );
     yyscanner = NULL;
     return 0;
 }
@@ -5318,7 +5523,7 @@ int psql_yylex_destroy  (yyscan_t yyscanner)
  */
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char* s1, yyconst char * s2, int n , yyscan_t yyscanner)
+static void yy_flex_strncpy (char* s1, const char * s2, int n , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
@@ -5330,7 +5535,7 @@ static void yy_flex_strncpy (char* s1, yyconst char * s2, int n , yyscan_t yysca
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (yyconst char * s , yyscan_t yyscanner)
+static int yy_flex_strlen (const char * s , yyscan_t yyscanner)
 {
 	int n;
 	for ( n = 0; s[n]; ++n )
@@ -5340,14 +5545,14 @@ static int yy_flex_strlen (yyconst char * s , yyscan_t yyscanner)
 }
 #endif
 
-void *psql_yyalloc (yy_size_t  size , yyscan_t yyscanner)
+void *yyalloc (yy_size_t  size , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
 	return malloc(size);
 }
 
-void *psql_yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
+void *yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
@@ -5362,17 +5567,16 @@ void *psql_yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
 	return realloc(ptr, size);
 }
 
-void psql_yyfree (void * ptr , yyscan_t yyscanner)
+void yyfree (void * ptr , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
-	free( (char *) ptr );	/* see psql_yyrealloc() for (char *) cast */
+	free( (char *) ptr );	/* see yyrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "yytables"
 
-#line 905 "psqlscan.l"
-
+#line 906 "psqlscan.l"
 
 
 /*
@@ -5391,9 +5595,9 @@ psql_scan_create(const PsqlScanCallbacks *callbacks)
 
 	state->callbacks = callbacks;
 
-	psql_yylex_init(&state->scanner);
+	yylex_init(&state->scanner);
 
-	psql_yyset_extra(state,state->scanner);
+	yyset_extra(state, state->scanner);
 
 	psql_scan_reset(state);
 
@@ -5410,7 +5614,7 @@ psql_scan_destroy(PsqlScanState state)
 
 	psql_scan_reset(state);
 
-	psql_yylex_destroy(state->scanner);
+	yylex_destroy(state->scanner);
 
 	free(state);
 }
@@ -5501,12 +5705,12 @@ psql_scan(PsqlScanState state,
 
 	/* Set input source */
 	if (state->buffer_stack != NULL)
-		psql_yy_switch_to_buffer(state->buffer_stack->buf,state->scanner);
+		yy_switch_to_buffer(state->buffer_stack->buf, state->scanner);
 	else
-		psql_yy_switch_to_buffer(state->scanbufhandle,state->scanner);
+		yy_switch_to_buffer(state->scanbufhandle, state->scanner);
 
 	/* And lex. */
-	lexresult = psql_yylex(NULL,state->scanner);
+	lexresult = yylex(NULL, state->scanner);
 
 	/*
 	 * Check termination state and return appropriate result info.
@@ -5588,7 +5792,7 @@ psql_scan(PsqlScanState state,
 			break;
 		default:
 			/* can't get here */
-			fprintf(stderr, "invalid psql_yylex result\n");
+			fprintf(stderr, "invalid yylex result\n");
 			exit(1);
 	}
 
@@ -5613,7 +5817,7 @@ psql_scan_finish(PsqlScanState state)
 
 	/* Done with the outer scan buffer, too */
 	if (state->scanbufhandle)
-		psql_yy_delete_buffer(state->scanbufhandle,state->scanner);
+		yy_delete_buffer(state->scanbufhandle, state->scanner);
 	state->scanbufhandle = NULL;
 	if (state->scanbuf)
 		free(state->scanbuf);
@@ -5726,7 +5930,7 @@ psqlscan_pop_buffer_stack(PsqlScanState state)
 	StackElem  *stackelem = state->buffer_stack;
 
 	state->buffer_stack = stackelem->next;
-	psql_yy_delete_buffer(stackelem->buf,state->scanner);
+	yy_delete_buffer(stackelem->buf, state->scanner);
 	free(stackelem->bufstring);
 	if (stackelem->origstring)
 		free(stackelem->origstring);
@@ -5745,13 +5949,13 @@ psqlscan_select_top_buffer(PsqlScanState state)
 
 	if (stackelem != NULL)
 	{
-		psql_yy_switch_to_buffer(stackelem->buf,state->scanner);
+		yy_switch_to_buffer(stackelem->buf, state->scanner);
 		state->curline = stackelem->bufstring;
 		state->refline = stackelem->origstring ? stackelem->origstring : stackelem->bufstring;
 	}
 	else
 	{
-		psql_yy_switch_to_buffer(state->scanbufhandle,state->scanner);
+		yy_switch_to_buffer(state->scanbufhandle, state->scanner);
 		state->curline = state->scanbuf;
 		state->refline = state->scanline;
 	}
@@ -5813,7 +6017,7 @@ psqlscan_prepare_buffer(PsqlScanState state, const char *txt, int len,
 		}
 	}
 
-	return psql_yy_scan_buffer(newtxt,len + 2,state->scanner);
+	return yy_scan_buffer(newtxt, len + 2, state->scanner);
 }
 
 /*

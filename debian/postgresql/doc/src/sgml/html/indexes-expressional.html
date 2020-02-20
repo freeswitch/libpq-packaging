@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Indexes"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -120,6 +120,18 @@ CLASS="LITERAL"
 </P><PRE
 CLASS="PROGRAMLISTING"
 >CREATE INDEX test1_lower_col1_idx ON test1 (lower(col1));</PRE
+><P>
+  </P
+><P
+>   Expression indexes also allow control over the scope of unique indexes.
+   For example, this unique index prevents duplicate integer values from
+   being stored in a <TT
+CLASS="TYPE"
+>double precision</TT
+>-typed column:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>CREATE UNIQUE INDEX test1_uniq_int ON tests ((floor(double_col)))</PRE
 ><P>
   </P
 ><P

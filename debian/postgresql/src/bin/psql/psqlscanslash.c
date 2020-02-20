@@ -31,9 +31,231 @@
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
 #define YY_FLEX_MINOR_VERSION 6
-#define YY_FLEX_SUBMINOR_VERSION 1
+#define YY_FLEX_SUBMINOR_VERSION 4
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
+#endif
+
+#ifdef yy_create_buffer
+#define slash_yy_create_buffer_ALREADY_DEFINED
+#else
+#define yy_create_buffer slash_yy_create_buffer
+#endif
+
+#ifdef yy_delete_buffer
+#define slash_yy_delete_buffer_ALREADY_DEFINED
+#else
+#define yy_delete_buffer slash_yy_delete_buffer
+#endif
+
+#ifdef yy_scan_buffer
+#define slash_yy_scan_buffer_ALREADY_DEFINED
+#else
+#define yy_scan_buffer slash_yy_scan_buffer
+#endif
+
+#ifdef yy_scan_string
+#define slash_yy_scan_string_ALREADY_DEFINED
+#else
+#define yy_scan_string slash_yy_scan_string
+#endif
+
+#ifdef yy_scan_bytes
+#define slash_yy_scan_bytes_ALREADY_DEFINED
+#else
+#define yy_scan_bytes slash_yy_scan_bytes
+#endif
+
+#ifdef yy_init_buffer
+#define slash_yy_init_buffer_ALREADY_DEFINED
+#else
+#define yy_init_buffer slash_yy_init_buffer
+#endif
+
+#ifdef yy_flush_buffer
+#define slash_yy_flush_buffer_ALREADY_DEFINED
+#else
+#define yy_flush_buffer slash_yy_flush_buffer
+#endif
+
+#ifdef yy_load_buffer_state
+#define slash_yy_load_buffer_state_ALREADY_DEFINED
+#else
+#define yy_load_buffer_state slash_yy_load_buffer_state
+#endif
+
+#ifdef yy_switch_to_buffer
+#define slash_yy_switch_to_buffer_ALREADY_DEFINED
+#else
+#define yy_switch_to_buffer slash_yy_switch_to_buffer
+#endif
+
+#ifdef yypush_buffer_state
+#define slash_yypush_buffer_state_ALREADY_DEFINED
+#else
+#define yypush_buffer_state slash_yypush_buffer_state
+#endif
+
+#ifdef yypop_buffer_state
+#define slash_yypop_buffer_state_ALREADY_DEFINED
+#else
+#define yypop_buffer_state slash_yypop_buffer_state
+#endif
+
+#ifdef yyensure_buffer_stack
+#define slash_yyensure_buffer_stack_ALREADY_DEFINED
+#else
+#define yyensure_buffer_stack slash_yyensure_buffer_stack
+#endif
+
+#ifdef yylex
+#define slash_yylex_ALREADY_DEFINED
+#else
+#define yylex slash_yylex
+#endif
+
+#ifdef yyrestart
+#define slash_yyrestart_ALREADY_DEFINED
+#else
+#define yyrestart slash_yyrestart
+#endif
+
+#ifdef yylex_init
+#define slash_yylex_init_ALREADY_DEFINED
+#else
+#define yylex_init slash_yylex_init
+#endif
+
+#ifdef yylex_init_extra
+#define slash_yylex_init_extra_ALREADY_DEFINED
+#else
+#define yylex_init_extra slash_yylex_init_extra
+#endif
+
+#ifdef yylex_destroy
+#define slash_yylex_destroy_ALREADY_DEFINED
+#else
+#define yylex_destroy slash_yylex_destroy
+#endif
+
+#ifdef yyget_debug
+#define slash_yyget_debug_ALREADY_DEFINED
+#else
+#define yyget_debug slash_yyget_debug
+#endif
+
+#ifdef yyset_debug
+#define slash_yyset_debug_ALREADY_DEFINED
+#else
+#define yyset_debug slash_yyset_debug
+#endif
+
+#ifdef yyget_extra
+#define slash_yyget_extra_ALREADY_DEFINED
+#else
+#define yyget_extra slash_yyget_extra
+#endif
+
+#ifdef yyset_extra
+#define slash_yyset_extra_ALREADY_DEFINED
+#else
+#define yyset_extra slash_yyset_extra
+#endif
+
+#ifdef yyget_in
+#define slash_yyget_in_ALREADY_DEFINED
+#else
+#define yyget_in slash_yyget_in
+#endif
+
+#ifdef yyset_in
+#define slash_yyset_in_ALREADY_DEFINED
+#else
+#define yyset_in slash_yyset_in
+#endif
+
+#ifdef yyget_out
+#define slash_yyget_out_ALREADY_DEFINED
+#else
+#define yyget_out slash_yyget_out
+#endif
+
+#ifdef yyset_out
+#define slash_yyset_out_ALREADY_DEFINED
+#else
+#define yyset_out slash_yyset_out
+#endif
+
+#ifdef yyget_leng
+#define slash_yyget_leng_ALREADY_DEFINED
+#else
+#define yyget_leng slash_yyget_leng
+#endif
+
+#ifdef yyget_text
+#define slash_yyget_text_ALREADY_DEFINED
+#else
+#define yyget_text slash_yyget_text
+#endif
+
+#ifdef yyget_lineno
+#define slash_yyget_lineno_ALREADY_DEFINED
+#else
+#define yyget_lineno slash_yyget_lineno
+#endif
+
+#ifdef yyset_lineno
+#define slash_yyset_lineno_ALREADY_DEFINED
+#else
+#define yyset_lineno slash_yyset_lineno
+#endif
+
+#ifdef yyget_column
+#define slash_yyget_column_ALREADY_DEFINED
+#else
+#define yyget_column slash_yyget_column
+#endif
+
+#ifdef yyset_column
+#define slash_yyset_column_ALREADY_DEFINED
+#else
+#define yyset_column slash_yyset_column
+#endif
+
+#ifdef yywrap
+#define slash_yywrap_ALREADY_DEFINED
+#else
+#define yywrap slash_yywrap
+#endif
+
+#ifdef yyget_lval
+#define slash_yyget_lval_ALREADY_DEFINED
+#else
+#define yyget_lval slash_yyget_lval
+#endif
+
+#ifdef yyset_lval
+#define slash_yyset_lval_ALREADY_DEFINED
+#else
+#define yyset_lval slash_yyset_lval
+#endif
+
+#ifdef yyalloc
+#define slash_yyalloc_ALREADY_DEFINED
+#else
+#define yyalloc slash_yyalloc
+#endif
+
+#ifdef yyrealloc
+#define slash_yyrealloc_ALREADY_DEFINED
+#else
+#define yyrealloc slash_yyrealloc
+#endif
+
+#ifdef yyfree
+#define slash_yyfree_ALREADY_DEFINED
+#else
+#define yyfree slash_yyfree
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -106,9 +328,15 @@ typedef unsigned int flex_uint32_t;
 #define UINT32_MAX             (4294967295U)
 #endif
 
+#ifndef SIZE_MAX
+#define SIZE_MAX               (~(size_t)0)
+#endif
+
 #endif /* ! C99 */
 
 #endif /* ! FLEXINT_H */
+
+/* begin standard C++ headers. */
 
 /* TODO: this is always defined, so inline it */
 #define yyconst const
@@ -122,12 +350,10 @@ typedef unsigned int flex_uint32_t;
 /* Returned upon end-of-file. */
 #define YY_NULL 0
 
-/* Promotes a possibly negative, possibly signed char to an unsigned
- * integer for use as an array index.  If the signed char is negative,
- * we want to instead treat it as an 8-bit unsigned char, hence the
- * double cast.
+/* Promotes a possibly negative, possibly signed char to an
+ *   integer in range [0..255] for use as an array index.
  */
-#define YY_SC_TO_UI(c) ((unsigned int) (unsigned char) c)
+#define YY_SC_TO_UI(c) ((YY_CHAR) (c))
 
 /* An opaque pointer. */
 #ifndef YY_TYPEDEF_YY_SCANNER_T
@@ -151,20 +377,16 @@ typedef void* yyscan_t;
  * definition of BEGIN.
  */
 #define BEGIN yyg->yy_start = 1 + 2 *
-
 /* Translate the current start state into a value that can be later handed
  * to BEGIN to return to the state.  The YYSTATE alias is for lex
  * compatibility.
  */
 #define YY_START ((yyg->yy_start - 1) / 2)
 #define YYSTATE YY_START
-
 /* Action number for EOF rule of a given start state. */
 #define YY_STATE_EOF(state) (YY_END_OF_BUFFER + state + 1)
-
 /* Special action meaning "start processing a new file". */
-#define YY_NEW_FILE slash_yyrestart(yyin ,yyscanner )
-
+#define YY_NEW_FILE yyrestart( yyin , yyscanner )
 #define YY_END_OF_BUFFER_CHAR 0
 
 /* Size of default input buffer. */
@@ -197,7 +419,7 @@ typedef size_t yy_size_t;
 #define EOB_ACT_CONTINUE_SCAN 0
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
-
+    
     #define YY_LESS_LINENO(n)
     #define YY_LINENO_REWIND_TO(ptr)
     
@@ -214,7 +436,6 @@ typedef size_t yy_size_t;
 		YY_DO_BEFORE_ACTION; /* set up yytext again */ \
 		} \
 	while ( 0 )
-
 #define unput(c) yyunput( c, yyg->yytext_ptr , yyscanner )
 
 #ifndef YY_STRUCT_YY_BUFFER_STATE
@@ -274,7 +495,7 @@ struct yy_buffer_state
 	 * possible backing-up.
 	 *
 	 * When we actually see the EOF, we change the status to "new"
-	 * (via slash_yyrestart()), so that the user can continue scanning by
+	 * (via yyrestart()), so that the user can continue scanning by
 	 * just pointing yyin at a new input file.
 	 */
 #define YY_BUFFER_EOF_PENDING 2
@@ -291,70 +512,64 @@ struct yy_buffer_state
 #define YY_CURRENT_BUFFER ( yyg->yy_buffer_stack \
                           ? yyg->yy_buffer_stack[yyg->yy_buffer_stack_top] \
                           : NULL)
-
 /* Same as previous macro, but useful when we know that the buffer stack is not
  * NULL or when we need an lvalue. For internal use only.
  */
 #define YY_CURRENT_BUFFER_LVALUE yyg->yy_buffer_stack[yyg->yy_buffer_stack_top]
 
-void slash_yyrestart (FILE *input_file ,yyscan_t yyscanner );
-void slash_yy_switch_to_buffer (YY_BUFFER_STATE new_buffer ,yyscan_t yyscanner );
-YY_BUFFER_STATE slash_yy_create_buffer (FILE *file,int size ,yyscan_t yyscanner );
-void slash_yy_delete_buffer (YY_BUFFER_STATE b ,yyscan_t yyscanner );
-void slash_yy_flush_buffer (YY_BUFFER_STATE b ,yyscan_t yyscanner );
-void slash_yypush_buffer_state (YY_BUFFER_STATE new_buffer ,yyscan_t yyscanner );
-void slash_yypop_buffer_state (yyscan_t yyscanner );
+void yyrestart ( FILE *input_file , yyscan_t yyscanner );
+void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size , yyscan_t yyscanner );
+void yy_delete_buffer ( YY_BUFFER_STATE b , yyscan_t yyscanner );
+void yy_flush_buffer ( YY_BUFFER_STATE b , yyscan_t yyscanner );
+void yypush_buffer_state ( YY_BUFFER_STATE new_buffer , yyscan_t yyscanner );
+void yypop_buffer_state ( yyscan_t yyscanner );
 
-static void slash_yyensure_buffer_stack (yyscan_t yyscanner );
-static void slash_yy_load_buffer_state (yyscan_t yyscanner );
-static void slash_yy_init_buffer (YY_BUFFER_STATE b,FILE *file ,yyscan_t yyscanner );
+static void yyensure_buffer_stack ( yyscan_t yyscanner );
+static void yy_load_buffer_state ( yyscan_t yyscanner );
+static void yy_init_buffer ( YY_BUFFER_STATE b, FILE *file , yyscan_t yyscanner );
+#define YY_FLUSH_BUFFER yy_flush_buffer( YY_CURRENT_BUFFER , yyscanner)
 
-#define YY_FLUSH_BUFFER slash_yy_flush_buffer(YY_CURRENT_BUFFER ,yyscanner)
+YY_BUFFER_STATE yy_scan_buffer ( char *base, yy_size_t size , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_scan_string ( const char *yy_str , yyscan_t yyscanner );
+YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len , yyscan_t yyscanner );
 
-YY_BUFFER_STATE slash_yy_scan_buffer (char *base,yy_size_t size ,yyscan_t yyscanner );
-YY_BUFFER_STATE slash_yy_scan_string (yyconst char *yy_str ,yyscan_t yyscanner );
-YY_BUFFER_STATE slash_yy_scan_bytes (yyconst char *bytes,int len ,yyscan_t yyscanner );
+void *yyalloc ( yy_size_t , yyscan_t yyscanner );
+void *yyrealloc ( void *, yy_size_t , yyscan_t yyscanner );
+void yyfree ( void * , yyscan_t yyscanner );
 
-void *slash_yyalloc (yy_size_t ,yyscan_t yyscanner );
-void *slash_yyrealloc (void *,yy_size_t ,yyscan_t yyscanner );
-void slash_yyfree (void * ,yyscan_t yyscanner );
-
-#define yy_new_buffer slash_yy_create_buffer
-
+#define yy_new_buffer yy_create_buffer
 #define yy_set_interactive(is_interactive) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){ \
-        slash_yyensure_buffer_stack (yyscanner); \
+        yyensure_buffer_stack (yyscanner); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            slash_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner); \
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_is_interactive = is_interactive; \
 	}
-
 #define yy_set_bol(at_bol) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){\
-        slash_yyensure_buffer_stack (yyscanner); \
+        yyensure_buffer_stack (yyscanner); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            slash_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner); \
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_at_bol = at_bol; \
 	}
-
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
 
 #define slash_yywrap(yyscanner) (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
-
-typedef unsigned char YY_CHAR;
+typedef flex_uint8_t YY_CHAR;
 
 typedef int yy_state_type;
 
 #define yytext_ptr yytext_r
 
-static yyconst flex_int16_t yy_nxt[][19] =
+static const flex_int16_t yy_nxt[][19] =
     {
     {
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -722,10 +937,10 @@ static yyconst flex_int16_t yy_nxt[][19] =
 
     } ;
 
-static yy_state_type yy_get_previous_state (yyscan_t yyscanner );
-static yy_state_type yy_try_NUL_trans (yy_state_type current_state  ,yyscan_t yyscanner);
-static int yy_get_next_buffer (yyscan_t yyscanner );
-static void yynoreturn yy_fatal_error (yyconst char* msg ,yyscan_t yyscanner );
+static yy_state_type yy_get_previous_state ( yyscan_t yyscanner );
+static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  , yyscan_t yyscanner);
+static int yy_get_next_buffer ( yyscan_t yyscanner );
+static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 
 /* Done after the current pattern has been matched and before the
  * corresponding action - sets up yytext.
@@ -736,7 +951,6 @@ static void yynoreturn yy_fatal_error (yyconst char* msg ,yyscan_t yyscanner );
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-
 #define YY_NUM_RULES 36
 #define YY_END_OF_BUFFER 37
 /* This struct is not used in this scanner,
@@ -746,7 +960,7 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[70] =
+static const flex_int16_t yy_accept[70] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,   37,    1,
@@ -757,7 +971,7 @@ static yyconst flex_int16_t yy_accept[70] =
        34,   15,   14,   24,   25,   13,   12,   24,   25
     } ;
 
-static yyconst YY_CHAR yy_ec[256] =
+static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    2,    2,    1,    1,    1,    1,    1,    1,    1,
@@ -802,7 +1016,7 @@ static yyconst YY_CHAR yy_ec[256] =
 #include "fe_utils/psqlscan_int.h"
 
 /*
- * We must have a typedef YYSTYPE for slash_yylex's first argument, but this lexer
+ * We must have a typedef YYSTYPE for yylex's first argument, but this lexer
  * doesn't presently make use of that argument, so just declare it as int.
  */
 typedef int YYSTYPE;
@@ -823,7 +1037,7 @@ static int	unquoted_option_chars;
 static int	backtick_start_offset;
 
 
-/* Return values from slash_yylex() */
+/* Return values from yylex() */
 #define LEXRES_EOL			0	/* end of input */
 #define LEXRES_OK			1	/* OK completion of backslash argument */
 
@@ -841,6 +1055,7 @@ static void evaluate_backtick(PsqlScanState state);
 extern int	slash_yyget_column(yyscan_t yyscanner);
 extern void slash_yyset_column(int column_no, yyscan_t yyscanner);
 
+#line 1059 "psqlscanslash.c"
 /* Except for the prefix, these options should match psqlscan.l */
 #define YY_NO_INPUT 1
 /*
@@ -853,17 +1068,10 @@ extern void slash_yyset_column(int column_no, yyscan_t yyscanner);
  */
 /* Exclusive states for lexing backslash commands */
 
-
-
-
-
-
-
-
 /*
  * Assorted character class definitions that should match psqlscan.l.
  */
-#line 867 "psqlscanslash.c"
+#line 1075 "psqlscanslash.c"
 
 #define INITIAL 0
 #define xslashcmd 1
@@ -923,52 +1131,52 @@ struct yyguts_t
 
     }; /* end struct yyguts_t */
 
-static int yy_init_globals (yyscan_t yyscanner );
+static int yy_init_globals ( yyscan_t yyscanner );
 
     /* This must go here because YYSTYPE and YYLTYPE are included
      * from bison output in section 1.*/
     #    define yylval yyg->yylval_r
     
-int slash_yylex_init (yyscan_t* scanner);
+int yylex_init (yyscan_t* scanner);
 
-int slash_yylex_init_extra (YY_EXTRA_TYPE user_defined,yyscan_t* scanner);
+int yylex_init_extra ( YY_EXTRA_TYPE user_defined, yyscan_t* scanner);
 
 /* Accessor methods to globals.
    These are made visible to non-reentrant scanners for convenience. */
 
-int slash_yylex_destroy (yyscan_t yyscanner );
+int yylex_destroy ( yyscan_t yyscanner );
 
-int slash_yyget_debug (yyscan_t yyscanner );
+int yyget_debug ( yyscan_t yyscanner );
 
-void slash_yyset_debug (int debug_flag ,yyscan_t yyscanner );
+void yyset_debug ( int debug_flag , yyscan_t yyscanner );
 
-YY_EXTRA_TYPE slash_yyget_extra (yyscan_t yyscanner );
+YY_EXTRA_TYPE yyget_extra ( yyscan_t yyscanner );
 
-void slash_yyset_extra (YY_EXTRA_TYPE user_defined ,yyscan_t yyscanner );
+void yyset_extra ( YY_EXTRA_TYPE user_defined , yyscan_t yyscanner );
 
-FILE *slash_yyget_in (yyscan_t yyscanner );
+FILE *yyget_in ( yyscan_t yyscanner );
 
-void slash_yyset_in  (FILE * _in_str ,yyscan_t yyscanner );
+void yyset_in  ( FILE * _in_str , yyscan_t yyscanner );
 
-FILE *slash_yyget_out (yyscan_t yyscanner );
+FILE *yyget_out ( yyscan_t yyscanner );
 
-void slash_yyset_out  (FILE * _out_str ,yyscan_t yyscanner );
+void yyset_out  ( FILE * _out_str , yyscan_t yyscanner );
 
-			int slash_yyget_leng (yyscan_t yyscanner );
+			int yyget_leng ( yyscan_t yyscanner );
 
-char *slash_yyget_text (yyscan_t yyscanner );
+char *yyget_text ( yyscan_t yyscanner );
 
-int slash_yyget_lineno (yyscan_t yyscanner );
+int yyget_lineno ( yyscan_t yyscanner );
 
-void slash_yyset_lineno (int _line_number ,yyscan_t yyscanner );
+void yyset_lineno ( int _line_number , yyscan_t yyscanner );
 
-int slash_yyget_column  (yyscan_t yyscanner );
+int yyget_column  ( yyscan_t yyscanner );
 
-void slash_yyset_column (int _column_no ,yyscan_t yyscanner );
+void yyset_column ( int _column_no , yyscan_t yyscanner );
 
-YYSTYPE * slash_yyget_lval (yyscan_t yyscanner );
+YYSTYPE * yyget_lval ( yyscan_t yyscanner );
 
-void slash_yyset_lval (YYSTYPE * yylval_param ,yyscan_t yyscanner );
+void yyset_lval ( YYSTYPE * yylval_param , yyscan_t yyscanner );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -976,9 +1184,9 @@ void slash_yyset_lval (YYSTYPE * yylval_param ,yyscan_t yyscanner );
 
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
-extern "C" int slash_yywrap (yyscan_t yyscanner );
+extern "C" int yywrap ( yyscan_t yyscanner );
 #else
-extern int slash_yywrap (yyscan_t yyscanner );
+extern int yywrap ( yyscan_t yyscanner );
 #endif
 #endif
 
@@ -987,19 +1195,18 @@ extern int slash_yywrap (yyscan_t yyscanner );
 #endif
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char *,yyconst char *,int ,yyscan_t yyscanner);
+static void yy_flex_strncpy ( char *, const char *, int , yyscan_t yyscanner);
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (yyconst char * ,yyscan_t yyscanner);
+static int yy_flex_strlen ( const char * , yyscan_t yyscanner);
 #endif
 
 #ifndef YY_NO_INPUT
-
 #ifdef __cplusplus
-static int yyinput (yyscan_t yyscanner );
+static int yyinput ( yyscan_t yyscanner );
 #else
-static int input (yyscan_t yyscanner );
+static int input ( yyscan_t yyscanner );
 #endif
 
 #endif
@@ -1030,7 +1237,7 @@ static int input (yyscan_t yyscanner );
 	if ( YY_CURRENT_BUFFER_LVALUE->yy_is_interactive ) \
 		{ \
 		int c = '*'; \
-		size_t n; \
+		int n; \
 		for ( n = 0; n < max_size && \
 			     (c = getc( yyin )) != EOF && c != '\n'; ++n ) \
 			buf[n] = (char) c; \
@@ -1043,7 +1250,7 @@ static int input (yyscan_t yyscanner );
 	else \
 		{ \
 		errno=0; \
-		while ( (result = (int) fread(buf, 1, max_size, yyin))==0 && ferror(yyin)) \
+		while ( (result = (int) fread(buf, 1, (yy_size_t) max_size, yyin)) == 0 && ferror(yyin)) \
 			{ \
 			if( errno != EINTR) \
 				{ \
@@ -1084,10 +1291,10 @@ static int input (yyscan_t yyscanner );
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
 
-extern int slash_yylex \
-               (YYSTYPE * yylval_param ,yyscan_t yyscanner);
+extern int yylex \
+               (YYSTYPE * yylval_param , yyscan_t yyscanner);
 
-#define YY_DECL int slash_yylex \
+#define YY_DECL int yylex \
                (YYSTYPE * yylval_param , yyscan_t yyscanner)
 #endif /* !YY_DECL */
 
@@ -1135,12 +1342,12 @@ YY_DECL
 			yyout = stdout;
 
 		if ( ! YY_CURRENT_BUFFER ) {
-			slash_yyensure_buffer_stack (yyscanner);
+			yyensure_buffer_stack (yyscanner);
 			YY_CURRENT_BUFFER_LVALUE =
-				slash_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner);
+				yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner);
 		}
 
-		slash_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 		}
 
 	{
@@ -1148,7 +1355,8 @@ YY_DECL
 
 
 
-		/* Declare some local variables inside slash_yylex(), for convenience */
+#line 119 "psqlscanslash.l"
+		/* Declare some local variables inside yylex(), for convenience */
 		PsqlScanState cur_state = yyextra;
 		PQExpBuffer output_buf = cur_state->output_buf;
 
@@ -1167,7 +1375,7 @@ YY_DECL
 	 * lexer; but if we are, just spit data to the output_buf until EOF.
 	 */
 
-#line 1171 "psqlscanslash.c"
+#line 1379 "psqlscanslash.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1200,7 +1408,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 137 "psqlscanslash.l"
+#line 138 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 /*
@@ -1211,7 +1419,7 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 146 "psqlscanslash.l"
+#line 147 "psqlscanslash.l"
 {
 					yyless(0);
 					cur_state->start_state = YY_START;
@@ -1220,7 +1428,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 152 "psqlscanslash.l"
+#line 153 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 
@@ -1233,12 +1441,12 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 163 "psqlscanslash.l"
+#line 164 "psqlscanslash.l"
 { }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 165 "psqlscanslash.l"
+#line 166 "psqlscanslash.l"
 {
 					if (option_type == OT_FILEPIPE)
 					{
@@ -1256,7 +1464,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 180 "psqlscanslash.l"
+#line 181 "psqlscanslash.l"
 {
 					yyless(0);
 					BEGIN(xslasharg);
@@ -1274,7 +1482,7 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 196 "psqlscanslash.l"
+#line 197 "psqlscanslash.l"
 {
 					/*
 					 * Unquoted space is end of arg; do not eat.  Likewise
@@ -1292,7 +1500,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 211 "psqlscanslash.l"
+#line 212 "psqlscanslash.l"
 {
 					*option_quote = '\'';
 					unquoted_option_chars = 0;
@@ -1301,7 +1509,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 217 "psqlscanslash.l"
+#line 218 "psqlscanslash.l"
 {
 					backtick_start_offset = output_buf->len;
 					*option_quote = '`';
@@ -1311,7 +1519,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 224 "psqlscanslash.l"
+#line 225 "psqlscanslash.l"
 {
 					ECHO;
 					*option_quote = '"';
@@ -1321,7 +1529,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 231 "psqlscanslash.l"
+#line 232 "psqlscanslash.l"
 {
 					/* Possible psql variable substitution */
 					if (option_type == OT_NO_EVAL ||
@@ -1362,7 +1570,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 269 "psqlscanslash.l"
+#line 270 "psqlscanslash.l"
 {
 					if (option_type == OT_NO_EVAL)
 						ECHO;
@@ -1376,7 +1584,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 281 "psqlscanslash.l"
+#line 282 "psqlscanslash.l"
 {
 					if (option_type == OT_NO_EVAL)
 						ECHO;
@@ -1390,7 +1598,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 292 "psqlscanslash.l"
+#line 293 "psqlscanslash.l"
 {
 					/* Throw back everything but the colon */
 					yyless(1);
@@ -1400,7 +1608,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 299 "psqlscanslash.l"
+#line 300 "psqlscanslash.l"
 {
 					/* Throw back everything but the colon */
 					yyless(1);
@@ -1410,7 +1618,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 306 "psqlscanslash.l"
+#line 307 "psqlscanslash.l"
 {
 					unquoted_option_chars++;
 					ECHO;
@@ -1424,42 +1632,42 @@ YY_RULE_SETUP
 	 */
 case 17:
 YY_RULE_SETUP
-#line 319 "psqlscanslash.l"
+#line 320 "psqlscanslash.l"
 { BEGIN(xslasharg); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 321 "psqlscanslash.l"
+#line 322 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\''); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 323 "psqlscanslash.l"
+#line 324 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\n'); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 324 "psqlscanslash.l"
+#line 325 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\t'); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 325 "psqlscanslash.l"
+#line 326 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\b'); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 326 "psqlscanslash.l"
+#line 327 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\r'); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 327 "psqlscanslash.l"
+#line 328 "psqlscanslash.l"
 { appendPQExpBufferChar(output_buf, '\f'); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 329 "psqlscanslash.l"
+#line 330 "psqlscanslash.l"
 {
 					/* octal case */
 					appendPQExpBufferChar(output_buf,
@@ -1468,7 +1676,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 335 "psqlscanslash.l"
+#line 336 "psqlscanslash.l"
 {
 					/* hex case */
 					appendPQExpBufferChar(output_buf,
@@ -1477,13 +1685,13 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 341 "psqlscanslash.l"
+#line 342 "psqlscanslash.l"
 { psqlscan_emit(cur_state, yytext + 1, 1); }
 	YY_BREAK
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 343 "psqlscanslash.l"
+#line 344 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 
@@ -1495,7 +1703,7 @@ YY_RULE_SETUP
 	 */
 case 28:
 YY_RULE_SETUP
-#line 354 "psqlscanslash.l"
+#line 355 "psqlscanslash.l"
 {
 					/* In NO_EVAL mode, don't evaluate the command */
 					if (option_type != OT_NO_EVAL)
@@ -1506,7 +1714,7 @@ YY_RULE_SETUP
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 361 "psqlscanslash.l"
+#line 362 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 
@@ -1514,7 +1722,7 @@ YY_RULE_SETUP
 /* double-quoted text: copy verbatim, including the double quotes */
 case 30:
 YY_RULE_SETUP
-#line 368 "psqlscanslash.l"
+#line 369 "psqlscanslash.l"
 {
 					ECHO;
 					BEGIN(xslasharg);
@@ -1523,7 +1731,7 @@ YY_RULE_SETUP
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 373 "psqlscanslash.l"
+#line 374 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 
@@ -1533,7 +1741,7 @@ YY_RULE_SETUP
 case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
-#line 381 "psqlscanslash.l"
+#line 382 "psqlscanslash.l"
 {
 					if (output_buf->len > 0)
 						ECHO;
@@ -1541,7 +1749,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 386 "psqlscanslash.l"
+#line 387 "psqlscanslash.l"
 { ECHO; }
 	YY_BREAK
 
@@ -1549,7 +1757,7 @@ YY_RULE_SETUP
 /* at end of command, eat a double backslash, but not anything else */
 case 34:
 YY_RULE_SETUP
-#line 393 "psqlscanslash.l"
+#line 394 "psqlscanslash.l"
 {
 					cur_state->start_state = YY_START;
 					return LEXRES_OK;
@@ -1558,7 +1766,7 @@ YY_RULE_SETUP
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 398 "psqlscanslash.l"
+#line 399 "psqlscanslash.l"
 {
 					yyless(0);
 					cur_state->start_state = YY_START;
@@ -1575,7 +1783,7 @@ case YY_STATE_EOF(xslashbackquote):
 case YY_STATE_EOF(xslashdquote):
 case YY_STATE_EOF(xslashwholeline):
 case YY_STATE_EOF(xslashend):
-#line 406 "psqlscanslash.l"
+#line 407 "psqlscanslash.l"
 {
 					if (cur_state->buffer_stack == NULL)
 					{
@@ -1593,10 +1801,10 @@ case YY_STATE_EOF(xslashend):
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 421 "psqlscanslash.l"
+#line 422 "psqlscanslash.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1600 "psqlscanslash.c"
+#line 1808 "psqlscanslash.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1612,7 +1820,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 			/* We're scanning a new file or input source.  It's
 			 * possible that this happened because the user
 			 * just pointed yyin at a new source and called
-			 * slash_yylex().  If so, then we have to assure
+			 * yylex().  If so, then we have to assure
 			 * consistency between YY_CURRENT_BUFFER and our
 			 * globals.  Here is the right place to do so, because
 			 * this is the first action (other than possibly a
@@ -1672,7 +1880,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 				{
 				yyg->yy_did_buffer_switch_on_eof = 0;
 
-				if ( slash_yywrap(yyscanner ) )
+				if ( yywrap( yyscanner ) )
 					{
 					/* Note: because we've taken care in
 					 * yy_get_next_buffer() to have set up
@@ -1726,7 +1934,7 @@ YY_FATAL_ERROR( "flex scanner jammed" );
 	} /* end of action switch */
 		} /* end of scanning one token */
 	} /* end of user's declarations */
-} /* end of slash_yylex */
+} /* end of yylex */
 
 /* yy_get_next_buffer - try to read in a new buffer
  *
@@ -1805,7 +2013,8 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					slash_yyrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2 ,yyscanner );
+					yyrealloc( (void *) b->yy_ch_buf,
+							 (yy_size_t) (b->yy_buf_size + 2) , yyscanner );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -1837,7 +2046,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		if ( number_to_move == YY_MORE_ADJ )
 			{
 			ret_val = EOB_ACT_END_OF_FILE;
-			slash_yyrestart(yyin  ,yyscanner);
+			yyrestart( yyin  , yyscanner);
 			}
 
 		else
@@ -1854,9 +2063,12 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	if ((yyg->yy_n_chars + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		int new_size = yyg->yy_n_chars + number_to_move + (yyg->yy_n_chars >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) slash_yyrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size ,yyscanner );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) yyrealloc(
+			(void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf, (yy_size_t) new_size , yyscanner );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
+		/* "- 2" to take care of EOB's */
+		YY_CURRENT_BUFFER_LVALUE->yy_buf_size = (int) (new_size - 2);
 	}
 
 	yyg->yy_n_chars += number_to_move;
@@ -1932,7 +2144,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 		else
 			{ /* need more input */
-			int offset = yyg->yy_c_buf_p - yyg->yytext_ptr;
+			int offset = (int) (yyg->yy_c_buf_p - yyg->yytext_ptr);
 			++yyg->yy_c_buf_p;
 
 			switch ( yy_get_next_buffer( yyscanner ) )
@@ -1949,13 +2161,13 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 					 */
 
 					/* Reset buffer status. */
-					slash_yyrestart(yyin ,yyscanner);
+					yyrestart( yyin , yyscanner);
 
 					/*FALLTHROUGH*/
 
 				case EOB_ACT_END_OF_FILE:
 					{
-					if ( slash_yywrap(yyscanner ) )
+					if ( yywrap( yyscanner ) )
 						return 0;
 
 					if ( ! yyg->yy_did_buffer_switch_on_eof )
@@ -1987,34 +2199,34 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @note This function does not reset the start condition to @c INITIAL .
  */
-    void slash_yyrestart  (FILE * input_file , yyscan_t yyscanner)
+    void yyrestart  (FILE * input_file , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	if ( ! YY_CURRENT_BUFFER ){
-        slash_yyensure_buffer_stack (yyscanner);
+        yyensure_buffer_stack (yyscanner);
 		YY_CURRENT_BUFFER_LVALUE =
-            slash_yy_create_buffer(yyin,YY_BUF_SIZE ,yyscanner);
+            yy_create_buffer( yyin, YY_BUF_SIZE , yyscanner);
 	}
 
-	slash_yy_init_buffer(YY_CURRENT_BUFFER,input_file ,yyscanner);
-	slash_yy_load_buffer_state(yyscanner );
+	yy_init_buffer( YY_CURRENT_BUFFER, input_file , yyscanner);
+	yy_load_buffer_state( yyscanner );
 }
 
 /** Switch to a different input buffer.
  * @param new_buffer The new input buffer.
  * @param yyscanner The scanner object.
  */
-    void slash_yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer , yyscan_t yyscanner)
+    void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	/* TODO. We should be able to replace this entire function body
 	 * with
-	 *		slash_yypop_buffer_state();
-	 *		slash_yypush_buffer_state(new_buffer);
+	 *		yypop_buffer_state();
+	 *		yypush_buffer_state(new_buffer);
      */
-	slash_yyensure_buffer_stack (yyscanner);
+	yyensure_buffer_stack (yyscanner);
 	if ( YY_CURRENT_BUFFER == new_buffer )
 		return;
 
@@ -2027,17 +2239,17 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		}
 
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
-	slash_yy_load_buffer_state(yyscanner );
+	yy_load_buffer_state( yyscanner );
 
 	/* We don't actually know whether we did this switch during
-	 * EOF (slash_yywrap()) processing, but the only time this flag
-	 * is looked at is after slash_yywrap() is called, so it's safe
+	 * EOF (yywrap()) processing, but the only time this flag
+	 * is looked at is after yywrap() is called, so it's safe
 	 * to go ahead and always set it.
 	 */
 	yyg->yy_did_buffer_switch_on_eof = 1;
 }
 
-static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
+static void yy_load_buffer_state  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	yyg->yy_n_chars = YY_CURRENT_BUFFER_LVALUE->yy_n_chars;
@@ -2052,35 +2264,35 @@ static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @return the allocated buffer state.
  */
-    YY_BUFFER_STATE slash_yy_create_buffer  (FILE * file, int  size , yyscan_t yyscanner)
+    YY_BUFFER_STATE yy_create_buffer  (FILE * file, int  size , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) slash_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state ) , yyscanner );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in slash_yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
-	b->yy_buf_size = (yy_size_t)size;
+	b->yy_buf_size = size;
 
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) slash_yyalloc(b->yy_buf_size + 2 ,yyscanner );
+	b->yy_ch_buf = (char *) yyalloc( (yy_size_t) (b->yy_buf_size + 2) , yyscanner );
 	if ( ! b->yy_ch_buf )
-		YY_FATAL_ERROR( "out of dynamic memory in slash_yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
 	b->yy_is_our_buffer = 1;
 
-	slash_yy_init_buffer(b,file ,yyscanner);
+	yy_init_buffer( b, file , yyscanner);
 
 	return b;
 }
 
 /** Destroy the buffer.
- * @param b a buffer created with slash_yy_create_buffer()
+ * @param b a buffer created with yy_create_buffer()
  * @param yyscanner The scanner object.
  */
-    void slash_yy_delete_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
+    void yy_delete_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -2091,28 +2303,28 @@ static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		slash_yyfree((void *) b->yy_ch_buf ,yyscanner );
+		yyfree( (void *) b->yy_ch_buf , yyscanner );
 
-	slash_yyfree((void *) b ,yyscanner );
+	yyfree( (void *) b , yyscanner );
 }
 
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
- * such as during a slash_yyrestart() or at EOF.
+ * such as during a yyrestart() or at EOF.
  */
-    static void slash_yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file , yyscan_t yyscanner)
+    static void yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file , yyscan_t yyscanner)
 
 {
 	int oerrno = errno;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
-	slash_yy_flush_buffer(b ,yyscanner);
+	yy_flush_buffer( b , yyscanner);
 
 	b->yy_input_file = file;
 	b->yy_fill_buffer = 1;
 
-    /* If b is the current buffer, then slash_yy_init_buffer was _probably_
-     * called from slash_yyrestart() or through yy_get_next_buffer.
+    /* If b is the current buffer, then yy_init_buffer was _probably_
+     * called from yyrestart() or through yy_get_next_buffer.
      * In that case, we don't want to reset the lineno or column.
      */
     if (b != YY_CURRENT_BUFFER){
@@ -2129,7 +2341,7 @@ static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
  * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
  * @param yyscanner The scanner object.
  */
-    void slash_yy_flush_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
+    void yy_flush_buffer (YY_BUFFER_STATE  b , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if ( ! b )
@@ -2150,7 +2362,7 @@ static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
 	if ( b == YY_CURRENT_BUFFER )
-		slash_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 }
 
 /** Pushes the new state onto the stack. The new state becomes
@@ -2159,15 +2371,15 @@ static void slash_yy_load_buffer_state  (yyscan_t yyscanner)
  *  @param new_buffer The new state.
  *  @param yyscanner The scanner object.
  */
-void slash_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
+void yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if (new_buffer == NULL)
 		return;
 
-	slash_yyensure_buffer_stack(yyscanner);
+	yyensure_buffer_stack(yyscanner);
 
-	/* This block is copied from slash_yy_switch_to_buffer. */
+	/* This block is copied from yy_switch_to_buffer. */
 	if ( YY_CURRENT_BUFFER )
 		{
 		/* Flush out information for old buffer. */
@@ -2181,8 +2393,8 @@ void slash_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
 		yyg->yy_buffer_stack_top++;
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
 
-	/* copied from slash_yy_switch_to_buffer. */
-	slash_yy_load_buffer_state(yyscanner );
+	/* copied from yy_switch_to_buffer. */
+	yy_load_buffer_state( yyscanner );
 	yyg->yy_did_buffer_switch_on_eof = 1;
 }
 
@@ -2190,19 +2402,19 @@ void slash_yypush_buffer_state (YY_BUFFER_STATE new_buffer , yyscan_t yyscanner)
  *  The next element becomes the new top.
  *  @param yyscanner The scanner object.
  */
-void slash_yypop_buffer_state (yyscan_t yyscanner)
+void yypop_buffer_state (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	if (!YY_CURRENT_BUFFER)
 		return;
 
-	slash_yy_delete_buffer(YY_CURRENT_BUFFER ,yyscanner);
+	yy_delete_buffer(YY_CURRENT_BUFFER , yyscanner);
 	YY_CURRENT_BUFFER_LVALUE = NULL;
 	if (yyg->yy_buffer_stack_top > 0)
 		--yyg->yy_buffer_stack_top;
 
 	if (YY_CURRENT_BUFFER) {
-		slash_yy_load_buffer_state(yyscanner );
+		yy_load_buffer_state( yyscanner );
 		yyg->yy_did_buffer_switch_on_eof = 1;
 	}
 }
@@ -2210,9 +2422,9 @@ void slash_yypop_buffer_state (yyscan_t yyscanner)
 /* Allocates the stack if it does not exist.
  *  Guarantees space for at least one push.
  */
-static void slash_yyensure_buffer_stack (yyscan_t yyscanner)
+static void yyensure_buffer_stack (yyscan_t yyscanner)
 {
-	int num_to_alloc;
+	yy_size_t num_to_alloc;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	if (!yyg->yy_buffer_stack) {
@@ -2222,11 +2434,11 @@ static void slash_yyensure_buffer_stack (yyscan_t yyscanner)
 		 * immediate realloc on the next call.
          */
       num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
-		yyg->yy_buffer_stack = (struct yy_buffer_state**)slash_yyalloc
+		yyg->yy_buffer_stack = (struct yy_buffer_state**)yyalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								, yyscanner);
 		if ( ! yyg->yy_buffer_stack )
-			YY_FATAL_ERROR( "out of dynamic memory in slash_yyensure_buffer_stack()" );
+			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
 
 		memset(yyg->yy_buffer_stack, 0, num_to_alloc * sizeof(struct yy_buffer_state*));
 
@@ -2241,12 +2453,12 @@ static void slash_yyensure_buffer_stack (yyscan_t yyscanner)
 		yy_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = yyg->yy_buffer_stack_max + grow_size;
-		yyg->yy_buffer_stack = (struct yy_buffer_state**)slash_yyrealloc
+		yyg->yy_buffer_stack = (struct yy_buffer_state**)yyrealloc
 								(yyg->yy_buffer_stack,
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								, yyscanner);
 		if ( ! yyg->yy_buffer_stack )
-			YY_FATAL_ERROR( "out of dynamic memory in slash_yyensure_buffer_stack()" );
+			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
 
 		/* zero only the new slots.*/
 		memset(yyg->yy_buffer_stack + yyg->yy_buffer_stack_max, 0, grow_size * sizeof(struct yy_buffer_state*));
@@ -2260,7 +2472,7 @@ static void slash_yyensure_buffer_stack (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE slash_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
     
@@ -2270,11 +2482,11 @@ YY_BUFFER_STATE slash_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t y
 		/* They forgot to leave room for the EOB's. */
 		return NULL;
 
-	b = (YY_BUFFER_STATE) slash_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state ) , yyscanner );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in slash_yy_scan_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_buffer()" );
 
-	b->yy_buf_size = size - 2;	/* "- 2" to take care of EOB's */
+	b->yy_buf_size = (int) (size - 2);	/* "- 2" to take care of EOB's */
 	b->yy_buf_pos = b->yy_ch_buf = base;
 	b->yy_is_our_buffer = 0;
 	b->yy_input_file = NULL;
@@ -2284,33 +2496,33 @@ YY_BUFFER_STATE slash_yy_scan_buffer  (char * base, yy_size_t  size , yyscan_t y
 	b->yy_fill_buffer = 0;
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
-	slash_yy_switch_to_buffer(b ,yyscanner );
+	yy_switch_to_buffer( b , yyscanner );
 
 	return b;
 }
 
-/** Setup the input buffer state to scan a string. The next call to slash_yylex() will
+/** Setup the input buffer state to scan a string. The next call to yylex() will
  * scan from a @e copy of @a str.
  * @param yystr a NUL-terminated string to scan
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  * @note If you want to scan bytes that may contain NUL values, then use
- *       slash_yy_scan_bytes() instead.
+ *       yy_scan_bytes() instead.
  */
-YY_BUFFER_STATE slash_yy_scan_string (yyconst char * yystr , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_string (const char * yystr , yyscan_t yyscanner)
 {
     
-	return slash_yy_scan_bytes(yystr,(int) strlen(yystr) ,yyscanner);
+	return yy_scan_bytes( yystr, (int) strlen(yystr) , yyscanner);
 }
 
-/** Setup the input buffer state to scan the given bytes. The next call to slash_yylex() will
+/** Setup the input buffer state to scan the given bytes. The next call to yylex() will
  * scan from a @e copy of @a bytes.
  * @param yybytes the byte buffer to scan
  * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
  * @param yyscanner The scanner object.
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE slash_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len , yyscan_t yyscanner)
+YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len , yyscan_t yyscanner)
 {
 	YY_BUFFER_STATE b;
 	char *buf;
@@ -2319,18 +2531,18 @@ YY_BUFFER_STATE slash_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len 
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = (yy_size_t) (_yybytes_len + 2);
-	buf = (char *) slash_yyalloc(n ,yyscanner );
+	buf = (char *) yyalloc( n , yyscanner );
 	if ( ! buf )
-		YY_FATAL_ERROR( "out of dynamic memory in slash_yy_scan_bytes()" );
+		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_bytes()" );
 
 	for ( i = 0; i < _yybytes_len; ++i )
 		buf[i] = yybytes[i];
 
 	buf[_yybytes_len] = buf[_yybytes_len+1] = YY_END_OF_BUFFER_CHAR;
 
-	b = slash_yy_scan_buffer(buf,n ,yyscanner);
+	b = yy_scan_buffer( buf, n , yyscanner);
 	if ( ! b )
-		YY_FATAL_ERROR( "bad buffer in slash_yy_scan_bytes()" );
+		YY_FATAL_ERROR( "bad buffer in yy_scan_bytes()" );
 
 	/* It's okay to grow etc. this buffer, and we should throw it
 	 * away when we're done.
@@ -2344,11 +2556,11 @@ YY_BUFFER_STATE slash_yy_scan_bytes  (yyconst char * yybytes, int  _yybytes_len 
 #define YY_EXIT_FAILURE 2
 #endif
 
-static void yynoreturn yy_fatal_error (yyconst char* msg , yyscan_t yyscanner)
+static void yynoreturn yy_fatal_error (const char* msg , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
-	(void) fprintf( stderr, "%s\n", msg );
+	fprintf( stderr, "%s\n", msg );
 	exit( YY_EXIT_FAILURE );
 }
 
@@ -2374,7 +2586,7 @@ static void yynoreturn yy_fatal_error (yyconst char* msg , yyscan_t yyscanner)
 /** Get the user-defined data for this scanner.
  * @param yyscanner The scanner object.
  */
-YY_EXTRA_TYPE slash_yyget_extra  (yyscan_t yyscanner)
+YY_EXTRA_TYPE yyget_extra  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyextra;
@@ -2383,7 +2595,7 @@ YY_EXTRA_TYPE slash_yyget_extra  (yyscan_t yyscanner)
 /** Get the current line number.
  * @param yyscanner The scanner object.
  */
-int slash_yyget_lineno  (yyscan_t yyscanner)
+int yyget_lineno  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -2396,7 +2608,7 @@ int slash_yyget_lineno  (yyscan_t yyscanner)
 /** Get the current column number.
  * @param yyscanner The scanner object.
  */
-int slash_yyget_column  (yyscan_t yyscanner)
+int yyget_column  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
@@ -2409,7 +2621,7 @@ int slash_yyget_column  (yyscan_t yyscanner)
 /** Get the input stream.
  * @param yyscanner The scanner object.
  */
-FILE *slash_yyget_in  (yyscan_t yyscanner)
+FILE *yyget_in  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyin;
@@ -2418,7 +2630,7 @@ FILE *slash_yyget_in  (yyscan_t yyscanner)
 /** Get the output stream.
  * @param yyscanner The scanner object.
  */
-FILE *slash_yyget_out  (yyscan_t yyscanner)
+FILE *yyget_out  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyout;
@@ -2427,7 +2639,7 @@ FILE *slash_yyget_out  (yyscan_t yyscanner)
 /** Get the length of the current token.
  * @param yyscanner The scanner object.
  */
-int slash_yyget_leng  (yyscan_t yyscanner)
+int yyget_leng  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyleng;
@@ -2437,7 +2649,7 @@ int slash_yyget_leng  (yyscan_t yyscanner)
  * @param yyscanner The scanner object.
  */
 
-char *slash_yyget_text  (yyscan_t yyscanner)
+char *yyget_text  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yytext;
@@ -2447,7 +2659,7 @@ char *slash_yyget_text  (yyscan_t yyscanner)
  * @param user_defined The data to be associated with this scanner.
  * @param yyscanner The scanner object.
  */
-void slash_yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
+void yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyextra = user_defined ;
@@ -2457,13 +2669,13 @@ void slash_yyset_extra (YY_EXTRA_TYPE  user_defined , yyscan_t yyscanner)
  * @param _line_number line number
  * @param yyscanner The scanner object.
  */
-void slash_yyset_lineno (int  _line_number , yyscan_t yyscanner)
+void yyset_lineno (int  _line_number , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
         /* lineno is only valid if an input buffer exists. */
         if (! YY_CURRENT_BUFFER )
-           YY_FATAL_ERROR( "slash_yyset_lineno called with no buffer" );
+           YY_FATAL_ERROR( "yyset_lineno called with no buffer" );
     
     yylineno = _line_number;
 }
@@ -2472,13 +2684,13 @@ void slash_yyset_lineno (int  _line_number , yyscan_t yyscanner)
  * @param _column_no column number
  * @param yyscanner The scanner object.
  */
-void slash_yyset_column (int  _column_no , yyscan_t yyscanner)
+void yyset_column (int  _column_no , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
         /* column is only valid if an input buffer exists. */
         if (! YY_CURRENT_BUFFER )
-           YY_FATAL_ERROR( "slash_yyset_column called with no buffer" );
+           YY_FATAL_ERROR( "yyset_column called with no buffer" );
     
     yycolumn = _column_no;
 }
@@ -2487,27 +2699,27 @@ void slash_yyset_column (int  _column_no , yyscan_t yyscanner)
  * input buffer.
  * @param _in_str A readable stream.
  * @param yyscanner The scanner object.
- * @see slash_yy_switch_to_buffer
+ * @see yy_switch_to_buffer
  */
-void slash_yyset_in (FILE *  _in_str , yyscan_t yyscanner)
+void yyset_in (FILE *  _in_str , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyin = _in_str ;
 }
 
-void slash_yyset_out (FILE *  _out_str , yyscan_t yyscanner)
+void yyset_out (FILE *  _out_str , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yyout = _out_str ;
 }
 
-int slash_yyget_debug  (yyscan_t yyscanner)
+int yyget_debug  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yy_flex_debug;
 }
 
-void slash_yyset_debug (int  _bdebug , yyscan_t yyscanner)
+void yyset_debug (int  _bdebug , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yy_flex_debug = _bdebug ;
@@ -2515,13 +2727,13 @@ void slash_yyset_debug (int  _bdebug , yyscan_t yyscanner)
 
 /* Accessor methods for yylval and yylloc */
 
-YYSTYPE * slash_yyget_lval  (yyscan_t yyscanner)
+YYSTYPE * yyget_lval  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yylval;
 }
 
-void slash_yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
+void yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     yylval = yylval_param;
@@ -2529,20 +2741,18 @@ void slash_yyset_lval (YYSTYPE *  yylval_param , yyscan_t yyscanner)
 
 /* User-visible API */
 
-/* slash_yylex_init is special because it creates the scanner itself, so it is
+/* yylex_init is special because it creates the scanner itself, so it is
  * the ONLY reentrant function that doesn't take the scanner as the last argument.
  * That's why we explicitly handle the declaration, instead of using our macros.
  */
-
-int slash_yylex_init(yyscan_t* ptr_yy_globals)
-
+int yylex_init(yyscan_t* ptr_yy_globals)
 {
     if (ptr_yy_globals == NULL){
         errno = EINVAL;
         return 1;
     }
 
-    *ptr_yy_globals = (yyscan_t) slash_yyalloc ( sizeof( struct yyguts_t ), NULL );
+    *ptr_yy_globals = (yyscan_t) yyalloc ( sizeof( struct yyguts_t ), NULL );
 
     if (*ptr_yy_globals == NULL){
         errno = ENOMEM;
@@ -2555,27 +2765,25 @@ int slash_yylex_init(yyscan_t* ptr_yy_globals)
     return yy_init_globals ( *ptr_yy_globals );
 }
 
-/* slash_yylex_init_extra has the same functionality as slash_yylex_init, but follows the
+/* yylex_init_extra has the same functionality as yylex_init, but follows the
  * convention of taking the scanner as the last argument. Note however, that
  * this is a *pointer* to a scanner, as it will be allocated by this call (and
  * is the reason, too, why this function also must handle its own declaration).
- * The user defined value in the first argument will be available to slash_yyalloc in
+ * The user defined value in the first argument will be available to yyalloc in
  * the yyextra field.
  */
-
-int slash_yylex_init_extra(YY_EXTRA_TYPE yy_user_defined,yyscan_t* ptr_yy_globals )
-
+int yylex_init_extra( YY_EXTRA_TYPE yy_user_defined, yyscan_t* ptr_yy_globals )
 {
     struct yyguts_t dummy_yyguts;
 
-    slash_yyset_extra (yy_user_defined, &dummy_yyguts);
+    yyset_extra (yy_user_defined, &dummy_yyguts);
 
     if (ptr_yy_globals == NULL){
         errno = EINVAL;
         return 1;
     }
 
-    *ptr_yy_globals = (yyscan_t) slash_yyalloc ( sizeof( struct yyguts_t ), &dummy_yyguts );
+    *ptr_yy_globals = (yyscan_t) yyalloc ( sizeof( struct yyguts_t ), &dummy_yyguts );
 
     if (*ptr_yy_globals == NULL){
         errno = ENOMEM;
@@ -2586,7 +2794,7 @@ int slash_yylex_init_extra(YY_EXTRA_TYPE yy_user_defined,yyscan_t* ptr_yy_global
     yy_init_globals. Leave at 0x00 for releases. */
     memset(*ptr_yy_globals,0x00,sizeof(struct yyguts_t));
 
-    slash_yyset_extra (yy_user_defined, *ptr_yy_globals);
+    yyset_extra (yy_user_defined, *ptr_yy_globals);
 
     return yy_init_globals ( *ptr_yy_globals );
 }
@@ -2595,7 +2803,7 @@ static int yy_init_globals (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     /* Initialization is the same as for the non-reentrant scanner.
-     * This function is called from slash_yylex_destroy(), so don't allocate here.
+     * This function is called from yylex_destroy(), so don't allocate here.
      */
 
     yyg->yy_buffer_stack = NULL;
@@ -2619,37 +2827,37 @@ static int yy_init_globals (yyscan_t yyscanner)
 #endif
 
     /* For future reference: Set errno on error, since we are called by
-     * slash_yylex_init()
+     * yylex_init()
      */
     return 0;
 }
 
-/* slash_yylex_destroy is for both reentrant and non-reentrant scanners. */
-int slash_yylex_destroy  (yyscan_t yyscanner)
+/* yylex_destroy is for both reentrant and non-reentrant scanners. */
+int yylex_destroy  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
     /* Pop the buffer stack, destroying each element. */
 	while(YY_CURRENT_BUFFER){
-		slash_yy_delete_buffer(YY_CURRENT_BUFFER ,yyscanner );
+		yy_delete_buffer( YY_CURRENT_BUFFER , yyscanner );
 		YY_CURRENT_BUFFER_LVALUE = NULL;
-		slash_yypop_buffer_state(yyscanner);
+		yypop_buffer_state(yyscanner);
 	}
 
 	/* Destroy the stack itself. */
-	slash_yyfree(yyg->yy_buffer_stack ,yyscanner);
+	yyfree(yyg->yy_buffer_stack , yyscanner);
 	yyg->yy_buffer_stack = NULL;
 
     /* Destroy the start condition stack. */
-        slash_yyfree(yyg->yy_start_stack ,yyscanner );
+        yyfree( yyg->yy_start_stack , yyscanner );
         yyg->yy_start_stack = NULL;
 
     /* Reset the globals. This is important in a non-reentrant scanner so the next time
-     * slash_yylex() is called, initialization will occur. */
+     * yylex() is called, initialization will occur. */
     yy_init_globals( yyscanner);
 
     /* Destroy the main struct (reentrant only). */
-    slash_yyfree ( yyscanner , yyscanner );
+    yyfree ( yyscanner , yyscanner );
     yyscanner = NULL;
     return 0;
 }
@@ -2659,7 +2867,7 @@ int slash_yylex_destroy  (yyscan_t yyscanner)
  */
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char* s1, yyconst char * s2, int n , yyscan_t yyscanner)
+static void yy_flex_strncpy (char* s1, const char * s2, int n , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
@@ -2671,7 +2879,7 @@ static void yy_flex_strncpy (char* s1, yyconst char * s2, int n , yyscan_t yysca
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (yyconst char * s , yyscan_t yyscanner)
+static int yy_flex_strlen (const char * s , yyscan_t yyscanner)
 {
 	int n;
 	for ( n = 0; s[n]; ++n )
@@ -2681,14 +2889,14 @@ static int yy_flex_strlen (yyconst char * s , yyscan_t yyscanner)
 }
 #endif
 
-void *slash_yyalloc (yy_size_t  size , yyscan_t yyscanner)
+void *yyalloc (yy_size_t  size , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
 	return malloc(size);
 }
 
-void *slash_yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
+void *yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
@@ -2703,17 +2911,16 @@ void *slash_yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner)
 	return realloc(ptr, size);
 }
 
-void slash_yyfree (void * ptr , yyscan_t yyscanner)
+void yyfree (void * ptr , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
-	free( (char *) ptr );	/* see slash_yyrealloc() for (char *) cast */
+	free( (char *) ptr );	/* see yyrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "yytables"
 
-#line 421 "psqlscanslash.l"
-
+#line 422 "psqlscanslash.l"
 
 
 /*
@@ -2740,9 +2947,9 @@ psql_scan_slash_command(PsqlScanState state)
 
 	/* Set input source */
 	if (state->buffer_stack != NULL)
-		slash_yy_switch_to_buffer(state->buffer_stack->buf,state->scanner);
+		yy_switch_to_buffer(state->buffer_stack->buf, state->scanner);
 	else
-		slash_yy_switch_to_buffer(state->scanbufhandle,state->scanner);
+		yy_switch_to_buffer(state->scanbufhandle, state->scanner);
 
 	/*
 	 * Set lexer start state.  Note that this is sufficient to switch
@@ -2751,7 +2958,7 @@ psql_scan_slash_command(PsqlScanState state)
 	state->start_state = xslashcmd;
 
 	/* And lex. */
-	slash_yylex(NULL,state->scanner);
+	yylex(NULL, state->scanner);
 
 	/* There are no possible errors in this lex state... */
 
@@ -2804,7 +3011,7 @@ psql_scan_slash_option(PsqlScanState state,
 	/* Build a local buffer that we'll return the data of */
 	initPQExpBuffer(&mybuf);
 
-	/* Set up static variables that will be used by slash_yylex */
+	/* Set up static variables that will be used by yylex */
 	option_type = type;
 	option_quote = quote;
 	unquoted_option_chars = 0;
@@ -2814,9 +3021,9 @@ psql_scan_slash_option(PsqlScanState state,
 
 	/* Set input source */
 	if (state->buffer_stack != NULL)
-		slash_yy_switch_to_buffer(state->buffer_stack->buf,state->scanner);
+		yy_switch_to_buffer(state->buffer_stack->buf, state->scanner);
 	else
-		slash_yy_switch_to_buffer(state->scanbufhandle,state->scanner);
+		yy_switch_to_buffer(state->scanbufhandle, state->scanner);
 
 	/* Set lexer start state */
 	if (type == OT_WHOLE_LINE)
@@ -2825,7 +3032,7 @@ psql_scan_slash_option(PsqlScanState state,
 		state->start_state = xslashargstart;
 
 	/* And lex. */
-	lexresult = slash_yylex(NULL,state->scanner);
+	lexresult = yylex(NULL, state->scanner);
 
 	/* Save final state for a moment... */
 	final_state = state->start_state;
@@ -2917,15 +3124,15 @@ psql_scan_slash_command_end(PsqlScanState state)
 
 	/* Set input source */
 	if (state->buffer_stack != NULL)
-		slash_yy_switch_to_buffer(state->buffer_stack->buf,state->scanner);
+		yy_switch_to_buffer(state->buffer_stack->buf, state->scanner);
 	else
-		slash_yy_switch_to_buffer(state->scanbufhandle,state->scanner);
+		yy_switch_to_buffer(state->scanbufhandle, state->scanner);
 
 	/* Set lexer start state */
 	state->start_state = xslashend;
 
 	/* And lex. */
-	slash_yylex(NULL,state->scanner);
+	yylex(NULL, state->scanner);
 
 	/* There are no possible errors in this lex state... */
 

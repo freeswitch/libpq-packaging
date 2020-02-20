@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Types"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -329,53 +329,54 @@ NAME="RANGETYPES-INFINITE"
 >8.17.4. Infinite (Unbounded) Ranges</A
 ></H2
 ><P
->   The lower bound of a range can be omitted, meaning that all points less
-   than the upper bound are included in the range. Likewise, if the upper
-   bound of the range is omitted, then all points greater than the lower bound
-   are included in the range. If both lower and upper bounds are omitted, all
-   values of the element type are considered to be in the range.
+>   The lower bound of a range can be omitted, meaning that all
+   values less than the upper bound are included in the range, e.g.,
+   <TT
+CLASS="LITERAL"
+>(,3]</TT
+>. Likewise, if the upper bound of the range
+   is omitted, then all values greater than the lower bound are included
+   in the range. If both lower and upper bounds are omitted, all values
+   of the element type are considered to be in the range.  Specifying a
+   missing bound as inclusive is automatically converted to exclusive,
+   e.g., <TT
+CLASS="LITERAL"
+>[,]</TT
+> is converted to <TT
+CLASS="LITERAL"
+>(,)</TT
+>.
+   You can think of these missing values as +/-infinity, but they are
+   special range type values and are considered to be beyond any range
+   element type's +/-infinity values.
   </P
 ><P
->   This is equivalent to considering that the lower bound is <SPAN
-CLASS="QUOTE"
->"minus
-   infinity"</SPAN
->, or the upper bound is <SPAN
-CLASS="QUOTE"
->"plus infinity"</SPAN
->,
-   respectively.  But note that these infinite values are never values of
-   the range's element type, and can never be part of the range.  (So there
-   is no such thing as an inclusive infinite bound &mdash; if you try to
-   write one, it will automatically be converted to an exclusive bound.)
-  </P
-><P
->   Also, some element types have a notion of <SPAN
+>   Element types that have the notion of <SPAN
 CLASS="QUOTE"
 >"infinity"</SPAN
->, but that
-   is just another value so far as the range type mechanisms are concerned.
-   For example, in timestamp ranges, <TT
-CLASS="LITERAL"
->[today,]</TT
-> means the same
-   thing as <TT
-CLASS="LITERAL"
->[today,)</TT
->.  But <TT
-CLASS="LITERAL"
->[today,infinity]</TT
-> means
-   something different from <TT
+> can
+   use them as explicit bound values.  For example, with timestamp
+   ranges, <TT
 CLASS="LITERAL"
 >[today,infinity)</TT
-> &mdash; the latter
-   excludes the special <TT
+> excludes the special
+   <TT
 CLASS="TYPE"
 >timestamp</TT
 > value <TT
 CLASS="LITERAL"
 >infinity</TT
+>,
+   while <TT
+CLASS="LITERAL"
+>[today,infinity]</TT
+> include it, as does
+   <TT
+CLASS="LITERAL"
+>[today,)</TT
+> and <TT
+CLASS="LITERAL"
+>[today,]</TT
 >.
   </P
 ><P

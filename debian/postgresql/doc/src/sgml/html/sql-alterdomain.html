@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.16 Documentation"
+TITLE="PostgreSQL 9.6.17 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2019-11-11T22:22:08"></HEAD
+CONTENT="2020-02-10T22:33:37"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.16 Documentation</A
+>PostgreSQL 9.6.17 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-ALTERDOMAIN"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN73098"
+NAME="AEN73132"
 ></A
 ><H2
 >Name</H2
@@ -104,7 +104,7 @@ NAME="AEN73098"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN73101"
+NAME="AEN73135"
 ></A
 ><H2
 >Synopsis</H2
@@ -222,7 +222,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN73121"
+NAME="AEN73155"
 ></A
 ><H2
 >Description</H2
@@ -328,8 +328,8 @@ CLASS="LITERAL"
       <TT
 CLASS="LITERAL"
 >NOT VALID</TT
->, that is, verify that all data in columns using the
-      domain satisfy the specified constraint.
+>, that is, it verifies that all values in
+      table columns of the domain type satisfy the specified constraint.
      </P
 ></DD
 ><DT
@@ -382,7 +382,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN73178"
+NAME="AEN73212"
 ></A
 ><H2
 >Parameters</H2
@@ -438,7 +438,7 @@ CLASS="REPLACEABLE"
 ></DT
 ><DD
 ><P
->        Do not verify existing column data for constraint validity.
+>        Do not verify existing stored data for constraint validity.
        </P
 ></DD
 ><DT
@@ -523,10 +523,36 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN73233"
+NAME="AEN73267"
 ></A
 ><H2
 >Notes</H2
+><P
+>   Although <TT
+CLASS="COMMAND"
+>ALTER DOMAIN ADD CONSTRAINT</TT
+> attempts to verify
+   that existing stored data satisfies the new constraint, this check is not
+   bulletproof, because the command cannot <SPAN
+CLASS="QUOTE"
+>"see"</SPAN
+> table rows that
+   are newly inserted or updated and not yet committed.  If there is a hazard
+   that concurrent operations might insert bad data, the way to proceed is to
+   add the constraint using the <TT
+CLASS="LITERAL"
+>NOT VALID</TT
+> option, commit
+   that command, wait until all transactions started before that commit have
+   finished, and then issue <TT
+CLASS="COMMAND"
+>ALTER DOMAIN VALIDATE
+   CONSTRAINT</TT
+> to search for data violating the constraint.  This
+   method is reliable because once the constraint is committed, all new
+   transactions are guaranteed to enforce it against new values of the domain
+   type.
+  </P
 ><P
 >   Currently, <TT
 CLASS="COMMAND"
@@ -548,7 +574,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN73239"
+NAME="AEN73278"
 ></A
 ><H2
 >Examples</H2

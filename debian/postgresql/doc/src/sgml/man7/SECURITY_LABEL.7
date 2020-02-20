@@ -2,12 +2,12 @@
 .\"     Title: SECURITY LABEL
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2019
-.\"    Manual: PostgreSQL 9.6.16 Documentation
-.\"    Source: PostgreSQL 9.6.16
+.\"      Date: 2020
+.\"    Manual: PostgreSQL 9.6.17 Documentation
+.\"    Source: PostgreSQL 9.6.17
 .\"  Language: English
 .\"
-.TH "SECURITY LABEL" "7" "2019" "PostgreSQL 9.6.16" "PostgreSQL 9.6.16 Documentation"
+.TH "SECURITY LABEL" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -85,7 +85,7 @@ is not an SQL function; it can only be called from C code loaded into the backen
 The label provider determines whether a given label is valid and whether it is permissible to assign that label to a given object\&. The meaning of a given label is likewise at the discretion of the label provider\&.
 PostgreSQL
 places no restrictions on whether or how a label provider must interpret security labels; it merely provides a mechanism for storing them\&. In practice, this facility is intended to allow integration with label\-based mandatory access control (MAC) systems such as
-SE\-Linux\&. Such systems make all access control decisions based on object labels, rather than traditional discretionary access control (DAC) concepts such as users and groups\&.
+SELinux\&. Such systems make all access control decisions based on object labels, rather than traditional discretionary access control (DAC) concepts such as users and groups\&.
 .SH "PARAMETERS"
 .PP
 \fIobject_name\fR
