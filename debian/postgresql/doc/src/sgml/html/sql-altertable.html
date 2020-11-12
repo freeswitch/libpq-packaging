@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-ALTERTABLE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN75765"
+NAME="AEN75786"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN75765"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN75768"
+NAME="AEN75789"
 ></A
 ><H2
 >Synopsis</H2
@@ -428,12 +428,12 @@ CLASS="REPLACEABLE"
 ><I
 >storage_parameter</I
 ></TT
-> = <TT
+> [= <TT
 CLASS="REPLACEABLE"
 ><I
 >value</I
 ></TT
-> [, ... ] )
+>] [, ... ] )
     RESET ( <TT
 CLASS="REPLACEABLE"
 ><I
@@ -502,7 +502,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN75835"
+NAME="AEN75856"
 ></A
 ><H2
 >Description</H2
@@ -515,9 +515,9 @@ CLASS="COMMAND"
    may differ for each subform. An <TT
 CLASS="LITERAL"
 >ACCESS EXCLUSIVE</TT
-> lock is held
-   unless explicitly noted. When multiple subcommands are listed, the lock
-   held will be the strictest one required from any subcommand.
+> lock is
+   acquired unless explicitly noted. When multiple subcommands are given, the
+   lock acquired will be the strictest one required by any subcommand.
 
   <P
 ></P
@@ -838,8 +838,8 @@ CLASS="REPLACEABLE"
 ></DT
 ><DD
 ><P
->      This form adds a new constraint to a table using the same syntax as
-      <A
+>      This form adds a new constraint to a table using the same constraint
+      syntax as <A
 HREF="sql-createtable.html"
 >CREATE TABLE</A
 >, plus the option <TT
@@ -877,6 +877,39 @@ HREF="sql-altertable.html#SQL-ALTERTABLE-NOTES"
 CLASS="LITERAL"
 >NOT VALID</TT
 > option.
+     </P
+><P
+>      Although most forms of <TT
+CLASS="LITERAL"
+>ADD
+      <TT
+CLASS="REPLACEABLE"
+><I
+>table_constraint</I
+></TT
+></TT
+>
+      require an <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+> lock, <TT
+CLASS="LITERAL"
+>ADD
+      FOREIGN KEY</TT
+> requires only a <TT
+CLASS="LITERAL"
+>SHARE ROW
+      EXCLUSIVE</TT
+> lock.  Note that <TT
+CLASS="LITERAL"
+>ADD FOREIGN KEY</TT
+>
+      also acquires a <TT
+CLASS="LITERAL"
+>SHARE ROW EXCLUSIVE</TT
+> lock on the
+      referenced table, in addition to the lock on the table on which the
+      constraint is declared.
      </P
 ></DD
 ><DT
@@ -1314,12 +1347,12 @@ CLASS="REPLACEABLE"
 ><I
 >storage_parameter</I
 ></TT
-> = <TT
+> [= <TT
 CLASS="REPLACEABLE"
 ><I
 >value</I
 ></TT
-> [, ... ] )</TT
+>] [, ... ] )</TT
 ></DT
 ><DD
 ><P
@@ -1656,7 +1689,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN76173"
+NAME="AEN76202"
 ></A
 ><H2
 >Parameters</H2
@@ -2211,7 +2244,7 @@ HREF="ddl.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN76344"
+NAME="AEN76373"
 ></A
 ><H2
 >Examples</H2
@@ -2391,7 +2424,7 @@ ALTER TABLE distributors DROP CONSTRAINT distributors_pkey,
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN76390"
+NAME="AEN76419"
 ></A
 ><H2
 >Compatibility</H2
@@ -2440,7 +2473,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN76403"
+NAME="AEN76432"
 ></A
 ><H2
 >See Also</H2

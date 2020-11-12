@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Concurrency Control"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -612,7 +612,7 @@ CLASS="OPTION"
 ></BLOCKQUOTE
 ></DIV
 ><P
->    Once acquired, a lock is normally held till end of transaction.  But if a
+>    Once acquired, a lock is normally held until the end of the transaction.  But if a
     lock is acquired after establishing a savepoint, the lock is released
     immediately if the savepoint is rolled back to.  This is consistent with
     the principle that <TT
@@ -928,7 +928,10 @@ CLASS="emphasis"
 CLASS="EMPHASIS"
 >writers and lockers</I
 ></SPAN
-> to the same row.
+> to the same
+     row.  Row-level locks are released at transaction end or during
+     savepoint rollback, just like table-level locks.
+
     </P
 ><P
 ></P

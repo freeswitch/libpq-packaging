@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "ALTER TABLE" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "ALTER TABLE" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -80,7 +80,7 @@ where \fIaction\fR is one of:
     SET WITHOUT OIDS
     SET TABLESPACE \fInew_tablespace\fR
     SET { LOGGED | UNLOGGED }
-    SET ( \fIstorage_parameter\fR = \fIvalue\fR [, \&.\&.\&. ] )
+    SET ( \fIstorage_parameter\fR [= \fIvalue\fR] [, \&.\&.\&. ] )
     RESET ( \fIstorage_parameter\fR [, \&.\&.\&. ] )
     INHERIT \fIparent_table\fR
     NO INHERIT \fIparent_table\fR
@@ -100,7 +100,7 @@ and \fItable_constraint_using_index\fR is:
 \fBALTER TABLE\fR
 changes the definition of an existing table\&. There are several subforms described below\&. Note that the lock level required may differ for each subform\&. An
 ACCESS EXCLUSIVE
-lock is held unless explicitly noted\&. When multiple subcommands are listed, the lock held will be the strictest one required from any subcommand\&.
+lock is acquired unless explicitly noted\&. When multiple subcommands are given, the lock acquired will be the strictest one required by any subcommand\&.
 .PP
 ADD COLUMN [ IF NOT EXISTS ]
 .RS 4
@@ -220,7 +220,7 @@ for more information\&.
 .PP
 ADD \fItable_constraint\fR [ NOT VALID ]
 .RS 4
-This form adds a new constraint to a table using the same syntax as
+This form adds a new constraint to a table using the same constraint syntax as
 CREATE TABLE (\fBCREATE_TABLE\fR(7)), plus the option
 NOT VALID, which is currently only allowed for foreign key and CHECK constraints\&.
 .sp
@@ -233,6 +233,20 @@ NOTES
 below for more information about using the
 NOT VALID
 option\&.
+.sp
+Although most forms of
+ADD \fItable_constraint\fR
+require an
+ACCESS EXCLUSIVE
+lock,
+ADD FOREIGN KEY
+requires only a
+SHARE ROW EXCLUSIVE
+lock\&. Note that
+ADD FOREIGN KEY
+also acquires a
+SHARE ROW EXCLUSIVE
+lock on the referenced table, in addition to the lock on the table on which the constraint is declared\&.
 .RE
 .PP
 ADD \fItable_constraint_using_index\fR
@@ -410,7 +424,7 @@ This form changes the table from unlogged to logged or vice\-versa (see
 UNLOGGED)\&. It cannot be applied to a temporary table\&.
 .RE
 .PP
-SET ( \fIstorage_parameter\fR = \fIvalue\fR [, \&.\&.\&. ] )
+SET ( \fIstorage_parameter\fR [= \fIvalue\fR] [, \&.\&.\&. ] )
 .RS 4
 This form changes one or more storage parameters for the table\&. See
 Storage Parameters

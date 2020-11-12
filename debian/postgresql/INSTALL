@@ -1181,25 +1181,6 @@ bs/pgsql748/lib/plperl.so": Bad address
    memory for another process. Like many other parts of AIX, the paging
    space allocation method and out-of-memory kill is configurable on a
    system- or process-wide basis if this becomes a problem.
-
-References and Resources
-
-   "Large Program Support", AIX Documentation: General Programming
-   Concepts: Writing and Debugging Programs.
-
-   "Program Address Space Overview", AIX Documentation: General
-   Programming Concepts: Writing and Debugging Programs.
-
-   "Performance Overview of the Virtual Memory Manager (VMM)", AIX
-   Documentation: Performance Management Guide.
-
-   "Page Space Allocation", AIX Documentation: Performance Management
-   Guide.
-
-   "Paging-space thresholds tuning", AIX Documentation: Performance
-   Management Guide.
-
-   Developing and Porting C and C++ Applications on AIX, IBM Redbook.
      __________________________________________________________________
 
 Cygwin

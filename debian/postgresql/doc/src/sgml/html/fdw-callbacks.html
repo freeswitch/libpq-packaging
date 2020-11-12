@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Writing A Foreign Data Wrapper"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -171,6 +171,29 @@ CLASS="LITERAL"
 >baserel-&gt;width</TT
 > if it can compute a better estimate
      of the average result row width.
+     (The initial value is based on column data types and on column
+     average-width values measured by the last <TT
+CLASS="COMMAND"
+>ANALYZE</TT
+>.)
+     Also, this function may update <TT
+CLASS="LITERAL"
+>baserel-&gt;tuples</TT
+> if
+     it can compute a better estimate of the foreign table's total row count.
+     (The initial value is
+     from <TT
+CLASS="STRUCTNAME"
+>pg_class</TT
+>.<TT
+CLASS="STRUCTFIELD"
+>reltuples</TT
+>
+     which represents the total row count seen by the
+     last <TT
+CLASS="COMMAND"
+>ANALYZE</TT
+>.)
     </P
 ><P
 >     See <A

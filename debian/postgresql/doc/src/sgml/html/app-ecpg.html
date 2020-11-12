@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN95034"
+NAME="AEN95088"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN95038"
+NAME="AEN95092"
 ></A
 ><H2
 >Synopsis</H2
@@ -151,21 +151,36 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >ecpg</TT
 > will convert each input file given on the
-   command line to the corresponding C output file.  Input files
-   preferably have the extension <TT
+   command line to the corresponding C output file.  If an input file
+   name does not have any extension, <TT
 CLASS="FILENAME"
 >.pgc</TT
->.
-   The extension will be replaced by <TT
+> is
+   assumed.  The file's extension will be replaced
+   by <TT
 CLASS="FILENAME"
 >.c</TT
-> to
-   determine the output file name.
-   The output file name can also be overridden using the
+> to construct the output file name.
+   But the output file name can be overridden using the
    <TT
 CLASS="OPTION"
 >-o</TT
 > option.
+  </P
+><P
+>   If an input file name is just <TT
+CLASS="LITERAL"
+>-</TT
+>,
+   <TT
+CLASS="COMMAND"
+>ecpg</TT
+> reads the program from standard input
+   (and writes to standard output, unless that is overridden
+   with <TT
+CLASS="OPTION"
+>-o</TT
+>).
   </P
 ><P
 >   This reference page does not describe the embedded SQL language.
@@ -178,7 +193,7 @@ HREF="ecpg.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN95056"
+NAME="AEN95114"
 ></A
 ><H2
 >Options</H2
@@ -254,6 +269,35 @@ CLASS="REPLACEABLE"
 ><DT
 ><TT
 CLASS="OPTION"
+>-h</TT
+></DT
+><DD
+><P
+>       Process header files.  When this option is specified, the output file
+       extension becomes <TT
+CLASS="LITERAL"
+>.h</TT
+> not <TT
+CLASS="LITERAL"
+>.c</TT
+>,
+       and the default input file extension is <TT
+CLASS="LITERAL"
+>.pgh</TT
+>
+       not <TT
+CLASS="LITERAL"
+>.pgc</TT
+>.  Also, the <TT
+CLASS="OPTION"
+>-c</TT
+> option is
+       forced on.
+      </P
+></DD
+><DT
+><TT
+CLASS="OPTION"
 >-i</TT
 ></DT
 ><DD
@@ -323,6 +367,10 @@ CLASS="REPLACEABLE"
 >filename</I
 ></TT
 >.
+       Write <TT
+CLASS="LITERAL"
+>-o -</TT
+> to send all output to standard output.
       </P
 ></DD
 ><DT
@@ -452,7 +500,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN95155"
+NAME="AEN95224"
 ></A
 ><H2
 >Notes</H2
@@ -497,7 +545,7 @@ HREF="app-pgconfig.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN95167"
+NAME="AEN95236"
 ></A
 ><H2
 >Examples</H2

@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "GRANT" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "GRANT" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -90,14 +90,16 @@ GRANT { USAGE | ALL [ PRIVILEGES ] }
     ON TYPE \fItype_name\fR [, \&.\&.\&.]
     TO \fIrole_specification\fR [, \&.\&.\&.] [ WITH GRANT OPTION ]
 
+GRANT \fIrole_name\fR [, \&.\&.\&.] TO \fIrole_specification\fR [, \&.\&.\&.]
+    [ WITH ADMIN OPTION ]
+    [ GRANTED BY \fIrole_specification\fR ]
+
 where \fIrole_specification\fR can be:
 
     [ GROUP ] \fIrole_name\fR
   | PUBLIC
   | CURRENT_USER
   | SESSION_USER
-
-GRANT \fIrole_name\fR [, \&.\&.\&.] TO \fIrole_name\fR [, \&.\&.\&.] [ WITH ADMIN OPTION ]
 .fi
 .SH "DESCRIPTION"
 .PP
@@ -303,9 +305,15 @@ on itself, but it may grant or revoke membership in itself from a database sessi
 CREATEROLE
 privilege can grant or revoke membership in any role that is not a superuser\&.
 .PP
+If
+GRANTED BY
+is specified, the grant is recorded as having been done by the specified role\&. Only database superusers may use this option, except when it names the same role executing the command\&.
+.PP
 Unlike the case with privileges, membership in a role cannot be granted to
 PUBLIC\&. Note also that this form of the command does not allow the noise word
-GROUP\&.
+GROUP
+in
+\fIrole_specification\fR\&.
 .SH "NOTES"
 .PP
 The
@@ -540,6 +548,11 @@ treats the owner\*(Aqs privileges as having been granted by the owner to themsel
 .PP
 According to the SQL standard, grant options can be granted to
 PUBLIC; PostgreSQL only supports granting grant options to roles\&.
+.PP
+The SQL standard allows the
+GRANTED BY
+option to be used in all forms of
+\fBGRANT\fR\&. PostgreSQL only supports it when granting role membership, and even then only superusers may use it in nontrivial ways\&.
 .PP
 The SQL standard provides for a
 USAGE

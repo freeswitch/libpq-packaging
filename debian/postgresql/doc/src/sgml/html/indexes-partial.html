@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Indexes"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -353,23 +353,12 @@ CREATE UNIQUE INDEX tests_success_constraint ON tests (subject, target)
     WHERE success;</PRE
 ><P>
     This is a particularly efficient approach when there are few
-    successful tests and many unsuccessful ones.
-   </P
-><P
->    This index allows only one null in the indexed column by using a
-    partial index clause to process only null column values, and using
-    an expression index clause to index <TT
+    successful tests and many unsuccessful ones.  It is also possible to
+    allow only one null in a column by creating a unique partial index
+    with an <TT
 CLASS="LITERAL"
->true</TT
-> instead
-    of <TT
-CLASS="LITERAL"
->null</TT
->:
-</P><PRE
-CLASS="PROGRAMLISTING"
->CREATE UNIQUE INDEX tests_target_one_null ON tests ((target IS NULL)) WHERE target IS NULL;</PRE
-><P>
+>IS NULL</TT
+> restriction.
    </P
 ></DIV
 ><P
@@ -403,7 +392,7 @@ CLASS="PRODUCTNAME"
 HREF="biblio.html#STON89B"
 ><I
 ><A
-HREF="http://db.cs.berkeley.edu/papers/ERL-M89-17.pdf"
+HREF="https://dsf.berkeley.edu/papers/ERL-M89-17.pdf"
 TARGET="_top"
 >    The case for partial indexes
     </A
@@ -419,7 +408,7 @@ HREF="biblio.html#SESHADRI95"
 ><I
 >Generalized Partial Indexes
     <A
-HREF="http://citeseer.ist.psu.edu/seshadri95generalized.html"
+HREF="https://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.40.5740"
 TARGET="_top"
 >(cached version)
     </A

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Additional Supplied Modules"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -104,18 +104,8 @@ CLASS="FILENAME"
   described first depends on the <TT
 CLASS="FILENAME"
 >cube</TT
-> module (which
-  <SPAN
-CLASS="emphasis"
-><I
-CLASS="EMPHASIS"
->must</I
-></SPAN
-> be installed before <TT
-CLASS="FILENAME"
->earthdistance</TT
-> can be
-  installed). The second one is based on the built-in <TT
+> module.
+  The second one is based on the built-in <TT
 CLASS="TYPE"
 >point</TT
 > data type,
@@ -127,19 +117,83 @@ CLASS="TYPE"
   <SPAN
 CLASS="APPLICATION"
 ><A
-HREF="http://postgis.net/"
+HREF="https://postgis.net/"
 TARGET="_top"
 >PostGIS</A
 ></SPAN
 >
   project.)
  </P
+><P
+>  The <TT
+CLASS="FILENAME"
+>cube</TT
+> module must be installed
+  before <TT
+CLASS="FILENAME"
+>earthdistance</TT
+> can be installed
+  (although you can use the <TT
+CLASS="LITERAL"
+>CASCADE</TT
+> option
+  of <TT
+CLASS="COMMAND"
+>CREATE EXTENSION</TT
+> to install both in one command).
+ </P
+><DIV
+CLASS="CAUTION"
+><P
+></P
+><TABLE
+CLASS="CAUTION"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Caution</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+><P
+>   It is strongly recommended that <TT
+CLASS="FILENAME"
+>earthdistance</TT
+>
+   and <TT
+CLASS="FILENAME"
+>cube</TT
+> be installed in the same schema, and that
+   that schema be one for which CREATE privilege has not been and will not
+   be granted to any untrusted users.
+   Otherwise there are installation-time security hazards
+   if <TT
+CLASS="FILENAME"
+>earthdistance</TT
+>'s schema contains objects defined
+   by a hostile user.
+   Furthermore, when using <TT
+CLASS="FILENAME"
+>earthdistance</TT
+>'s functions
+   after installation, the entire search path should contain only trusted
+   schemas.
+  </P
+></TD
+></TR
+></TABLE
+></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN137600"
+NAME="AEN138146"
 >F.13.1. Cube-based Earth Distances</A
 ></H2
 ><P
@@ -358,7 +412,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN137688"
+NAME="AEN138234"
 >F.13.2. Point-based Earth Distances</A
 ></H2
 ><P

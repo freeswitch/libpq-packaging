@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Types"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -115,7 +115,7 @@ HREF="functions-datetime.html"
     Dates are counted according to the Gregorian calendar, even in
     years before that calendar was introduced (see <A
 HREF="datetime-units-history.html"
->Section B.5</A
+>Section B.6</A
 > for more information).
    </P
 ><DIV
@@ -246,9 +246,9 @@ CLASS="REPLACEABLE"
 ><TD
 >times of day only, with time zone</TD
 ><TD
->00:00:00+1459</TD
+>00:00:00+1559</TD
 ><TD
->24:00:00-1459</TD
+>24:00:00-1559</TD
 ><TD
 >1 microsecond / 14 digits</TD
 ></TR
@@ -612,7 +612,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN6111"
+NAME="AEN6112"
 >8.5.1.1. Dates</A
 ></H3
 ><P
@@ -787,7 +787,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN6184"
+NAME="AEN6185"
 >8.5.1.2. Times</A
 ></H3
 ><P
@@ -1091,7 +1091,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN6304"
+NAME="AEN6305"
 >8.5.1.3. Time Stamps</A
 ></H3
 ><P
@@ -1282,7 +1282,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN6354"
+NAME="AEN6355"
 >8.5.1.4. Special Values</A
 ></H3
 ><P
@@ -2003,7 +2003,7 @@ CLASS="LITERAL"
 >.  Such a
         specification merely defines a particular offset from UTC, in
         contrast to full time zone names which can imply a set of daylight
-        savings transition-date rules as well.  The recognized abbreviations
+        savings transition rules as well.  The recognized abbreviations
         are listed in the <TT
 CLASS="LITERAL"
 >pg_timezone_abbrevs</TT
@@ -2034,86 +2034,13 @@ CLASS="LITERAL"
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
 > will accept POSIX-style time zone
-        specifications of the form <TT
-CLASS="REPLACEABLE"
-><I
->STD</I
-></TT
-><TT
-CLASS="REPLACEABLE"
-><I
->offset</I
-></TT
-> or
-        <TT
-CLASS="REPLACEABLE"
-><I
->STD</I
-></TT
-><TT
-CLASS="REPLACEABLE"
-><I
->offset</I
-></TT
-><TT
-CLASS="REPLACEABLE"
-><I
->DST</I
-></TT
->, where
-        <TT
-CLASS="REPLACEABLE"
-><I
->STD</I
-></TT
-> is a zone abbreviation, <TT
-CLASS="REPLACEABLE"
-><I
->offset</I
-></TT
-> is a
-        numeric offset in hours west from UTC, and <TT
-CLASS="REPLACEABLE"
-><I
->DST</I
-></TT
-> is an
-        optional daylight-savings zone abbreviation, assumed to stand for one
-        hour ahead of the given offset. For example, if <TT
-CLASS="LITERAL"
->EST5EDT</TT
->
-        were not already a recognized zone name, it would be accepted and would
-        be functionally equivalent to United States East Coast time.  In this
-        syntax, a zone abbreviation can be a string of letters, or an
-        arbitrary string surrounded by angle brackets (<TT
-CLASS="LITERAL"
->&lt;&gt;</TT
->).
-        When a daylight-savings zone abbreviation is present,
-        it is assumed to be used
-        according to the same daylight-savings transition rules used in the
-        IANA time zone database's <TT
-CLASS="FILENAME"
->posixrules</TT
-> entry.
-        In a standard <SPAN
-CLASS="PRODUCTNAME"
->PostgreSQL</SPAN
-> installation,
-        <TT
-CLASS="FILENAME"
->posixrules</TT
-> is the same as <TT
-CLASS="LITERAL"
->US/Eastern</TT
->, so
-        that POSIX-style time zone specifications follow USA daylight-savings
-        rules.  If needed, you can adjust this behavior by replacing the
-        <TT
-CLASS="FILENAME"
->posixrules</TT
-> file.
+        specifications, as described in
+        <A
+HREF="datetime-posix-timezone-specs.html"
+>Section B.5</A
+>.  This option is not
+        normally preferable to using a named time zone, but it may be
+        necessary if no suitable IANA time zone entry is available.
        </P
 ></LI
 ></UL
@@ -2156,36 +2083,6 @@ CLASS="LITERAL"
 >EST</TT
 > example
      above, this is not necessarily the same as local civil time on that date.
-    </P
-><P
->     One should be wary that the POSIX-style time zone feature can
-     lead to silently accepting bogus input, since there is no check on the
-     reasonableness of the zone abbreviations.  For example, <TT
-CLASS="LITERAL"
->SET
-     TIMEZONE TO FOOBAR0</TT
-> will work, leaving the system effectively using
-     a rather peculiar abbreviation for UTC.
-     Another issue to keep in mind is that in POSIX time zone names,
-     positive offsets are used for locations <SPAN
-CLASS="emphasis"
-><I
-CLASS="EMPHASIS"
->west</I
-></SPAN
-> of Greenwich.
-     Everywhere else, <SPAN
-CLASS="PRODUCTNAME"
->PostgreSQL</SPAN
-> follows the
-     ISO-8601 convention that positive timezone offsets are <SPAN
-CLASS="emphasis"
-><I
-CLASS="EMPHASIS"
->east</I
-></SPAN
->
-     of Greenwich.
     </P
 ><P
 >     In all cases, timezone names and abbreviations are recognized

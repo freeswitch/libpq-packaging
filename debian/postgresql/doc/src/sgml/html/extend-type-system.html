@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Extending SQL"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -113,7 +113,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN59804"
+NAME="AEN59768"
 >36.2.1. Base Types</A
 ></H2
 ><P
@@ -144,7 +144,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN59810"
+NAME="AEN59774"
 >36.2.2. Composite Types</A
 ></H2
 ><P
@@ -201,7 +201,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN59823"
+NAME="AEN59787"
 >36.2.4. Pseudo-Types</A
 ></H2
 ><P
@@ -308,14 +308,22 @@ CLASS="TYPE"
      and others declared <TT
 CLASS="TYPE"
 >anyelement</TT
->, the actual range type in
-     the <TT
+> or <TT
+CLASS="TYPE"
+>anyarray</TT
+>,
+     the actual range type in the <TT
 CLASS="TYPE"
 >anyrange</TT
-> positions must be a range whose subtype is
-     the same type appearing in the <TT
+> positions must be a
+     range whose subtype is the same type appearing in
+     the <TT
 CLASS="TYPE"
 >anyelement</TT
+> positions and the same as the element type
+     of the <TT
+CLASS="TYPE"
+>anyarray</TT
 > positions.
      <TT
 CLASS="TYPE"
@@ -364,6 +372,34 @@ CLASS="LITERAL"
 >f(anyarray) returns anyenum</TT
 >
      will only accept arrays of enum types.
+    </P
+><P
+>     In most cases, the parser can infer the actual data type for a
+     polymorphic result type from arguments that are of a different
+     polymorphic type; for example <TT
+CLASS="TYPE"
+>anyarray</TT
+> can be deduced
+     from <TT
+CLASS="TYPE"
+>anyelement</TT
+> or vice versa.  The exception is that a
+     polymorphic result of type <TT
+CLASS="TYPE"
+>anyrange</TT
+> requires an argument
+     of type <TT
+CLASS="TYPE"
+>anyrange</TT
+>; it cannot be deduced
+     from <TT
+CLASS="TYPE"
+>anyarray</TT
+> or <TT
+CLASS="TYPE"
+>anyelement</TT
+> arguments.  This
+     is because there could be multiple range types with the same subtype.
     </P
 ><P
 >     Note that <TT

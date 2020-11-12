@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-REVOKE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN90350"
+NAME="AEN90398"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN90350"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN90353"
+NAME="AEN90401"
 ></A
 ><H2
 >Synopsis</H2
@@ -124,12 +124,12 @@ CLASS="REPLACEABLE"
 >schema_name</I
 ></TT
 > [, ...] }
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -151,12 +151,12 @@ CLASS="REPLACEABLE"
 >table_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -174,12 +174,12 @@ CLASS="REPLACEABLE"
 >schema_name</I
 ></TT
 > [, ...] }
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -190,12 +190,12 @@ CLASS="REPLACEABLE"
 >database_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -206,12 +206,12 @@ CLASS="REPLACEABLE"
 >domain_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -222,12 +222,12 @@ CLASS="REPLACEABLE"
 >fdw_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -238,12 +238,12 @@ CLASS="REPLACEABLE"
 >server_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -275,12 +275,12 @@ CLASS="REPLACEABLE"
 >schema_name</I
 ></TT
 > [, ...] }
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -291,12 +291,12 @@ CLASS="REPLACEABLE"
 >lang_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -307,12 +307,12 @@ CLASS="REPLACEABLE"
 >loid</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -323,12 +323,12 @@ CLASS="REPLACEABLE"
 >schema_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -339,12 +339,12 @@ CLASS="REPLACEABLE"
 >tablespace_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
@@ -355,12 +355,12 @@ CLASS="REPLACEABLE"
 >type_name</I
 ></TT
 > [, ...]
-    FROM { [ GROUP ] <TT
+    FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
-> | PUBLIC } [, ...]
+> [, ...]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ ADMIN OPTION FOR ]
@@ -372,10 +372,39 @@ CLASS="REPLACEABLE"
 > [, ...] FROM <TT
 CLASS="REPLACEABLE"
 ><I
->role_name</I
+>role_specification</I
 ></TT
 > [, ...]
-    [ CASCADE | RESTRICT ]</PRE
+    [ GRANTED BY <TT
+CLASS="REPLACEABLE"
+><I
+>role_specification</I
+></TT
+> ]
+    [ CASCADE | RESTRICT ]
+
+<SPAN
+CLASS="phrase"
+><SPAN
+CLASS="PHRASE"
+>where <TT
+CLASS="REPLACEABLE"
+><I
+>role_specification</I
+></TT
+> can be:</SPAN
+></SPAN
+>
+
+    [ GROUP ] <TT
+CLASS="REPLACEABLE"
+><I
+>role_name</I
+></TT
+>
+  | PUBLIC
+  | CURRENT_USER
+  | SESSION_USER</PRE
 ></DIV
 ><DIV
 CLASS="REFSECT1"
@@ -481,10 +510,22 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >ADMIN OPTION</TT
 >, but the behavior is similar.
+   This form of the command also allows a <TT
+CLASS="LITERAL"
+>GRANTED BY</TT
+>
+   option, but that option is currently ignored (except for checking
+   the existence of the named role).
    Note also that this form of the command does not
    allow the noise word <TT
 CLASS="LITERAL"
 >GROUP</TT
+>
+   in <TT
+CLASS="REPLACEABLE"
+><I
+>role_specification</I
+></TT
 >.
   </P
 ></DIV
@@ -722,7 +763,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN90472"
+NAME="AEN90526"
 ></A
 ><H2
 >See Also</H2

@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "CREATE EXTENSION" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "CREATE EXTENSION" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -141,6 +141,28 @@ pg_available_extensions
 or
 pg_available_extension_versions
 system views\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBCaution\fR
+.ps -1
+.br
+.PP
+Installing an extension as superuser requires trusting that the extension\*(Aqs author wrote the extension installation script in a secure fashion\&. It is not terribly difficult for a malicious user to create trojan\-horse objects that will compromise later execution of a carelessly\-written extension script, allowing that user to acquire superuser privileges\&. However, trojan\-horse objects are only hazardous if they are in the
+\fIsearch_path\fR
+during script execution, meaning that they are in the extension\*(Aqs installation target schema or in the schema of some extension it depends on\&. Therefore, a good rule of thumb when dealing with extensions whose scripts have not been carefully vetted is to install them only into schemas for which CREATE privilege has not been and will not be granted to any untrusted users\&. Likewise for any extensions they depend on\&.
+.PP
+The extensions supplied with
+PostgreSQL
+are believed to be secure against installation\-time attacks of this sort, except for a few that depend on other extensions\&. As stated in the documentation for those extensions, they should be installed into secure schemas, or installed into the same schemas as the extensions they depend on, or both\&.
+.sp .5v
+.RE
 .PP
 For information about writing new extensions, see
 Section 36.15, \(lqPackaging Related Objects into an Extension\(rq, in the documentation\&.
@@ -148,12 +170,26 @@ Section 36.15, \(lqPackaging Related Objects into an Extension\(rq, in the docum
 .PP
 Install the
 hstore
-extension into the current database:
+extension into the current database, placing its objects in schema
+addons:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
+CREATE EXTENSION hstore SCHEMA addons;
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+Another way to accomplish the same thing:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+SET search_path = addons;
 CREATE EXTENSION hstore;
 .fi
 .if n \{\

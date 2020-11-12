@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1857,7 +1857,8 @@ CLASS="TYPE"
    <TT
 CLASS="TYPE"
 >timestamp with time zone</TT
-> by the indicated number of days.
+> by the indicated number of days,
+   keeping the time of day the same.
    Across daylight saving time changes (when the session time zone is set to a
    time zone that recognizes DST), this means <TT
 CLASS="LITERAL"
@@ -1867,37 +1868,38 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >interval '24 hours'</TT
 >.
-   For example, with the session time zone set to <TT
+   For example, with the session time zone set
+   to <TT
 CLASS="LITERAL"
->CST7CDT</TT
->,
-   <TT
-CLASS="LITERAL"
->timestamp with time zone '2005-04-02 12:00-07' + interval '1 day'</TT
+>America/Denver</TT
+>:
+</P><PRE
+CLASS="SCREEN"
+>SELECT timestamp with time zone '2005-04-02 12:00:00-07' + interval '1 day';
+<I
+CLASS="LINEANNOTATION"
+>Result: </I
+><SAMP
+CLASS="COMPUTEROUTPUT"
+>2005-04-03 12:00:00-06</SAMP
 >
-   will produce <TT
+SELECT timestamp with time zone '2005-04-02 12:00:00-07' + interval '24 hours';
+<I
+CLASS="LINEANNOTATION"
+>Result: </I
+><SAMP
+CLASS="COMPUTEROUTPUT"
+>2005-04-03 13:00:00-06</SAMP
+></PRE
+><P>
+   This happens because an hour was skipped due to a change in daylight saving
+   time at <TT
 CLASS="LITERAL"
->timestamp with time zone '2005-04-03 12:00-06'</TT
->,
-   while adding <TT
-CLASS="LITERAL"
->interval '24 hours'</TT
-> to the same initial
-   <TT
-CLASS="TYPE"
->timestamp with time zone</TT
-> produces
-   <TT
-CLASS="LITERAL"
->timestamp with time zone '2005-04-03 13:00-06'</TT
->, as there is
-   a change in daylight saving time at <TT
-CLASS="LITERAL"
->2005-04-03 02:00</TT
+>2005-04-03 02:00:00</TT
 > in time zone
    <TT
 CLASS="LITERAL"
->CST7CDT</TT
+>America/Denver</TT
 >.
   </P
 ><P
@@ -2566,8 +2568,8 @@ CLASS="LITERAL"
 ><P
 >        The seconds field, including fractional parts (0 -
         59<A
-NAME="AEN15571"
-HREF="#FTN.AEN15571"
+NAME="AEN15565"
+HREF="#FTN.AEN15565"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -3741,8 +3743,8 @@ ALIGN="LEFT"
 VALIGN="TOP"
 WIDTH="5%"
 ><A
-NAME="FTN.AEN15571"
-HREF="functions-datetime.html#AEN15571"
+NAME="FTN.AEN15565"
+HREF="functions-datetime.html#AEN15565"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN

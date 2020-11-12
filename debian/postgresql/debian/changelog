@@ -1,8 +1,29 @@
-postgresql-9.6 (9.6.17-999+fs9u1) stretch; urgency=medium
+postgresql-9.6 (9.6.19-999+fs9u1) stretch; urgency=medium
 
   * FreeSWITCH rebuild with libssl-1.0.
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Thu, 20 Feb 2020 12:10:37 +0200
+ -- FreeSWITCH Solutions <packages@freeswitch.com>  Thu, 12 Nov 2020 12:10:37 +0200
+
+postgresql-9.6 (9.6.19-0+deb9u1) stretch-security; urgency=medium
+
+  * New upstream version.
+    + Make contrib modules' installation scripts more secure (Tom Lane)
+
+      Attacks similar to those described in CVE-2018-1058 could be carried out
+      against an extension installation script, if the attacker can create
+      objects in either the extension's target schema or the schema of some
+      prerequisite extension.  Since extensions often require superuser
+      privilege to install, this can open a path to obtaining superuser
+      privilege.  To mitigate this risk, be more careful about the search_path
+      used to run an installation script; disable check_function_bodies within
+      the script; and fix catalog-adjustment queries used in some contrib
+      modules to ensure they are secure.  Also provide documentation to help
+      third-party extension authors make their installation scripts secure.
+      This is not a complete solution; extensions that depend on other
+      extensions can still be at risk if installed carelessly.
+      (CVE-2020-14350)
+
+ -- Christoph Berg <myon@debian.org>  Thu, 13 Aug 2020 10:32:13 +0200
 
 postgresql-9.6 (9.6.17-0+deb9u1) stretch-security; urgency=medium
 

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -435,7 +435,61 @@ CLASS="FUNCTION"
     <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
->-specific.
+>-specific.  You may see these
+    operator names in <TT
+CLASS="COMMAND"
+>EXPLAIN</TT
+> output and similar
+    places, since the parser actually translates <CODE
+CLASS="FUNCTION"
+>LIKE</CODE
+>
+    et al. to these operators.
+   </P
+><P
+>    The phrases <CODE
+CLASS="FUNCTION"
+>LIKE</CODE
+>, <CODE
+CLASS="FUNCTION"
+>ILIKE</CODE
+>,
+    <CODE
+CLASS="FUNCTION"
+>NOT LIKE</CODE
+>, and <CODE
+CLASS="FUNCTION"
+>NOT ILIKE</CODE
+> are
+    generally treated as operators
+    in <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> syntax; for example they can
+    be used in <TT
+CLASS="REPLACEABLE"
+><I
+>expression</I
+></TT
+>
+    <TT
+CLASS="REPLACEABLE"
+><I
+>operator</I
+></TT
+> ANY
+    (<TT
+CLASS="REPLACEABLE"
+><I
+>subquery</I
+></TT
+>) constructs, although
+    an <TT
+CLASS="LITERAL"
+>ESCAPE</TT
+> clause cannot be included there.  In some
+    obscure cases it may be necessary to use the underlying operator names
+    instead.
    </P
 ></DIV
 ><DIV

@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "PG_UPGRADE" "1" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "PG_UPGRADE" "1" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -99,9 +99,9 @@ the new cluster data directory; environment variable
 \fBPGDATANEW\fR
 .RE
 .PP
-\fB\-j\fR
+\fB\-j \fR\fB\fInjobs\fR\fR
 .br
-\fB\-\-jobs\fR
+\fB\-\-jobs=\fR\fB\fInjobs\fR\fR
 .RS 4
 number of simultaneous processes or threads to use
 .RE
@@ -361,10 +361,10 @@ Step 10, verify that the old standby servers are caught up by running
 pg_controldata
 against the old primary and standby clusters\&. Verify that the
 \(lqLatest checkpoint location\(rq
-values match in all clusters\&. (There will be a mismatch if old standby servers were shut down before the old primary or if the old standby servers are still running\&.) Also, change
+values match in all clusters\&. (There will be a mismatch if old standby servers were shut down before the old primary or if the old standby servers are still running\&.) Also, make sure
 \fIwal_level\fR
-to
-replica
+is not set to
+minimal
 in the
 postgresql\&.conf
 file on the new primary cluster\&.
