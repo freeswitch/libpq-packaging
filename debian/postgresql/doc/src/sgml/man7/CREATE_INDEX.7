@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "CREATE INDEX" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "CREATE INDEX" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE_INDEX \- define a new index
 .nf
 CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] \fIname\fR ] ON \fItable_name\fR [ USING \fImethod\fR ]
     ( { \fIcolumn_name\fR | ( \fIexpression\fR ) } [ COLLATE \fIcollation\fR ] [ \fIopclass\fR ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, \&.\&.\&.] )
-    [ WITH ( \fIstorage_parameter\fR = \fIvalue\fR [, \&.\&.\&. ] ) ]
+    [ WITH ( \fIstorage_parameter\fR [= \fIvalue\fR] [, \&.\&.\&. ] ) ]
     [ TABLESPACE \fItablespace_name\fR ]
     [ WHERE \fIpredicate\fR ]
 .fi

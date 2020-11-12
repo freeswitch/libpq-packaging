@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Full Text Search"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1226,27 +1226,13 @@ STYLE="list-style-type: disc"
 ><P
 >       <TT
 CLASS="LITERAL"
->StartSel</TT
->, <TT
-CLASS="LITERAL"
->StopSel</TT
->: the strings with
-       which to delimit query words appearing in the document, to distinguish
-       them from other excerpted words.  You must double-quote these strings
-       if they contain spaces or commas.
-      </P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
->       <TT
-CLASS="LITERAL"
 >MaxWords</TT
 >, <TT
 CLASS="LITERAL"
 >MinWords</TT
->: these numbers
-       determine the longest and shortest headlines to output.
+> (integers):
+       these numbers determine the longest and shortest headlines to output.
+       The default values are 35 and 15.
       </P
 ></LI
 ><LI
@@ -1255,9 +1241,10 @@ STYLE="list-style-type: disc"
 >       <TT
 CLASS="LITERAL"
 >ShortWord</TT
->: words of this length or less will be
-       dropped at the start and end of a headline. The default
-       value of three eliminates common English articles.
+> (integer): words of this length or less
+       will be dropped at the start and end of a headline, unless they are
+       query terms.  The default value of three eliminates common English
+       articles.
       </P
 ></LI
 ><LI
@@ -1266,12 +1253,16 @@ STYLE="list-style-type: disc"
 >       <TT
 CLASS="LITERAL"
 >HighlightAll</TT
->: Boolean flag;  if
+> (boolean): if
        <TT
 CLASS="LITERAL"
 >true</TT
 > the whole document will be used as the
-       headline, ignoring the preceding three parameters.
+       headline, ignoring the preceding three parameters.  The default
+       is <TT
+CLASS="LITERAL"
+>false</TT
+>.
       </P
 ></LI
 ><LI
@@ -1280,27 +1271,39 @@ STYLE="list-style-type: disc"
 >       <TT
 CLASS="LITERAL"
 >MaxFragments</TT
->: maximum number of text excerpts
-       or fragments to display.  The default value of zero selects a
-       non-fragment-oriented headline generation method.  A value greater than
-       zero selects fragment-based headline generation.  This method
-       finds text fragments with as many query words as possible and
-       stretches those fragments around the query words.  As a result
-       query words are close to the middle of each fragment and have words on
-       each side. Each fragment will be of at most <TT
+> (integer): maximum number of text
+       fragments to display.  The default value of zero selects a
+       non-fragment-based headline generation method.  A value greater
+       than zero selects fragment-based headline generation (see below).
+      </P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+>       <TT
 CLASS="LITERAL"
->MaxWords</TT
+>StartSel</TT
+>, <TT
+CLASS="LITERAL"
+>StopSel</TT
+> (strings):
+       the strings with which to delimit query words appearing in the
+       document, to distinguish them from other excerpted words.  The
+       default values are <SPAN
+CLASS="QUOTE"
+>"<TT
+CLASS="LITERAL"
+>&lt;b&gt;</TT
+>"</SPAN
 > and
-       words of length <TT
+       <SPAN
+CLASS="QUOTE"
+>"<TT
 CLASS="LITERAL"
->ShortWord</TT
-> or less are dropped at the start
-       and end of each fragment. If not all query words are found in the
-       document, then a single fragment of the first <TT
-CLASS="LITERAL"
->MinWords</TT
->
-       in the document will be displayed.
+>&lt;/b&gt;</TT
+>"</SPAN
+>, which can be suitable
+       for HTML output.
       </P
 ></LI
 ><LI
@@ -1309,21 +1312,63 @@ STYLE="list-style-type: disc"
 >       <TT
 CLASS="LITERAL"
 >FragmentDelimiter</TT
->: When more than one fragment is
-       displayed, the fragments will be separated by this string.
+> (string): When more than one
+       fragment is displayed, the fragments will be separated by this string.
+       The default is <SPAN
+CLASS="QUOTE"
+>"<TT
+CLASS="LITERAL"
+> ... </TT
+>"</SPAN
+>.
       </P
 ></LI
 ></UL
 ><P>
 
-    Any unspecified options receive these defaults:
-
-</P><PRE
-CLASS="PROGRAMLISTING"
->StartSel=&lt;b&gt;, StopSel=&lt;/b&gt;,
-MaxWords=35, MinWords=15, ShortWord=3, HighlightAll=FALSE,
-MaxFragments=0, FragmentDelimiter=" ... "</PRE
-><P>
+    These option names are recognized case-insensitively.
+    You must double-quote string values if they contain spaces or commas.
+   </P
+><P
+>    In non-fragment-based headline
+    generation, <CODE
+CLASS="FUNCTION"
+>ts_headline</CODE
+> locates matches for the
+    given <TT
+CLASS="REPLACEABLE"
+><I
+>query</I
+></TT
+> and chooses a
+    single one to display, preferring matches that have more query words
+    within the allowed headline length.
+    In fragment-based headline generation, <CODE
+CLASS="FUNCTION"
+>ts_headline</CODE
+>
+    locates the query matches and splits each match
+    into <SPAN
+CLASS="QUOTE"
+>"fragments"</SPAN
+> of no more than <TT
+CLASS="LITERAL"
+>MaxWords</TT
+>
+    words each, preferring fragments with more query words, and when
+    possible <SPAN
+CLASS="QUOTE"
+>"stretching"</SPAN
+> fragments to include surrounding
+    words.  The fragment-based mode is thus more useful when the query
+    matches span large sections of the document, or when it's desirable to
+    display multiple matches.
+    In either mode, if no query matches can be identified, then a single
+    fragment of the first <TT
+CLASS="LITERAL"
+>MinWords</TT
+> words in the document
+    will be displayed.
    </P
 ><P
 >    For example:
@@ -1335,25 +1380,24 @@ CLASS="SCREEN"
 is to find all documents containing given query terms
 and return them in order of their similarity to the
 query.',
-  to_tsquery('query &amp; similarity'));
-                        ts_headline                         
+  to_tsquery('english', 'query &amp; similarity'));
+                        ts_headline
 ------------------------------------------------------------
- containing given &lt;b&gt;query&lt;/b&gt; terms
- and return them in order of their &lt;b&gt;similarity&lt;/b&gt; to the
+ containing given &lt;b&gt;query&lt;/b&gt; terms                       +
+ and return them in order of their &lt;b&gt;similarity&lt;/b&gt; to the+
  &lt;b&gt;query&lt;/b&gt;.
 
 SELECT ts_headline('english',
-  'The most common type of search
-is to find all documents containing given query terms
-and return them in order of their similarity to the
-query.',
-  to_tsquery('query &amp; similarity'),
-  'StartSel = &lt;, StopSel = &gt;');
-                      ts_headline                      
--------------------------------------------------------
- containing given &lt;query&gt; terms
- and return them in order of their &lt;similarity&gt; to the
- &lt;query&gt;.</PRE
+  'Search terms may occur
+many times in a document,
+requiring ranking of the search matches to decide which
+occurrences to display in the result.',
+  to_tsquery('english', 'search &amp; term'),
+  'MaxFragments=10, MaxWords=7, MinWords=3, StartSel=&lt;&lt;, StopSel=&gt;&gt;');
+                        ts_headline
+------------------------------------------------------------
+ &lt;&lt;Search&gt;&gt; &lt;&lt;terms&gt;&gt; may occur                            +
+ many times ... ranking of the &lt;&lt;search&gt;&gt; matches to decide</PRE
 ><P>
    </P
 ><P

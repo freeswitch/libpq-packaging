@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "ALTER INDEX" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "ALTER INDEX" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -35,7 +35,7 @@ ALTER_INDEX \- change the definition of an index
 ALTER INDEX [ IF EXISTS ] \fIname\fR RENAME TO \fInew_name\fR
 ALTER INDEX [ IF EXISTS ] \fIname\fR SET TABLESPACE \fItablespace_name\fR
 ALTER INDEX \fIname\fR DEPENDS ON EXTENSION \fIextension_name\fR
-ALTER INDEX [ IF EXISTS ] \fIname\fR SET ( \fIstorage_parameter\fR = \fIvalue\fR [, \&.\&.\&. ] )
+ALTER INDEX [ IF EXISTS ] \fIname\fR SET ( \fIstorage_parameter\fR [= \fIvalue\fR] [, \&.\&.\&. ] )
 ALTER INDEX [ IF EXISTS ] \fIname\fR RESET ( \fIstorage_parameter\fR [, \&.\&.\&. ] )
 ALTER INDEX ALL IN TABLESPACE \fIname\fR [ OWNED BY \fIrole_name\fR [, \&.\&.\&. ] ]
     SET TABLESPACE \fInew_tablespace\fR [ NOWAIT ]
@@ -74,7 +74,7 @@ DEPENDS ON EXTENSION
 This form marks the index as dependent on the extension, such that if the extension is dropped, the index will automatically be dropped as well\&.
 .RE
 .PP
-SET ( \fIstorage_parameter\fR = \fIvalue\fR [, \&.\&.\&. ] )
+SET ( \fIstorage_parameter\fR [= \fIvalue\fR] [, \&.\&.\&. ] )
 .RS 4
 This form changes one or more index\-method\-specific storage parameters for the index\&. See
 CREATE INDEX (\fBCREATE_INDEX\fR(7))

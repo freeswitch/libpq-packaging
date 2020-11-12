@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Advanced Features"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -117,20 +117,20 @@ CLASS="PROGRAMLISTING"
 >CREATE TABLE capitals (
   name       text,
   population real,
-  altitude   int,    -- (in ft)
+  elevation  int,    -- (in ft)
   state      char(2)
 );
 
 CREATE TABLE non_capitals (
   name       text,
   population real,
-  altitude   int     -- (in ft)
+  elevation  int     -- (in ft)
 );
 
 CREATE VIEW cities AS
-  SELECT name, population, altitude FROM capitals
+  SELECT name, population, elevation FROM capitals
     UNION
-  SELECT name, population, altitude FROM non_capitals;</PRE
+  SELECT name, population, elevation FROM non_capitals;</PRE
 ><P>
 
     This works OK as far as querying goes, but it gets ugly when you
@@ -144,7 +144,7 @@ CLASS="PROGRAMLISTING"
 >CREATE TABLE cities (
   name       text,
   population real,
-  altitude   int     -- (in ft)
+  elevation  int     -- (in ft)
 );
 
 CREATE TABLE capitals (
@@ -169,7 +169,7 @@ CLASS="STRUCTFIELD"
 >population</TT
 >, and <TT
 CLASS="STRUCTFIELD"
->altitude</TT
+>elevation</TT
 >) from its
     <I
 CLASS="FIRSTTERM"
@@ -189,11 +189,15 @@ CLASS="TYPE"
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
 >
-    type for variable length character strings.  State capitals have
+    type for variable length character strings.  The
+    <CODE
+CLASS="CLASSNAME"
+>capitals</CODE
+> table has
     an extra column, <TT
 CLASS="STRUCTFIELD"
 >state</TT
->, that shows their state.  In
+>, which shows their states.  In
     <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
@@ -202,46 +206,46 @@ CLASS="PRODUCTNAME"
    </P
 ><P
 >    For example, the  following  query finds the  names  of  all  cities,
-    including  state capitals, that are located at an altitude
+    including  state capitals, that are located at an elevation
     over 500 feet:
 
 </P><PRE
 CLASS="PROGRAMLISTING"
->SELECT name, altitude
+>SELECT name, elevation
   FROM cities
-  WHERE altitude &gt; 500;</PRE
+  WHERE elevation &gt; 500;</PRE
 ><P>
 
     which returns:
 
 </P><PRE
 CLASS="SCREEN"
->   name    | altitude
------------+----------
- Las Vegas |     2174
- Mariposa  |     1953
- Madison   |      845
+>   name    | elevation
+-----------+-----------
+ Las Vegas |      2174
+ Mariposa  |      1953
+ Madison   |       845
 (3 rows)</PRE
 ><P>
    </P
 ><P
 >    On the other hand, the  following  query  finds
     all  the cities that are not state capitals and
-    are situated at an altitude over 500 feet:
+    are situated at an elevation over 500 feet:
 
 </P><PRE
 CLASS="PROGRAMLISTING"
->SELECT name, altitude
+>SELECT name, elevation
     FROM ONLY cities
-    WHERE altitude &gt; 500;</PRE
+    WHERE elevation &gt; 500;</PRE
 ><P>
 
 </P><PRE
 CLASS="SCREEN"
->   name    | altitude
------------+----------
- Las Vegas |     2174
- Mariposa  |     1953
+>   name    | elevation
+-----------+-----------
+ Las Vegas |      2174
+ Mariposa  |      1953
 (2 rows)</PRE
 ><P>
    </P

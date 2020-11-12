@@ -216,7 +216,7 @@ static void dumpUserMappings(Archive *fout,
 				 const char *owner, CatalogId catalogId, DumpId dumpId);
 static void dumpDefaultACL(Archive *fout, DefaultACLInfo *daclinfo);
 
-static void dumpACL(Archive *fout, CatalogId objCatId, DumpId objDumpId,
+static DumpId dumpACL(Archive *fout, DumpId objDumpId, DumpId altDumpId,
 		const char *type, const char *name, const char *subname,
 		const char *nspname, const char *owner,
 		const char *acls, const char *racls,
@@ -3101,7 +3101,7 @@ dumpBlob(Archive *fout, BlobInfo *binfo)
 
 	/* Dump ACL if any */
 	if (binfo->blobacl && (binfo->dobj.dump & DUMP_COMPONENT_ACL))
-		dumpACL(fout, binfo->dobj.catId, binfo->dobj.dumpId, "LARGE OBJECT",
+		dumpACL(fout, binfo->dobj.dumpId, InvalidDumpId, "LARGE OBJECT",
 				binfo->dobj.name, NULL,
 				NULL, binfo->rolname, binfo->blobacl, binfo->rblobacl,
 				binfo->initblobacl, binfo->initrblobacl);
@@ -3337,6 +3337,8 @@ dumpPolicy(Archive *fout, PolicyInfo *polinfo)
 	TableInfo  *tbinfo = polinfo->poltable;
 	PQExpBuffer query;
 	PQExpBuffer delqry;
+	PQExpBuffer polprefix;
+	char	   *qtabname;
 	const char *cmd;
 	char	   *tag;
 
@@ -3394,6 +3396,9 @@ dumpPolicy(Archive *fout, PolicyInfo *polinfo)
 
 	query = createPQExpBuffer();
 	delqry = createPQExpBuffer();
+	polprefix = createPQExpBuffer();
+
+	qtabname = pg_strdup(fmtId(tbinfo->dobj.name));
 
 	appendPQExpBuffer(query, "CREATE POLICY %s", fmtId(polinfo->polname));
 
@@ -3414,6 +3419,9 @@ dumpPolicy(Archive *fout, PolicyInfo *polinfo)
 	appendPQExpBuffer(delqry, "DROP POLICY %s", fmtId(polinfo->polname));
 	appendPQExpBuffer(delqry, " ON %s;\n", fmtQualifiedDumpable(tbinfo));
 
+	appendPQExpBuffer(polprefix, "POLICY %s ON",
+					  fmtId(polinfo->polname));
+
 	tag = psprintf("%s %s", tbinfo->dobj.name, polinfo->dobj.name);
 
 	if (polinfo->dobj.dump & DUMP_COMPONENT_POLICY)
@@ -3427,10 +3435,67 @@ dumpPolicy(Archive *fout, PolicyInfo *polinfo)
 					 NULL, 0,
 					 NULL, NULL);
 
+	if (polinfo->dobj.dump & DUMP_COMPONENT_COMMENT)
+		dumpComment(fout, polprefix->data, qtabname,
+					tbinfo->dobj.namespace->dobj.name, tbinfo->rolname,
+					polinfo->dobj.catId, 0, polinfo->dobj.dumpId);
+
 	free(tag);
 	destroyPQExpBuffer(query);
 	destroyPQExpBuffer(delqry);
+	destroyPQExpBuffer(polprefix);
+	free(qtabname);
 }
+
+/*
+ * Given a "create query", append as many ALTER ... DEPENDS ON EXTENSION as
+ * the object needs.
+ */
+static void
+append_depends_on_extension(Archive *fout,
+							PQExpBuffer create,
+							DumpableObject *dobj,
+							const char *catalog,
+							const char *keyword,
+							const char *objname)
+{
+	if (dobj->depends_on_ext)
+	{
+		char   *nm;
+		PGresult   *res;
+		PQExpBuffer	query;
+		int		ntups;
+		int		i_extname;
+		int		i;
+
+		/* dodge fmtId() non-reentrancy */
+		nm = pg_strdup(objname);
+
+		query = createPQExpBuffer();
+		appendPQExpBuffer(query,
+						  "SELECT e.extname "
+						  "FROM pg_catalog.pg_depend d, pg_catalog.pg_extension e "
+						  "WHERE d.refobjid = e.oid AND classid = '%s'::pg_catalog.regclass "
+						  "AND objid = '%u'::pg_catalog.oid AND deptype = 'x' "
+						  "AND refclassid = 'pg_catalog.pg_extension'::pg_catalog.regclass",
+						  catalog,
+						  dobj->catId.oid);
+		res = ExecuteSqlQuery(fout, query->data, PGRES_TUPLES_OK);
+		ntups = PQntuples(res);
+		i_extname = PQfnumber(res, "extname");
+		for (i = 0; i < ntups; i++)
+		{
+			appendPQExpBuffer(create, "ALTER %s %s DEPENDS ON EXTENSION %s;\n",
+							  keyword, nm,
+							  fmtId(PQgetvalue(res, i, i_extname)));
+		}
+
+		PQclear(res);
+		destroyPQExpBuffer(query);
+		pg_free(nm);
+	}
+}
+
 
 static void
 binary_upgrade_set_type_oids_by_type_oid(Archive *fout,
@@ -9017,6 +9082,11 @@ getDefaultACLs(Archive *fout, int *numDefaultACLs)
 						  racl_subquery->data,
 						  initacl_subquery->data,
 						  initracl_subquery->data);
+
+		destroyPQExpBuffer(acl_subquery);
+		destroyPQExpBuffer(racl_subquery);
+		destroyPQExpBuffer(initacl_subquery);
+		destroyPQExpBuffer(initracl_subquery);
 	}
 	else
 	{
@@ -9618,7 +9688,7 @@ dumpNamespace(Archive *fout, NamespaceInfo *nspinfo)
 					 nspinfo->dobj.catId, 0, nspinfo->dobj.dumpId);
 
 	if (nspinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, nspinfo->dobj.catId, nspinfo->dobj.dumpId, "SCHEMA",
+		dumpACL(fout, nspinfo->dobj.dumpId, InvalidDumpId, "SCHEMA",
 				qnspname, NULL, NULL,
 				nspinfo->rolname, nspinfo->nspacl, nspinfo->rnspacl,
 				nspinfo->initnspacl, nspinfo->initrnspacl);
@@ -9898,7 +9968,7 @@ dumpEnumType(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -10024,7 +10094,7 @@ dumpRangeType(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -10096,7 +10166,7 @@ dumpUndefinedType(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -10484,7 +10554,7 @@ dumpBaseType(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -10641,7 +10711,7 @@ dumpDomain(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -10864,7 +10934,7 @@ dumpCompositeType(Archive *fout, TypeInfo *tyinfo)
 					 tyinfo->dobj.catId, 0, tyinfo->dobj.dumpId);
 
 	if (tyinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, tyinfo->dobj.catId, tyinfo->dobj.dumpId, "TYPE",
+		dumpACL(fout, tyinfo->dobj.dumpId, InvalidDumpId, "TYPE",
 				qtypname, NULL,
 				tyinfo->dobj.namespace->dobj.name,
 				tyinfo->rolname, tyinfo->typacl, tyinfo->rtypacl,
@@ -11160,7 +11230,7 @@ dumpProcLang(Archive *fout, ProcLangInfo *plang)
 					 plang->dobj.catId, 0, plang->dobj.dumpId);
 
 	if (plang->lanpltrusted && plang->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, plang->dobj.catId, plang->dobj.dumpId, "LANGUAGE",
+		dumpACL(fout, plang->dobj.dumpId, InvalidDumpId, "LANGUAGE",
 				qlanname, NULL, NULL,
 				plang->lanowner, plang->lanacl, plang->rlanacl,
 				plang->initlanacl, plang->initrlanacl);
@@ -11832,6 +11902,12 @@ dumpFunc(Archive *fout, FuncInfo *finfo)
 
 	appendPQExpBuffer(q, "\n    %s;\n", asPart->data);
 
+	append_depends_on_extension(fout, q, &finfo->dobj,
+								"pg_catalog.pg_proc", "FUNCTION",
+								psprintf("%s.%s",
+										 fmtId(finfo->dobj.namespace->dobj.name),
+										 funcsig));
+
 	if (dopt->binary_upgrade)
 		binary_upgrade_extension_member(q, &finfo->dobj,
 										"FUNCTION", funcsig,
@@ -11860,7 +11936,7 @@ dumpFunc(Archive *fout, FuncInfo *finfo)
 					 finfo->dobj.catId, 0, finfo->dobj.dumpId);
 
 	if (finfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, finfo->dobj.catId, finfo->dobj.dumpId, "FUNCTION",
+		dumpACL(fout, finfo->dobj.dumpId, InvalidDumpId, "FUNCTION",
 				funcsig, NULL,
 				finfo->dobj.namespace->dobj.name,
 				finfo->rolname, finfo->proacl, finfo->rproacl,
@@ -13842,7 +13918,7 @@ dumpAgg(Archive *fout, AggInfo *agginfo)
 	aggsig = format_function_signature(fout, &agginfo->aggfn, true);
 
 	if (agginfo->aggfn.dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, agginfo->aggfn.dobj.catId, agginfo->aggfn.dobj.dumpId,
+		dumpACL(fout, agginfo->aggfn.dobj.dumpId, InvalidDumpId,
 				"FUNCTION", aggsig, NULL,
 				agginfo->aggfn.dobj.namespace->dobj.name,
 				agginfo->aggfn.rolname, agginfo->aggfn.proacl,
@@ -14246,7 +14322,7 @@ dumpForeignDataWrapper(Archive *fout, FdwInfo *fdwinfo)
 
 	/* Handle the ACL */
 	if (fdwinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, fdwinfo->dobj.catId, fdwinfo->dobj.dumpId,
+		dumpACL(fout, fdwinfo->dobj.dumpId, InvalidDumpId,
 				"FOREIGN DATA WRAPPER", qfdwname, NULL,
 				NULL, fdwinfo->rolname,
 				fdwinfo->fdwacl, fdwinfo->rfdwacl,
@@ -14337,7 +14413,7 @@ dumpForeignServer(Archive *fout, ForeignServerInfo *srvinfo)
 
 	/* Handle the ACL */
 	if (srvinfo->dobj.dump & DUMP_COMPONENT_ACL)
-		dumpACL(fout, srvinfo->dobj.catId, srvinfo->dobj.dumpId,
+		dumpACL(fout, srvinfo->dobj.dumpId, InvalidDumpId,
 				"FOREIGN SERVER", qsrvname, NULL,
 				NULL, srvinfo->rolname,
 				srvinfo->srvacl, srvinfo->rsrvacl,
@@ -14536,8 +14612,9 @@ dumpDefaultACL(Archive *fout, DefaultACLInfo *daclinfo)
 /*----------
  * Write out grant/revoke information
  *
- * 'objCatId' is the catalog ID of the underlying object.
  * 'objDumpId' is the dump ID of the underlying object.
+ * 'altDumpId' can be a second dumpId that the ACL entry must also depend on,
+ *		or InvalidDumpId if there is no need for a second dependency.
  * 'type' must be one of
  *		TABLE, SEQUENCE, FUNCTION, LANGUAGE, SCHEMA, DATABASE, TABLESPACE,
  *		FOREIGN DATA WRAPPER, SERVER, or LARGE OBJECT.
@@ -14560,25 +14637,29 @@ dumpDefaultACL(Archive *fout, DefaultACLInfo *daclinfo)
  * NB: initacls/initracls are needed because extensions can set privileges on
  * an object during the extension's script file and we record those into
  * pg_init_privs as that object's initial privileges.
+ *
+ * Returns the dump ID assigned to the ACL TocEntry, or InvalidDumpId if
+ * no ACL entry was created.
  *----------
  */
-static void
-dumpACL(Archive *fout, CatalogId objCatId, DumpId objDumpId,
+static DumpId
+dumpACL(Archive *fout, DumpId objDumpId, DumpId altDumpId,
 		const char *type, const char *name, const char *subname,
 		const char *nspname, const char *owner,
 		const char *acls, const char *racls,
 		const char *initacls, const char *initracls)
 {
+	DumpId		aclDumpId = InvalidDumpId;
 	DumpOptions *dopt = fout->dopt;
 	PQExpBuffer sql;
 
 	/* Do nothing if ACL dump is not enabled */
 	if (dopt->aclsSkip)
-		return;
+		return InvalidDumpId;
 
 	/* --data-only skips ACLs *except* BLOB ACLs */
 	if (dopt->dataOnly && strcmp(type, "LARGE OBJECT") != 0)
-		return;
+		return InvalidDumpId;
 
 	sql = createPQExpBuffer();
 
@@ -14612,24 +14693,35 @@ dumpACL(Archive *fout, CatalogId objCatId, DumpId objDumpId,
 	if (sql->len > 0)
 	{
 		PQExpBuffer tag = createPQExpBuffer();
+		DumpId		aclDeps[2];
+		int			nDeps = 0;
 
 		if (subname)
 			appendPQExpBuffer(tag, "COLUMN %s.%s", name, subname);
 		else
 			appendPQExpBuffer(tag, "%s %s", type, name);
 
-		ArchiveEntry(fout, nilCatalogId, createDumpId(),
+		aclDeps[nDeps++] = objDumpId;
+		if (altDumpId != InvalidDumpId)
+			aclDeps[nDeps++] = altDumpId;
+
+		aclDumpId = createDumpId();
+
+		ArchiveEntry(fout, nilCatalogId, aclDumpId,
 					 tag->data, nspname,
 					 NULL,
 					 owner ? owner : "",
 					 false, "ACL", SECTION_NONE,
 					 sql->data, "", NULL,
-					 &(objDumpId), 1,
+					 aclDeps, nDeps,
 					 NULL, NULL);
+
 		destroyPQExpBuffer(tag);
 	}
 
 	destroyPQExpBuffer(sql);
+
+	return aclDumpId;
 }
 
 /*
@@ -14951,6 +15043,7 @@ static void
 dumpTable(Archive *fout, TableInfo *tbinfo)
 {
 	DumpOptions *dopt = fout->dopt;
+	DumpId		tableAclDumpId = InvalidDumpId;
 	char	   *namecopy;
 
 	/*
@@ -14972,11 +15065,12 @@ dumpTable(Archive *fout, TableInfo *tbinfo)
 		const char *objtype =
 		(tbinfo->relkind == RELKIND_SEQUENCE) ? "SEQUENCE" : "TABLE";
 
-		dumpACL(fout, tbinfo->dobj.catId, tbinfo->dobj.dumpId,
-				objtype, namecopy, NULL,
-				tbinfo->dobj.namespace->dobj.name, tbinfo->rolname,
-				tbinfo->relacl, tbinfo->rrelacl,
-				tbinfo->initrelacl, tbinfo->initrrelacl);
+		tableAclDumpId =
+			dumpACL(fout, tbinfo->dobj.dumpId, InvalidDumpId,
+					objtype, namecopy, NULL,
+					tbinfo->dobj.namespace->dobj.name, tbinfo->rolname,
+					tbinfo->relacl, tbinfo->rrelacl,
+					tbinfo->initrelacl, tbinfo->initrrelacl);
 	}
 
 	/*
@@ -15060,8 +15154,13 @@ dumpTable(Archive *fout, TableInfo *tbinfo)
 			char	   *attnamecopy;
 
 			attnamecopy = pg_strdup(fmtId(attname));
-			/* Column's GRANT type is always TABLE */
-			dumpACL(fout, tbinfo->dobj.catId, tbinfo->dobj.dumpId,
+
+			/*
+			 * Column's GRANT type is always TABLE.  Each column ACL depends
+			 * on the table-level ACL, since we can restore column ACLs in
+			 * parallel but the table-level ACL has to be done first.
+			 */
+			dumpACL(fout, tbinfo->dobj.dumpId, tableAclDumpId,
 					"TABLE", namecopy, attnamecopy,
 					tbinfo->dobj.namespace->dobj.name, tbinfo->rolname,
 					attacl, rattacl, initattacl, initrattacl);
@@ -15499,6 +15598,14 @@ dumpTableSchema(Archive *fout, TableInfo *tbinfo)
 		}
 		else
 			appendPQExpBufferStr(q, ";\n");
+
+		/* Materialized views can depend on extensions */
+		if (tbinfo->relkind == RELKIND_MATVIEW)
+			append_depends_on_extension(fout, q, &tbinfo->dobj,
+										"pg_catalog.pg_class",
+										tbinfo->relkind == RELKIND_MATVIEW ?
+										"MATERIALIZED VIEW" : "INDEX",
+										qualrelname);
 
 		/*
 		 * To create binary-compatible heap files, we have to ensure the same
@@ -15947,6 +16054,7 @@ dumpIndex(Archive *fout, IndxInfo *indxinfo)
 	PQExpBuffer q;
 	PQExpBuffer delq;
 	char	   *qindxname;
+	char	   *qqindxname;
 
 	if (dopt->dataOnly)
 		return;
@@ -15955,6 +16063,7 @@ dumpIndex(Archive *fout, IndxInfo *indxinfo)
 	delq = createPQExpBuffer();
 
 	qindxname = pg_strdup(fmtId(indxinfo->dobj.name));
+	qqindxname = pg_strdup(fmtQualifiedDumpable(indxinfo));
 
 	/*
 	 * If there's an associated constraint, don't dump the index per se, but
@@ -15988,6 +16097,11 @@ dumpIndex(Archive *fout, IndxInfo *indxinfo)
 							  qindxname);
 		}
 
+		/* Indexes can depend on extensions */
+		append_depends_on_extension(fout, q, &indxinfo->dobj,
+									"pg_catalog.pg_class",
+									"INDEX", qqindxname);
+
 		/* If the index defines identity, we need to record that. */
 		if (indxinfo->indisreplident)
 		{
@@ -15998,8 +16112,7 @@ dumpIndex(Archive *fout, IndxInfo *indxinfo)
 							  qindxname);
 		}
 
-		appendPQExpBuffer(delq, "DROP INDEX %s;\n",
-						  fmtQualifiedDumpable(indxinfo));
+		appendPQExpBuffer(delq, "DROP INDEX %s;\n", qqindxname);
 
 		if (indxinfo->dobj.dump & DUMP_COMPONENT_DEFINITION)
 			ArchiveEntry(fout, indxinfo->dobj.catId, indxinfo->dobj.dumpId,
@@ -16025,6 +16138,7 @@ dumpIndex(Archive *fout, IndxInfo *indxinfo)
 	destroyPQExpBuffer(q);
 	destroyPQExpBuffer(delq);
 	free(qindxname);
+	free(qqindxname);
 }
 
 /*
@@ -16137,6 +16251,11 @@ dumpConstraint(Archive *fout, ConstraintInfo *coninfo)
 			appendPQExpBuffer(q, " INDEX %s;\n",
 							  fmtId(indxinfo->dobj.name));
 		}
+
+		/* Indexes can depend on extensions */
+		append_depends_on_extension(fout, q, &indxinfo->dobj,
+									"pg_catalog.pg_class", "INDEX",
+									fmtQualifiedDumpable(indxinfo));
 
 		appendPQExpBuffer(delq, "ALTER TABLE ONLY %s ",
 						  fmtQualifiedDumpable(tbinfo));
@@ -16617,6 +16736,7 @@ dumpTrigger(Archive *fout, TriggerInfo *tginfo)
 	PQExpBuffer query;
 	PQExpBuffer delqry;
 	PQExpBuffer trigprefix;
+	PQExpBuffer trigidentity;
 	char	   *qtabname;
 	char	   *tgargs;
 	size_t		lentgargs;
@@ -16634,13 +16754,14 @@ dumpTrigger(Archive *fout, TriggerInfo *tginfo)
 	query = createPQExpBuffer();
 	delqry = createPQExpBuffer();
 	trigprefix = createPQExpBuffer();
+	trigidentity = createPQExpBuffer();
 
 	qtabname = pg_strdup(fmtId(tbinfo->dobj.name));
 
-	appendPQExpBuffer(delqry, "DROP TRIGGER %s ",
-					  fmtId(tginfo->dobj.name));
-	appendPQExpBuffer(delqry, "ON %s;\n",
-					  fmtQualifiedDumpable(tbinfo));
+	appendPQExpBuffer(trigidentity, "%s ", fmtId(tginfo->dobj.name));
+	appendPQExpBuffer(trigidentity, "ON %s", fmtQualifiedDumpable(tbinfo));
+
+	appendPQExpBuffer(delqry, "DROP TRIGGER %s;\n", trigidentity->data);
 
 	if (tginfo->tgdef)
 	{
@@ -16767,6 +16888,11 @@ dumpTrigger(Archive *fout, TriggerInfo *tginfo)
 		appendPQExpBufferStr(query, ");\n");
 	}
 
+	/* Triggers can depend on extensions */
+	append_depends_on_extension(fout, query, &tginfo->dobj,
+								"pg_catalog.pg_trigger", "TRIGGER",
+								trigidentity->data);
+
 	if (tginfo->tgenabled != 't' && tginfo->tgenabled != 'O')
 	{
 		appendPQExpBuffer(query, "\nALTER TABLE %s ",
@@ -16816,6 +16942,7 @@ dumpTrigger(Archive *fout, TriggerInfo *tginfo)
 	destroyPQExpBuffer(query);
 	destroyPQExpBuffer(delqry);
 	destroyPQExpBuffer(trigprefix);
+	destroyPQExpBuffer(trigidentity);
 	free(qtabname);
 }
 
@@ -17485,6 +17612,15 @@ getDependencies(Archive *fout)
 #endif
 			continue;
 		}
+
+		/*
+		 * For 'x' dependencies, mark the object for later; we still add the
+		 * normal dependency, for possible ordering purposes.  Currently
+		 * pg_dump_sort.c knows to put extensions ahead of all object types
+		 * that could possibly depend on them, but this is safer.
+		 */
+		if (deptype == 'x')
+			dobj->depends_on_ext = true;
 
 		/*
 		 * Ordinarily, table rowtypes have implicit dependencies on their

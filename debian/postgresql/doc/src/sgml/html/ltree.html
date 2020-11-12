@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Additional Supplied Modules"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -108,7 +108,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139098"
+NAME="AEN139647"
 >F.21.1. Definitions</A
 ></H2
 ><P
@@ -120,8 +120,8 @@ CLASS="FIRSTTERM"
    <TT
 CLASS="LITERAL"
 >A-Za-z0-9_</TT
-> are allowed).  Labels must be less than 256 bytes
-   long.
+> are allowed).
+   Labels must be less than 256 characters long.
   </P
 ><P
 >   Examples: <TT
@@ -142,8 +142,7 @@ CLASS="LITERAL"
 >L1.L2.L3</TT
 >, representing
    a path from the root of a hierarchical tree to a particular node.  The
-   length of a label path must be less than 65kB, but keeping it under 2kB is
-   preferable.
+   length of a label path cannot exceed 65535 labels.
   </P
 ><P
 >   Example: <TT
@@ -524,7 +523,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139212"
+NAME="AEN139761"
 >F.21.2. Operators and Functions</A
 ></H2
 ><P
@@ -1576,7 +1575,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139623"
+NAME="AEN140172"
 >F.21.3. Indexes</A
 ></H2
 ><P
@@ -1703,7 +1702,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139662"
+NAME="AEN140211"
 >F.21.4. Example</A
 ></H2
 ><P
@@ -1847,7 +1846,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139680"
+NAME="AEN140229"
 >F.21.5. Transforms</A
 ></H2
 ><P
@@ -1878,13 +1877,44 @@ CLASS="TYPE"
 > values are mapped to Python lists.
    (The reverse is currently not supported, however.)
   </P
+><DIV
+CLASS="CAUTION"
+><P
+></P
+><TABLE
+CLASS="CAUTION"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Caution</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+><P
+>    It is strongly recommended that the transform extensions be installed in
+    the same schema as <TT
+CLASS="FILENAME"
+>ltree</TT
+>.  Otherwise there are
+    installation-time security hazards if a transform extension's schema
+    contains objects defined by a hostile user.
+   </P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139689"
+NAME="AEN140241"
 >F.21.6. Authors</A
 ></H2
 ><P

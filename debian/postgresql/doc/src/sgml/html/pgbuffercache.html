@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.17 Documentation"
+TITLE="PostgreSQL 9.6.19 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Additional Supplied Modules"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-02-10T22:33:37"></HEAD
+CONTENT="2020-08-10T21:33:48"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.17 Documentation</A
+>PostgreSQL 9.6.19 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -123,7 +123,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139939"
+NAME="AEN140491"
 >F.24.1. The <TT
 CLASS="STRUCTNAME"
 >pg_buffercache</TT
@@ -369,32 +369,33 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN140031"
+NAME="AEN140583"
 >F.24.2. Sample Output</A
 ></H2
 ><PRE
 CLASS="SCREEN"
->regression=# SELECT c.relname, count(*) AS buffers
-             FROM pg_buffercache b INNER JOIN pg_class c
+>regression=# SELECT n.nspname, c.relname, count(*) AS buffers
+             FROM pg_buffercache b JOIN pg_class c
              ON b.relfilenode = pg_relation_filenode(c.oid) AND
                 b.reldatabase IN (0, (SELECT oid FROM pg_database
                                       WHERE datname = current_database()))
-             GROUP BY c.relname
-             ORDER BY 2 DESC
+             JOIN pg_namespace n ON n.oid = c.relnamespace
+             GROUP BY n.nspname, c.relname
+             ORDER BY 3 DESC
              LIMIT 10;
 
-             relname             | buffers
----------------------------------+---------
- tenk2                           |     345
- tenk1                           |     141
- pg_proc                         |      46
- pg_class                        |      45
- pg_attribute                    |      43
- pg_class_relname_nsp_index      |      30
- pg_proc_proname_args_nsp_index  |      28
- pg_attribute_relid_attnam_index |      26
- pg_depend                       |      22
- pg_depend_reference_index       |      20
+  nspname   |        relname         | buffers
+------------+------------------------+---------
+ public     | delete_test_table      |     593
+ public     | delete_test_table_pkey |     494
+ pg_catalog | pg_attribute           |     472
+ public     | quad_poly_tbl          |     353
+ public     | tenk2                  |     349
+ public     | tenk1                  |     349
+ public     | gin_test_idx           |     306
+ pg_catalog | pg_largeobject         |     206
+ public     | gin_test_tbl           |     188
+ public     | spgist_text_tbl        |     182
 (10 rows)</PRE
 ></DIV
 ><DIV
@@ -402,7 +403,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN140034"
+NAME="AEN140586"
 >F.24.3. Authors</A
 ></H2
 ><P

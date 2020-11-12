@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.17 Documentation
-.\"    Source: PostgreSQL 9.6.17
+.\"    Manual: PostgreSQL 9.6.19 Documentation
+.\"    Source: PostgreSQL 9.6.19
 .\"  Language: English
 .\"
-.TH "CREATE TRIGGER" "7" "2020" "PostgreSQL 9.6.17" "PostgreSQL 9.6.17 Documentation"
+.TH "CREATE TRIGGER" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -357,6 +357,9 @@ triggers are not considered\&. Conversely, a command such as
 UPDATE \&.\&.\&. SET x = x \&.\&.\&.
 will fire a trigger on column
 x, even though the column\*(Aqs value did not change\&.
+.PP
+There are a few built\-in trigger functions that can be used to solve common problems without having to write your own trigger code; see
+Section 9.27, \(lqTrigger Functions\(rq, in the documentation\&.
 .PP
 In a
 BEFORE
