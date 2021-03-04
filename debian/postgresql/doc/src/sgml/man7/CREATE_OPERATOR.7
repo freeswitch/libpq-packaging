@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "CREATE OPERATOR" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "CREATE OPERATOR" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -135,6 +135,24 @@ LEFTARG
 should be defined, while for left unary operators only
 RIGHTARG
 should be defined\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBNote\fR
+.ps -1
+.br
+.PP
+Right unary, also called postfix, operators are deprecated and will be removed in
+PostgreSQL
+version 14\&.
+.sp .5v
+.RE
 .PP
 The
 \fIfunction_name\fR

@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "PG_CTL" "1" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "PG_CTL" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -97,7 +97,7 @@ mode, the server that is running in the specified data directory is shut down\&.
 \fB\-m\fR
 option\&.
 \(lqSmart\(rq
-mode waits for all active clients to disconnect and any online backup to finish\&. If the server is in hot standby, recovery and streaming replication will be terminated once all clients have disconnected\&.
+mode disallows new connections, then waits for all existing clients to disconnect and any online backup to finish\&. If the server is in hot standby, recovery and streaming replication will be terminated once all clients have disconnected\&.
 \(lqFast\(rq
 mode (the default) does not wait for clients to disconnect and will terminate an online backup in progress\&. All active transactions are rolled back and clients are forcibly disconnected, then the server is shut down\&.
 \(lqImmediate\(rq

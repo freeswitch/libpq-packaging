@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Full Text Search"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -359,7 +359,7 @@ CLASS="TYPE"
 
 </P><PRE
 CLASS="SCREEN"
->SELECT to_tsvector('english','in the list of stop words');
+>SELECT to_tsvector('english', 'in the list of stop words');
         to_tsvector
 ----------------------------
  'list':3 'stop':5 'word':6</PRE
@@ -370,12 +370,12 @@ CLASS="SCREEN"
 
 </P><PRE
 CLASS="SCREEN"
->SELECT ts_rank_cd (to_tsvector('english','in the list of stop words'), to_tsquery('list &amp; stop'));
+>SELECT ts_rank_cd (to_tsvector('english', 'in the list of stop words'), to_tsquery('list &amp; stop'));
  ts_rank_cd
 ------------
        0.05
 
-SELECT ts_rank_cd (to_tsvector('english','list stop words'), to_tsquery('list &amp; stop'));
+SELECT ts_rank_cd (to_tsvector('english', 'list stop words'), to_tsquery('list &amp; stop'));
  ts_rank_cd
 ------------
         0.1</PRE
@@ -466,12 +466,12 @@ CLASS="COMMAND"
 
 </P><PRE
 CLASS="SCREEN"
->SELECT ts_lexize('public.simple_dict','YeS');
+>SELECT ts_lexize('public.simple_dict', 'YeS');
  ts_lexize
 -----------
  {yes}
 
-SELECT ts_lexize('public.simple_dict','The');
+SELECT ts_lexize('public.simple_dict', 'The');
  ts_lexize
 -----------
  {}</PRE
@@ -496,12 +496,12 @@ CLASS="LITERAL"
 CLASS="SCREEN"
 >ALTER TEXT SEARCH DICTIONARY public.simple_dict ( Accept = false );
 
-SELECT ts_lexize('public.simple_dict','YeS');
+SELECT ts_lexize('public.simple_dict', 'YeS');
  ts_lexize
 -----------
 
 
-SELECT ts_lexize('public.simple_dict','The');
+SELECT ts_lexize('public.simple_dict', 'The');
  ts_lexize
 -----------
  {}</PRE
@@ -748,7 +748,7 @@ indices index*</PRE
 </P><PRE
 CLASS="SCREEN"
 >mydb=# CREATE TEXT SEARCH DICTIONARY syn (template=synonym, synonyms='synonym_sample');
-mydb=# SELECT ts_lexize('syn','indices');
+mydb=# SELECT ts_lexize('syn', 'indices');
  ts_lexize
 -----------
  {index}
@@ -756,13 +756,13 @@ mydb=# SELECT ts_lexize('syn','indices');
 
 mydb=# CREATE TEXT SEARCH CONFIGURATION tst (copy=simple);
 mydb=# ALTER TEXT SEARCH CONFIGURATION tst ALTER MAPPING FOR asciiword WITH syn;
-mydb=# SELECT to_tsvector('tst','indices');
+mydb=# SELECT to_tsvector('tst', 'indices');
  to_tsvector
 -------------
  'index':1
 (1 row)
 
-mydb=# SELECT to_tsquery('tst','indices');
+mydb=# SELECT to_tsquery('tst', 'indices');
  to_tsquery
 ------------
  'index':*
@@ -774,7 +774,7 @@ mydb=# SELECT 'indexes are very useful'::tsvector;
  'are' 'indexes' 'useful' 'very'
 (1 row)
 
-mydb=# SELECT 'indexes are very useful'::tsvector @@ to_tsquery('tst','indices');
+mydb=# SELECT 'indexes are very useful'::tsvector @@ to_tsquery('tst', 'indices');
  ?column?
 ----------
  t

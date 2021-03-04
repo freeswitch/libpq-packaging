@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-CREATEROLE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN81875"
+NAME="AEN82012"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN81875"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN81878"
+NAME="AEN82015"
 ></A
 ><H2
 >Synopsis</H2
@@ -199,7 +199,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN81893"
+NAME="AEN82030"
 ></A
 ><H2
 >Description</H2
@@ -242,7 +242,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN81904"
+NAME="AEN82041"
 ></A
 ><H2
 >Parameters</H2
@@ -438,6 +438,11 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >NOREPLICATION</TT
 > is the default.
+        You must be a superuser to create a new role having the
+        <TT
+CLASS="LITERAL"
+>REPLICATION</TT
+> attribute.
        </P
 ></DD
 ><DT
@@ -455,7 +460,14 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >NOBYPASSRLS</TT
 > is the default.
-        Note that pg_dump will set <TT
+        You must be a superuser to create a new role having
+        the <TT
+CLASS="LITERAL"
+>BYPASSRLS</TT
+> attribute.
+       </P
+><P
+>        Note that pg_dump will set <TT
 CLASS="LITERAL"
 >row_security</TT
 > to
@@ -464,8 +476,8 @@ CLASS="LITERAL"
 >OFF</TT
 > by default, to ensure all contents of a table are
         dumped out.  If the user running pg_dump does not have appropriate
-        permissions, an error will be returned.  The superuser and owner of the
-        table being dumped always bypass RLS.
+        permissions, an error will be returned.  However, superusers and the
+        owner of the table being dumped always bypass RLS.
        </P
 ></DD
 ><DT
@@ -709,7 +721,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82062"
+NAME="AEN82202"
 ></A
 ><H2
 >Notes</H2
@@ -892,7 +904,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82105"
+NAME="AEN82245"
 ></A
 ><H2
 >Examples</H2
@@ -941,7 +953,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82118"
+NAME="AEN82258"
 ></A
 ><H2
 >Compatibility</H2
@@ -1001,7 +1013,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82132"
+NAME="AEN82272"
 ></A
 ><H2
 >See Also</H2

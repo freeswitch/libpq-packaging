@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Type Conversion"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -250,17 +250,19 @@ converted to a common type so that the <TT
 CLASS="LITERAL"
 >CASE</TT
 > expression as a whole
-has a known output type.  The same holds for <TT
+has a known output type.  Some other constructs, such
+as <TT
 CLASS="LITERAL"
->ARRAY</TT
-> constructs,
-and for the <CODE
+>ARRAY[]</TT
+> and the <CODE
 CLASS="FUNCTION"
 >GREATEST</CODE
-> and <CODE
+>
+and <CODE
 CLASS="FUNCTION"
 >LEAST</CODE
-> functions.</P
+> functions, likewise require determination of a
+common type for several subexpressions.</P
 ></DD
 ></DL
 ></DIV

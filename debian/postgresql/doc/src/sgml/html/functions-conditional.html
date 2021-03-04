@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -463,6 +463,14 @@ CLASS="LITERAL"
 >.
   </P
 ><P
+>    The arguments must all be convertible to a common data type, which
+    will be the type of the result (see
+    <A
+HREF="typeconv-union-case.html"
+>Section 10.5</A
+> for details).
+   </P
+><P
 >    Like a <TT
 CLASS="TOKEN"
 >CASE</TT
@@ -541,9 +549,7 @@ CLASS="FUNCTION"
 CLASS="PROGRAMLISTING"
 >SELECT NULLIF(value, '(none)') ...</PRE
 ><P>
-  </P
-><P
->   In this example, if <TT
+   In this example, if <TT
 CLASS="LITERAL"
 >value</TT
 > is <TT
@@ -555,6 +561,66 @@ CLASS="LITERAL"
 >value</TT
 >
    is returned.
+  </P
+><P
+>   The two arguments must be of comparable types.
+   To be specific, they are compared exactly as if you had
+   written <TT
+CLASS="LITERAL"
+><TT
+CLASS="REPLACEABLE"
+><I
+>value1</I
+></TT
+>
+   = <TT
+CLASS="REPLACEABLE"
+><I
+>value2</I
+></TT
+></TT
+>, so there must be a
+   suitable <TT
+CLASS="LITERAL"
+>=</TT
+> operator available.
+  </P
+><P
+>   The result has the same type as the first argument &mdash; but there is
+   a subtlety.  What is actually returned is the first argument of the
+   implied <TT
+CLASS="LITERAL"
+>=</TT
+> operator, and in some cases that will have
+   been promoted to match the second argument's type.  For
+   example, <TT
+CLASS="LITERAL"
+>NULLIF(1, 2.2)</TT
+> yields <TT
+CLASS="TYPE"
+>numeric</TT
+>,
+   because there is no <TT
+CLASS="TYPE"
+>integer</TT
+> <TT
+CLASS="LITERAL"
+>=</TT
+>
+   <TT
+CLASS="TYPE"
+>numeric</TT
+> operator,
+   only <TT
+CLASS="TYPE"
+>numeric</TT
+> <TT
+CLASS="LITERAL"
+>=</TT
+> <TT
+CLASS="TYPE"
+>numeric</TT
+>.
   </P
 ></DIV
 ><DIV

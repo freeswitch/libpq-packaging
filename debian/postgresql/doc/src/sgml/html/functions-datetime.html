@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -2568,8 +2568,8 @@ CLASS="LITERAL"
 ><P
 >        The seconds field, including fractional parts (0 -
         59<A
-NAME="AEN15565"
-HREF="#FTN.AEN15565"
+NAME="AEN15604"
+HREF="#FTN.AEN15604"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -3577,7 +3577,7 @@ CLASS="LITERAL"
 CLASS="PROGRAMLISTING"
 >SELECT CURRENT_TIMESTAMP;
 SELECT now();
-SELECT TIMESTAMP 'now';  -- incorrect for use with DEFAULT</PRE
+SELECT TIMESTAMP 'now';  -- but see tip below</PRE
 ><P>
    </P
 ><DIV
@@ -3587,11 +3587,12 @@ CLASS="TIP"
 ><P
 ><B
 >Tip: </B
->      You do not want to use the third form when specifying a <TT
+>      Do not use the third form when specifying a value to be evaluated later,
+      for example in a <TT
 CLASS="LITERAL"
 >DEFAULT</TT
->
-      clause while creating a table.  The system will convert <TT
+> clause for a table column.
+      The system will convert <TT
 CLASS="LITERAL"
 >now</TT
 >
@@ -3604,6 +3605,10 @@ CLASS="TYPE"
       forms will not be evaluated until the default value is used,
       because they are function calls.  Thus they will give the desired
       behavior of defaulting to the time of row insertion.
+      (See also <A
+HREF="datatype-datetime.html#DATATYPE-DATETIME-SPECIAL-VALUES"
+>Section 8.5.1.4</A
+>.)
      </P
 ></BLOCKQUOTE
 ></DIV
@@ -3743,8 +3748,8 @@ ALIGN="LEFT"
 VALIGN="TOP"
 WIDTH="5%"
 ><A
-NAME="FTN.AEN15565"
-HREF="functions-datetime.html#AEN15565"
+NAME="FTN.AEN15604"
+HREF="functions-datetime.html#AEN15604"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN

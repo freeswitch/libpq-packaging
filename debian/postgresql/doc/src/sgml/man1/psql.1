@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "PSQL" "1" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "PSQL" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -177,19 +177,10 @@ EOF
 .RS 4
 Specifies the name of the database to connect to\&. This is equivalent to specifying
 \fIdbname\fR
-as the first non\-option argument on the command line\&.
-.sp
-If this parameter contains an
-=
-sign or starts with a valid
-URI
-prefix (postgresql://
-or
-postgres://), it is treated as a
-\fIconninfo\fR
-string\&. See
-Section 32.1.1, \(lqConnection Strings\(rq, in the documentation
-for more information\&.
+as the first non\-option argument on the command line\&. The
+\fIdbname\fR
+can be a
+connection string\&. If so, connection string parameters will override any conflicting command line options\&.
 .RE
 .PP
 \fB\-e\fR
@@ -446,7 +437,7 @@ version and exit\&.
 .br
 \fB\-\-no\-password\fR
 .RS 4
-Never issue a password prompt\&. If the server requires password authentication and a password is not available by other means such as a
+Never issue a password prompt\&. If the server requires password authentication and a password is not available from other sources such as a
 \&.pgpass
 file, the connection attempt will fail\&. This option can be useful in batch jobs and scripts where no user is present to enter a password\&.
 .sp
@@ -461,11 +452,13 @@ as well as the initial connection attempt\&.
 .RS 4
 Force
 psql
-to prompt for a password before connecting to a database\&.
+to prompt for a password before connecting to a database, even if the password will not be used\&.
 .sp
-This option is never essential, since
+If the server requires password authentication and a password is not available from other sources such as a
+\&.pgpass
+file,
 psql
-will automatically prompt for a password if the server demands password authentication\&. However,
+will prompt for a password in any case\&. However,
 psql
 will waste a connection attempt finding out that the server wants a password\&. In some cases it is worth typing
 \fB\-W\fR
@@ -559,7 +552,7 @@ configuration variables\&.
 .SH "EXIT STATUS"
 .PP
 psql
-returns 0 to the shell if it finished normally, 1 if a fatal error of its own occurs (e\&.g\&. out of memory, file not found), 2 if the connection to the server went bad and the session was not interactive, and 3 if an error occurred in a script and the variable
+returns 0 to the shell if it finished normally, 1 if a fatal error of its own occurs (e\&.g\&., out of memory, file not found), 2 if the connection to the server went bad and the session was not interactive, and 3 if an error occurred in a script and the variable
 \fION_ERROR_STOP\fR
 was set\&.
 .SH "USAGE"
@@ -641,7 +634,7 @@ is currently connected, followed by the string
 .\}
 .nf
 $ \fBpsql testdb\fR
-psql (9\&.6\&.19)
+psql (9\&.6\&.20)
 Type "help" for help\&.
 
 testdb=>
@@ -745,20 +738,12 @@ for a more general solution\&.
 .RS 4
 Establishes a new connection to a
 PostgreSQL
-server\&. The connection parameters to use can be specified either using a positional syntax, or using
+server\&. The connection parameters to use can be specified either using a positional syntax (one or more of database name, user, host, and port), or using a
 \fIconninfo\fR
-connection strings as detailed in
-Section 32.1.1, \(lqConnection Strings\(rq, in the documentation\&.
+connection string as detailed in
+Section 32.1.1, \(lqConnection Strings\(rq, in the documentation\&. If no arguments are given, a new connection is made using the same parameters as before\&.
 .sp
-Where the command omits database name, user, host, or port, the new connection can reuse values from the previous connection\&. By default, values from the previous connection are reused except when processing a
-\fIconninfo\fR
-string\&. Passing a first argument of
-\-reuse\-previous=on
-or
-\-reuse\-previous=off
-overrides that default\&. When the command neither specifies nor reuses a particular parameter, the
-libpq
-default is used\&. Specifying any of
+Specifying any of
 \fIdbname\fR,
 \fIusername\fR,
 \fIhost\fR
@@ -768,9 +753,26 @@ as
 \-
 is equivalent to omitting that parameter\&.
 .sp
-If the new connection is successfully made, the previous connection is closed\&. If the connection attempt failed (wrong user name, access denied, etc\&.), the previous connection will only be kept if
+The new connection can re\-use connection parameters from the previous connection; not only database name, user, host, and port, but other settings such as
+\fIsslmode\fR\&. By default, parameters are re\-used in the positional syntax, but not when a
+\fIconninfo\fR
+string is given\&. Passing a first argument of
+\-reuse\-previous=on
+or
+\-reuse\-previous=off
+overrides that default\&. If parameters are re\-used, then any parameter not explicitly specified as a positional parameter or in the
+\fIconninfo\fR
+string is taken from the existing connection\*(Aqs parameters\&. An exception is that if the
+\fIhost\fR
+setting is changed from its previous value using the positional syntax, any
+\fIhostaddr\fR
+setting present in the existing connection\*(Aqs parameters is dropped\&. When the command neither specifies nor reuses a particular parameter, the
+libpq
+default is used\&.
+.sp
+If the new connection is successfully made, the previous connection is closed\&. If the connection attempt fails (wrong user name, access denied, etc\&.), the previous connection will be kept if
 psql
-is in interactive mode\&. When executing a non\-interactive script, processing will immediately stop with an error\&. This distinction was chosen as a user convenience against typos on the one hand, and a safety mechanism that scripts are not accidentally acting on the wrong database on the other hand\&.
+is in interactive mode\&. But when executing a non\-interactive script, processing will immediately stop with an error\&. This distinction was chosen as a user convenience against typos on the one hand, and a safety mechanism that scripts are not accidentally acting on the wrong database on the other hand\&.
 .sp
 Examples:
 .sp
@@ -781,6 +783,7 @@ Examples:
 => \ec mydb myuser host\&.dom 6432
 => \ec service=foo
 => \ec "host=localhost port=5432 dbname=mydb connect_timeout=10 sslmode=disable"
+=> \ec \-reuse\-previous=on sslmode=require    \-\- changes only sslmode
 => \ec postgresql://tom@localhost/mydb?application_name=myapp
 .fi
 .if n \{\
@@ -2196,7 +2199,7 @@ is given, the table attributes are unset\&.
 .sp
 In
 latex\-longtable
-format, this controls the proportional width of each column containing a left\-aligned data type\&. It is specified as a whitespace\-separated list of values, e\&.g\&.
+format, this controls the proportional width of each column containing a left\-aligned data type\&. It is specified as a whitespace\-separated list of values, e\&.g\&.,
 \*(Aq0\&.2 0\&.2 0\&.6\*(Aq\&. Unspecified output columns use the last specified value\&.
 .RE
 .PP
@@ -3315,7 +3318,7 @@ exits and is reloaded when
 psql
 starts up\&. Tab\-completion is also supported, although the completion logic makes no claim to be an
 SQL
-parser\&. The queries generated by tab\-completion can also interfere with other SQL commands, e\&.g\&.
+parser\&. The queries generated by tab\-completion can also interfere with other SQL commands, e\&.g\&.,
 SET TRANSACTION ISOLATION LEVEL\&. If for some reason you do not like the tab completion, you can turn it off by putting this in a file named
 \&.inputrc
 in your home directory:

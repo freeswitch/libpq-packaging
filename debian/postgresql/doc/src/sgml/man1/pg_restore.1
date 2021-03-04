@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "PG_RESTORE" "1" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "PG_RESTORE" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -112,7 +112,10 @@ commands\&. All data is restored into the database name that appears in the arch
 .RS 4
 Connect to database
 \fIdbname\fR
-and restore directly into the database\&.
+and restore directly into the database\&. The
+\fIdbname\fR
+can be a
+connection string\&. If so, connection string parameters will override any conflicting command line options\&.
 .RE
 .PP
 \fB\-e\fR
@@ -439,7 +442,7 @@ does not support row security\&.
 .PP
 \fB\-\-if\-exists\fR
 .RS 4
-Use conditional commands (i\&.e\&. add an
+Use conditional commands (i\&.e\&., add an
 IF EXISTS
 clause) when cleaning database objects\&. This option is not valid unless
 \fB\-\-clean\fR

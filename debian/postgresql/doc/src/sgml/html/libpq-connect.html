@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="libpq - C Library"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -228,46 +228,6 @@ CLASS="FUNCTION"
 ></TABLE
 ></DIV
 >
-
-   </P><DIV
-CLASS="NOTE"
-><BLOCKQUOTE
-CLASS="NOTE"
-><P
-><B
->Note: </B
->     On Windows, there is a way to improve performance if a single
-     database connection is repeatedly started and shutdown.  Internally,
-     libpq calls <CODE
-CLASS="FUNCTION"
->WSAStartup()</CODE
-> and <CODE
-CLASS="FUNCTION"
->WSACleanup()</CODE
-> for connection startup
-     and shutdown, respectively.  <CODE
-CLASS="FUNCTION"
->WSAStartup()</CODE
-> increments an internal
-     Windows library reference count which is decremented by <CODE
-CLASS="FUNCTION"
->WSACleanup()</CODE
->.
-     When the reference count is just one, calling <CODE
-CLASS="FUNCTION"
->WSACleanup()</CODE
-> frees
-     all resources and all DLLs are unloaded.  This is an expensive
-     operation.  To avoid this, an application can manually call
-     <CODE
-CLASS="FUNCTION"
->WSAStartup()</CODE
-> so resources will not be freed when the last database
-     connection is closed.
-    </P
-></BLOCKQUOTE
-></DIV
-><P>
 
    <P
 ></P
@@ -1462,7 +1422,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45830"
+NAME="AEN45964"
 >32.1.1.1. Keyword/Value Connection Strings</A
 ></H3
 ><P
@@ -1505,7 +1465,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45841"
+NAME="AEN45975"
 >32.1.1.2. Connection URIs</A
 ></H3
 ><P

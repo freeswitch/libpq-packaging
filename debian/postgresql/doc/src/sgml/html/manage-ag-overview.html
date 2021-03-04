@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Managing Databases"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -109,27 +109,60 @@ CLASS="LITERAL"
    such as a function).
   </P
 ><P
->   When connecting to the database server, a client must specify in
-   its connection request the name of the database it wants to connect
-   to. It is not possible to access more than one database per
-   connection. However, an application is not restricted in the number of
-   connections it opens to the same or other databases.  Databases are
-   physically separated and access control is managed at the
-   connection level.  If one <SPAN
+>   When connecting to the database server, a client must specify the
+   database name in its connection request.
+   It is not possible to access more than one database per
+   connection. However, clients can open multiple connections to
+   the same database, or different databases.
+   Database-level security has two components: access control
+   (see <A
+HREF="auth-pg-hba-conf.html"
+>Section 20.1</A
+>), managed at the
+   connection level, and authorization control
+   (see <A
+HREF="ddl-priv.html"
+>Section 5.6</A
+>), managed via the grant system.
+   Foreign data wrappers (see <A
+HREF="postgres-fdw.html"
+>postgres_fdw</A
+>)
+   allow for objects within one database to act as proxies for objects in
+   other database or clusters.
+   The older dblink module (see <A
+HREF="dblink.html"
+>dblink</A
+>) provides a similar capability.
+   By default, all users can connect to all databases using all connection methods.
+  </P
+><P
+>   If one <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
-> server
-   instance is to house projects or users that should be separate and
-   for the most part unaware of each other, it is therefore
-   recommended to put them into separate databases.  If the projects
-   or users are interrelated and should be able to use each other's
-   resources, they should be put in the same database but possibly
-   into separate schemas.  Schemas are a purely logical structure and who can
-   access what is managed by the privilege system.  More information about
-   managing schemas is in <A
+> server cluster is planned to contain
+   unrelated projects or users that should be, for the most part, unaware
+   of each other, it is recommended to put them into separate databases and
+   adjust authorizations and access controls accordingly.
+   If the projects or users are interrelated, and thus should be able to use
+   each other's resources, they should be put in the same database but probably
+   into separate schemas;  this provides a modular structure with namespace
+   isolation and authorization control.
+   More information about managing schemas is in <A
 HREF="ddl-schemas.html"
 >Section 5.8</A
 >.
+  </P
+><P
+>   While multiple databases can be created within a single cluster, it is advised
+   to consider carefully whether the benefits outweigh the risks and limitations.
+   In particular, the impact that having a shared WAL (see <A
+HREF="wal.html"
+>Chapter 30</A
+>)
+   has on backup and recovery options. While individual databases in the cluster
+   are isolated when considered from the user's perspective, they are closely bound
+   from the database administrator's point-of-view.
   </P
 ><P
 >   Databases are created with the <TT

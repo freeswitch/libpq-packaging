@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "ALTER ROLE" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "ALTER ROLE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -74,7 +74,10 @@ and
 \fBREVOKE\fR(7)
 for that\&.) Attributes not mentioned in the command retain their previous settings\&. Database superusers can change any of these settings for any role\&. Roles having
 CREATEROLE
-privilege can change any of these settings, but only for non\-superuser and non\-replication roles\&. Ordinary roles can only change their own password\&.
+privilege can change any of these settings except
+SUPERUSER,
+REPLICATION, and
+BYPASSRLS; but only for non\-superuser and non\-replication roles\&. Ordinary roles can only change their own password\&.
 .PP
 The second variant changes the name of the role\&. Database superusers can rename any role\&. Roles having
 CREATEROLE

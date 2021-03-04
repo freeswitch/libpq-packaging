@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Server Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN103679"
+NAME="AEN103829"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN103683"
+NAME="AEN103833"
 ></A
 ><H2
 >Synopsis</H2
@@ -159,7 +159,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103704"
+NAME="AEN103854"
 ></A
 ><H2
 >Description</H2
@@ -179,11 +179,11 @@ CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
 >
   major version without the data dump/reload typically required for
-  major version upgrades, e.g. from 8.4.7 to the current major release
+  major version upgrades, e.g., from 8.4.7 to the current major release
   of <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
->.  It is not required for minor version upgrades, e.g. from
+>.  It is not required for minor version upgrades, e.g., from
   9.0.1 to 9.0.4.
  </P
 ><P
@@ -208,7 +208,7 @@ CLASS="APPLICATION"
 CLASS="APPLICATION"
 >pg_upgrade</SPAN
 > does its best to
-  make sure the old and new clusters are binary-compatible, e.g.  by
+  make sure the old and new clusters are binary-compatible, e.g.,  by
   checking for compatible compile-time settings, including 32/64-bit
   binaries.  It is important that
   any external modules are also binary compatible, though this cannot
@@ -228,7 +228,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103720"
+NAME="AEN103870"
 ></A
 ><H2
 >Options</H2
@@ -584,7 +584,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103866"
+NAME="AEN104016"
 ></A
 ><H2
 >Usage</H2
@@ -606,7 +606,7 @@ CLASS="STEP"
 >Optionally move the old cluster</B
 ></P
 ><P
->     If you are using a version-specific installation directory, e.g.
+>     If you are using a version-specific installation directory, e.g.,
      <TT
 CLASS="FILENAME"
 >/opt/PostgreSQL/9.1</TT
@@ -614,7 +614,7 @@ CLASS="FILENAME"
      graphical installers all use version-specific installation directories.
     </P
 ><P
->     If your installation directory is not version-specific, e.g.
+>     If your installation directory is not version-specific, e.g.,
      <TT
 CLASS="FILENAME"
 >/usr/local/pgsql</TT
@@ -714,7 +714,7 @@ CLASS="STEP"
 ></P
 ><P
 >     Install any custom shared object files (or DLLs) used by the old cluster
-     into the new cluster, e.g. <TT
+     into the new cluster, e.g., <TT
 CLASS="FILENAME"
 >pgcrypto.so</TT
 >,
@@ -722,7 +722,7 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >contrib</TT
 >
-     or some other source. Do not install the schema definitions, e.g.
+     or some other source. Do not install the schema definitions, e.g.,
      <TT
 CLASS="COMMAND"
 >CREATE EXTENSION pgcrypto</TT
@@ -1083,16 +1083,23 @@ CLASS="STEP"
 >Save configuration files</B
 ></P
 ><P
->       Save any configuration files from the old standbys' data
-       directories you need to keep, e.g.  <TT
+>       Save any configuration files from the old standbys' configuration
+       directories you need to keep, e.g.,  <TT
 CLASS="FILENAME"
 >postgresql.conf</TT
+>
+       (and any files included by it), <TT
+CLASS="FILENAME"
+>postgresql.auto.conf</TT
 >,
        <TT
 CLASS="LITERAL"
 >recovery.conf</TT
->, because these will be overwritten or
-       removed in the next step.
+>, <TT
+CLASS="LITERAL"
+>pg_hba.conf</TT
+>,
+       because these will be overwritten or removed in the next step.
       </P
 ></LI
 ><LI
@@ -1149,7 +1156,7 @@ CLASS="EMPHASIS"
 CLASS="APPLICATION"
 >rsync</SPAN
 > manual page for details on specifying the
-       remote directory, e.g.
+       remote directory, e.g.,
 
 </P><PRE
 CLASS="PROGRAMLISTING"
@@ -1254,9 +1261,13 @@ CLASS="FILENAME"
 >pg_hba.conf</TT
 >, restore its original settings.
      It might also be necessary to adjust other configuration files in the new
-     cluster to match the old cluster, e.g. <TT
+     cluster to match the old cluster, e.g., <TT
 CLASS="FILENAME"
 >postgresql.conf</TT
+>
+     (and any files included by it), <TT
+CLASS="FILENAME"
+>postgresql.auto.conf</TT
 >.
     </P
 ></LI
@@ -1355,7 +1366,7 @@ CLASS="COMMAND"
 > completes. (Automatic deletion is not
      possible if you have user-defined tablespaces inside the old data
      directory.)  You can also delete the old installation directories
-     (e.g. <TT
+     (e.g., <TT
 CLASS="FILENAME"
 >bin</TT
 >, <TT
@@ -1477,7 +1488,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN104075"
+NAME="AEN104228"
 ></A
 ><H2
 >Notes</H2
@@ -1542,7 +1553,7 @@ CLASS="PRODUCTNAME"
 CLASS="APPLICATION"
 >pg_upgrade</SPAN
 >, and
-   pass the configuration directory location to the server, e.g.
+   pass the configuration directory location to the server, e.g.,
    <TT
 CLASS="LITERAL"
 >-d /real-data-directory -o '-D /configuration-directory'</TT
@@ -1579,7 +1590,7 @@ CLASS="COMMAND"
 >rsync</TT
 > only has file modification-time
    granularity of one second.)  You might want to exclude some
-   files, e.g. <TT
+   files, e.g., <TT
 CLASS="FILENAME"
 >postmaster.pid</TT
 >, as documented in <A
@@ -1595,7 +1606,7 @@ HREF="continuous-archiving.html#BACKUP-LOWLEVEL-BASE-BACKUP"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN104103"
+NAME="AEN104256"
 ></A
 ><H2
 >See Also</H2

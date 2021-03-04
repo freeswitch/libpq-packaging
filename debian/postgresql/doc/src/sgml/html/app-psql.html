@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN99125"
+NAME="AEN99264"
 ></A
 ><H2
 >Name</H2
@@ -113,7 +113,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN99130"
+NAME="AEN99269"
 ></A
 ><H2
 >Synopsis</H2
@@ -142,7 +142,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN99139"
+NAME="AEN99278"
 ></A
 ><H2
 >Description</H2
@@ -438,32 +438,18 @@ CLASS="REPLACEABLE"
 >dbname</I
 ></TT
 > as the first non-option
-       argument on the command line.
-      </P
-><P
->       If this parameter contains an <TT
-CLASS="SYMBOL"
->=</TT
-> sign or starts
-       with a valid <ACRONYM
-CLASS="ACRONYM"
->URI</ACRONYM
-> prefix
-       (<TT
-CLASS="LITERAL"
->postgresql://</TT
+       argument on the command line.  The <TT
+CLASS="REPLACEABLE"
+><I
+>dbname</I
+></TT
 >
-       or <TT
-CLASS="LITERAL"
->postgres://</TT
->), it is treated as a
-       <TT
-CLASS="PARAMETER"
->conninfo</TT
-> string. See <A
+       can be a <A
 HREF="libpq-connect.html#LIBPQ-CONNSTRING"
->Section 32.1.1</A
-> for more information.
+>connection string</A
+>.
+       If so, connection string parameters will override any conflicting
+       command line options.
       </P
 ></DD
 ><DT
@@ -1124,7 +1110,7 @@ CLASS="OPTION"
 ><DD
 ><P
 >       Never issue a password prompt.  If the server requires password
-       authentication and a password is not available by other means
+       authentication and a password is not available from other sources
        such as a <TT
 CLASS="FILENAME"
 >.pgpass</TT
@@ -1155,15 +1141,20 @@ CLASS="OPTION"
 CLASS="APPLICATION"
 >psql</SPAN
 > to prompt for a
-       password before connecting to a database.
+       password before connecting to a database, even if the password will
+       not be used.
       </P
 ><P
->       This option is never essential, since <SPAN
+>       If the server requires password authentication and a password is not
+       available from other sources such as a <TT
+CLASS="FILENAME"
+>.pgpass</TT
+>
+       file, <SPAN
 CLASS="APPLICATION"
 >psql</SPAN
->
-       will automatically prompt for a password if the server demands
-       password authentication.  However, <SPAN
+> will prompt for a
+       password in any case.  However, <SPAN
 CLASS="APPLICATION"
 >psql</SPAN
 >
@@ -1365,7 +1356,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN99552"
+NAME="AEN99687"
 ></A
 ><H2
 >Exit Status</H2
@@ -1374,7 +1365,7 @@ NAME="AEN99552"
 CLASS="APPLICATION"
 >psql</SPAN
 > returns 0 to the shell if it
-   finished normally, 1 if a fatal error of its own occurs (e.g. out of memory,
+   finished normally, 1 if a fatal error of its own occurs (e.g., out of memory,
    file not found), 2 if the connection to the server went bad
    and the session was not interactive, and 3 if an error occurred in a
    script and the variable <TT
@@ -1386,7 +1377,7 @@ CLASS="VARNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN99557"
+NAME="AEN99692"
 ></A
 ><H2
 >Usage</H2
@@ -1572,7 +1563,7 @@ CLASS="PROGRAMLISTING"
 CLASS="USERINPUT"
 >psql testdb</KBD
 >
-psql (9.6.19)
+psql (9.6.20)
 Type "help" for help.
 
 testdb=&gt;</PRE
@@ -1872,40 +1863,22 @@ CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
 >
         server.  The connection parameters to use can be specified either
-        using a positional syntax, or using <TT
+        using a positional syntax (one or more of database name, user,
+        host, and port), or using a <TT
 CLASS="REPLACEABLE"
 ><I
 >conninfo</I
 ></TT
-> connection
-        strings as detailed in <A
+>
+        connection string as detailed in
+        <A
 HREF="libpq-connect.html#LIBPQ-CONNSTRING"
 >Section 32.1.1</A
->.
+>.  If no arguments are given, a
+        new connection is made using the same parameters as before.
         </P
 ><P
->        Where the command omits database name, user, host, or port, the new
-        connection can reuse values from the previous connection.  By default,
-        values from the previous connection are reused except when processing
-        a <TT
-CLASS="REPLACEABLE"
-><I
->conninfo</I
-></TT
-> string.  Passing a first argument
-        of <TT
-CLASS="LITERAL"
->-reuse-previous=on</TT
->
-        or <TT
-CLASS="LITERAL"
->-reuse-previous=off</TT
-> overrides that default.
-        When the command neither specifies nor reuses a particular parameter,
-        the <SPAN
-CLASS="APPLICATION"
->libpq</SPAN
-> default is used.  Specifying any
+>        Specifying any
         of <TT
 CLASS="REPLACEABLE"
 ><I
@@ -1936,14 +1909,66 @@ CLASS="LITERAL"
 > is equivalent to omitting that parameter.
         </P
 ><P
+>        The new connection can re-use connection parameters from the previous
+        connection; not only database name, user, host, and port, but other
+        settings such as <TT
+CLASS="REPLACEABLE"
+><I
+>sslmode</I
+></TT
+>.  By default,
+        parameters are re-used in the positional syntax, but not when
+        a <TT
+CLASS="REPLACEABLE"
+><I
+>conninfo</I
+></TT
+> string is given.  Passing a
+        first argument of <TT
+CLASS="LITERAL"
+>-reuse-previous=on</TT
+>
+        or <TT
+CLASS="LITERAL"
+>-reuse-previous=off</TT
+> overrides that default.  If
+        parameters are re-used, then any parameter not explicitly specified as
+        a positional parameter or in the <TT
+CLASS="REPLACEABLE"
+><I
+>conninfo</I
+></TT
+>
+        string is taken from the existing connection's parameters.  An
+        exception is that if the <TT
+CLASS="REPLACEABLE"
+><I
+>host</I
+></TT
+> setting
+        is changed from its previous value using the positional syntax,
+        any <TT
+CLASS="REPLACEABLE"
+><I
+>hostaddr</I
+></TT
+> setting present in the
+        existing connection's parameters is dropped.
+        When the command neither specifies nor reuses a particular parameter,
+        the <SPAN
+CLASS="APPLICATION"
+>libpq</SPAN
+> default is used.
+        </P
+><P
 >        If the new connection is successfully made, the previous
         connection is closed.
-        If the connection attempt failed (wrong user name, access
-        denied, etc.), the previous connection will only be kept if
+        If the connection attempt fails (wrong user name, access
+        denied, etc.), the previous connection will be kept if
         <SPAN
 CLASS="APPLICATION"
 >psql</SPAN
-> is in interactive mode. When
+> is in interactive mode. But when
         executing a non-interactive script, processing will
         immediately stop with an error. This distinction was chosen as
         a user convenience against typos on the one hand, and a safety
@@ -1958,6 +1983,7 @@ CLASS="PROGRAMLISTING"
 >=&gt; \c mydb myuser host.dom 6432
 =&gt; \c service=foo
 =&gt; \c "host=localhost port=5432 dbname=mydb connect_timeout=10 sslmode=disable"
+=&gt; \c -reuse-previous=on sslmode=require    -- changes only sslmode
 =&gt; \c postgresql://tom@localhost/mydb?application_name=myapp</PRE
 ></DD
 ><DT
@@ -5672,7 +5698,7 @@ CLASS="LITERAL"
 > format, this controls
           the proportional width of each column containing a left-aligned
           data type.  It is specified as a whitespace-separated list of values,
-          e.g. <TT
+          e.g., <TT
 CLASS="LITERAL"
 >'0.2 0.2 0.6'</TT
 >.  Unspecified output columns
@@ -6688,7 +6714,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN100998"
+NAME="AEN101138"
 ></A
 ><H3
 >Advanced Features</H3
@@ -8098,7 +8124,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT3"
 ><A
-NAME="AEN101423"
+NAME="AEN101563"
 ></A
 ><H4
 >Command-Line Editing</H4
@@ -8125,7 +8151,7 @@ CLASS="APPLICATION"
 CLASS="ACRONYM"
 >SQL</ACRONYM
 > parser.  The queries generated by tab-completion
-    can also interfere with other SQL commands, e.g. <TT
+    can also interfere with other SQL commands, e.g., <TT
 CLASS="LITERAL"
 >SET
     TRANSACTION ISOLATION LEVEL</TT
@@ -8398,7 +8424,7 @@ HREF="libpq-envars.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN101525"
+NAME="AEN101665"
 ></A
 ><H2
 >Files</H2
@@ -8543,7 +8569,7 @@ CLASS="ENVAR"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN101565"
+NAME="AEN101705"
 ></A
 ><H2
 >Notes</H2
@@ -8632,7 +8658,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN101588"
+NAME="AEN101728"
 ></A
 ><H2
 >Notes for Windows Users</H2
