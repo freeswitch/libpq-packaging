@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Type Conversion"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -118,7 +118,8 @@ CLASS="LITERAL"
 dissimilar types in the same way as <TT
 CLASS="LITERAL"
 >UNION</TT
->.  The
+>.
+Some other constructs, including
 <TT
 CLASS="LITERAL"
 >CASE</TT
@@ -129,13 +130,14 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >VALUES</TT
 >,
-<CODE
+and the <CODE
 CLASS="FUNCTION"
 >GREATEST</CODE
 > and <CODE
 CLASS="FUNCTION"
 >LEAST</CODE
-> constructs use the identical
+>
+functions, use the identical
 algorithm to match up their component expressions and select a result
 data type.</P
 ><DIV
@@ -168,8 +170,8 @@ CLASS="STEP"
 >If any input is of a domain type, treat it as being of the
 domain's base type for all subsequent steps.
   <A
-NAME="AEN25652"
-HREF="#FTN.AEN25652"
+NAME="AEN25708"
+HREF="#FTN.AEN25708"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -200,22 +202,27 @@ CLASS="STEP"
 ><LI
 CLASS="STEP"
 ><P
->Choose the first non-unknown input type which is a preferred type in
-that category, if there is one.</P
+>Select the first non-unknown input type as the candidate type,
+then consider each other non-unknown input type, left to right.
+  <A
+NAME="AEN25720"
+HREF="#FTN.AEN25720"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+If the candidate type can be implicitly converted to the other type,
+but not vice-versa, select the other type as the new candidate type.
+Then continue considering the remaining inputs.  If, at any stage of this
+process, a preferred type is selected, stop considering additional
+inputs.</P
 ></LI
 ><LI
 CLASS="STEP"
 ><P
->Otherwise, choose the last non-unknown input type that allows all the
-preceding non-unknown inputs to be implicitly converted to it.  (There
-always is such a type, since at least the first type in the list must
-satisfy this condition.)</P
-></LI
-><LI
-CLASS="STEP"
-><P
->Convert all inputs to the selected type.  Fail if there is not a
-conversion from a given input to the selected type.</P
+>Convert all inputs to the final candidate type.  Fail if there is not an
+implicit conversion from a given input type to the candidate type.</P
 ></LI
 ></OL
 ></DIV
@@ -224,7 +231,7 @@ conversion from a given input to the selected type.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN25669"
+NAME="AEN25730"
 ></A
 ><P
 ><B
@@ -252,7 +259,7 @@ CLASS="TYPE"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN25675"
+NAME="AEN25736"
 ></A
 ><P
 ><B
@@ -291,7 +298,7 @@ CLASS="TYPE"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN25684"
+NAME="AEN25745"
 ></A
 ><P
 ><B
@@ -330,7 +337,7 @@ CLASS="TYPE"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN25693"
+NAME="AEN25754"
 ></A
 ><P
 ><B
@@ -405,8 +412,8 @@ ALIGN="LEFT"
 VALIGN="TOP"
 WIDTH="5%"
 ><A
-NAME="FTN.AEN25652"
-HREF="typeconv-union-case.html#AEN25652"
+NAME="FTN.AEN25708"
+HREF="typeconv-union-case.html#AEN25708"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -424,7 +431,48 @@ CLASS="LITERAL"
 >UNION</TT
 > or similar construct, so long as the user is
     careful to ensure that all inputs are implicitly or explicitly of that
-    exact type.  Otherwise the domain's base type will be preferred.
+    exact type.  Otherwise the domain's base type will be used.
+   </P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN25720"
+HREF="typeconv-union-case.html#AEN25720"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>    For historical reasons, <TT
+CLASS="LITERAL"
+>CASE</TT
+> treats
+    its <TT
+CLASS="LITERAL"
+>ELSE</TT
+> clause (if any) as the <SPAN
+CLASS="QUOTE"
+>"first"</SPAN
+>
+    input, with the <TT
+CLASS="LITERAL"
+>THEN</TT
+> clauses(s) considered after
+    that.  In all other cases, <SPAN
+CLASS="QUOTE"
+>"left to right"</SPAN
+> means the order
+    in which the expressions appear in the query text.
    </P
 ></TD
 ></TR

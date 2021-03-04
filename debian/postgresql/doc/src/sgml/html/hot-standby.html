@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="High Availability, Load Balancing, and Replication"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -975,7 +975,7 @@ CLASS="APPLICATION"
 ></P><UL
 ><LI
 ><P
->         Data Definition Language (DDL) - e.g. <TT
+>         Data Definition Language (DDL) - e.g., <TT
 CLASS="COMMAND"
 >CREATE INDEX</TT
 >
@@ -1099,7 +1099,7 @@ CLASS="PRODUCTNAME"
    </P
 ><P
 >    WAL file control commands will not work during recovery,
-    e.g. <CODE
+    e.g., <CODE
 CLASS="FUNCTION"
 >pg_start_backup</CODE
 >, <CODE
@@ -1218,9 +1218,10 @@ CLASS="COMMAND"
     end of recovery.
    </P
 ><P
->    The background writer is active during recovery and will perform
-    restartpoints (similar to checkpoints on the primary) and normal block
-    cleaning activities. This can include updates of the hint bit
+>    The checkpointer process and the background writer process are active during
+    recovery. The checkpointer process will perform restartpoints (similar to
+    checkpoints on the primary) and the background writer process will perform
+    normal block cleaning activities. This can include updates of the hint bit
     information stored on the standby server.
     The <TT
 CLASS="COMMAND"

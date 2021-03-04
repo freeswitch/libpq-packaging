@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Internals"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="CHAPTER"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -134,12 +134,12 @@ HREF="protocol-flow.html"
 ><DL
 ><DT
 >51.2.1. <A
-HREF="protocol-flow.html#AEN113561"
+HREF="protocol-flow.html#AEN113717"
 >Start-up</A
 ></DT
 ><DT
 >51.2.2. <A
-HREF="protocol-flow.html#AEN113641"
+HREF="protocol-flow.html#AEN113797"
 >Simple Query</A
 ></DT
 ><DT
@@ -149,7 +149,7 @@ HREF="protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY"
 ></DT
 ><DT
 >51.2.4. <A
-HREF="protocol-flow.html#AEN113752"
+HREF="protocol-flow.html#AEN113908"
 >Function Call</A
 ></DT
 ><DT
@@ -164,17 +164,17 @@ HREF="protocol-flow.html#PROTOCOL-ASYNC"
 ></DT
 ><DT
 >51.2.7. <A
-HREF="protocol-flow.html#AEN113838"
+HREF="protocol-flow.html#AEN113994"
 >Canceling Requests in Progress</A
 ></DT
 ><DT
 >51.2.8. <A
-HREF="protocol-flow.html#AEN113846"
+HREF="protocol-flow.html#AEN114002"
 >Termination</A
 ></DT
 ><DT
 >51.2.9. <A
-HREF="protocol-flow.html#AEN113855"
+HREF="protocol-flow.html#AEN114011"
 ><ACRONYM
 CLASS="ACRONYM"
 >SSL</ACRONYM
@@ -240,7 +240,7 @@ CLASS="PRODUCTNAME"
   the server, the connection will be rejected (for example, this would occur
   if the client requested protocol version 4.0, which does not exist as of
   this writing).  If the minor version requested by the client is not
-  supported by the server (e.g. the client requests version 3.1, but the
+  supported by the server (e.g., the client requests version 3.1, but the
   server supports only 3.0), the server may either reject the connection or
   may respond with a NegotiateProtocolVersion message containing the highest
   minor protocol version which it supports.  The client may then choose either

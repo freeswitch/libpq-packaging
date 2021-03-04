@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Full Text Search"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -335,7 +335,7 @@ CLASS="LITERAL"
 
 </P><PRE
 CLASS="SCREEN"
->SELECT * FROM ts_debug('english','a fat  cat sat on a mat - it ate a fat rats');
+>SELECT * FROM ts_debug('english', 'a fat  cat sat on a mat - it ate a fat rats');
    alias   |   description   | token |  dictionaries  |  dictionary  | lexemes 
 -----------+-----------------+-------+----------------+--------------+---------
  asciiword | Word, all ASCII | a     | {english_stem} | english_stem | {}
@@ -387,7 +387,7 @@ ALTER TEXT SEARCH CONFIGURATION public.english
    ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;</PRE
 ><PRE
 CLASS="SCREEN"
->SELECT * FROM ts_debug('public.english','The Brightest supernovaes');
+>SELECT * FROM ts_debug('public.english', 'The Brightest supernovaes');
    alias   |   description   |    token    |         dictionaries          |   dictionary   |   lexemes   
 -----------+-----------------+-------------+-------------------------------+----------------+-------------
  asciiword | Word, all ASCII | The         | {english_ispell,english_stem} | english_ispell | {}
@@ -461,7 +461,7 @@ HREF="textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS"
 </P><PRE
 CLASS="SCREEN"
 >SELECT alias, token, dictionary, lexemes
-FROM ts_debug('public.english','The Brightest supernovaes');
+FROM ts_debug('public.english', 'The Brightest supernovaes');
    alias   |    token    |   dictionary   |   lexemes   
 -----------+-------------+----------------+-------------
  asciiword | The         | english_ispell | {}
@@ -812,7 +812,7 @@ CLASS="EMPHASIS"
 
 </P><PRE
 CLASS="SCREEN"
->SELECT ts_lexize('thesaurus_astro','supernovae stars') is null;
+>SELECT ts_lexize('thesaurus_astro', 'supernovae stars') is null;
  ?column?
 ----------
  t</PRE

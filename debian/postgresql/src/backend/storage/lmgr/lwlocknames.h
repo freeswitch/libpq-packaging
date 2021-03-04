@@ -43,5 +43,7 @@
 #define ReplicationOriginLock (&MainLWLockArray[40].lock)
 #define MultiXactTruncationLock (&MainLWLockArray[41].lock)
 #define OldSnapshotTimeMapLock (&MainLWLockArray[42].lock)
+#define WrapLimitsVacuumLock (&MainLWLockArray[46].lock)
+#define NotifyQueueTailLock (&MainLWLockArray[47].lock)
 
-#define NUM_INDIVIDUAL_LWLOCKS		43
+#define NUM_INDIVIDUAL_LWLOCKS		48

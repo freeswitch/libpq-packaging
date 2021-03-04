@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN97914"
+NAME="AEN98056"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN97918"
+NAME="AEN98060"
 ></A
 ><H2
 >Synopsis</H2
@@ -180,32 +180,18 @@ CLASS="REPLACEABLE"
 ></DT
 ><DD
 ><P
->       Specifies the name of the database to connect to.
-      </P
-><P
->       If this parameter contains an <TT
-CLASS="SYMBOL"
->=</TT
-> sign or starts
-       with a valid <ACRONYM
-CLASS="ACRONYM"
->URI</ACRONYM
-> prefix
-       (<TT
-CLASS="LITERAL"
->postgresql://</TT
->
-       or <TT
-CLASS="LITERAL"
->postgres://</TT
->), it is treated as a
+>       Specifies the name of the database to connect to. The
        <TT
-CLASS="PARAMETER"
->conninfo</TT
-> string. See <A
+CLASS="REPLACEABLE"
+><I
+>dbname</I
+></TT
+> can be a <A
 HREF="libpq-connect.html#LIBPQ-CONNSTRING"
->Section 32.1.1</A
-> for more information.
+>connection string</A
+>.  If so,
+       connection string parameters will override any conflicting command
+       line options.
       </P
 ></DD
 ><DT
@@ -369,7 +355,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN98010"
+NAME="AEN98147"
 ></A
 ><H2
 >Exit Status</H2
@@ -399,7 +385,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN98018"
+NAME="AEN98155"
 ></A
 ><H2
 >Environment</H2

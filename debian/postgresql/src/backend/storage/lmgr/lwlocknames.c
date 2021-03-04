@@ -43,5 +43,10 @@ char *MainLWLockNames[] = {
 	"CommitTsLock",
 	"ReplicationOriginLock",
 	"MultiXactTruncationLock",
-	"OldSnapshotTimeMapLock"
+	"OldSnapshotTimeMapLock",
+	"<unassigned:43>",
+	"<unassigned:44>",
+	"<unassigned:45>",
+	"WrapLimitsVacuumLock",
+	"NotifyQueueTailLock"
 };

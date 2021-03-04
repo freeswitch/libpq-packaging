@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Server Configuration"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -374,38 +374,70 @@ CLASS="TYPE"
       </DT
 ><DD
 ><P
->        Specifies whether transaction commit will wait for WAL records
-        to be written to disk before the command returns a <SPAN
+>        Specifies how much WAL processing must complete before
+        the database server returns a <SPAN
 CLASS="QUOTE"
 >"success"</SPAN
 >
-        indication to the client.  Valid values are <TT
-CLASS="LITERAL"
->on</TT
->,
+        indication to the client.  Valid values are
         <TT
 CLASS="LITERAL"
 >remote_apply</TT
 >, <TT
 CLASS="LITERAL"
+>on</TT
+>
+        (the default), <TT
+CLASS="LITERAL"
 >remote_write</TT
->, <TT
+>,
+        <TT
 CLASS="LITERAL"
 >local</TT
->,
-        and <TT
+>, and <TT
 CLASS="LITERAL"
 >off</TT
->.  The default, and safe, setting
-        is <TT
+>.
+       </P
+><P
+>        If <TT
+CLASS="VARNAME"
+>synchronous_standby_names</TT
+> is empty,
+        the only meaningful settings are <TT
 CLASS="LITERAL"
 >on</TT
->.  When <TT
+> and
+        <TT
 CLASS="LITERAL"
 >off</TT
->, there can be a delay between
-        when success is reported to the client and when the transaction is
-        really guaranteed to be safe against a server crash.  (The maximum
+>;  <TT
+CLASS="LITERAL"
+>remote_apply</TT
+>,
+        <TT
+CLASS="LITERAL"
+>remote_write</TT
+> and <TT
+CLASS="LITERAL"
+>local</TT
+>
+        all provide the same local synchronization level
+        as <TT
+CLASS="LITERAL"
+>on</TT
+>.  The local behavior of all
+        non-<TT
+CLASS="LITERAL"
+>off</TT
+> modes is to wait for local flush of WAL
+        to disk.  In <TT
+CLASS="LITERAL"
+>off</TT
+> mode, there is no waiting,
+        so there can be a delay between when success is reported to the
+        client and when the transaction is later guaranteed to be safe
+        against a server crash.  (The maximum
         delay is three times <A
 HREF="runtime-config-wal.html#GUC-WAL-WRITER-DELAY"
 >wal_writer_delay</A
@@ -436,66 +468,53 @@ HREF="wal-async-commit.html"
 >        If <A
 HREF="runtime-config-replication.html#GUC-SYNCHRONOUS-STANDBY-NAMES"
 >synchronous_standby_names</A
-> is non-empty, this
-        parameter also controls whether or not transaction commits will wait
-        for their WAL records to be replicated to the standby server(s).
-        When set to <TT
-CLASS="LITERAL"
->on</TT
->, commits will wait until replies
-        from the current synchronous standby(s) indicate they have received
-        the commit record of the transaction and flushed it to disk.  This
-        ensures the transaction will not be lost unless both the primary and
-        all synchronous standbys suffer corruption of their database storage.
-        When set to <TT
+> is non-empty,
+        <TT
+CLASS="VARNAME"
+>synchronous_commit</TT
+> also controls whether
+        transaction commits will wait for their WAL records to be
+        processed on the standby server(s).
+       </P
+><P
+>        When set to <TT
 CLASS="LITERAL"
 >remote_apply</TT
->, commits will wait until replies
-        from the current synchronous standby(s) indicate they have received the
-        commit record of the transaction and applied it, so that it has become
-        visible to queries on the standby(s).
+>, commits will wait
+        until replies from the current synchronous standby(s) indicate they
+        have received the commit record of the transaction and applied
+        it, so that it has become visible to queries on the standby(s),
+        and also written to durable storage on the standbys.  This will
+        cause much larger commit delays than previous settings since
+        it waits for WAL replay.  When set to <TT
+CLASS="LITERAL"
+>on</TT
+>,
+        commits wait until replies
+        from the current synchronous standby(s) indicate they have received
+        the commit record of the transaction and flushed it to durable storage.  This
+        ensures the transaction will not be lost unless both the primary and
+        all synchronous standbys suffer corruption of their database storage.
         When set to <TT
 CLASS="LITERAL"
 >remote_write</TT
 >, commits will wait until replies
         from the current synchronous standby(s) indicate they have
-        received the commit record of the transaction and written it out to
-        their operating system. This setting is sufficient to
-        ensure data preservation even if a standby instance of
+        received the commit record of the transaction and written it to
+        their file systems. This setting ensures data preservation if a standby instance of
         <SPAN
 CLASS="PRODUCTNAME"
 >PostgreSQL</SPAN
-> were to crash, but not if the standby
-        suffers an operating-system-level crash, since the data has not
-        necessarily reached stable storage on the standby.
-        Finally, the setting <TT
+> crashes, but not if the standby
+        suffers an operating-system-level crash because the data has not
+        necessarily reached durable storage on the standby.
+        The setting <TT
 CLASS="LITERAL"
 >local</TT
 > causes commits to wait for
-        local flush to disk, but not for replication.  This is not usually
+        local flush to disk, but not for replication.  This is usually not
         desirable when synchronous replication is in use, but is provided for
         completeness.
-       </P
-><P
->        If <TT
-CLASS="VARNAME"
->synchronous_standby_names</TT
-> is empty, the settings
-        <TT
-CLASS="LITERAL"
->on</TT
->, <TT
-CLASS="LITERAL"
->remote_apply</TT
->, <TT
-CLASS="LITERAL"
->remote_write</TT
->
-        and <TT
-CLASS="LITERAL"
->local</TT
-> all provide the same synchronization level:
-        transaction commits only wait for local flush to disk.
        </P
 ><P
 >        This parameter can be changed at any time; the behavior for any
@@ -509,6 +528,136 @@ CLASS="COMMAND"
         LOCAL synchronous_commit TO OFF</TT
 > within the transaction.
        </P
+><P
+>        <A
+HREF="runtime-config-wal.html#SYNCHRONOUS-COMMIT-MATRIX"
+>Table 19-1</A
+> summarizes the
+        capabilities of the <TT
+CLASS="VARNAME"
+>synchronous_commit</TT
+> settings.
+       </P
+><DIV
+CLASS="TABLE"
+><A
+NAME="SYNCHRONOUS-COMMIT-MATRIX"
+></A
+><P
+><B
+>Table 19-1. synchronous_commit Modes</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL
+WIDTH="1*"
+TITLE="col1"><COL
+WIDTH="1*"
+TITLE="col2"><COL
+WIDTH="1*"
+TITLE="col3"><COL
+WIDTH="1*"
+TITLE="col4"><COL
+WIDTH="1*"
+TITLE="col5"><THEAD
+><TR
+><TH
+>synchronous_commit setting</TH
+><TH
+>local durable commit</TH
+><TH
+>standby durable commit after PG crash</TH
+><TH
+>standby durable commit after OS crash</TH
+><TH
+>standby query consistency</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>remote_apply</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+></TR
+><TR
+><TD
+>on</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>remote_write</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>local</TD
+><TD
+ALIGN="CENTER"
+>&bull;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+>off</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+><TD
+ALIGN="CENTER"
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
 ></DD
 ><DT
 ><A
@@ -1172,7 +1321,7 @@ CLASS="TYPE"
       </DT
 ><DD
 ><P
->        Maximum size to let the WAL grow to between automatic WAL
+>        Maximum size to let the WAL grow during automatic
         checkpoints. This is a soft limit; WAL size can exceed
         <TT
 CLASS="VARNAME"
@@ -1377,7 +1526,7 @@ CLASS="VARNAME"
 CLASS="VARNAME"
 >archive_command</TT
 > to a command that does nothing but
-        return true, e.g. <TT
+        return true, e.g., <TT
 CLASS="LITERAL"
 >/bin/true</TT
 > (<TT

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1235,7 +1235,7 @@ CLASS="FUNCTION"
 CLASS="FUNCTION"
 >to_timestamp</CODE
 >, double-quoted strings skip the number of
-       input characters contained in the string, e.g. <TT
+       input characters contained in the string, e.g., <TT
 CLASS="LITERAL"
 >"XX"</TT
 >
@@ -1254,12 +1254,12 @@ CLASS="LITERAL"
 ></LI
 ><LI
 ><P
->       If the year format specification is less than four digits, e.g.
+>       If the year format specification is less than four digits, e.g.,
        <TT
 CLASS="LITERAL"
 >YYY</TT
 >, and the supplied year is less than four digits,
-       the year will be adjusted to be nearest to the year 2020, e.g.
+       the year will be adjusted to be nearest to the year 2020, e.g.,
        <TT
 CLASS="LITERAL"
 >95</TT
@@ -1268,17 +1268,35 @@ CLASS="LITERAL"
 ></LI
 ><LI
 ><P
->       The <TT
+>       In <CODE
+CLASS="FUNCTION"
+>to_timestamp</CODE
+> and <CODE
+CLASS="FUNCTION"
+>to_date</CODE
+>,
+       negative years are treated as signifying BC.  If you write both a
+       negative year and an explicit <TT
+CLASS="LITERAL"
+>BC</TT
+> field, you get AD
+       again.  An input of year zero is treated as 1 BC.
+      </P
+></LI
+><LI
+><P
+>       In <CODE
+CLASS="FUNCTION"
+>to_timestamp</CODE
+> and <CODE
+CLASS="FUNCTION"
+>to_date</CODE
+>,
+       the <TT
 CLASS="LITERAL"
 >YYYY</TT
-> conversion from string to <TT
-CLASS="TYPE"
->timestamp</TT
-> or
-       <TT
-CLASS="TYPE"
->date</TT
-> has a restriction when processing years with more than 4 digits. You must
+> conversion has a restriction when
+       processing years with more than 4 digits. You must
        use some non-digit character or template after <TT
 CLASS="LITERAL"
 >YYYY</TT
@@ -1529,7 +1547,7 @@ CLASS="LITERAL"
         <TT
 CLASS="LITERAL"
 >HH12</TT
-> as shown on a 12-hour clock, i.e. zero hours
+> as shown on a 12-hour clock, i.e., zero hours
         and 36 hours output as <TT
 CLASS="LITERAL"
 >12</TT

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Monitoring Database Activity"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -212,7 +212,7 @@ CLASS="FILENAME"
 >pg_stat</TT
 > subdirectory, so that
    statistics can be retained across server restarts.  When recovery is
-   performed at server start (e.g. after immediate shutdown, server crash,
+   performed at server start (e.g., after immediate shutdown, server crash,
    and point-in-time recovery), all statistics counters are reset.
   </P
 ></DIV
@@ -1369,7 +1369,7 @@ CLASS="CALSTABLE"
 ><TBODY
 ><TR
 ><TD
-ROWSPAN="42"
+ROWSPAN="44"
 ><TT
 CLASS="LITERAL"
 >LWLockNamed</TT
@@ -1773,6 +1773,26 @@ CLASS="LITERAL"
 ></TR
 ><TR
 ><TD
+><TT
+CLASS="LITERAL"
+>WrapLimitsVacuumLock</TT
+></TD
+><TD
+>Waiting to update limits on transaction id and multixact
+         consumption.</TD
+></TR
+><TR
+><TD
+><TT
+CLASS="LITERAL"
+>NotifyQueueTailLock</TT
+></TD
+><TD
+>Waiting to update limit on notification message
+         storage.</TD
+></TR
+><TR
+><TD
 ROWSPAN="16"
 ><TT
 CLASS="LITERAL"
@@ -1925,7 +1945,7 @@ CLASS="LITERAL"
 ></TR
 ><TR
 ><TD
-ROWSPAN="10"
+ROWSPAN="11"
 ><TT
 CLASS="LITERAL"
 >Lock</TT
@@ -1946,6 +1966,29 @@ CLASS="LITERAL"
 ></TD
 ><TD
 >Waiting to extend a relation.</TD
+></TR
+><TR
+><TD
+><TT
+CLASS="LITERAL"
+>frozenid</TT
+></TD
+><TD
+>Waiting to
+         update <TT
+CLASS="STRUCTNAME"
+>pg_database</TT
+>.<TT
+CLASS="STRUCTFIELD"
+>datfrozenxid</TT
+>
+         and <TT
+CLASS="STRUCTNAME"
+>pg_database</TT
+>.<TT
+CLASS="STRUCTFIELD"
+>datminmxid</TT
+>.</TD
 ></TR
 ><TR
 ><TD

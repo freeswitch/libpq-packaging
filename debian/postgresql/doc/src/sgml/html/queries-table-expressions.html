@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Queries"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -1539,7 +1539,11 @@ SELECT * FROM vw_getfoo;</PRE
      the pseudotype <TT
 CLASS="TYPE"
 >record</TT
->.  When such a function is used in
+> with no <TT
+CLASS="LITERAL"
+>OUT</TT
+>
+     parameters.  When such a function is used in
      a query, the expected row structure must be specified in the
      query itself, so that the system can know how to parse and plan
      the query.  This syntax looks like:
@@ -1677,6 +1681,54 @@ CLASS="LITERAL"
 >*</TT
 > should
      expand to.
+    </P
+><P
+>     This example uses <TT
+CLASS="LITERAL"
+>ROWS FROM</TT
+>:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>SELECT *
+FROM ROWS FROM
+    (
+        json_to_recordset('[{"a":40,"b":"foo"},{"a":"100","b":"bar"}]')
+            AS (a INTEGER, b TEXT),
+        generate_series(1, 3)
+    ) AS x (p, q, s)
+ORDER BY p;
+
+  p  |  q  | s
+-----+-----+---
+  40 | foo | 1
+ 100 | bar | 2
+     |     | 3</PRE
+><P>
+     It joins two functions into a single <TT
+CLASS="LITERAL"
+>FROM</TT
+>
+     target.  <CODE
+CLASS="FUNCTION"
+>json_to_recordset()</CODE
+> is instructed
+     to return two columns, the first <TT
+CLASS="TYPE"
+>integer</TT
+>
+     and the second <TT
+CLASS="TYPE"
+>text</TT
+>.  The result of
+     <CODE
+CLASS="FUNCTION"
+>generate_series()</CODE
+> is used directly.
+     The <TT
+CLASS="LITERAL"
+>ORDER BY</TT
+> clause sorts the column values
+     as integers.
     </P
 ></DIV
 ><DIV
@@ -2554,7 +2606,7 @@ CLASS="REPLACEABLE"
     ( )
 )</PRE
 ><P>
-    This is commonly used for analysis over hierarchical data; e.g. total
+    This is commonly used for analysis over hierarchical data; e.g., total
     salary by department, division, and company-wide total.
    </P
 ><P
@@ -2573,7 +2625,7 @@ CLASS="REPLACEABLE"
 ></TT
 >, ... )</PRE
 ><P>
-    represents the given list and all of its possible subsets (i.e. the power
+    represents the given list and all of its possible subsets (i.e., the power
     set).  Thus
 </P><PRE
 CLASS="PROGRAMLISTING"

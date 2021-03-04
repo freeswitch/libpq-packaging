@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "GRANT" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "GRANT" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -266,7 +266,7 @@ For procedural languages, allows the use of the specified language for the creat
 .sp
 For schemas, allows access to objects contained in the specified schema (assuming that the objects\*(Aq own privilege requirements are also met)\&. Essentially this allows the grantee to
 \(lqlook up\(rq
-objects within the schema\&. Without this permission, it is still possible to see the object names, e\&.g\&. by querying the system tables\&. Also, after revoking this permission, existing backends might have statements that have previously performed this lookup, so this is not a completely secure way to prevent object access\&.
+objects within the schema\&. Without this permission, it is still possible to see the object names, e\&.g\&., by querying the system tables\&. Also, after revoking this permission, existing backends might have statements that have previously performed this lookup, so this is not a completely secure way to prevent object access\&.
 .sp
 For sequences, this privilege allows the use of the
 \fBcurrval\fR

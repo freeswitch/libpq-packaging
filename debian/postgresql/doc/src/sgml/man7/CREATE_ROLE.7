@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "CREATE ROLE" "7" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "CREATE ROLE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -149,7 +149,9 @@ These clauses determine whether a role is a replication role\&. A role must have
 REPLICATION
 attribute is a very highly privileged role, and should only be used on roles actually used for replication\&. If not specified,
 NOREPLICATION
-is the default\&.
+is the default\&. You must be a superuser to create a new role having the
+REPLICATION
+attribute\&.
 .RE
 .PP
 BYPASSRLS
@@ -158,11 +160,15 @@ NOBYPASSRLS
 .RS 4
 These clauses determine whether a role bypasses every row\-level security (RLS) policy\&.
 NOBYPASSRLS
-is the default\&. Note that pg_dump will set
+is the default\&. You must be a superuser to create a new role having the
+BYPASSRLS
+attribute\&.
+.sp
+Note that pg_dump will set
 row_security
 to
 OFF
-by default, to ensure all contents of a table are dumped out\&. If the user running pg_dump does not have appropriate permissions, an error will be returned\&. The superuser and owner of the table being dumped always bypass RLS\&.
+by default, to ensure all contents of a table are dumped out\&. If the user running pg_dump does not have appropriate permissions, an error will be returned\&. However, superusers and the owner of the table being dumped always bypass RLS\&.
 .RE
 .PP
 CONNECTION LIMIT \fIconnlimit\fR

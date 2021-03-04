@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.19 Documentation
-.\"    Source: PostgreSQL 9.6.19
+.\"    Manual: PostgreSQL 9.6.20 Documentation
+.\"    Source: PostgreSQL 9.6.20
 .\"  Language: English
 .\"
-.TH "DROPDB" "1" "2020" "PostgreSQL 9.6.19" "PostgreSQL 9.6.19 Documentation"
+.TH "DROPDB" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -149,7 +149,8 @@ Specifies the name of the database to connect to in order to drop the target dat
 postgres
 database will be used; if that does not exist (or is the database being dropped),
 template1
-will be used\&.
+will be used\&. This can be a
+connection string\&. If so, connection string parameters will override any conflicting command line options\&.
 .RE
 .SH "ENVIRONMENT"
 .PP

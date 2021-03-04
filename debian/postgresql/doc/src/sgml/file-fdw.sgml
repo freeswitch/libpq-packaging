@@ -27,7 +27,8 @@
 
    <listitem>
     <para>
-     Specifies the file to be read.  Required.  Must be an absolute path name.
+     Specifies the file to be read.  Required.  Relative paths are relative to the
+     data directory.
     </para>
    </listitem>
   </varlistentry>
@@ -186,9 +187,11 @@
  <title id="csvlog-fdw">Create a Foreign Table for PostgreSQL CSV Logs</title>
 
   <para>
-   One of the obvious uses for the <literal>file_fdw</> is to make
+   One of the obvious uses for <literal>file_fdw</> is to make
    the PostgreSQL activity log available as a table for querying.  To
-   do this, first you must be logging to a CSV file, which here we
+   do this, first you must be <link
+   linkend="runtime-config-logging-csvlog">logging to a CSV file,</link>
+   which here we
    will call <literal>pglog.csv</>.  First, install <literal>file_fdw</>
    as an extension:
   </para>

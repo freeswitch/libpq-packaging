@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.19 Documentation"
+TITLE="PostgreSQL 9.6.20 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Logical Decoding"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-08-10T21:33:48"></HEAD
+CONTENT="2020-11-09T22:44:17"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.19 Documentation</A
+>PostgreSQL 9.6.20 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -100,7 +100,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN72345"
+NAME="AEN72476"
 >47.2.1. Logical Decoding</A
 ></H2
 ><P
@@ -167,7 +167,7 @@ CLASS="PRODUCTNAME"
 >     A logical slot will emit each change just once in normal operation.
      The current position of each slot is persisted only at checkpoint, so in
      the case of a crash the slot may return to an earlier LSN, which will
-     then cause recent changes to be resent when the server restarts.
+     then cause recent changes to be sent again when the server restarts.
      Logical decoding clients are responsible for avoiding ill effects from
      handling the same message more than once.  Clients may wish to record
      the last LSN they saw when decoding and skip over any repeated data or
@@ -217,7 +217,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN72372"
+NAME="AEN72503"
 >47.2.3. Output Plugins</A
 ></H2
 ><P
@@ -230,7 +230,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN72375"
+NAME="AEN72506"
 >47.2.4. Exported Snapshots</A
 ></H2
 ><P
