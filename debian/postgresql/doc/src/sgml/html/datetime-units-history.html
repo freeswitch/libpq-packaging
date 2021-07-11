@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Date/Time Support"
@@ -18,15 +18,15 @@ REL="PREVIOUS"
 TITLE="POSIX Time Zone Specifications"
 HREF="datetime-posix-timezone-specs.html"><LINK
 REL="NEXT"
-TITLE="SQL Key Words"
-HREF="sql-keywords-appendix.html"><LINK
+TITLE="Julian Dates"
+HREF="datetime-julian-dates.html"><LINK
 REL="STYLESHEET"
 TYPE="text/css"
 HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -77,8 +77,8 @@ WIDTH="20%"
 ALIGN="right"
 VALIGN="top"
 ><A
-TITLE="SQL Key Words"
-HREF="sql-keywords-appendix.html"
+TITLE="Julian Dates"
+HREF="datetime-julian-dates.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -229,45 +229,6 @@ CLASS="PRODUCTNAME"
    for civil purposes. The Chinese calendar is used for determining
    festivals.
   </P
-><P
->   The <I
-CLASS="FIRSTTERM"
->Julian Date</I
-> system is another type of
-   calendar, unrelated to the Julian calendar though it is confusingly
-   named similarly to that calendar.
-   The Julian Date system was invented by the French scholar
-   Joseph Justus Scaliger (1540-1609)
-   and probably takes its name from Scaliger's father,
-   the Italian scholar Julius Caesar Scaliger (1484-1558).
-   In the Julian Date system, each day has a sequential number, starting
-   from JD 0 (which is sometimes called <SPAN
-CLASS="emphasis"
-><I
-CLASS="EMPHASIS"
->the</I
-></SPAN
-> Julian Date).
-   JD 0 corresponds to 1 January 4713 BC in the Julian calendar, or
-   24 November 4714 BC in the Gregorian calendar.  Julian Date counting
-   is most often used by astronomers for labeling their nightly observations,
-   and therefore a date runs from noon UTC to the next noon UTC, rather than
-   from midnight to midnight: JD 0 designates the 24 hours from noon UTC on
-   24 November 4714 BC to noon UTC on 25 November 4714 BC.
-  </P
-><P
->   Although <SPAN
-CLASS="PRODUCTNAME"
->PostgreSQL</SPAN
-> supports Julian Date notation for
-   input and output of dates (and also uses Julian dates for some internal
-   datetime calculations), it does not observe the nicety of having dates
-   run from noon to noon.  <SPAN
-CLASS="PRODUCTNAME"
->PostgreSQL</SPAN
-> treats a Julian Date
-   as running from midnight to midnight.
-  </P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -303,7 +264,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="sql-keywords-appendix.html"
+HREF="datetime-julian-dates.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -330,10 +291,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
-><ACRONYM
-CLASS="ACRONYM"
->SQL</ACRONYM
-> Key Words</TD
+>Julian Dates</TD
 ></TR
 ></TABLE
 ></DIV

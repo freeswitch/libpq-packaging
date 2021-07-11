@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Overview of PostgreSQL Internals"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -171,77 +171,94 @@ CLASS="LITERAL"
     the planner.
    </P
 ><P
->    The executor mechanism is used to evaluate all four basic SQL query types:
-    <TT
+>    The executor mechanism is used to evaluate all four basic SQL query
+    types: <TT
 CLASS="COMMAND"
 >SELECT</TT
 >, <TT
 CLASS="COMMAND"
 >INSERT</TT
->, <TT
+>,
+    <TT
 CLASS="COMMAND"
 >UPDATE</TT
->, and
-    <TT
+>, and <TT
 CLASS="COMMAND"
 >DELETE</TT
->.  For <TT
+>.
+    For <TT
 CLASS="COMMAND"
 >SELECT</TT
->, the top-level executor
-    code only needs to send each row returned by the query plan tree off
-    to the client.  For <TT
+>, the top-level executor code
+    only needs to send each row returned by the query plan tree
+    off to the client.  <TT
 CLASS="COMMAND"
->INSERT</TT
->, each returned row is inserted
-    into the target table specified for the <TT
+>INSERT ... SELECT</TT
+>,
+    <TT
 CLASS="COMMAND"
->INSERT</TT
->.  This is
-    done in a special top-level plan node called <TT
+>UPDATE</TT
+>, and <TT
+CLASS="COMMAND"
+>DELETE</TT
+>
+    are effectively <TT
+CLASS="COMMAND"
+>SELECT</TT
+>s under a special
+    top-level plan node called <TT
 CLASS="LITERAL"
 >ModifyTable</TT
 >.
-    (A simple
-    <TT
-CLASS="COMMAND"
->INSERT ... VALUES</TT
-> command creates a trivial plan tree
-    consisting of a single <TT
-CLASS="LITERAL"
->Result</TT
-> node, which computes just one
-    result row, and <TT
-CLASS="LITERAL"
->ModifyTable</TT
-> above it to perform the insertion.
-    But <TT
+   </P
+><P
+>    <TT
 CLASS="COMMAND"
 >INSERT ... SELECT</TT
-> can demand the full power
-    of the executor mechanism.)  For <TT
+> feeds the rows up
+    to <TT
+CLASS="LITERAL"
+>ModifyTable</TT
+> for insertion.  For
+    <TT
 CLASS="COMMAND"
 >UPDATE</TT
->, the planner arranges
-    that each computed row includes all the updated column values, plus
-    the <I
+>, the planner arranges that each
+    computed row includes all the updated column values, plus the
+    <I
 CLASS="FIRSTTERM"
 >TID</I
-> (tuple ID, or row ID) of the original target row;
-    this data is fed into a <TT
+> (tuple ID, or row ID) of the original
+    target row; this data is fed up to the <TT
 CLASS="LITERAL"
 >ModifyTable</TT
-> node, which uses the
-    information to create a new updated row and mark the old row deleted.
-    For <TT
+>
+    node, which uses the information to create a new updated row and
+    mark the old row deleted.  For <TT
 CLASS="COMMAND"
 >DELETE</TT
->, the only column that is actually returned by the
-    plan is the TID, and the <TT
+>, the only
+    column that is actually returned by the plan is the TID, and the
+    <TT
 CLASS="LITERAL"
 >ModifyTable</TT
-> node simply uses the TID
-    to visit each target row and mark it deleted.
+> node simply uses the TID to visit each
+    target row and mark it deleted.
+   </P
+><P
+>    A simple <TT
+CLASS="COMMAND"
+>INSERT ... VALUES</TT
+> command creates a
+    trivial plan tree consisting of a single <TT
+CLASS="LITERAL"
+>Result</TT
+>
+    node, which computes just one result row, feeding that up
+    to<TT
+CLASS="LITERAL"
+>ModifyTable</TT
+> to perform the insertion.
    </P
 ></DIV
 ><DIV

@@ -977,28 +977,24 @@ sub get_new_node
 			$found = 0 if ($node->port == $port);
 		}
 
-		# Check to see if anything else is listening on this TCP port.  This
-		# is *necessary* on $use_tcp (Windows) configurations.  Seek a port
-		# available for all possible listen_addresses values, for own_host
-		# nodes and so the caller can harness this port for the widest range
-		# of purposes.  The 0.0.0.0 test achieves that for post-2006 Cygwin,
-		# which automatically sets SO_EXCLUSIVEADDRUSE.  The same holds for
-		# MSYS (a Cygwin fork).  Testing 0.0.0.0 is insufficient for Windows
-		# native Perl (https://stackoverflow.com/a/14388707), so we also test
-		# individual addresses.
+		# Check to see if anything else is listening on this TCP port.
+		# Seek a port available for all possible listen_addresses values,
+		# so callers can harness this port for the widest range of purposes.
+		# The 0.0.0.0 test achieves that for MSYS, which automatically sets
+		# SO_EXCLUSIVEADDRUSE.  Testing 0.0.0.0 is insufficient for Windows
+		# native Perl (https://stackoverflow.com/a/14388707), so we also
+		# have to test individual addresses.  Doing that for 127.0.0/24
+		# addresses other than 127.0.0.1 might fail with EADDRNOTAVAIL on
+		# non-Linux, non-Windows kernels.
 		#
-		# This seems like a good idea on Unixen as well, even though we don't
-		# ask the postmaster to open a TCP port on Unix.  On Non-Linux,
-		# non-Windows kernels, binding to 127.0.0.1/24 addresses other than
-		# 127.0.0.1 might fail with EADDRNOTAVAIL.  Binding to 0.0.0.0 is
-		# unnecessary on non-Windows systems.
-		#
-		# XXX A port available now may become unavailable by the time we start
-		# the postmaster.
+		# Thus, 0.0.0.0 and individual 127.0.0/24 addresses are tested
+		# only on Windows and only when TCP usage is requested.
 		if ($found == 1)
 		{
 			foreach my $addr (qw(127.0.0.1),
-				$use_tcp ? qw(127.0.0.2 127.0.0.3 0.0.0.0) : ())
+               ($use_tcp && $TestLib::windows_os)
+               ? qw(127.0.0.2 127.0.0.3 0.0.0.0)
+               : ())
 			{
 				can_bind($addr, $port) or $found = 0;
 			}
@@ -1456,9 +1452,6 @@ sub command_like
 Run a command on the node, then verify that $expected_sql appears in the
 server log file.
 
-Reads the whole log file so be careful when working with large log outputs.
-The log file is truncated prior to running the command, however.
-
 =cut
 
 sub issues_sql_like
@@ -1468,10 +1461,11 @@ sub issues_sql_like
 	local $ENV{PGHOST} = $self->host;
 	local $ENV{PGPORT} = $self->port;
 
-	truncate $self->logfile, 0;
+	my $log_location = -s $self->logfile;
+
 	my $result = TestLib::run_log($cmd);
 	ok($result, "@$cmd exit code 0");
-	my $log = TestLib::slurp_file($self->logfile);
+	my $log = TestLib::slurp_file($self->logfile, $log_location);
 	like($log, $expected_sql, "$test_name: SQL found in server log");
 }
 

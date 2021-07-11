@@ -2,12 +2,12 @@
 .\"     Title: SET ROLE
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "SET ROLE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "SET ROLE" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -54,11 +54,16 @@ modifiers act the same as for the regular
 \fBSET\fR(7)
 command\&.
 .PP
-The
-NONE
-and
-RESET
-forms reset the current user identifier to be the current session user identifier\&. These forms can be executed by any user\&.
+SET ROLE NONE
+sets the current user identifier to the current session user identifier, as returned by
+\fBsession_user\fR\&.
+RESET ROLE
+sets the current user identifier to the connection\-time setting specified by the
+command\-line options,
+\fBALTER ROLE\fR, or
+\fBALTER DATABASE\fR, if any such settings exist\&. Otherwise,
+RESET ROLE
+sets the current user identifier to the current session user identifier\&. These forms can be executed by any user\&.
 .SH "NOTES"
 .PP
 Using this command, it is possible to either add privileges or restrict one\*(Aqs privileges\&. If the session user role has the

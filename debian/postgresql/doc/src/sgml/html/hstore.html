@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Additional Supplied Modules"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -113,7 +113,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN138800"
+NAME="AEN139208"
 >F.16.1. <TT
 CLASS="TYPE"
 >hstore</TT
@@ -254,7 +254,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN138831"
+NAME="AEN139239"
 >F.16.2. <TT
 CLASS="TYPE"
 >hstore</TT
@@ -1399,7 +1399,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139303"
+NAME="AEN139711"
 >F.16.3. Indexes</A
 ></H2
 ><P
@@ -1479,7 +1479,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139325"
+NAME="AEN139733"
 >F.16.4. Examples</A
 ></H2
 ><P
@@ -1559,7 +1559,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139342"
+NAME="AEN139750"
 >F.16.5. Statistics</A
 ></H2
 ><P
@@ -1613,7 +1613,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139352"
+NAME="AEN139760"
 >F.16.6. Compatibility</A
 ></H2
 ><P
@@ -1648,8 +1648,12 @@ CLASS="PROGRAMLISTING"
    The <TT
 CLASS="COMMAND"
 >ALTER TABLE</TT
-> method requires an exclusive lock on the table,
-   but does not result in bloating the table with old row versions.
+> method requires an <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+>
+   lock on the table, but does not result in bloating the table with old row
+   versions.
   </P
 ></DIV
 ><DIV
@@ -1657,7 +1661,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139362"
+NAME="AEN139771"
 >F.16.7. Transforms</A
 ></H2
 ><P
@@ -1738,7 +1742,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN139377"
+NAME="AEN139786"
 >F.16.8. Authors</A
 ></H2
 ><P

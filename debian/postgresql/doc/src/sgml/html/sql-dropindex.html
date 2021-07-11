@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-DROPINDEX"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN86752"
+NAME="AEN86820"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN86752"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN86755"
+NAME="AEN86823"
 ></A
 ><H2
 >Synopsis</H2
@@ -119,7 +119,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN86758"
+NAME="AEN86826"
 ></A
 ><H2
 >Description</H2
@@ -135,7 +135,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN86762"
+NAME="AEN86830"
 ></A
 ><H2
 >Parameters</H2
@@ -156,9 +156,12 @@ CLASS="LITERAL"
 CLASS="COMMAND"
 >DROP INDEX</TT
 >
-      acquires exclusive lock on the table, blocking other accesses until the
-      index drop can be completed.  With this option, the command instead
-      waits until conflicting transactions have completed.
+      acquires an <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+> lock on the table, blocking
+      other accesses until the index drop can be completed.  With this option,
+      the command instead waits until conflicting transactions have completed.
      </P
 ><P
 >      There are several caveats to be aware of when using this option.
@@ -248,7 +251,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN86800"
+NAME="AEN86869"
 ></A
 ><H2
 >Examples</H2
@@ -266,7 +269,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN86805"
+NAME="AEN86874"
 ></A
 ><H2
 >Compatibility</H2
@@ -285,7 +288,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN86810"
+NAME="AEN86879"
 ></A
 ><H2
 >See Also</H2

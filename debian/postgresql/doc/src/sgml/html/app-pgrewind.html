@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Server Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN103511"
+NAME="AEN103596"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN103515"
+NAME="AEN103600"
 ></A
 ><H2
 >Synopsis</H2
@@ -154,7 +154,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103534"
+NAME="AEN103619"
 ></A
 ><H2
 >Description</H2
@@ -205,17 +205,13 @@ CLASS="FILENAME"
    copied from the WAL archive to the <TT
 CLASS="FILENAME"
 >pg_xlog</TT
-> directory, or
-   fetched on startup by configuring <TT
-CLASS="FILENAME"
->recovery.conf</TT
->.  The use of
-   <SPAN
+> directory.
+   The use of <SPAN
 CLASS="APPLICATION"
 >pg_rewind</SPAN
-> is not limited to failover, e.g.,  a standby
-   server can be promoted, run some write transactions, and then rewound
-   to become a standby again.
+> is not limited to
+   failover, e.g., a standby server can be promoted, run some write
+   transactions, and then rewound to become a standby again.
   </P
 ><P
 >   When the target server is started for the first time after running
@@ -320,7 +316,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103567"
+NAME="AEN103651"
 ></A
 ><H2
 >Options</H2
@@ -476,7 +472,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103629"
+NAME="AEN103713"
 ></A
 ><H2
 >Environment</H2
@@ -501,7 +497,7 @@ HREF="libpq-envars.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN103636"
+NAME="AEN103720"
 ></A
 ><H2
 >Notes</H2
@@ -525,7 +521,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN103642"
+NAME="AEN103726"
 ></A
 ><H3
 >How it works</H3

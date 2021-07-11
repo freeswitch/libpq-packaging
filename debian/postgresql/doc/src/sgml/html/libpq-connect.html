@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="libpq - C Library"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -290,65 +290,107 @@ HREF="libpq-connect.html#LIBPQ-PARAMKEYWORDS"
 >.
       </P
 ><P
->       When <TT
-CLASS="LITERAL"
->expand_dbname</TT
-> is non-zero, the
-       <TT
-CLASS="PARAMETER"
->dbname</TT
-> key word value is allowed to be recognized
-       as a connection string. Only the first occurrence of
-       <TT
-CLASS="PARAMETER"
->dbname</TT
-> is expanded this way, any subsequent
-       <TT
-CLASS="PARAMETER"
->dbname</TT
-> value is processed as plain database name. More
-       details on the possible connection string formats appear in
-       <A
-HREF="libpq-connect.html#LIBPQ-CONNSTRING"
->Section 32.1.1</A
->.
-      </P
-><P
 >       The passed arrays can be empty to use all default parameters, or can
-       contain one or more parameter settings. They should be matched in length.
+       contain one or more parameter settings. They must be matched in length.
        Processing will stop at the first <TT
 CLASS="SYMBOL"
 >NULL</TT
-> element
+> entry
        in the <TT
 CLASS="LITERAL"
 >keywords</TT
 > array.
-      </P
-><P
->       If  any  parameter is <TT
+       Also, if the <TT
+CLASS="LITERAL"
+>values</TT
+> entry associated with a
+       non-<TT
 CLASS="SYMBOL"
 >NULL</TT
-> or an empty string, the corresponding
-       environment variable (see <A
-HREF="libpq-envars.html"
->Section 32.14</A
->) is checked.
-       If the  environment  variable is not set either, then the indicated
-       built-in defaults are used.
+> <TT
+CLASS="LITERAL"
+>keywords</TT
+> entry is
+       <TT
+CLASS="SYMBOL"
+>NULL</TT
+> or an empty string, that entry is ignored and
+       processing continues with the next pair of array entries.
       </P
 ><P
->       In general key words are processed from the beginning of these arrays in index
-       order. The effect of this is that when key words are repeated, the last processed
-       value is retained. Therefore, through careful placement of the
-       <TT
+>       When <TT
+CLASS="LITERAL"
+>expand_dbname</TT
+> is non-zero, the value for
+       the first <TT
 CLASS="PARAMETER"
 >dbname</TT
-> key word, it is possible to determine what may
-       be overridden by a <TT
+> key word is checked to see
+       if it is a <I
+CLASS="FIRSTTERM"
+>connection string</I
+>.  If so, it
+       is <SPAN
+CLASS="QUOTE"
+>"expanded"</SPAN
+> into the individual connection
+       parameters extracted from the string.  The value is considered to
+       be a connection string, rather than just a database name, if it
+       contains an equal sign (<TT
+CLASS="LITERAL"
+>=</TT
+>) or it begins with a
+       URI scheme designator.  (More details on connection string formats
+       appear in <A
+HREF="libpq-connect.html#LIBPQ-CONNSTRING"
+>Section 32.1.1</A
+>.)  Only the first
+       occurrence of <TT
 CLASS="PARAMETER"
->conninfo</TT
-> string, and what may not.
+>dbname</TT
+> is treated in this way;
+       any subsequent <TT
+CLASS="PARAMETER"
+>dbname</TT
+> parameter is processed
+       as a plain database name.
+      </P
+><P
+>       In general the parameter arrays are processed from start to end.
+       If any key word is repeated, the last value (that is
+       not <TT
+CLASS="SYMBOL"
+>NULL</TT
+> or empty) is used.  This rule applies in
+       particular when a key word found in a connection string conflicts
+       with one appearing in the <TT
+CLASS="LITERAL"
+>keywords</TT
+> array.  Thus,
+       the programmer may determine whether array entries can override or
+       be overridden by values taken from a connection string.  Array
+       entries appearing before an expanded <TT
+CLASS="PARAMETER"
+>dbname</TT
+>
+       entry can be overridden by fields of the connection string, and in
+       turn those fields are overridden by array entries appearing
+       after <TT
+CLASS="PARAMETER"
+>dbname</TT
+> (but, again, only if those
+       entries supply non-empty values).
+      </P
+><P
+>       After processing all the array entries and any expanded connection
+       string, any connection parameters that remain unset are filled with
+       default values.  If an unset parameter's corresponding environment
+       variable (see <A
+HREF="libpq-envars.html"
+>Section 32.14</A
+>) is set, its value is
+       used.  If the environment variable is not set either, then the
+       parameter's built-in default value is used.
       </P
 ></DD
 ><DT
@@ -1422,7 +1464,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45964"
+NAME="AEN46014"
 >32.1.1.1. Keyword/Value Connection Strings</A
 ></H3
 ><P
@@ -1465,7 +1507,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN45975"
+NAME="AEN46025"
 >32.1.1.2. Connection URIs</A
 ></H3
 ><P
@@ -1475,7 +1517,7 @@ CLASS="ACRONYM"
 > is:
 </P><PRE
 CLASS="SYNOPSIS"
->postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&amp;...]</PRE
+>postgresql://[user[:password]@][host][:port][/dbname][?param1=value1&amp;...]</PRE
 ><P>
    </P
 ><P
@@ -1490,14 +1532,14 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >postgres://</TT
 >.  Each
-    of the <ACRONYM
+    of the remaining <ACRONYM
 CLASS="ACRONYM"
 >URI</ACRONYM
-> parts is optional.  The following examples
-    illustrate valid <ACRONYM
+> parts is optional.  The
+    following examples illustrate valid <ACRONYM
 CLASS="ACRONYM"
 >URI</ACRONYM
-> syntax uses:
+> syntax:
 </P><PRE
 CLASS="PROGRAMLISTING"
 >postgresql://
@@ -1508,39 +1550,26 @@ postgresql://user@localhost
 postgresql://user:secret@localhost
 postgresql://other@localhost/otherdb?connect_timeout=10&amp;application_name=myapp</PRE
 ><P>
-    Components of the hierarchical part of the <ACRONYM
+    Values that would normally appear in the hierarchical part of
+    the <ACRONYM
 CLASS="ACRONYM"
 >URI</ACRONYM
-> can also
-    be given as parameters.  For example:
+> can alternatively be given as named
+    parameters.  For example:
 </P><PRE
 CLASS="PROGRAMLISTING"
 >postgresql:///mydb?host=localhost&amp;port=5433</PRE
 ><P>
-   </P
-><P
->    Percent-encoding may be used to include symbols with special meaning in any
-    of the <ACRONYM
-CLASS="ACRONYM"
->URI</ACRONYM
-> parts.
-   </P
-><P
->    Any connection parameters not corresponding to key words listed in <A
+    All named parameters must match key words listed in
+    <A
 HREF="libpq-connect.html#LIBPQ-PARAMKEYWORDS"
 >Section 32.1.2</A
-> are ignored and a warning message about them
-    is sent to <TT
-CLASS="FILENAME"
->stderr</TT
->.
-   </P
-><P
->    For improved compatibility with JDBC connection <ACRONYM
+>, except that for compatibility
+    with JDBC connection <ACRONYM
 CLASS="ACRONYM"
 >URI</ACRONYM
->s,
-    instances of parameter <TT
+>s, instances
+    of <TT
 CLASS="LITERAL"
 >ssl=true</TT
 > are translated into
@@ -1550,24 +1579,32 @@ CLASS="LITERAL"
 >.
    </P
 ><P
->    The host part may be either host name or an IP address.  To specify an
-    IPv6 host address, enclose it in square brackets:
+>    Percent-encoding may be used to include symbols with special meaning in any
+    of the <ACRONYM
+CLASS="ACRONYM"
+>URI</ACRONYM
+> parts.
+   </P
+><P
+>    The host part may be either a host name or an IP address.  To specify an
+    IPv6 address, enclose it in square brackets:
 </P><PRE
 CLASS="SYNOPSIS"
 >postgresql://[2001:db8::1234]/database</PRE
 ><P>
    </P
 ><P
->    The host component is interpreted as described for the parameter <A
+>    The host part is interpreted as described for the parameter <A
 HREF="libpq-connect.html#LIBPQ-CONNECT-HOST"
 >host</A
 >.  In particular, a Unix-domain socket
-    connection is chosen if the host part is either empty or starts with a
-    slash, otherwise a TCP/IP connection is initiated.  Note, however, that the
+    connection is chosen if the host part is either empty or looks like an
+    absolute path name,
+    otherwise a TCP/IP connection is initiated.  Note, however, that the
     slash is a reserved character in the hierarchical part of the URI.  So, to
     specify a non-standard Unix-domain socket directory, either omit the host
-    specification in the URI and specify the host as a parameter, or
-    percent-encode the path in the host component of the URI:
+    part of the URI and specify the host as a named parameter, or
+    percent-encode the path in the host part of the URI:
 </P><PRE
 CLASS="PROGRAMLISTING"
 >postgresql:///dbname?host=/var/lib/postgresql

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Functions and Operators"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -121,6 +121,29 @@ HREF="functions-formatting.html"
 HREF="datatype-datetime.html"
 >Section 8.5</A
 >.
+  </P
+><P
+>   In addition, the usual comparison operators shown in
+   <A
+HREF="functions-comparison.html#FUNCTIONS-COMPARISON-OP-TABLE"
+>Table 9-1</A
+> are available for the
+   date/time types.  Dates and timestamps (with or without time zone) are
+   all comparable, while times (with or without time zone) and intervals
+   can only be compared to other values of the same data type.  When
+   comparing a timestamp without time zone to a timestamp with time zone,
+   the former value is assumed to be given in the time zone specified by
+   the <A
+HREF="runtime-config-client.html#GUC-TIMEZONE"
+>TimeZone</A
+> configuration parameter, and is
+   rotated to UTC for comparison to the latter value (which is already
+   in UTC internally).  Similarly, a date value is assumed to represent
+   midnight in the <TT
+CLASS="VARNAME"
+>TimeZone</TT
+> zone when comparing it
+   to a timestamp.
   </P
 ><P
 >   All the functions and operators described below that take <TT
@@ -2247,7 +2270,8 @@ CLASS="LITERAL"
 CLASS="TYPE"
 >timestamp with time zone</TT
 > values, the
-        number of seconds since 1970-01-01 00:00:00 UTC (can be negative);
+        number of seconds since 1970-01-01 00:00:00 UTC (negative for
+        timestamps before that);
         for <TT
 CLASS="TYPE"
 >date</TT
@@ -2255,7 +2279,8 @@ CLASS="TYPE"
 CLASS="TYPE"
 >timestamp</TT
 > values, the
-        number of seconds since 1970-01-01 00:00:00 local time;
+        nominal number of seconds since 1970-01-01 00:00:00,
+        without regard to timezone or daylight-savings rules;
         for <TT
 CLASS="TYPE"
 >interval</TT
@@ -2273,6 +2298,15 @@ CLASS="COMPUTEROUTPUT"
 >982384720.12</SAMP
 >
 
+SELECT EXTRACT(EPOCH FROM TIMESTAMP '2001-02-16 20:38:40.12');
+<I
+CLASS="LINEANNOTATION"
+>Result: </I
+><SAMP
+CLASS="COMPUTEROUTPUT"
+>982355920.12</SAMP
+>
+
 SELECT EXTRACT(EPOCH FROM INTERVAL '5 days 3 hours');
 <I
 CLASS="LINEANNOTATION"
@@ -2282,7 +2316,10 @@ CLASS="COMPUTEROUTPUT"
 >442800</SAMP
 ></PRE
 ><P
->        You can convert an epoch value back to a time stamp
+>        You can convert an epoch value back to a <TT
+CLASS="TYPE"
+>timestamp with time zone</TT
+>
         with <CODE
 CLASS="FUNCTION"
 >to_timestamp</CODE
@@ -2298,6 +2335,22 @@ CLASS="LINEANNOTATION"
 CLASS="COMPUTEROUTPUT"
 >2001-02-17 04:38:40.12+00</SAMP
 ></PRE
+><P
+>        Beware that applying <CODE
+CLASS="FUNCTION"
+>to_timestamp</CODE
+> to an epoch
+        extracted from a <TT
+CLASS="TYPE"
+>date</TT
+> or <TT
+CLASS="TYPE"
+>timestamp</TT
+> value
+        could produce a misleading result: the result will effectively
+        assume that the original value had been given in UTC, which might
+        not be the case.
+       </P
 ></DD
 ><DT
 ><TT
@@ -2406,6 +2459,43 @@ CLASS="LITERAL"
 ><P
 >        This field is not available in PostgreSQL releases prior to 8.3.
        </P
+></DD
+><DT
+><TT
+CLASS="LITERAL"
+>julian</TT
+></DT
+><DD
+><P
+>        The <I
+CLASS="FIRSTTERM"
+>Julian Date</I
+> corresponding to the
+        date or timestamp (not applicable to intervals).  Timestamps
+        that are not local midnight result in a fractional value.  See
+        <A
+HREF="datetime-julian-dates.html"
+>Section B.7</A
+> for more information.
+       </P
+><PRE
+CLASS="SCREEN"
+>SELECT EXTRACT(JULIAN FROM DATE '2006-01-01');
+<I
+CLASS="LINEANNOTATION"
+>Result: </I
+><SAMP
+CLASS="COMPUTEROUTPUT"
+>2453737</SAMP
+>
+SELECT EXTRACT(JULIAN FROM TIMESTAMP '2006-01-01 12:00');
+<I
+CLASS="LINEANNOTATION"
+>Result: </I
+><SAMP
+CLASS="COMPUTEROUTPUT"
+>2453737.5</SAMP
+></PRE
 ></DD
 ><DT
 ><TT
@@ -2568,8 +2658,8 @@ CLASS="LITERAL"
 ><P
 >        The seconds field, including fractional parts (0 -
         59<A
-NAME="AEN15604"
-HREF="#FTN.AEN15604"
+NAME="AEN15636"
+HREF="#FTN.AEN15636"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN
@@ -3748,8 +3838,8 @@ ALIGN="LEFT"
 VALIGN="TOP"
 WIDTH="5%"
 ><A
-NAME="FTN.AEN15604"
-HREF="functions-datetime.html#AEN15604"
+NAME="FTN.AEN15636"
+HREF="functions-datetime.html#AEN15636"
 ><SPAN
 CLASS="footnote"
 >[1]</SPAN

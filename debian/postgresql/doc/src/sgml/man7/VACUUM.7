@@ -2,12 +2,12 @@
 .\"     Title: VACUUM
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "VACUUM" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "VACUUM" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -67,7 +67,9 @@ Plain
 (without
 FULL) simply reclaims space and makes it available for re\-use\&. This form of the command can operate in parallel with normal reading and writing of the table, as an exclusive lock is not obtained\&. However, extra space is not returned to the operating system (in most cases); it\*(Aqs just kept available for re\-use within the same table\&.
 \fBVACUUM FULL\fR
-rewrites the entire contents of the table into a new disk file with no extra space, allowing unused space to be returned to the operating system\&. This form is much slower and requires an exclusive lock on each table while it is being processed\&.
+rewrites the entire contents of the table into a new disk file with no extra space, allowing unused space to be returned to the operating system\&. This form is much slower and requires an
+ACCESS EXCLUSIVE
+lock on each table while it is being processed\&.
 .PP
 When the option list is surrounded by parentheses, the options can be written in any order\&. Without parentheses, options must be specified in exactly the order shown above\&. The parenthesized syntax was added in
 PostgreSQL

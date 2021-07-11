@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="  Installation from Source Code"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -205,7 +205,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30650"
+NAME="AEN30683"
 >16.7.1.1. GCC Issues</A
 ></H3
 ><P
@@ -226,7 +226,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30654"
+NAME="AEN30687"
 >16.7.1.2. Unix-Domain Sockets Broken</A
 ></H3
 ><P
@@ -270,7 +270,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30663"
+NAME="AEN30696"
 >16.7.1.3. Internet Address Issues</A
 ></H3
 ><P
@@ -385,7 +385,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30686"
+NAME="AEN30719"
 >16.7.1.4. Memory Management</A
 ></H3
 ><P
@@ -828,6 +828,23 @@ NAME="INSTALLATION-NOTES-MACOS"
 >16.7.4. macOS</A
 ></H2
 ><P
+>    To build <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> from source
+    on <SPAN
+CLASS="PRODUCTNAME"
+>macOS</SPAN
+>, you will need to install Apple's
+    command line developer tools, which can be done by issuing
+</P><PRE
+CLASS="PROGRAMLISTING"
+>xcode-select --install</PRE
+><P>
+    (note that this will pop up a GUI dialog window for confirmation).
+    You may or may not wish to also install Xcode.
+   </P
+><P
 >    On recent <SPAN
 CLASS="PRODUCTNAME"
 >macOS</SPAN
@@ -865,7 +882,7 @@ CLASS="REPLACEABLE"
     To find out the appropriate path on your machine, run
 </P><PRE
 CLASS="PROGRAMLISTING"
->xcodebuild -version -sdk macosx Path</PRE
+>xcrun --show-sdk-path</PRE
 ><P>
     Note that building an extension using a different sysroot version than
     was used to build the core server is not really recommended; in the
@@ -890,6 +907,22 @@ CLASS="REPLACEABLE"
 ></TT
 ></PRE
 ><P>
+    This would primarily be useful to cross-compile for some other
+    macOS version.  There is no guarantee that the resulting executables
+    will run on the current host.
+   </P
+><P
+>    To suppress the <TT
+CLASS="OPTION"
+>-isysroot</TT
+> options altogether, use
+</P><PRE
+CLASS="PROGRAMLISTING"
+>./configure ... PG_SYSROOT=none</PRE
+><P>
+    (any nonexistent pathname will work).  This might be useful if you wish
+    to build with a non-Apple compiler, but beware that that case is not
+    tested or supported by the PostgreSQL developers.
    </P
 ><P
 >    <SPAN
@@ -1046,7 +1079,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30849"
+NAME="AEN30889"
 >16.7.6.1. Skunkware</A
 ></H3
 ><P
@@ -1079,7 +1112,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30855"
+NAME="AEN30895"
 >16.7.6.2. GNU Make</A
 ></H3
 ><P
@@ -1104,7 +1137,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30861"
+NAME="AEN30901"
 >16.7.6.3. Readline</A
 ></H3
 ><P
@@ -1147,7 +1180,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30871"
+NAME="AEN30911"
 >16.7.6.4. Using the UDK on OpenServer</A
 ></H3
 ><P
@@ -1170,7 +1203,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30876"
+NAME="AEN30916"
 >16.7.6.5. Reading the PostgreSQL Man Pages</A
 ></H3
 ><P
@@ -1206,7 +1239,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30884"
+NAME="AEN30924"
 >16.7.6.6. C99 Issues with the 7.1.1b Feature Supplement</A
 ></H3
 ><P
@@ -1237,7 +1270,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30891"
+NAME="AEN30931"
 >16.7.6.7. Threading on UnixWare</A
 ></H3
 ><P
@@ -1291,7 +1324,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30906"
+NAME="AEN30946"
 >16.7.7.1. Required Tools</A
 ></H3
 ><P
@@ -1338,7 +1371,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30915"
+NAME="AEN30955"
 >16.7.7.2. Problems with OpenSSL</A
 ></H3
 ><P
@@ -1395,7 +1428,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30933"
+NAME="AEN30973"
 >16.7.7.3. configure Complains About a Failed Test Program</A
 ></H3
 ><P
@@ -1434,7 +1467,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30943"
+NAME="AEN30983"
 >16.7.7.4. 64-bit Build Sometimes Crashes</A
 ></H3
 ><P
@@ -1479,7 +1512,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30953"
+NAME="AEN30993"
 >16.7.7.5. Compiling for Optimal Performance</A
 ></H3
 ><P
@@ -1515,7 +1548,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN30960"
+NAME="AEN31000"
 >16.7.7.6. Using DTrace for Tracing PostgreSQL</A
 ></H3
 ><P

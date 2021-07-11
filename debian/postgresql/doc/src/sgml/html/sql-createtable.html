@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-CREATETABLE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN82865"
+NAME="AEN82931"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN82865"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN82868"
+NAME="AEN82934"
 ></A
 ><H2
 >Synopsis</H2
@@ -555,7 +555,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN82948"
+NAME="AEN83014"
 ></A
 ><H2
 >Parameters</H2
@@ -1161,19 +1161,21 @@ CLASS="LITERAL"
 >UNIQUE</TT
 > constraint specifies that a
       group of one or more columns of a table can contain
-      only unique values. The behavior of the unique table constraint
-      is the same as that for column constraints, with the additional
-      capability to span multiple columns.
+      only unique values. The behavior of a unique table constraint
+      is the same as that of a unique column constraint, with the
+      additional capability to span multiple columns.  The constraint
+      therefore enforces that any two rows must differ in at least one
+      of these columns.
      </P
 ><P
 >      For the purpose of a unique constraint, null values are not
       considered equal.
      </P
 ><P
->      Each unique table constraint must name a set of columns that is
+>      Each unique constraint should name a set of columns that is
       different from the set of columns named by any other unique or
-      primary key constraint defined for the table.  (Otherwise it
-      would just be the same constraint listed twice.)
+      primary key constraint defined for the table.  (Otherwise, redundant
+      unique constraints will be discarded.)
      </P
 ></DD
 ><DT
@@ -1216,10 +1218,18 @@ CLASS="LITERAL"
 > and <TT
 CLASS="LITERAL"
 >NOT NULL</TT
->, but
+>.  However,
       identifying a set of columns as the primary key also provides metadata
       about the design of the schema, since a primary key implies that other
       tables can rely on this set of columns as a unique identifier for rows.
+     </P
+><P
+>      Adding a <TT
+CLASS="LITERAL"
+>PRIMARY KEY</TT
+> constraint will automatically
+      create a unique btree index on the column or group of columns used in the
+      constraint.
      </P
 ></DD
 ><DT
@@ -2706,7 +2716,7 @@ CLASS="ACRONYM"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83552"
+NAME="AEN83620"
 ></A
 ><H3
 >Temporary Tables</H3
@@ -2805,7 +2815,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83575"
+NAME="AEN83643"
 ></A
 ><H3
 >Non-deferred Uniqueness Constraints</H3
@@ -2840,7 +2850,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83583"
+NAME="AEN83651"
 ></A
 ><H3
 >Column Check Constraints</H3
@@ -2864,7 +2874,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83589"
+NAME="AEN83657"
 ></A
 ><H3
 ><TT
@@ -2885,7 +2895,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83595"
+NAME="AEN83663"
 ></A
 ><H3
 ><TT
@@ -2919,7 +2929,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83604"
+NAME="AEN83672"
 ></A
 ><H3
 >Inheritance</H3
@@ -2944,7 +2954,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83610"
+NAME="AEN83678"
 ></A
 ><H3
 >Zero-column Tables</H3
@@ -2969,7 +2979,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83616"
+NAME="AEN83684"
 ></A
 ><H3
 ><TT
@@ -2995,7 +3005,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83623"
+NAME="AEN83691"
 ></A
 ><H3
 ><TT
@@ -3016,7 +3026,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83629"
+NAME="AEN83697"
 ></A
 ><H3
 >Tablespaces</H3
@@ -3038,7 +3048,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN83635"
+NAME="AEN83703"
 ></A
 ><H3
 >Typed Tables</H3
@@ -3058,7 +3068,7 @@ CLASS="QUOTE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN83639"
+NAME="AEN83707"
 ></A
 ><H2
 >See Also</H2

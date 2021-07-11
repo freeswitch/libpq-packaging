@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -98,7 +98,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN95793"
+NAME="AEN95874"
 ></A
 ><H2
 >Name</H2
@@ -109,7 +109,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN95797"
+NAME="AEN95878"
 ></A
 ><H2
 >Synopsis</H2
@@ -150,7 +150,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN95812"
+NAME="AEN95893"
 ></A
 ><H2
 >Description</H2
@@ -382,7 +382,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN95858"
+NAME="AEN95939"
 ></A
 ><H2
 >Options</H2
@@ -624,12 +624,7 @@ CLASS="REPLACEABLE"
 ></DT
 ><DD
 ><P
->        Add the specified built-in script to the list of executed scripts.
-        An optional integer weight after <TT
-CLASS="LITERAL"
->@</TT
-> allows to adjust the
-        probability of drawing the script.  If not specified, it is set to 1.
+>        Add the specified built-in script to the list of scripts to be executed.
         Available built-in scripts are: <TT
 CLASS="LITERAL"
 >tpcb-like</TT
@@ -642,11 +637,20 @@ CLASS="LITERAL"
 >select-only</TT
 >.
         Unambiguous prefixes of built-in names are accepted.
-        With special name <TT
+        With the special name <TT
 CLASS="LITERAL"
 >list</TT
 >, show the list of built-in scripts
         and exit immediately.
+       </P
+><P
+>        Optionally, write an integer weight after <TT
+CLASS="LITERAL"
+>@</TT
+> to
+        adjust the probability of selecting this script versus other ones.
+        The default weight is 1.
+        See below for details.
        </P
 ></DD
 ><DT
@@ -769,13 +773,25 @@ CLASS="REPLACEABLE"
 ><I
 >filename</I
 ></TT
-> to
-        the list of executed scripts.
-        An optional integer weight after <TT
+>
+        to the list of scripts to be executed.
+       </P
+><P
+>        Optionally, write an integer weight after <TT
 CLASS="LITERAL"
 >@</TT
-> allows to adjust the
-        probability of drawing the test.
+> to
+        adjust the probability of selecting this script versus other ones.
+        The default weight is 1.
+        (To use a script file name that includes an <TT
+CLASS="LITERAL"
+>@</TT
+>
+        character, append a weight so that there is no ambiguity, for
+        example <TT
+CLASS="LITERAL"
+>filen@me@1</TT
+>.)
         See below for details.
        </P
 ></DD
@@ -1441,14 +1457,14 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN96228"
+NAME="AEN96313"
 ></A
 ><H2
 >Notes</H2
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96230"
+NAME="AEN96315"
 ></A
 ><H3
 >What is the <SPAN
@@ -1464,19 +1480,19 @@ CLASS="APPLICATION"
 >pgbench</SPAN
 > executes test scripts chosen randomly
    from a specified list.
-   They include built-in scripts with <TT
+   The scripts may include built-in scripts specified with <TT
 CLASS="OPTION"
 >-b</TT
-> and
-   user-provided custom scripts with <TT
+>
+   and user-provided scripts specified with <TT
 CLASS="OPTION"
 >-f</TT
 >.
-   Each script may be given a relative weight specified after a
+   Each script may be given a relative weight specified after an
    <TT
 CLASS="LITERAL"
 >@</TT
-> so as to change its drawing probability.
+> so as to change its selection probability.
    The default weight is <TT
 CLASS="LITERAL"
 >1</TT
@@ -1591,7 +1607,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96276"
+NAME="AEN96361"
 ></A
 ><H3
 >Custom Scripts</H3
@@ -2704,7 +2720,7 @@ END;</PRE
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96590"
+NAME="AEN96675"
 ></A
 ><H3
 >Per-Transaction Logging</H3
@@ -2920,7 +2936,7 @@ CLASS="OPTION"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96633"
+NAME="AEN96718"
 ></A
 ><H3
 >Aggregated Logging</H3
@@ -3098,7 +3114,7 @@ CLASS="SCREEN"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96668"
+NAME="AEN96753"
 ></A
 ><H3
 >Per-Statement Latencies</H3
@@ -3161,7 +3177,7 @@ script statistics:
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96677"
+NAME="AEN96762"
 ></A
 ><H3
 >Good Practices</H3
@@ -3251,7 +3267,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT2"
 ><A
-NAME="AEN96697"
+NAME="AEN96782"
 ></A
 ><H3
 >Security</H3

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="PostgreSQL Client Applications"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="APP-PGDUMP"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN96912"
+NAME="AEN96997"
 ></A
 ><H2
 >Name</H2
@@ -107,7 +107,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN96916"
+NAME="AEN97001"
 ></A
 ><H2
 >Synopsis</H2
@@ -356,8 +356,8 @@ CLASS="OPTION"
         were not present in the destination database.)
        </P
 ><P
->        This option is only meaningful for the plain-text format.  For
-        the archive formats, you can specify the option when you
+>        This option is ignored when emitting an archive (non-text) output
+        file.  For the archive formats, you can specify the option when you
         call <TT
 CLASS="COMMAND"
 >pg_restore</TT
@@ -385,8 +385,8 @@ CLASS="OPTION"
         recreates the target database before reconnecting to it.
        </P
 ><P
->        This option is only meaningful for the plain-text format.  For
-        the archive formats, you can specify the option when you
+>        This option is ignored when emitting an archive (non-text) output
+        file.  For the archive formats, you can specify the option when you
         call <TT
 CLASS="COMMAND"
 >pg_restore</TT
@@ -921,8 +921,8 @@ CLASS="OPTION"
 >.
        </P
 ><P
->        This option is only meaningful for the plain-text format.  For
-        the archive formats, you can specify the option when you
+>        This option is ignored when emitting an archive (non-text) output
+        file.  For the archive formats, you can specify the option when you
         call <TT
 CLASS="COMMAND"
 >pg_restore</TT
@@ -1295,7 +1295,7 @@ CLASS="REPLACEABLE"
 ><DD
 ><P
 >        Specify the compression level to use.  Zero means no compression.
-        For the custom archive format, this specifies compression of
+        For the custom and directory archive formats, this specifies compression of
         individual table-data segments, and the default is to compress
         at a moderate level.
         For plain text output, setting a nonzero compression level causes
@@ -1402,8 +1402,8 @@ CLASS="OPTION"
         start the resulting script as a superuser.
        </P
 ><P
->        This option is only meaningful for the plain-text format.  For
-        the archive formats, you can specify the option when you
+>        This option is ignored when emitting an archive (non-text) output
+        file.  For the archive formats, you can specify the option when you
         call <TT
 CLASS="COMMAND"
 >pg_restore</TT
@@ -1607,8 +1607,8 @@ CLASS="OPTION"
         tablespace is the default during restore.
        </P
 ><P
->        This option is only meaningful for the plain-text format.  For
-        the archive formats, you can specify the option when you
+>        This option is ignored when emitting an archive (non-text) output
+        file.  For the archive formats, you can specify the option when you
         call <TT
 CLASS="COMMAND"
 >pg_restore</TT
@@ -2109,7 +2109,7 @@ CLASS="APPLICATION"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97532"
+NAME="AEN97617"
 ></A
 ><H2
 >Environment</H2
@@ -2579,7 +2579,7 @@ CLASS="USERINPUT"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN97660"
+NAME="AEN97745"
 ></A
 ><H2
 >See Also</H2
