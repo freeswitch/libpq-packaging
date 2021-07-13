@@ -2,12 +2,12 @@
 .\"     Title: CREATE TABLE
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "CREATE TABLE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "CREATE TABLE" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -332,11 +332,11 @@ UNIQUE ( \fIcolumn_name\fR [, \&.\&.\&. ] ) (table constraint)
 .RS 4
 The
 UNIQUE
-constraint specifies that a group of one or more columns of a table can contain only unique values\&. The behavior of the unique table constraint is the same as that for column constraints, with the additional capability to span multiple columns\&.
+constraint specifies that a group of one or more columns of a table can contain only unique values\&. The behavior of a unique table constraint is the same as that of a unique column constraint, with the additional capability to span multiple columns\&. The constraint therefore enforces that any two rows must differ in at least one of these columns\&.
 .sp
 For the purpose of a unique constraint, null values are not considered equal\&.
 .sp
-Each unique table constraint must name a set of columns that is different from the set of columns named by any other unique or primary key constraint defined for the table\&. (Otherwise it would just be the same constraint listed twice\&.)
+Each unique constraint should name a set of columns that is different from the set of columns named by any other unique or primary key constraint defined for the table\&. (Otherwise, redundant unique constraints will be discarded\&.)
 .RE
 .PP
 PRIMARY KEY (column constraint)
@@ -353,7 +353,11 @@ PRIMARY KEY
 enforces the same data constraints as a combination of
 UNIQUE
 and
-NOT NULL, but identifying a set of columns as the primary key also provides metadata about the design of the schema, since a primary key implies that other tables can rely on this set of columns as a unique identifier for rows\&.
+NOT NULL\&. However, identifying a set of columns as the primary key also provides metadata about the design of the schema, since a primary key implies that other tables can rely on this set of columns as a unique identifier for rows\&.
+.sp
+Adding a
+PRIMARY KEY
+constraint will automatically create a unique btree index on the column or group of columns used in the constraint\&.
 .RE
 .PP
 EXCLUDE [ USING \fIindex_method\fR ] ( \fIexclude_element\fR WITH \fIoperator\fR [, \&.\&.\&. ] ) \fIindex_parameters\fR [ WHERE ( \fIpredicate\fR ) ]

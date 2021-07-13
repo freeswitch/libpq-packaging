@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-CREATEINDEX"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN80692"
+NAME="AEN80754"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN80692"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN80695"
+NAME="AEN80757"
 ></A
 ><H2
 >Synopsis</H2
@@ -173,7 +173,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80708"
+NAME="AEN80770"
 ></A
 ><H2
 >Description</H2
@@ -274,7 +274,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80730"
+NAME="AEN80792"
 ></A
 ><H2
 >Parameters</H2
@@ -845,7 +845,8 @@ CLASS="PRODUCTNAME"
 HREF="mvcc.html"
 >Chapter 13</A
 >) predating the second
-    scan to terminate.  Then finally the index can be marked ready for use,
+    scan to terminate, including transactions used by any phase of concurrent
+    index builds on other tables.  Then finally the index can be marked ready for use,
     and the <TT
 CLASS="COMMAND"
 >CREATE INDEX</TT
@@ -940,7 +941,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80929"
+NAME="AEN80991"
 ></A
 ><H2
 >Notes</H2
@@ -1066,6 +1067,23 @@ CLASS="QUOTE"
 >, in queries that depend on indexes to avoid sorting steps.
   </P
 ><P
+>   The system regularly collects statistics on all of a table's
+   columns.  Newly-created non-expression indexes can immediately
+   use these statistics to determine an index's usefulness.
+   For new expression indexes, it is necessary to run <A
+HREF="sql-analyze.html"
+><TT
+CLASS="COMMAND"
+>ANALYZE</TT
+></A
+> or wait for
+   the <A
+HREF="routine-vacuuming.html#AUTOVACUUM"
+>autovacuum daemon</A
+> to analyze
+   the table to generate statistics for these indexes.
+  </P
+><P
 >   For most index methods, the speed of creating an index is
    dependent on the setting of <A
 HREF="runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM"
@@ -1106,7 +1124,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80962"
+NAME="AEN81028"
 ></A
 ><H2
 >Examples</H2
@@ -1211,7 +1229,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80990"
+NAME="AEN81056"
 ></A
 ><H2
 >Compatibility</H2
@@ -1230,7 +1248,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN80995"
+NAME="AEN81061"
 ></A
 ><H2
 >See Also</H2

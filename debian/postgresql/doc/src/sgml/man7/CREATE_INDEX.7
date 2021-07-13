@@ -2,12 +2,12 @@
 .\"     Title: CREATE INDEX
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "CREATE INDEX" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "CREATE INDEX" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -294,7 +294,7 @@ PostgreSQL
 must perform two scans of the table, and in addition it must wait for all existing transactions that could potentially modify or use the index to terminate\&. Thus this method requires more total work than a standard index build and takes significantly longer to complete\&. However, since it allows normal operations to continue while the index is built, this method is useful for adding new indexes in a production environment\&. Of course, the extra CPU and I/O load imposed by the index creation might slow other operations\&.
 .PP
 In a concurrent index build, the index is actually entered into the system catalogs in one transaction, then two table scans occur in two more transactions\&. Before each table scan, the index build must wait for existing transactions that have modified the table to terminate\&. After the second scan, the index build must wait for any transactions that have a snapshot (see
-Chapter 13, Concurrency Control, in the documentation) predating the second scan to terminate\&. Then finally the index can be marked ready for use, and the
+Chapter 13, Concurrency Control, in the documentation) predating the second scan to terminate, including transactions used by any phase of concurrent index builds on other tables\&. Then finally the index can be marked ready for use, and the
 \fBCREATE INDEX\fR
 command terminates\&. Even then, however, the index may not be immediately usable for queries: in the worst case, it cannot be used as long as transactions exist that predate the start of the index build\&.
 .PP
@@ -391,6 +391,12 @@ options are useful if you need to support
 \(lqnulls sort low\(rq
 behavior, rather than the default
 \(lqnulls sort high\(rq, in queries that depend on indexes to avoid sorting steps\&.
+.PP
+The system regularly collects statistics on all of a table\*(Aqs columns\&. Newly\-created non\-expression indexes can immediately use these statistics to determine an index\*(Aqs usefulness\&. For new expression indexes, it is necessary to run
+\fBANALYZE\fR
+or wait for the
+autovacuum daemon
+to analyze the table to generate statistics for these indexes\&.
 .PP
 For most index methods, the speed of creating an index is dependent on the setting of
 maintenance_work_mem\&. Larger values will reduce the time needed for index creation, so long as you don\*(Aqt make it larger than the amount of memory really available, which would drive the machine into swapping\&.

@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-SET-ROLE"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN92604"
+NAME="AEN92675"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN92604"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN92607"
+NAME="AEN92678"
 ></A
 ><H2
 >Synopsis</H2
@@ -121,7 +121,7 @@ RESET ROLE</PRE
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN92610"
+NAME="AEN92681"
 ></A
 ><H2
 >Description</H2
@@ -166,21 +166,49 @@ HREF="sql-set.html"
    command.
   </P
 ><P
->   The <TT
+>   <TT
 CLASS="LITERAL"
->NONE</TT
-> and <TT
+>SET ROLE NONE</TT
+> sets the current user identifier to the
+   current session user identifier, as returned by
+   <CODE
+CLASS="FUNCTION"
+>session_user</CODE
+>.  <TT
 CLASS="LITERAL"
->RESET</TT
-> forms reset the current
-   user identifier to be the current session user identifier.
-   These forms can be executed by any user.
+>RESET ROLE</TT
+> sets the
+   current user identifier to the connection-time setting specified by the
+   <A
+HREF="libpq-connect.html#LIBPQ-CONNECT-OPTIONS"
+>command-line options</A
+>,
+   <A
+HREF="sql-alterrole.html"
+><TT
+CLASS="COMMAND"
+>ALTER ROLE</TT
+></A
+>, or
+   <A
+HREF="sql-alterdatabase.html"
+><TT
+CLASS="COMMAND"
+>ALTER DATABASE</TT
+></A
+>,
+   if any such settings exist.  Otherwise, <TT
+CLASS="LITERAL"
+>RESET ROLE</TT
+> sets
+   the current user identifier to the current session user identifier.  These
+   forms can be executed by any user.
   </P
 ></DIV
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN92624"
+NAME="AEN92702"
 ></A
 ><H2
 >Notes</H2
@@ -270,7 +298,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN92647"
+NAME="AEN92725"
 ></A
 ><H2
 >Examples</H2
@@ -293,7 +321,7 @@ SELECT SESSION_USER, CURRENT_USER;
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN92650"
+NAME="AEN92728"
 ></A
 ><H2
 >Compatibility</H2
@@ -338,7 +366,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN92661"
+NAME="AEN92739"
 ></A
 ><H2
 >See Also</H2

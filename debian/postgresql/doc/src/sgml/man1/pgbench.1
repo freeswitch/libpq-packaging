@@ -2,12 +2,12 @@
 .\"     Title: pgbench
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "PGBENCH" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "PGBENCH" "1" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -245,14 +245,16 @@ accepts the following command\-line benchmarking arguments:
 .br
 \fB\-\-builtin\fR=\fIscriptname[@weight]\fR
 .RS 4
-Add the specified built\-in script to the list of executed scripts\&. An optional integer weight after
-@
-allows to adjust the probability of drawing the script\&. If not specified, it is set to 1\&. Available built\-in scripts are:
+Add the specified built\-in script to the list of scripts to be executed\&. Available built\-in scripts are:
 tpcb\-like,
 simple\-update
 and
-select\-only\&. Unambiguous prefixes of built\-in names are accepted\&. With special name
+select\-only\&. Unambiguous prefixes of built\-in names are accepted\&. With the special name
 list, show the list of built\-in scripts and exit immediately\&.
+.sp
+Optionally, write an integer weight after
+@
+to adjust the probability of selecting this script versus other ones\&. The default weight is 1\&. See below for details\&.
 .RE
 .PP
 \fB\-c\fR \fIclients\fR
@@ -291,9 +293,14 @@ options are allowed\&.
 .RS 4
 Add a transaction script read from
 \fIfilename\fR
-to the list of executed scripts\&. An optional integer weight after
+to the list of scripts to be executed\&.
+.sp
+Optionally, write an integer weight after
 @
-allows to adjust the probability of drawing the test\&. See below for details\&.
+to adjust the probability of selecting this script versus other ones\&. The default weight is 1\&. (To use a script file name that includes an
+@
+character, append a weight so that there is no ambiguity, for example
+filen@me@1\&.) See below for details\&.
 .RE
 .PP
 \fB\-j\fR \fIthreads\fR
@@ -547,12 +554,12 @@ command line arguments, and exit\&.
 .SS "What is the \(lqTransaction\(rq Actually Performed in pgbench?"
 .PP
 pgbench
-executes test scripts chosen randomly from a specified list\&. They include built\-in scripts with
+executes test scripts chosen randomly from a specified list\&. The scripts may include built\-in scripts specified with
 \fB\-b\fR
-and user\-provided custom scripts with
-\fB\-f\fR\&. Each script may be given a relative weight specified after a
+and user\-provided scripts specified with
+\fB\-f\fR\&. Each script may be given a relative weight specified after an
 @
-so as to change its drawing probability\&. The default weight is
+so as to change its selection probability\&. The default weight is
 1\&. Scripts with a weight of
 0
 are ignored\&.

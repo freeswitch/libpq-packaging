@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="libpq - C Library"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -246,7 +246,16 @@ CLASS="FUNCTION"
    <TT
 CLASS="STRUCTNAME"
 >PGresult</TT
-> pointer. The result status should be
+> pointer, with
+   status <TT
+CLASS="LITERAL"
+>PGRES_COMMAND_OK</TT
+> for success
+   or <TT
+CLASS="LITERAL"
+>PGRES_FATAL_ERROR</TT
+> if some problem was encountered.
+   The result status should be
    checked before the result is used.   The caller is responsible for
    freeing  the  <TT
 CLASS="STRUCTNAME"
@@ -258,8 +267,50 @@ CLASS="FUNCTION"
 > when it is no longer needed.
   </P
 ><P
->   Note that it is not possible to handle null arguments, null results,
-   nor set-valued results when using this interface.
+>   To pass a NULL argument to the function, set
+   the <TT
+CLASS="PARAMETER"
+>len</TT
+> field of that parameter structure
+   to <TT
+CLASS="LITERAL"
+>-1</TT
+>; the <TT
+CLASS="PARAMETER"
+>isint</TT
+>
+   and <TT
+CLASS="PARAMETER"
+>u</TT
+> fields are then irrelevant.
+   (But this works only in protocol 3.0 and later connections.)
+  </P
+><P
+>   If the function returns NULL, <TT
+CLASS="PARAMETER"
+>*result_len</TT
+> is set
+   to <TT
+CLASS="LITERAL"
+>-1</TT
+>, and <TT
+CLASS="PARAMETER"
+>*result_buf</TT
+> is not
+   modified.  (This works only in protocol 3.0 and later connections; in
+   protocol 2.0, neither <TT
+CLASS="PARAMETER"
+>*result_len</TT
+>
+   nor <TT
+CLASS="PARAMETER"
+>*result_buf</TT
+> are modified.)
+  </P
+><P
+>   Note that it is not possible to handle set-valued results when using
+   this interface.  Also, the function must be a plain function, not an
+   aggregate or window function.
   </P
 ></DIV
 ><DIV

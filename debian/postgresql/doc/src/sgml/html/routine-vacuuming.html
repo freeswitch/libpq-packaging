@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Routine Database Maintenance Tasks"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -240,9 +240,12 @@ CLASS="COMMAND"
     <TT
 CLASS="COMMAND"
 >VACUUM FULL</TT
-> requires exclusive lock on the table it is
-    working on, and therefore cannot be done in parallel with other use
-    of the table.  Generally, therefore,
+> requires an <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+> lock
+    on the table it is working on, and therefore cannot be done in parallel
+    with other use of the table.  Generally, therefore,
     administrators should strive to use standard <TT
 CLASS="COMMAND"
 >VACUUM</TT
@@ -338,7 +341,7 @@ CLASS="COMMAND"
 >.  In this approach, the idea
     is not to keep tables at their minimum size, but to maintain steady-state
     usage of disk space: each table occupies space equivalent to its
-    minimum size plus however much space gets used up between vacuumings.
+    minimum size plus however much space gets used up between vacuum runs.
     Although <TT
 CLASS="COMMAND"
 >VACUUM FULL</TT
@@ -425,7 +428,11 @@ HREF="sql-altertable.html"
 >ALTER TABLE</A
 >.
     These commands rewrite an entire new copy of the table and build
-    new indexes for it.  All these options require exclusive lock.  Note that
+    new indexes for it.  All these options require an
+    <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+> lock.  Note that
     they also temporarily use extra disk space approximately equal to the size
     of the table, since the old copies of the table and indexes can't be
     released until the new ones are complete.

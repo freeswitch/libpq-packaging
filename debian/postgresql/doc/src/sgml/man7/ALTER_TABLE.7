@@ -2,12 +2,12 @@
 .\"     Title: ALTER TABLE
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "ALTER TABLE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "ALTER TABLE" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -308,6 +308,10 @@ This form validates a foreign key or check constraint that was previously create
 NOT VALID, by scanning the table to ensure there are no rows for which the constraint is not satisfied\&. Nothing happens if the constraint is already marked valid\&. (See
 NOTES
 below for an explanation of the usefulness of this command\&.)
+.sp
+This command acquires a
+SHARE UPDATE EXCLUSIVE
+lock\&.
 .RE
 .PP
 DROP CONSTRAINT [ IF EXISTS ]

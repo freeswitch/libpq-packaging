@@ -2,12 +2,12 @@
 .\"     Title: pg_basebackup
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "PG_BASEBACKUP" "1" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "PG_BASEBACKUP" "1" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -155,7 +155,9 @@ p
 .br
 plain
 .RS 4
-Write the output as plain files, with the same layout as the current data directory and tablespaces\&. When the cluster has no additional tablespaces, the whole database will be placed in the target directory\&. If the cluster contains additional tablespaces, the main data directory will be placed in the target directory, but all other tablespaces will be placed in the same absolute path as they have on the server\&.
+Write the output as plain files, with the same layout as the current data directory and tablespaces\&. When the cluster has no additional tablespaces, the whole database will be placed in the target directory\&. If the cluster contains additional tablespaces, the main data directory will be placed in the target directory, but all other tablespaces will be placed in the same absolute path as they have on the source server\&. (See
+\fB\-\-tablespace\-mapping\fR
+to change that\&.)
 .sp
 This is the default format\&.
 .RE
@@ -235,6 +237,8 @@ must be absolute paths\&. If a path happens to contain a
 sign, escape it with a backslash\&. This option can be specified multiple times for multiple tablespaces\&. See examples below\&.
 .sp
 If a tablespace is relocated in this way, the symbolic links inside the main data directory are updated to point to the new location\&. So the new data directory is ready to be used for a new server instance with all tablespaces in the updated locations\&.
+.sp
+Currently, this option only works with plain output format; it is ignored if tar format is selected\&.
 .RE
 .PP
 \fB\-\-xlogdir=\fR\fB\fIxlogdir\fR\fR
@@ -339,7 +343,7 @@ The following command\-line options control the database connection parameters\&
 \fB\-\-dbname=\fR\fB\fIconnstr\fR\fR
 .RS 4
 Specifies parameters used to connect to the server, as a
-connction string; these will override any conflicting command line options\&.
+connection string; these will override any conflicting command line options\&.
 .sp
 The option is called
 \-\-dbname

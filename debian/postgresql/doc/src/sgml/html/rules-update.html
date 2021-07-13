@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="The Rule System"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -233,7 +233,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN65142"
+NAME="AEN65202"
 >39.4.1. How Update Rules Work</A
 ></H2
 ><P
@@ -416,7 +416,7 @@ CLASS="LITERAL"
 ><P
 >    The query trees generated from rule actions are thrown into the
     rewrite system again, and maybe more rules get applied resulting
-    in more or less query trees.
+    in additional or fewer query trees.
     So a rule's actions must have either a different
     command type or a different result relation than the rule itself is
     on, otherwise this recursive process will end up in an infinite loop.
@@ -470,7 +470,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN65202"
+NAME="AEN65262"
 >39.4.1.1. A First Rule Step by Step</A
 ></H3
 ><P

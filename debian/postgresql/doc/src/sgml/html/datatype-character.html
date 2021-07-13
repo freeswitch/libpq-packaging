@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="Data Types"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="SECT1"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -395,6 +395,16 @@ CLASS="LITERAL"
     regular expressions.
    </P
 ><P
+>    The characters that can be stored in any of these data types are
+    determined by the database character set, which is selected when
+    the database is created.  Regardless of the specific character set,
+    the character with code zero (sometimes called NUL) cannot be stored.
+    For more information refer to <A
+HREF="multibyte.html"
+>Section 23.3</A
+>.
+   </P
+><P
 >    The storage requirement for a short string (up to 126 bytes) is 1 byte
     plus the actual string, which includes the space padding in the case of
     <TT
@@ -480,18 +490,12 @@ HREF="sql-syntax-lexical.html#SQL-SYNTAX-STRINGS"
 HREF="functions.html"
 >Chapter 9</A
 >
-    for information about available operators and functions. The
-    database character set determines the character set used to store
-    textual values; for more information on character set support,
-    refer to <A
-HREF="multibyte.html"
->Section 23.3</A
->.
+    for information about available operators and functions.
    </P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN5744"
+NAME="AEN5752"
 ></A
 ><P
 ><B

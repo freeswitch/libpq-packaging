@@ -2,12 +2,12 @@
 .\"     Title: CREATE TYPE
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2020
-.\"    Manual: PostgreSQL 9.6.20 Documentation
-.\"    Source: PostgreSQL 9.6.20
+.\"      Date: 2021
+.\"    Manual: PostgreSQL 9.6.22 Documentation
+.\"    Source: PostgreSQL 9.6.22
 .\"  Language: English
 .\"
-.TH "CREATE TYPE" "7" "2020" "PostgreSQL 9.6.20" "PostgreSQL 9.6.20 Documentation"
+.TH "CREATE TYPE" "7" "2021" "PostgreSQL 9.6.22" "PostgreSQL 9.6.22 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -514,7 +514,7 @@ information to be used while converting it to or from external form\&.
 .PP
 Before
 PostgreSQL
-version 8\&.3, the name of a generated array type was always exactly the element type\*(Aqs name with one underscore character (_) prepended\&. (Type names were therefore restricted in length to one less character than other names\&.) While this is still usually the case, the array type name may vary from this in case of maximum\-length names or collisions with user type names that begin with underscore\&. Writing code that depends on this convention is therefore deprecated\&. Instead, use
+version 8\&.3, the name of a generated array type was always exactly the element type\*(Aqs name with one underscore character (_) prepended\&. (Type names were therefore restricted in length to one fewer character than other names\&.) While this is still usually the case, the array type name may vary from this in case of maximum\-length names or collisions with user type names that begin with underscore\&. Writing code that depends on this convention is therefore deprecated\&. Instead, use
 pg_type\&.typarray
 to locate the array type associated with a given type\&.
 .PP

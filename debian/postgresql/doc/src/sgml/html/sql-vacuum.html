@@ -9,7 +9,7 @@ CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REV="MADE"
 HREF="mailto:pgsql-docs@postgresql.org"><LINK
 REL="HOME"
-TITLE="PostgreSQL 9.6.20 Documentation"
+TITLE="PostgreSQL 9.6.22 Documentation"
 HREF="index.html"><LINK
 REL="UP"
 TITLE="SQL Commands"
@@ -26,7 +26,7 @@ HREF="stylesheet.css"><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html; charset=ISO-8859-1"><META
 NAME="creation"
-CONTENT="2020-11-09T22:44:17"></HEAD
+CONTENT="2021-05-10T20:59:53"></HEAD
 ><BODY
 CLASS="REFENTRY"
 ><DIV
@@ -44,7 +44,7 @@ ALIGN="center"
 VALIGN="bottom"
 ><A
 HREF="index.html"
->PostgreSQL 9.6.20 Documentation</A
+>PostgreSQL 9.6.22 Documentation</A
 ></TH
 ></TR
 ><TR
@@ -95,7 +95,7 @@ NAME="SQL-VACUUM"
 ><DIV
 CLASS="REFNAMEDIV"
 ><A
-NAME="AEN93404"
+NAME="AEN93482"
 ></A
 ><H2
 >Name</H2
@@ -103,7 +103,7 @@ NAME="AEN93404"
 ><DIV
 CLASS="REFSYNOPSISDIV"
 ><A
-NAME="AEN93407"
+NAME="AEN93485"
 ></A
 ><H2
 >Synopsis</H2
@@ -141,7 +141,7 @@ CLASS="REPLACEABLE"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93414"
+NAME="AEN93492"
 ></A
 ><H2
 >Description</H2
@@ -214,7 +214,11 @@ CLASS="COMMAND"
 > rewrites the entire contents
    of the table into a new disk file with no extra space, allowing unused
    space to be returned to the operating system.  This form is much slower and
-   requires an exclusive lock on each table while it is being processed.
+   requires an <TT
+CLASS="LITERAL"
+>ACCESS EXCLUSIVE</TT
+> lock on each table while
+   it is being processed.
   </P
 ><P
 >   When the option list is surrounded by parentheses, the options can be
@@ -231,7 +235,7 @@ CLASS="PRODUCTNAME"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93435"
+NAME="AEN93514"
 ></A
 ><H2
 >Parameters</H2
@@ -374,7 +378,7 @@ CLASS="LITERAL"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93483"
+NAME="AEN93562"
 ></A
 ><H2
 >Outputs</H2
@@ -393,7 +397,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93488"
+NAME="AEN93567"
 ></A
 ><H2
 >Notes</H2
@@ -501,7 +505,7 @@ HREF="routine-vacuuming.html"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93514"
+NAME="AEN93593"
 ></A
 ><H2
 >Examples</H2
@@ -520,7 +524,7 @@ CLASS="PROGRAMLISTING"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93519"
+NAME="AEN93598"
 ></A
 ><H2
 >Compatibility</H2
@@ -534,7 +538,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="REFSECT1"
 ><A
-NAME="AEN93523"
+NAME="AEN93602"
 ></A
 ><H2
 >See Also</H2
