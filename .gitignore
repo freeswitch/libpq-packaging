@@ -1,0 +1,17 @@
+.vs/*
+Win32/*
+x64/*
+out/*
+openssl-*.tar.gz
+openssl-*/
+openssl/
+openssl-*.zip
+postgresql-*/
+postgresql-*.tar.*
+7za*.exe
+pax_global_header
+build-*
+zlib*.zip
+zlib*/
+Debug/
+Release/
